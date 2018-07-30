@@ -1,5 +1,25 @@
-<div class="container" id="map">
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.0053033185627!2d73.04592321520605!3d33.70881168070072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfb1bcfc9a29%3A0xd14988e2fe91fedd!2sPhastphoods!5e0!3m2!1sen!2s!4v1506506913180"
-    width="100%" height="550px" frameborder="0" style="border:0" allowfullscreen></iframe>
+<div class="row" id="map">
+
+  <!-- this creates a google map on the page with the given lat/lng from -->
+  <!-- the component as the initial center of the map: -->
+  <agm-map #gm
+    [latitude]="lat" 
+    [longitude]="lng"
+    [zoom]="zoom">
+
+      <agm-marker 
+        [latitude]="lat" 
+        [longitude]="lng"
+        [iconUrl]="icon"
+        (mouseOver)="onMouseOver(infoWindow,gm)"
+        (mouseOut)="onMouseOut()">
+
+        <agm-info-window [disableAutoPan]="false" #infoWindow>
+          <strong>Property Details</strong>
+        </agm-info-window>
+
+      </agm-marker>
+
+  </agm-map>
 
 </div>
