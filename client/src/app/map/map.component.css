@@ -1,3 +1,12 @@
 agm-map {
     height: 500px;
 }
+
+.propertyImg {
+    float: left;
+}
+
+.propertyImg, 
+.propertyDetails {
+    display: inline-block;
+}
