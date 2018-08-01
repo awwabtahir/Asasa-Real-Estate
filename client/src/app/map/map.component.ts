@@ -16,7 +16,7 @@ export class MapComponent implements OnInit {
 
   // marker image
   icon = {
-    url: "https://kavigupta.org/circle-tree-system/intro/red-inside-red.svg",
+    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/RedDot.svg/2000px-RedDot.svg.png",
     scaledSize: {
       width: 15,
       height: 15

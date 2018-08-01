@@ -1,0 +1,22 @@
+footer {
+    padding: 30px;
+}
+
+h5 {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+ul li {
+    padding: 5px;
+}
+
+.app-img {
+    width: 200px;
+}
+
+.copy {
+    background-color: black;
+    padding: 20px;
+    color: white;
+}
