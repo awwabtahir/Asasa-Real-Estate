@@ -14,6 +14,8 @@ export class MapComponent implements OnInit {
   lat: number = 33.6929635;
   lng: number = 73.0117814;
 
+  gesture = "greedy";
+
   // marker image
   icon = {
     url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/RedDot.svg/2000px-RedDot.svg.png",
