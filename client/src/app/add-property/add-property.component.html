@@ -1,0 +1,84 @@
+<div class="container mb-2">
+  <div class="form-group">
+    <input 
+      placeholder="Search for location" 
+      autocorrect="off" 
+      autocapitalize="off" 
+      spellcheck="off" 
+      type="text" 
+      class="form-control searchControl"
+      #search [formControl]="searchControl">
+  </div>
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+  
+  <br>
+
+  <form>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <!-- Property Type Selection -->
+        <select id="inputType" class="form-control">
+          <option selected>Select Type</option>
+          <option>...</option>
+        </select>
+        <!-- End Property Type Selection -->
+      </div>
+      <div class="form-group col-md-3">
+        <!-- Property # Selection -->
+        <input type="text" class="form-control" id="inputLocation" placeholder="Plot #">
+        <!-- End Property # Selection -->
+      </div>
+      <div class="form-group col-md-3">
+        <!-- Street # Selection -->
+        <input type="text" class="form-control" id="inputLocation" placeholder="Street #">
+        <!-- End Street # Selection -->
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <input type="text" class="form-control" id="inputDemand" placeholder="Demand (Rs)">
+      </div>
+      <div class="form-group col-md-3">
+        <input type="text" class="form-control" id="inputArea" placeholder="Land Area">
+      </div>
+      <div class="form-group col-md-3">
+        <select id="inputSize" class="form-control">
+          <option selected>Marla</option>
+          <option>...</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <input type="number" placeholder="Number of beds" class="form-control" id="inputBed">
+      </div>
+      <div class="form-group col-md-6">
+        <input type="number" placeholder="Number of baths" class="form-control" id="inputBath">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <input type="file" class="form-control" id="" placeholder="Images & Videos">
+      </div>
+      <div class="form-group col-md-2">
+
+      </div>
+      <div class="form-group col-md-6" id="map">
+
+      </div>
+
+    </div>
+
+    <div class="form-row">
+      <div class="text-center ">
+        <button type="submit" class="btn" style=" background-color: #39BCA4; color: white;">Post Ad</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>
