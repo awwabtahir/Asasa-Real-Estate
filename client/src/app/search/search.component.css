@@ -1,0 +1,9 @@
+.box {
+    background-color: black;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    border-radius: 25px; 
+    width: 60%;
+    opacity: 0.8;
+}

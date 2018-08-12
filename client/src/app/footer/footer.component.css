@@ -1,6 +1,8 @@
 footer {
     padding: 30px;
     width: 100%;
+    color: white;
+    margin-top: 40px; 
 }
 
 h5 {
@@ -12,8 +14,16 @@ ul li {
     padding: 5px;
 }
 
+ul li a {
+    color: white!important;
+}
+
 .list-inline li {
     display: inline-block;
+}
+
+.social li a:hover {
+    color: grey!important;
 }
 
 .app-img {

@@ -17,6 +17,7 @@ import { MapComponent } from './map/map.component';
 import { PropertyComponent } from './property/property.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddPropertyComponent } from './add-property/add-property.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -37,7 +38,8 @@ const routes: Routes = [
     MapComponent,
     PropertyComponent,
     FooterComponent,
-    AddPropertyComponent
+    AddPropertyComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

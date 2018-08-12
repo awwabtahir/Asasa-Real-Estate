@@ -4,6 +4,16 @@
     height: 100%;
 }
 
+.list-inline {
+    margin: 0px;
+}
+
+.list-inline li {
+    display: inline-block;   
+    font-weight: bold;
+    margin-right: 5px;
+}
+
 agm-map {
     height: 500px;
 }
@@ -15,4 +25,16 @@ agm-map {
 .propertyImg, 
 .propertyDetails {
     display: inline-block;
+}
+
+.fa-circle {
+    color: greenyellow;
+}
+
+.fa-square {
+    color: red;
+}
+
+.fa-caret-up {
+    color: purple;
 }
