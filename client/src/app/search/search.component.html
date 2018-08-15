@@ -1,18 +1,49 @@
-<div class="box mr-auto ml-auto mt-3">
-  <h2>Map Search</h2>
-  <div class="row mb-3 mt-3">
-    <div class="col">
-      <select class="form-control">
-        <option>Select City</option>
-        <option>Peshawar</option>
-        <option>Islamabad</option>
-        <option>Lahore</option>
-        <option>Multan</option>
-      </select>
-    </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Type Location">
-    </div>
-  </div>
-  <button type="submit" class="btn btn-primary mb-2">Search</button>
+<div class="start-here">
+  <img src="assets/images/start-here-arrow.png">
+</div>
+
+<div class="mt-2 form-inline">
+  <select class="form-control mr-2">
+    <option>Select City</option>
+    <option>Peshawar</option>
+    <option>Islamabad</option>
+    <option>Lahore</option>
+    <option>Multan</option>
+  </select>
+  <input placeholder="Type location" type="text" class="form-control searchControl mr-2">
+
+  <!-- Size Slider -->
+  <ion-range-slider #size *ngIf="sliders"
+    type="double" 
+    [min]="myMinVar" max="100" 
+    from="30" to="80"
+    grid="true" grid_num="10" 
+    prefix="Size: " postfix=" Marla" decorate_both="false"
+    (onUpdate)="myOnUpdate($event)" (onChange)="myOnChange($event)" 
+    (onFinish)="myOnFinish($event)"></ion-range-slider>
+
+  <!-- Price Slider -->
+  <ion-range-slider #price *ngIf="sliders"
+    type="double" 
+    [min]="myMinVar" max="100" 
+    grid="true" grid_num="10" 
+    from="30" to="80"
+    prefix="Price: " postfix=" Lacs" decorate_both="false"
+    (onUpdate)="myOnUpdate($event)" (onChange)="myOnChange($event)" 
+    (onFinish)="myOnFinish($event)"></ion-range-slider>
+  
+  <!-- Bed Slider -->
+  <ion-range-slider #bed *ngIf="sliders"
+    type="double" 
+    [min]="1" max="9" 
+    from="3" to="8"
+    grid="true" grid_num="1" 
+    prefix="Beds: " decorate_both="false"
+    (onUpdate)="myOnUpdate($event)" (onChange)="myOnChange($event)" 
+    (onFinish)="myOnFinish($event)"></ion-range-slider>
+
+  <button class="btn btn-deflaut btn-sm" (click)="onFilterClick()">
+      <span *ngIf="!sliders"><i class="fas fa-bars"></i> Filter</span>
+      <span *ngIf="sliders"><i class="fas fa-times"></i> Close</span>
+  </button>
 </div>

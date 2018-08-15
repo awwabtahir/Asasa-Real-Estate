@@ -63,7 +63,7 @@ export class AuthenticationService {
 
   private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
     let base;
-    let prod = false;
+    let prod = true;
 
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, user);

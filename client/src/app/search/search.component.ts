@@ -12,4 +12,9 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
+  sliders = false;
+  onFilterClick() {
+    this.sliders = !this.sliders;
+  }
+
 }

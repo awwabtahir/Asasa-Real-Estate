@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 
-body {
-    background-image: url("assets/images/bj.jpg");
-    background-size: cover;
+.irs-from, 
+.irs-to, 
+.irs-single,
+.irs-bar {
+    background: #25BDA4;
 }

@@ -1,8 +1,6 @@
 footer {
-    padding: 30px;
+    padding: 0px 30px 30px 30px;
     width: 100%;
-    color: white;
-    margin-top: 40px; 
 }
 
 h5 {
@@ -12,10 +10,6 @@ h5 {
 
 ul li {
     padding: 5px;
-}
-
-ul li a {
-    color: white!important;
 }
 
 .list-inline li {

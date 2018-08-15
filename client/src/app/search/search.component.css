@@ -7,3 +7,34 @@
     width: 60%;
     opacity: 0.8;
 }
+
+input {
+    margin-bottom: 0px;
+}
+
+button {
+    background: #25BDA4;
+    color: white;
+}
+
+ion-range-slider {
+    width: 200px;
+    margin-right: 30px;
+}
+
+.start-here {
+    position: absolute;
+    left: 3px;
+    top: 85px;
+    transform: rotate(64deg);
+}
+
+.start-here img {
+    width: 142px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .start-here {
+        display: none;
+    }
+}
