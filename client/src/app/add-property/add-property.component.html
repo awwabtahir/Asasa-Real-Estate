@@ -2,17 +2,25 @@
   <div class="form-group">
     <input 
       placeholder="Search for location" 
-      autocorrect="off" 
-      autocapitalize="off" 
-      spellcheck="off" 
       type="text" 
       class="form-control searchControl"
       #search [formControl]="searchControl">
   </div>
-  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  <agm-map [latitude]="latitude" [longitude]="longitude" 
+           [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" 
+      [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
+    </agm-marker>
   </agm-map>
-  
+
+  <br>
+
+  <div class="form-inline form-row">
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="Lat: {{ mlatitude }}" disabled>
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="Lng: {{ mlongitude }}" disabled>
+    <input class="form-control" name="city" id="disabledInput" type="text" placeholder="{{ city }}" disabled>
+  </div>
+
   <br>
 
   <form>

@@ -10,7 +10,9 @@
     [latitude]="lat" 
     [longitude]="lng" 
     [zoom]="zoom"
-    [gestureHandling]="gesture">
+    [gestureHandling]="gesture"
+    [mapTypeControl]=true
+    (mapReady)="mapReady($event)">
 
     <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" (mouseOver)="onMouseOver(infoWindow,gm)" (mouseOut)="onMouseOut()">
 

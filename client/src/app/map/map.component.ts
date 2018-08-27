@@ -30,6 +30,18 @@ export class MapComponent implements OnInit {
   ngOnInit() {
   }
 
+  mapReady(event) {
+    console.log(event);
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+        this.zoom = 12;
+        console.log("hello");
+      });
+    }
+  }
+
   gm: any;
   onMouseOver(infoWindow, gm) {
     if (gm.lastOpen && gm.lastOpen.isOpen) {
