@@ -29,11 +29,11 @@
       <li class="nav-item">
         <a class="nav-link" href="#">House Architecture</a>
       </li>
+      <li class="nav-item">
+        <div *ngIf="!auth.isLoggedIn()" class="nav-link" style="color:blue!important;">Call Now: +92-311-2233656</div>
+      </li>
     </ul>
     <ul class="navbar-nav pull-right right-nav">
-      <li *ngIf="!auth.isLoggedIn()" class="nav-item">
-        <a class="nav-link" routerLink="/"><i class="fas fa-user-plus"></i> Register</a>
-      </li>
       <li *ngIf="!auth.isLoggedIn()" class="nav-item">
         <a class="nav-link sign-in" routerLink="/login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
       </li>

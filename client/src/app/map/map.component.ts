@@ -31,15 +31,14 @@ export class MapComponent implements OnInit {
   }
 
   mapReady(event) {
-    console.log(event);
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
         this.zoom = 12;
-        console.log("hello");
       });
     }
+    event.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('Settings'));
   }
 
   gm: any;

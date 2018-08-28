@@ -12,14 +12,26 @@ import * as $ from 'jquery';
 export class AddPropertyComponent implements OnInit {
   @ViewChild("search")
   public searchElementRef: ElementRef;
+  public searchControl: FormControl;
+
   public latitude: number;
   public longitude: number;
   public mlatitude: number;
   public mlongitude: number;
   public zoom: number;
-  public city: string;
-  public searchControl: FormControl;
+
+  public location = "F-10";
+  public city = "Islamabad";
+  public type = "0";
+  public propNumber = "";
+  public street = "";
+  public demand = "";
+  public area = "";
+  public areaType = "sqft";
+  public beds = "";
+  public baths = "";
   
+  gesture = "greedy";
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -31,7 +43,6 @@ export class AddPropertyComponent implements OnInit {
     this.zoom = 15;
     this.latitude = this.mlatitude = 33.69;
     this.longitude = this.mlongitude = 73.01;
-    this.city = "Islamabad";
 
     //create search FormControl
     this.searchControl = new FormControl();
@@ -66,6 +77,29 @@ export class AddPropertyComponent implements OnInit {
     this.getCity(this.mlatitude, this.mlongitude);
   }
 
+  save() {
+    this.city = $('input[name=city]').val();
+    let ad = {
+      lat: this.latitude,
+      lng: this.longitude,
+      city: this.city,
+      type: this.type,
+      propNumber: this.propNumber,
+      street: this.street,
+      demand: this.demand,
+      area: this.area,
+      areaType: this.areaType,
+      beds: this.beds,
+      baths: this.baths
+    };
+
+    console.log(ad);
+  }
+
+  mapReady(event) {
+    event.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('search'));
+  }
+
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -84,6 +118,7 @@ export class AddPropertyComponent implements OnInit {
         if (!results[1]) { console.log("No reverse geocode results."); return; }
         for (var i = 0; i < results.length; i++) {
           if (results[i].types[0] === "locality") {
+            $('input[name=location]').val(results[1].address_components[0].long_name);
             $('input[name=city]').val(results[i].address_components[0].long_name);
           }
         }
