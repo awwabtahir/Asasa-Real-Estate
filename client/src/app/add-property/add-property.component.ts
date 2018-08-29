@@ -30,6 +30,8 @@ export class AddPropertyComponent implements OnInit {
   public areaType = "sqft";
   public beds = "";
   public baths = "";
+  public imgURL = "";
+  public imgCount = 0;
   
   gesture = "greedy";
 
@@ -90,7 +92,9 @@ export class AddPropertyComponent implements OnInit {
       area: this.area,
       areaType: this.areaType,
       beds: this.beds,
-      baths: this.baths
+      baths: this.baths,
+      imgUrl: this.imgURL,
+      imgCount: this.imgCount
     };
 
     console.log(ad);
@@ -98,6 +102,13 @@ export class AddPropertyComponent implements OnInit {
 
   mapReady(event) {
     event.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('search'));
+  }
+
+  onImgUpload(event) {
+    if(event.isStored) {
+      this.imgURL = event.cdnUrl;
+      this.imgCount = event.count;
+    }
   }
 
   private setCurrentPosition() {

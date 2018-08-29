@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
+import { UcWidgetModule } from 'ngx-uploadcare-widget';
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -48,6 +49,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     IonRangeSliderModule,
+    UcWidgetModule,
     RouterModule.forRoot(routes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',

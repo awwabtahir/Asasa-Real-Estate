@@ -1,17 +1,12 @@
 <div class="container mb-2">
   <div class="form-group"></div>
 
-  <agm-map [latitude]="latitude" [longitude]="longitude" 
-           [scrollwheel]="false" [zoom]="zoom" [gestureHandling]="gesture"
-           [mapTypeControl]=true (mapReady)="mapReady($event)">
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom" [gestureHandling]="gesture" [mapTypeControl]=true
+    (mapReady)="mapReady($event)">
 
-    <input 
-    id="search" placeholder="Search for location" 
-    type="text" class="form-control searchControl"
-    #search [formControl]="searchControl">
-    
-    <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" 
-      [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
+    <input id="search" placeholder="Search for location" type="text" class="form-control searchControl" #search [formControl]="searchControl">
+
+    <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
     </agm-marker>
   </agm-map>
 
@@ -59,25 +54,21 @@
       </div>
       <div class="form-group col-md-3">
         <!-- Property # Selection -->
-        <input *ngIf="type" type="text" class="form-control" name="propNumber" 
-          id="inputPropNumber" placeholder="{{ type }} #" [(ngModel)]="propNumber">
+        <input type="text" class="form-control" name="propNumber" id="inputPropNumber" placeholder="{{ type }} #" [(ngModel)]="propNumber">
         <!-- End Property # Selection -->
       </div>
       <div class="form-group col-md-3">
         <!-- Street # Selection -->
-        <input *ngIf="type" type="text" class="form-control" name="street"
-          id="inputStreet" placeholder="Street #" [(ngModel)]="street">
+        <input type="text" class="form-control" name="street" id="inputStreet" placeholder="Street #" [(ngModel)]="street">
         <!-- End Street # Selection -->
       </div>
     </div>
-    <div *ngIf="type" class="form-row">
+    <div class="form-row">
       <div class="form-group col-md-6">
-        <input type="text" class="form-control" name="demand"
-          id="inputDemand" placeholder="Demand (Rs)" [(ngModel)]="demand">
+        <input type="text" class="form-control" name="demand" id="inputDemand" placeholder="Demand (Rs)" [(ngModel)]="demand">
       </div>
       <div class="form-group col-md-3">
-        <input type="text" class="form-control" name="area"
-          id="inputArea" placeholder="Land Area" [(ngModel)]="area">
+        <input type="text" class="form-control" name="area" id="inputArea" placeholder="Land Area" [(ngModel)]="area">
       </div>
       <div class="form-group col-md-3">
         <select id="inputSize" class="form-control" name="areaType" [(ngModel)]="areaType">
@@ -88,26 +79,33 @@
       </div>
     </div>
 
-    <div *ngIf="type" class="form-row">
+    <div class="form-row">
       <div class="form-group col-md-6">
-        <input type="text" placeholder="Number of beds/rooms (optional)" name="beds" [(ngModel)]="beds"
-          class="form-control" id="inputBed">
+        <input type="text" placeholder="Number of beds/rooms (optional)" name="beds" [(ngModel)]="beds" class="form-control" id="inputBed">
       </div>
       <div class="form-group col-md-6">
-        <input type="text" placeholder="Number of baths (optional)" name="baths" [(ngModel)]="baths" 
-          class="form-control" id="inputBath">
+        <input type="text" placeholder="Number of baths (optional)" name="baths" [(ngModel)]="baths" class="form-control" id="inputBath">
       </div>
     </div>
 
-    <div *ngIf="type" class="form-row">
-      <div class="form-group col-md-4">
-        <input type="file" class="form-control" id="" placeholder="Images & Videos">
-      </div>
+    <div class="form-inline mb-2">
+      <ngx-uploadcare-widget 
+        images-only="true" 
+        public-key="dbed02bb1fcce3f1a79d" 
+        multiple="true" (on-upload-complete)="onImgUpload($event)">
+      </ngx-uploadcare-widget>
+
+      <ngx-uploadcare-widget
+        class="ml-3"
+        public-key="dbed02bb1fcce3f1a79d" 
+        input-accept-types="video/*">
+        Upload Video
+      </ngx-uploadcare-widget>
     </div>
 
     <div class="form-row mb-5">
-      <div *ngIf="type" class="text-center">
-        <button (click)="save()" class="btn" style=" background-color: #39BCA4; color: white;">Post Ad</button>
+      <div class="text-center">
+        <button (click)="save()" class="btn btn-danger">Post Ad</button>
       </div>
     </div>
 

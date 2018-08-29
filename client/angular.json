@@ -27,7 +27,8 @@
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js"
+              "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
+              "upload-care.js"
             ]
           },
           "configurations": {
