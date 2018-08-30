@@ -6,20 +6,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { AuthenticationService } from './authentication.service';
-import { AuthGuardService } from './auth-guard.service';
 import { SearchComponent } from './search/search.component';
 import { MapComponent } from './map/map.component';
 import { PropertyComponent } from './property/property.component';
 import { FooterComponent } from './footer/footer.component';
 import { AddPropertyComponent } from './add-property/add-property.component';
 import { NavbarComponent } from './navbar/navbar.component';
+
+import { AuthenticationService } from './authentication.service';
+import { AuthGuardService } from './auth-guard.service';
+import { PropertyService } from './property.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -54,11 +57,14 @@ const routes: Routes = [
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',
       libraries: ["places"]
-    })
+    }),
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot()
   ],
   providers: [
     AuthenticationService, 
-    AuthGuardService
+    AuthGuardService,
+    PropertyService
   ],
   bootstrap: [AppComponent]
 })

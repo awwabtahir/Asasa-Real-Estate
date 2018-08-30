@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import * as $ from 'jquery';
+import { PropertyService } from '../property.service';
 
 @Component({
   selector: 'app-add-property',
@@ -30,14 +31,19 @@ export class AddPropertyComponent implements OnInit {
   public areaType = "sqft";
   public beds = "";
   public baths = "";
+  public title = "";
+  public description = "";
+  public imgUID = "";
   public imgURL = "";
   public imgCount = 0;
+  public vidUrl = "";
   
   gesture = "greedy";
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private propertyService: PropertyService
   ) { }
 
   ngOnInit() {
@@ -85,6 +91,7 @@ export class AddPropertyComponent implements OnInit {
       lat: this.latitude,
       lng: this.longitude,
       city: this.city,
+      location: this.location,
       type: this.type,
       propNumber: this.propNumber,
       street: this.street,
@@ -93,11 +100,14 @@ export class AddPropertyComponent implements OnInit {
       areaType: this.areaType,
       beds: this.beds,
       baths: this.baths,
+      description: this.description,
+      imgUID: this.imgUID,
       imgUrl: this.imgURL,
-      imgCount: this.imgCount
+      imgCount: this.imgCount,
+      vidUrl: this.vidUrl
     };
 
-    console.log(ad);
+    this.propertyService.save(ad);
   }
 
   mapReady(event) {
@@ -106,6 +116,7 @@ export class AddPropertyComponent implements OnInit {
 
   onImgUpload(event) {
     if(event.isStored) {
+      this.imgUID = event.uuid;
       this.imgURL = event.cdnUrl;
       this.imgCount = event.count;
     }

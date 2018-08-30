@@ -12,22 +12,48 @@
 
   <br>
 
-  <div class="form-inline form-row">
-    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="Lat: {{ mlatitude }}" disabled>
-    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="Lng: {{ mlongitude }}" disabled>
-    <input class="form-control mr-2" name="location" id="disabledInput" type="text" placeholder="{{ location }}">
-    <input class="form-control" name="city" id="disabledInput" type="text" placeholder="{{ city }}" disabled>
+  <div class="form-row">
+    <div class="form-group input-group col-md-3">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Lat</div>
+      </div>
+      <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlatitude }}" disabled>
+    </div>
+    <div class="form-group input-group col-md-3">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Lng</div>
+      </div>
+      <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlongitude }}" disabled>
+    </div>
+    <div class="form-group input-group col-md-3">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Location: </div>
+      </div>
+      <input class="form-control mr-2" name="location" id="location" type="text" value="{{ location }}" [(ngModel)]="location"
+        #loc="ngModel" required>
+      <div *ngIf="loc.invalid && (loc.dirty || loc.touched)" class="invalid-feedback">
+        <div *ngIf="loc.errors.required">
+          Location is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group input-group col-md-3">
+      <div class="input-group-prepend">
+        <div class="input-group-text">City: </div>
+      </div>
+      <input class="form-control" name="city" id="disabledInput" type="text" placeholder="{{ city }}" disabled>
+    </div>
   </div>
 
   <br>
 
-  <form>
+  <form #propForm="ngForm">
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group">
         <!-- Property Type Selection -->
         <select id="inputType" class="form-control" name="type" [(ngModel)]="type">
           <option value="0">Select Type</option>
-          <option value="">--------- Homes ---------</option>
+          <option value="0">--------- Homes ---------</option>
           <option value="House">House</option>
           <option value="Flat">Flat</option>
           <option value="Upper Portion">Upper Portion</option>
@@ -35,14 +61,14 @@
           <option value="Farm House">Farm House</option>
           <option value="Room">Room</option>
           <option value="Penthouse">Penthouse</option>
-          <option value="">--------- Plots ---------</option>
+          <option value="0">--------- Plots ---------</option>
           <option value="Residential Plot">Residential Plot</option>
           <option value="Commercial Plot">Commercial Plot</option>
           <option value="Agricultural Land">Agricultural Land</option>
           <option value="Industrial Land">Industrial Land</option>
           <option value="Plot File">Plot File</option>
           <option value="Plot Form">Plot Form</option>
-          <option value="">--------- Commercial ---------</option>
+          <option value="0">--------- Commercial ---------</option>
           <option value="Office">Office</option>
           <option value="Shop">Shop</option>
           <option value="Warehouse">Warehouse</option>
@@ -52,23 +78,43 @@
         </select>
         <!-- End Property Type Selection -->
       </div>
-      <div class="form-group col-md-3">
+      <div *ngIf="type != '0'" class="form-group col-md-3">
         <!-- Property # Selection -->
-        <input type="text" class="form-control" name="propNumber" id="inputPropNumber" placeholder="{{ type }} #" [(ngModel)]="propNumber">
-        <!-- End Property # Selection -->
+        <input type="text" class="form-control" name="propNumber" id="inputPropNumber" placeholder="{{ type }} #" [(ngModel)]="propNumber"
+          #pNum="ngModel" required>
+        <div *ngIf="pNum.invalid && (pNum.dirty || pNum.touched)" class="invalid-feedback">
+          <div *ngIf="pNum.errors.required">
+            {{ type }} # is required.
+          </div>
+        </div>
       </div>
-      <div class="form-group col-md-3">
+      <div *ngIf="type != '0'" class="form-group col-md-3">
         <!-- Street # Selection -->
-        <input type="text" class="form-control" name="street" id="inputStreet" placeholder="Street #" [(ngModel)]="street">
-        <!-- End Street # Selection -->
+        <input type="text" class="form-control" name="street" id="inputStreet" placeholder="Street # (optional)" [(ngModel)]="street">
       </div>
+      <!-- End Street # Selection -->
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <input type="text" class="form-control" name="demand" id="inputDemand" placeholder="Demand (Rs)" [(ngModel)]="demand">
+      <div class="form-group input-group col-md-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Rs.</div>
+        </div>
+        <input type="text" class="form-control" name="demand" id="inputDemand" placeholder="Demand" [(ngModel)]="demand" #price="ngModel"
+          required>
+        <div *ngIf="price.invalid && (price.dirty || price.touched)" class="invalid-feedback">
+          <div *ngIf="price.errors.required">
+            Demand is required.
+          </div>
+        </div>
       </div>
       <div class="form-group col-md-3">
-        <input type="text" class="form-control" name="area" id="inputArea" placeholder="Land Area" [(ngModel)]="area">
+        <input type="text" class="form-control" name="area" id="inputArea" placeholder="Land Area" [(ngModel)]="area" #ar="ngModel"
+          required>
+        <div *ngIf="ar.invalid && (ar.dirty || ar.touched)" class="invalid-feedback">
+          <div *ngIf="ar.errors.required">
+            Area is required.
+          </div>
+        </div>
       </div>
       <div class="form-group col-md-3">
         <select id="inputSize" class="form-control" name="areaType" [(ngModel)]="areaType">
@@ -80,32 +126,41 @@
     </div>
 
     <div class="form-row">
-      <div class="form-group col-md-6">
-        <input type="text" placeholder="Number of beds/rooms (optional)" name="beds" [(ngModel)]="beds" class="form-control" id="inputBed">
-      </div>
-      <div class="form-group col-md-6">
-        <input type="text" placeholder="Number of baths (optional)" name="baths" [(ngModel)]="baths" class="form-control" id="inputBath">
+      <div class="form-group col-md-3">
+        <button class="btn btn-primary btn-sm"><i class="fas fa-plus-circle"></i> Add Features</button>
       </div>
     </div>
 
-    <div class="form-inline mb-2">
-      <ngx-uploadcare-widget 
-        images-only="true" 
-        public-key="dbed02bb1fcce3f1a79d" 
-        multiple="true" (on-upload-complete)="onImgUpload($event)">
-      </ngx-uploadcare-widget>
+    <div class="form-row mb-1">
+      <div class="form-group col-md-6">
+        <input type="text" placeholder="Property Title" name="title" [(ngModel)]="title" class="form-control" id="inputTitle" #headline="ngModel"
+          required>
+        <div *ngIf="headline.invalid && (headline.dirty || headline.touched)" class="invalid-feedback">
+          <div *ngIf="headline.errors.required">
+            Title is required.
+          </div>
+        </div>
+      </div>
+    </div>
 
-      <ngx-uploadcare-widget
-        class="ml-3"
-        public-key="dbed02bb1fcce3f1a79d" 
-        input-accept-types="video/*">
-        Upload Video
-      </ngx-uploadcare-widget>
+    <div class="form-row mb-3">
+      <div [froalaEditor] [(froalaModel)]="description">Write description here!</div>
+    </div>
+
+    <div class="form-row mb-2">
+      <div class="form-group col-md-3">
+        <input type="url" placeholder="Paste YouTube Video Url" name="vidUrl" [(ngModel)]="vidUrl" class="form-control" id="inputVidUrl">
+      </div>
+      <div class="form-group col-md-3">
+        <ngx-uploadcare-widget public-key="dbed02bb1fcce3f1a79d" images-only="true" tabs="file" clearable="false" multiple="true"
+          (on-upload-complete)="onImgUpload($event)">
+        </ngx-uploadcare-widget>
+      </div>
     </div>
 
     <div class="form-row mb-5">
       <div class="text-center">
-        <button (click)="save()" class="btn btn-danger">Post Ad</button>
+        <button (click)="save()" class="btn btn-danger" [disabled]="!propForm.valid">Post Ad</button>
       </div>
     </div>
 
