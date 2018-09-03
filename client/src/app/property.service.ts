@@ -4,10 +4,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PropertyService {
+  locationData;
 
   constructor() { }
 
   save(ad) {
-    console.log(ad);
+    let property = $.extend({}, ad, this.locationData);
+    console.log(property);
+  }
+
+  setLocation(data) {
+    this.locationData = data;
   }
 }

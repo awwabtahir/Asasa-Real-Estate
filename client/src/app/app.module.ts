@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { NgxEditorModule } from 'ngx-editor';
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -23,12 +23,16 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
 import { PropertyService } from './property.service';
+import { AddPropertyFeaturesComponent } from './add-property/add-property-features/add-property-features.component';
+import { AddPropertyLocationComponent } from './add-property/add-property-location/add-property-location.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] }
 ];
 
@@ -44,7 +48,10 @@ const routes: Routes = [
     PropertyComponent,
     FooterComponent,
     AddPropertyComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddPropertyFeaturesComponent,
+    AddPropertyLocationComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -53,13 +60,12 @@ const routes: Routes = [
     HttpClientModule,
     IonRangeSliderModule,
     UcWidgetModule,
+    NgxEditorModule,
     RouterModule.forRoot(routes),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',
       libraries: ["places"]
-    }),
-    FroalaEditorModule.forRoot(), 
-    FroalaViewModule.forRoot()
+    })
   ],
   providers: [
     AuthenticationService, 

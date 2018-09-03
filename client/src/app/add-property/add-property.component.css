@@ -1,29 +1,55 @@
-
-agm-map {
-    height: 400px;
-}
-
-.searchControl {
-    top: 10px!important;
-    width: 40%;
-    direction: ltr;
-    overflow: hidden;
-    text-align: center;
-    position: relative;
-    color: rgb(86, 86, 86);
-    font-family: Roboto, Arial, sans-serif;
-    user-select: none;
-    font-size: 11px;
-    background-color: rgb(255, 255, 255);
-    padding: 11px;
-    border-bottom-right-radius: 2px;
-    border-top-right-radius: 2px;
-    background-clip: padding-box;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-    min-width: 40px;
-    border-left: 0px;
-}
-
 .invalid-feedback {
     display: block!important;
+}
+
+.checkbox-custom, .radio-custom {
+    opacity: 0;
+    position: absolute;   
+}
+
+.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.checkbox-custom-label, .radio-custom-label {
+    position: relative;
+}
+
+.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label:before {
+    content: "\f00c";
+    font-family: FontAwesome;
+    background: rebeccapurple;
+    color: #fff;
+}
+
+.radio-custom + .radio-custom-label:before {
+    border-radius: 50%;
+}
+
+.radio-custom:checked + .radio-custom-label:before {
+    content: "\f058";
+    border: 0px;
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-family: 'Font Awesome 5 Free';
+    color: #000;
+}
+
+.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
+  outline: 1px solid #ddd; /* focus style */
 }

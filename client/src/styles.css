@@ -11,3 +11,7 @@
 .gm-svpc {
     display: none!important;
 }
+
+.ngx-editor .ngx-wrapper .ngx-editor-textarea {
+    min-height: 5rem!important;
+}
