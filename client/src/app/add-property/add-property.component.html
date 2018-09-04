@@ -102,9 +102,9 @@
       </div>
     </div>
 
-    <div class="form-row">
+    <div *ngIf="ad.type != '0'" class="form-row">
       <div class="form-group col-md-3">
-        <add-property-features></add-property-features>
+        <add-property-modal [type]="ad.type"></add-property-modal>
       </div>
     </div>
 

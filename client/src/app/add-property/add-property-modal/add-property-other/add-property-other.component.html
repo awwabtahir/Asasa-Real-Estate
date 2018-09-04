@@ -1,0 +1,39 @@
+<p><b>Other Facilities</b></p>
+<form>
+  <div class="form-row">
+    <div class="form-group">
+
+      <!-- Maintainance Staff -->
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="maintainance-staff" name="maintainance-staff">
+        <label class="custom-control-label" for="maintainance-staff">Maintainance Staff</label>
+      </div>
+      <!-- Security Staff -->
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="security-staff" name="security-staff">
+        <label class="custom-control-label" for="security-staff">Security Staff</label>
+      </div>
+      <!-- Facilities for Disabled -->
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="facilities-disable" name="facilities-disable">
+        <label class="custom-control-label" for="facilities-disable">Facilities for Disabled</label>
+      </div>
+      <ng-template [ngIf]="type == 'commercial'">
+        <!-- Pet Policy -->
+        <select class="custom-select mt-2 mb-2" name="pet-policy" id="pet-policy">
+          <option value="">Select Pet Policy</option>
+          <option value="Allowed">Allowed</option>
+          <option value="Not Allowed">Not Allowed</option>
+        </select>
+      </ng-template>
+      <!-- Other Facilities -->
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Other Facilities: </div>
+        </div>
+        <input type="text" class="form-control" id="other-facilities" name="other-facilities">
+      </div>
+
+    </div>
+  </div>
+</form>

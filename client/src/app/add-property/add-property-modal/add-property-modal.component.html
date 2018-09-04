@@ -1,0 +1,63 @@
+<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#featuresModal">
+  <i class="fas fa-plus-circle"></i> Add Features</button>
+
+<!-- Modal -->
+<div class="modal fade" id="featuresModal" tabindex="-1" role="dialog" aria-labelledby="featuresModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="featuresModalLabel">Add Features</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+
+          <!-- Row 1 -->
+          <div class="row">
+            <div class="col">
+              <add-property-features *ngIf="type != 'plot'" [type]="type">
+              </add-property-features>
+              <add-property-plot-features *ngIf="type == 'plot'">
+              </add-property-plot-features>
+            </div>
+            <div class="col">
+              <add-property-rooms *ngIf="type != 'plot'" [type]="type">
+              </add-property-rooms>
+              <add-property-other *ngIf="type == 'plot'">
+              </add-property-other>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="row">
+            <div class="col">
+              <add-property-biz-comm *ngIf="type != 'plot'" [type]="type">
+              </add-property-biz-comm>
+            </div>
+            <div class="col">
+              <add-property-healthcare *ngIf="type != 'plot'" [type]="type">
+              </add-property-healthcare>
+            </div>
+          </div>
+
+          <!-- Row 3 -->
+          <div class="row">
+            <div class="col">
+              <add-property-nearby-loc></add-property-nearby-loc>
+            </div>
+            <div class="col">
+              <add-property-other *ngIf="type != 'plot'" [type]="type">
+              </add-property-other>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>

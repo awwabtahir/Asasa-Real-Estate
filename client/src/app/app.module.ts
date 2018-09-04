@@ -23,9 +23,16 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AuthenticationService } from './authentication.service';
 import { AuthGuardService } from './auth-guard.service';
 import { PropertyService } from './property.service';
-import { AddPropertyFeaturesComponent } from './add-property/add-property-features/add-property-features.component';
+import { AddPropertyFeaturesComponent } from './add-property/add-property-modal/add-property-features/add-property-features.component';
 import { AddPropertyLocationComponent } from './add-property/add-property-location/add-property-location.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AddPropertyModalComponent } from './add-property/add-property-modal/add-property-modal.component';
+import { AddPropertyBizCommComponent } from './add-property/add-property-modal/add-property-biz-comm/add-property-biz-comm.component';
+import { AddPropertyNearbyLocComponent } from './add-property/add-property-modal/add-property-nearby-loc/add-property-nearby-loc.component';
+import { AddPropertyRoomsComponent } from './add-property/add-property-modal/add-property-rooms/add-property-rooms.component';
+import { AddPropertyHealthcareComponent } from './add-property/add-property-modal/add-property-healthcare/add-property-healthcare.component';
+import { AddPropertyOtherComponent } from './add-property/add-property-modal/add-property-other/add-property-other.component';
+import { AddPropertyPlotFeaturesComponent } from './add-property/add-property-modal/add-property-plot-features/add-property-plot-features.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -51,7 +58,14 @@ const routes: Routes = [
     NavbarComponent,
     AddPropertyFeaturesComponent,
     AddPropertyLocationComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddPropertyModalComponent,
+    AddPropertyBizCommComponent,
+    AddPropertyNearbyLocComponent,
+    AddPropertyRoomsComponent,
+    AddPropertyHealthcareComponent,
+    AddPropertyOtherComponent,
+    AddPropertyPlotFeaturesComponent
   ],
   imports: [
     BrowserModule,

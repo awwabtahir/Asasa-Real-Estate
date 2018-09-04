@@ -1,0 +1,100 @@
+<p><b>Rooms</b></p>
+<form>
+  <div class="form-row">
+    <div class="form-group">
+
+      <ng-template [ngIf]="type == 'house'">
+        <!-- Bedrooms -->
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Bedrooms: </div>
+          </div>
+          <input type="text" class="form-control" id="beds" name="beds">
+        </div>
+        <!-- Bathrooms -->
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Bathrooms: </div>
+          </div>
+          <input type="text" class="form-control" id="baths" name="baths">
+        </div>
+      </ng-template>
+      <!-- Servant Quarters -->
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Servant Quarters: </div>
+        </div>
+        <input type="text" class="form-control" id="servant-quarters" name="servant-quarters">
+      </div>
+      <ng-template [ngIf]="type == 'house'">
+        <!-- Drawing Room -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="drawing-room" name="drawing-room">
+          <label class="custom-control-label" for="drawing-room">Drawing Room</label>
+        </div>
+        <!-- Dining Room -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="dining-room" name="dining-room">
+          <label class="custom-control-label" for="dining-room">Dining Room</label>
+        </div>
+        <!-- Kitchens -->
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Kitchens: </div>
+          </div>
+          <input type="text" class="form-control" id="kitchens" name="kitchens">
+        </div>
+        <!-- Study Room -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="studing-room" name="studing-room">
+          <label class="custom-control-label" for="studing-room">Study Room</label>
+        </div>
+        <!-- Prayer Room -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="prayer-room" name="prayer-room">
+          <label class="custom-control-label" for="prayer-room">Prayer Room</label>
+        </div>
+        <!-- Powder Room -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="powder-room" name="powder-room">
+          <label class="custom-control-label" for="powder-room">Powder Room</label>
+        </div>
+        <!-- Gym -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="gym" name="gym">
+          <label class="custom-control-label" for="gym">Gym</label>
+        </div>
+        <!-- Store Rooms -->
+        <div class="input-group mb-2 mr-sm-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Store Rooms: </div>
+          </div>
+          <input type="text" class="form-control" id="store-rooms" name="store-rooms">
+        </div>
+        <!-- Steam Room -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="steam-room" name="steam-room">
+          <label class="custom-control-label" for="steam-room">Steam Room</label>
+        </div>
+        <!-- Lounge or Sitting Room -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="lounge-room" name="lounge-room">
+          <label class="custom-control-label" for="lounge-room">Lounge or Sitting Room</label>
+        </div>
+        <!-- Laundary Room -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="laundary-room" name="laundary-room">
+          <label class="custom-control-label" for="laundary-room">Laundary Room</label>
+        </div>
+      </ng-template>
+      <!-- Other Rooms -->
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Other Rooms: </div>
+        </div>
+        <input type="text" class="form-control" id="other-rooms" name="other-rooms">
+      </div>
+
+    </div>
+  </div>
+</form>

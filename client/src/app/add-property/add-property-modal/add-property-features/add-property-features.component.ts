@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'add-property-features',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-property-features.component.css']
 })
 export class AddPropertyFeaturesComponent implements OnInit {
+
+  @Input() type: string;
 
   constructor() { }
 
