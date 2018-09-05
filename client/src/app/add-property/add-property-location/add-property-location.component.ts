@@ -84,7 +84,7 @@ export class AddPropertyLocationComponent implements OnInit {
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     this.city = $('input[name=city]').val();
     this.location = $('input[name=location]').val();
-    this.propertyService.setLocation({
+    this.propertyService.addLocation({
       lat: this.mlatitude,
       lng: this.mlongitude,
       location: this.location,

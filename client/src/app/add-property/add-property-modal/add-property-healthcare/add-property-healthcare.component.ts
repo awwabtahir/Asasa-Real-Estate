@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { PropertyService } from '../../../property.service';
 
 @Component({
   selector: 'add-property-healthcare',
@@ -7,11 +10,28 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AddPropertyHealthcareComponent implements OnInit {
 
+  @ViewChild('form') ngForm: NgForm;
   @Input() type: string;
+  formChangesSubscription: Subscription;
 
-  constructor() { }
+  healthcare = {
+    lawn: false,
+    pool: false,
+    sauna: false,
+    jacuzzi: false,
+    other_healthcare: ""
+  }
+
+  constructor(private propertyService: PropertyService) { }
 
   ngOnInit() {
+    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(healthcare => {
+      this.propertyService.addHealthCare(healthcare);
+    });
+  }
+
+  ngOnDestroy() {
+    this.formChangesSubscription.unsubscribe();
   }
 
 }

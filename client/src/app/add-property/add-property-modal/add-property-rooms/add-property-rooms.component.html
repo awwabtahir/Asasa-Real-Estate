@@ -1,5 +1,5 @@
 <p><b>Rooms</b></p>
-<form>
+<form #form="ngForm">
   <div class="form-row">
     <div class="form-group">
 
@@ -9,14 +9,14 @@
           <div class="input-group-prepend">
             <div class="input-group-text">Bedrooms: </div>
           </div>
-          <input type="text" class="form-control" id="beds" name="beds">
+          <input type="text" class="form-control" name="beds" [(ngModel)]="room.beds">
         </div>
         <!-- Bathrooms -->
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">Bathrooms: </div>
           </div>
-          <input type="text" class="form-control" id="baths" name="baths">
+          <input type="text" class="form-control" name="baths" [(ngModel)]="room.baths">
         </div>
       </ng-template>
       <!-- Servant Quarters -->
@@ -24,67 +24,67 @@
         <div class="input-group-prepend">
           <div class="input-group-text">Servant Quarters: </div>
         </div>
-        <input type="text" class="form-control" id="servant-quarters" name="servant-quarters">
+        <input type="text" class="form-control" name="servant_quarters" [(ngModel)]="room.servant_quarters">
       </div>
       <ng-template [ngIf]="type == 'house'">
         <!-- Drawing Room -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="drawing-room" name="drawing-room">
-          <label class="custom-control-label" for="drawing-room">Drawing Room</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="drawing_room" [(ngModel)]="room.drawing_room">
+          <label class="form-check-label" for="drawing_room">Drawing Room</label>
         </div>
         <!-- Dining Room -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="dining-room" name="dining-room">
-          <label class="custom-control-label" for="dining-room">Dining Room</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="dining_room" [(ngModel)]="room.dining_room">
+          <label class="form-check-label" for="dining_room">Dining Room</label>
         </div>
         <!-- Kitchens -->
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">Kitchens: </div>
           </div>
-          <input type="text" class="form-control" id="kitchens" name="kitchens">
+          <input type="text" class="form-control" name="kitchens" [(ngModel)]="room.kitchens">
         </div>
         <!-- Study Room -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="studing-room" name="studing-room">
-          <label class="custom-control-label" for="studing-room">Study Room</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="studing_room" [(ngModel)]="room.studing_room">
+          <label class="form-check-label" for="studing_room">Study Room</label>
         </div>
         <!-- Prayer Room -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="prayer-room" name="prayer-room">
-          <label class="custom-control-label" for="prayer-room">Prayer Room</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="prayer_room" [(ngModel)]="room.prayer_room">
+          <label class="form-check-label" for="prayer_room">Prayer Room</label>
         </div>
         <!-- Powder Room -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="powder-room" name="powder-room">
-          <label class="custom-control-label" for="powder-room">Powder Room</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="powder_room" [(ngModel)]="room.powder_room">
+          <label class="form-check-label" for="powder_room">Powder Room</label>
         </div>
         <!-- Gym -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="gym" name="gym">
-          <label class="custom-control-label" for="gym">Gym</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="gym" [(ngModel)]="room.gym">
+          <label class="form-check-label" for="gym">Gym</label>
         </div>
         <!-- Store Rooms -->
         <div class="input-group mb-2 mr-sm-2">
           <div class="input-group-prepend">
             <div class="input-group-text">Store Rooms: </div>
           </div>
-          <input type="text" class="form-control" id="store-rooms" name="store-rooms">
+          <input type="text" class="form-control" name="store_rooms" [(ngModel)]="room.store_rooms">
         </div>
         <!-- Steam Room -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="steam-room" name="steam-room">
-          <label class="custom-control-label" for="steam-room">Steam Room</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="steam_room" [(ngModel)]="room.steam_room">
+          <label class="form-check-label" for="steam_room">Steam Room</label>
         </div>
         <!-- Lounge or Sitting Room -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="lounge-room" name="lounge-room">
-          <label class="custom-control-label" for="lounge-room">Lounge or Sitting Room</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="lounge_room" [(ngModel)]="room.lounge_room">
+          <label class="form-check-label" for="lounge_room">Lounge or Sitting Room</label>
         </div>
         <!-- Laundary Room -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="laundary-room" name="laundary-room">
-          <label class="custom-control-label" for="laundary-room">Laundary Room</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="laundary_room" [(ngModel)]="room.laundary_room">
+          <label class="form-check-label" for="laundary_room">Laundary Room</label>
         </div>
       </ng-template>
       <!-- Other Rooms -->
@@ -92,7 +92,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">Other Rooms: </div>
         </div>
-        <input type="text" class="form-control" id="other-rooms" name="other-rooms">
+        <input type="text" class="form-control" name="other_rooms" [(ngModel)]="room.other_rooms">
       </div>
 
     </div>

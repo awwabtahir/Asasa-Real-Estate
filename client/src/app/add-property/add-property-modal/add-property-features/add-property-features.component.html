@@ -1,5 +1,5 @@
 <p><b>Features</b></p>
-<form>
+<form #form="ngForm">
     <div class="form-row">
         <div class="form-group">
 
@@ -8,44 +8,47 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Built in Year: </div>
                 </div>
-                <input type="text" class="form-control" id="builtyear" name="builtyear">
+                <input type="text" class="form-control" name="builtyear" [(ngModel)]="features.builtyear">
             </div>
             <!-- view -->
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">View: </div>
                 </div>
-                <input type="text" class="form-control" id="view" name="view">
+                <input type="text" class="form-control" name="view" [(ngModel)]="features.view">
             </div>
             <!-- Parking Space -->
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Parking Spaces: </div>
                 </div>
-                <input type="text" class="form-control" id="parking-space" name="parking-space">
+                <input type="text" class="form-control" name="parking_space" [(ngModel)]="features.parking_space">
             </div>
             <!-- Doubled Gazed Windows -->
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="window" name="window">
-                <label class="custom-control-label" for="window">Doubled Gazed Windows</label>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="window" [(ngModel)]="features.window">Doubled
+                    Gazed Windows
+                </label>
             </div>
             <!-- Central Air Conditioned -->
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="cac" name="cac">
-                <label class="custom-control-label" for="cac">Central Air Conditioned</label>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" name="cac" [(ngModel)]="features.cac">Central Air Conditioned
+                </label>
             </div>
             <!-- Central Heating -->
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="ch" name="ch">
-                <label class="custom-control-label" for="ch">Central Heating</label>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="ch" [(ngModel)]="features.ch">
+                <label class="form-check-label" for="ch">Central Heating</label>
             </div>
             <!-- Waste Disposal -->
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="waste-disposal" name="waste-disposal">
-                <label class="custom-control-label" for="waste-disposal">Waste Disposal</label>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="waste_disposal" [(ngModel)]="features.waste_disposal">
+                <label class="form-check-label" for="waste_disposal">Waste Disposal</label>
             </div>
             <!-- Flooring -->
-            <select class="custom-select mt-2" name="flooring" id="flooring">
+            <select class="custom-select mt-2" name="flooring" [(ngModel)]="features.flooring">
                 <option value="">Select Floor Type</option>
                 <option value="Tiles">Tiles</option>
                 <option value="Marble">Marble</option>
@@ -55,7 +58,7 @@
                 <option value="Other">Other</option>
             </select>
             <!-- Electricity Backup -->
-            <select class="custom-select mt-2 mb-2" name="electric-backup" id="electric-backup">
+            <select class="custom-select mt-2 mb-2" name="electric_backup" [(ngModel)]="features.electric_backup">
                 <option value="">Select Electricity Backup</option>
                 <option value="None">None</option>
                 <option value="Generator">Generator</option>
@@ -68,44 +71,44 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">Floors: </div>
                 </div>
-                <input type="text" class="form-control" id="floors" name="floors">
+                <input type="text" class="form-control" name="floors" [(ngModel)]="features.floors">
             </div>
             <!-- Other main features -->
             <div class="input-group mb-2 mr-sm-2">
                 <div class="input-group-prepend">
                     <div class="input-group-text">Other Features: </div>
                 </div>
-                <input type="text" class="form-control" id="other-features" name="other-features">
+                <input type="text" class="form-control" name="other_features" [(ngModel)]="features.other_features">
             </div>
             <!-- Furnished -->
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="furnished" name="furnished">
-                <label class="custom-control-label" for="furnished">Furnished</label>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" name="furnished" [(ngModel)]="features.furnished">
+                <label class="form-check-label" for="furnished">Furnished</label>
             </div>
             <ng-template [ngIf]="type == 'commercial'">
                 <!-- Lobby in Building -->
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="lobby" name="lobby">
-                    <label class="custom-control-label" for="lobby">Lobby in Building</label>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="lobby" [(ngModel)]="features.lobby">
+                    <label class="form-check-label" for="lobby">Lobby in Building</label>
                 </div>
                 <!-- Floors in Building -->
                 <div class="input-group mb-2 mr-sm-2 mt-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Floors in Building: </div>
                     </div>
-                    <input type="text" class="form-control" id="building-floor" name="building-floor">
+                    <input type="text" class="form-control" name="building_floor" [(ngModel)]="features.building_floor">
                 </div>
                 <!-- Elevators -->
                 <div class="input-group mb-2 mr-sm-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Elevators: </div>
                     </div>
-                    <input type="text" class="form-control" id="elevators" name="elevators">
+                    <input type="text" class="form-control" name="elevators" [(ngModel)]="features.elevators">
                 </div>
                 <!-- Service Elevators in Building -->
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="service-elevators" name="service-elevators">
-                    <label class="custom-control-label" for="service-elevators">Service Elevators in Building</label>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="service_elevators" [(ngModel)]="features.service_elevators">
+                    <label class="form-check-label" for="service-elevators">Service Elevators in Building</label>
                 </div>
             </ng-template>
 

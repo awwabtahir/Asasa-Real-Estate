@@ -1,33 +1,33 @@
 <p><b>Business and Communication</b></p>
-<form>
+<form #form="ngForm">
   <div class="form-row">
     <div class="form-group">
 
       <!-- Broadband Internet Access -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="internet" name="internet">
-        <label class="custom-control-label" for="internet">Broadband Internet Access</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="internet" [(ngModel)]="biz_comm.internet">
+        <label class="form-check-label" for="internet">Broadband Internet Access</label>
       </div>
       <!-- Sattelite or Cable TV Ready -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="cable-tv" name="cable-tv">
-        <label class="custom-control-label" for="cable-tv">Sattelite or Cable TV Ready</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="cable_tv" [(ngModel)]="biz_comm.cable_tv">
+        <label class="form-check-label" for="cable_tv">Sattelite or Cable TV Ready</label>
       </div>
       <!-- Intercom -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="intercom" name="intercom">
-        <label class="custom-control-label" for="intercom">Intercom</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="intercom" [(ngModel)]="biz_comm.intercom">
+        <label class="form-check-label" for="intercom">Intercom</label>
       </div>
       <ng-template [ngIf]="type == 'commercial'">
         <!-- Business Center or Media Room in Building -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="business-center" name="business-center">
-          <label class="custom-control-label" for="business-center">Business Center or Media Room in Building</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="business_center" [(ngModel)]="biz_comm.business_center">
+          <label class="form-check-label" for="business_center">Business Center or Media Room in Building</label>
         </div>
         <!-- ATM Machines -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="atm" name="atm">
-          <label class="custom-control-label" for="atm">ATM Machines</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="atm" [(ngModel)]="biz_comm.atm">
+          <label class="form-check-label" for="atm">ATM Machines</label>
         </div>
       </ng-template>
       <!-- Other Business and Communication Facilities -->
@@ -35,7 +35,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">Other Facilities: </div>
         </div>
-        <input type="text" class="form-control" id="other-biz" name="other-biz">
+        <input type="text" class="form-control" name="other_biz" [(ngModel)]="biz_comm.other_biz">
       </div>
 
     </div>

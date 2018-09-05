@@ -1,5 +1,5 @@
 <p><b>Nearby Locations</b></p>
-<form>
+<form #form="ngForm">
   <div class="form-row">
     <div class="form-group">
 
@@ -8,49 +8,49 @@
         <div class="input-group-prepend">
           <div class="input-group-text">Nearby Schools: </div>
         </div>
-        <input type="text" class="form-control" id="nearby-schools" name="nearby-schools">
+        <input type="text" class="form-control" name="nearby_schools" [(ngModel)]="nearby_loc.nearby_schools">
       </div>
       <!-- Nearby Hospitals -->
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Nearby Hospitals: </div>
         </div>
-        <input type="text" class="form-control" id="nearby-hospitals" name="nearby-hospitals">
+        <input type="text" class="form-control" name="nearby_hospitals" [(ngModel)]="nearby_loc.nearby_hospitals">
       </div>
       <!-- Nearby Shopping Malls -->
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Nearby Shopping Malls: </div>
         </div>
-        <input type="text" class="form-control" id="nearby-shopping-malls" name="nearby-shopping-malls">
+        <input type="text" class="form-control" name="nearby_shoppingmalls" [(ngModel)]="nearby_loc.nearby_shoppingmalls">
       </div>
       <!-- Nearby Restaurants -->
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Nearby Restaurants: </div>
         </div>
-        <input type="text" class="form-control" id="nearby-restaurants" name="nearby-restaurants">
+        <input type="text" class="form-control" name="nearby_restaurants" [(ngModel)]="nearby_loc.nearby_restaurants">
       </div>
       <!-- Distance from Airport(kms) -->
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Distance from Airport(kms): </div>
         </div>
-        <input type="text" class="form-control" id="airport-distance" name="airport-distance">
+        <input type="text" class="form-control" name="airport_distance" [(ngModel)]="nearby_loc.airport_distance">
       </div>
       <!-- Nearby Public Transport -->
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Nearby Public Transport: </div>
         </div>
-        <input type="text" class="form-control" id="nearby-transport" name="nearby-transport">
+        <input type="text" class="form-control" name="nearby_transport" [(ngModel)]="nearby_loc.nearby_transport">
       </div>
       <!-- Other Nearby Places -->
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Other Nearby Places: </div>
         </div>
-        <input type="text" class="form-control" id="nearby-places" name="nearby-places">
+        <input type="text" class="form-control" name="nearby_places" [(ngModel)]="nearby_loc.nearby_places">
       </div>
 
     </div>

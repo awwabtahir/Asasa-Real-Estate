@@ -1,28 +1,28 @@
 <p><b>Healthcare Recreational</b></p>
-<form>
+<form #form="ngForm">
   <div class="form-row">
     <div class="form-group">
 
       <!-- Lawn or Garden -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="lawn" name="lawn">
-        <label class="custom-control-label" for="lawn">Lawn or Garden</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="lawn" [(ngModel)]="healthcare.lawn">
+        <label class="form-check-label" for="lawn">Lawn or Garden</label>
       </div>
       <ng-template [ngIf]="type == 'house'">
         <!-- Swimming Pool -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="pool" name="pool">
-          <label class="custom-control-label" for="pool">Swimming Pool</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="pool" [(ngModel)]="healthcare.pool">
+          <label class="form-check-label" for="pool">Swimming Pool</label>
         </div>
         <!-- Sauna -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="sauna" name="sauna">
-          <label class="custom-control-label" for="sauna">Sauna</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="sauna" [(ngModel)]="healthcare.sauna">
+          <label class="form-check-label" for="sauna">Sauna</label>
         </div>
         <!-- Jacuzzi -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="jacuzzi" name="jacuzzi">
-          <label class="custom-control-label" for="jacuzzi">Jacuzzi</label>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="jacuzzi" [(ngModel)]="healthcare.jacuzzi">
+          <label class="form-check-label" for="jacuzzi">Jacuzzi</label>
         </div>
       </ng-template>
       <!-- Other Healthcare and Recreational Facilities -->
@@ -30,7 +30,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">Other Facilities: </div>
         </div>
-        <input type="text" class="form-control" id="other-healthcare" name="other-healthcare">
+        <input type="text" class="form-control" name="other_healthcare" [(ngModel)]="healthcare.other_healthcare">
       </div>
 
     </div>

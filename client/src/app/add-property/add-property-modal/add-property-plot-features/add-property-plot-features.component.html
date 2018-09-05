@@ -1,69 +1,69 @@
 <p><b>Plot Features</b></p>
-<form>
+<form #form="ngForm">
   <div class="form-row">
     <div class="form-group">
 
       <!-- Possession -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="possession" name="possession">
-        <label class="custom-control-label" for="possession">Possession</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="possession" [(ngModel)]="plot_features.possession">
+        <label class="form-check-label" for="possession">Possession</label>
       </div>
       <!-- Corner -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="corner" name="corner">
-        <label class="custom-control-label" for="corner">Corner</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="corner" [(ngModel)]="plot_features.corner">
+        <label class="form-check-label" for="corner">Corner</label>
       </div>
       <!-- Park facing -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="park-facing" name="park-facing">
-        <label class="custom-control-label" for="park-facing">Park facing</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="park_facing" [(ngModel)]="plot_features.park_facing">
+        <label class="form-check-label" for="park-facing">Park facing</label>
       </div>
       <!-- Disputed -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="disputed" name="disputed">
-        <label class="custom-control-label" for="disputed">Disputed</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="disputed" [(ngModel)]="plot_features.disputed">
+        <label class="form-check-label" for="disputed">Disputed</label>
       </div>
       <!-- File -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="file" name="file">
-        <label class="custom-control-label" for="file">File</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="file" [(ngModel)]="plot_features.file">
+        <label class="form-check-label" for="file">File</label>
       </div>
       <!-- Balloted -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="balloted" name="balloted">
-        <label class="custom-control-label" for="balloted">Balloted</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="balloted" [(ngModel)]="plot_features.balloted">
+        <label class="form-check-label" for="balloted">Balloted</label>
       </div>
       <!-- Sewerage -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="sewerage" name="sewerage">
-        <label class="custom-control-label" for="sewerage">Sewerage</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="sewerage" [(ngModel)]="plot_features.sewerage">
+        <label class="form-check-label" for="sewerage">Sewerage</label>
       </div>
       <!-- Electricity -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="electricity" name="electricity">
-        <label class="custom-control-label" for="electricity">Electricity</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="electricity" [(ngModel)]="plot_features.electricity">
+        <label class="form-check-label" for="electricity">Electricity</label>
       </div>
       <!-- Water Supply -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="water-supply" name="water-supply">
-        <label class="custom-control-label" for="water-supply">Water Supply</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="water_supply" [(ngModel)]="plot_features.water_supply">
+        <label class="form-check-label" for="water-supply">Water Supply</label>
       </div>
       <!-- Sui Gas -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="sui-gas" name="sui-gas">
-        <label class="custom-control-label" for="sui-gas">Sui Gas</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="sui_gas" [(ngModel)]="plot_features.sui_gas">
+        <label class="form-check-label" for="sui-gas">Sui Gas</label>
       </div>
       <!-- Boundary Wall -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="boundary-wall" name="boundary-wall">
-        <label class="custom-control-label" for="boundary-wall">Boundary Wall</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="boundary_wall" [(ngModel)]="plot_features.boundary_wall">
+        <label class="form-check-label" for="boundary-wall">Boundary Wall</label>
       </div>
       <!-- Other Plot Features -->
       <div class="input-group mb-2 mr-sm-2">
         <div class="input-group-prepend">
           <div class="input-group-text">Other Plot Features: </div>
         </div>
-        <input type="text" class="form-control" id="plot-features" name="plot-features">
+        <input type="text" class="form-control" name="plot_features" [(ngModel)]="plot_features.plot_features">
       </div>
 
     </div>

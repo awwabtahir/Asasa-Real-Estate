@@ -1,26 +1,26 @@
 <p><b>Other Facilities</b></p>
-<form>
+<form #form="ngForm">
   <div class="form-row">
     <div class="form-group">
 
       <!-- Maintainance Staff -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="maintainance-staff" name="maintainance-staff">
-        <label class="custom-control-label" for="maintainance-staff">Maintainance Staff</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="maintainance_staff" [(ngModel)]="other.maintainance_staff">
+        <label class="form-check-label" for="maintainance-staff">Maintainance Staff</label>
       </div>
       <!-- Security Staff -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="security-staff" name="security-staff">
-        <label class="custom-control-label" for="security-staff">Security Staff</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="security_staff" [(ngModel)]="other.security_staff">
+        <label class="form-check-label" for="security-staff">Security Staff</label>
       </div>
       <!-- Facilities for Disabled -->
-      <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="facilities-disable" name="facilities-disable">
-        <label class="custom-control-label" for="facilities-disable">Facilities for Disabled</label>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" name="facilities_disable" [(ngModel)]="other.facilities_disable">
+        <label class="form-check-label" for="facilities-disable">Facilities for Disabled</label>
       </div>
       <ng-template [ngIf]="type == 'commercial'">
         <!-- Pet Policy -->
-        <select class="custom-select mt-2 mb-2" name="pet-policy" id="pet-policy">
+        <select class="custom-select mt-2 mb-2" name="pet_policy" [(ngModel)]="other.pet_policy">
           <option value="">Select Pet Policy</option>
           <option value="Allowed">Allowed</option>
           <option value="Not Allowed">Not Allowed</option>
@@ -31,7 +31,7 @@
         <div class="input-group-prepend">
           <div class="input-group-text">Other Facilities: </div>
         </div>
-        <input type="text" class="form-control" id="other-facilities" name="other-facilities">
+        <input type="text" class="form-control" name="other_facilities" [(ngModel)]="other.other_facilities">
       </div>
 
     </div>
