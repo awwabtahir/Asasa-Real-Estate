@@ -45,3 +45,9 @@
     border-radius: 25px;
     cursor: pointer;
 }
+
+.call {
+    color:blue!important;
+    border: 5px solid red;
+    border-radius: 10px!important;
+}

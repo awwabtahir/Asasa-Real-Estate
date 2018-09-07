@@ -7,6 +7,7 @@ import { AgmCoreModule } from '@agm/core';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import { NgxEditorModule } from 'ngx-editor';
+import { AgmOverlays } from "agm-overlays";
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -35,7 +36,8 @@ import { AddPropertyOtherComponent } from './add-property/add-property-modal/add
 import { AddPropertyPlotFeaturesComponent } from './add-property/add-property-modal/add-property-plot-features/add-property-plot-features.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/peshawar/dha', pathMatch: 'full' },
+  { path: 'peshawar/dha', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
@@ -76,13 +78,14 @@ const routes: Routes = [
     UcWidgetModule,
     NgxEditorModule,
     RouterModule.forRoot(routes),
+    AgmOverlays,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',
       libraries: ["places"]
     })
   ],
   providers: [
-    AuthenticationService, 
+    AuthenticationService,
     AuthGuardService,
     PropertyService
   ],
