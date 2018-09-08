@@ -1,4 +1,5 @@
 var express = require('express');
+var compression = require('compression');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -30,6 +31,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
+
+// compress all responses
+app.use(compression());
 
 // [SH] Initialise Passport before using the route middleware
 app.use(passport.initialize());
