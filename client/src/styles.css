@@ -8,10 +8,6 @@
     background: #25BDA4;
 }
 
-img[src="https://maps.gstatic.com/mapfiles/api-3/images/mapcnt6.png"] {
-    display: none;
-}
-
 .ngx-editor .ngx-wrapper .ngx-editor-textarea {
     min-height: 5rem!important;
 }
