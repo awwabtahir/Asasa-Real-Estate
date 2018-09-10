@@ -3,24 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-
-export interface UserDetails {
-  _id: string;
-  email: string;
-  name: string;
-  exp: number;
-  iat: number;
-}
-
-interface TokenResponse {
-  token: string;
-}
-
-export interface TokenPayload {
-  email: string;
-  password: string;
-  name?: string;
-}
+import { UserDetails } from './models/UserDetails';
+import { TokenResponse } from './models/token';
+import { TokenPayload } from './models/token';
+import { ad } from './models/ad';
 
 @Injectable()
 export class AuthenticationService {
@@ -61,14 +47,18 @@ export class AuthenticationService {
     }
   }
 
-  private request(method: 'post'|'get', type: 'login'|'register'|'profile', user?: TokenPayload): Observable<any> {
+  private request(
+    method: 'post'|'get', 
+    type: 'login'|'register'|'profile'|'save_ad'|'get_ads', 
+    template?: TokenPayload | ad): Observable<any> {
+
     let base;
     let prod = false;
 
     if (method === 'post') {
-      base = this.http.post(`/api/${type}`, user);
+      base = this.http.post(`/api/${type}`, template);
       if(prod)
-        base = this.http.post(`http://localhost:3000/api/${type}`, user);
+        base = this.http.post(`http://localhost:3000/api/${type}`, template);
     } else {
       base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
       if(prod)
@@ -97,6 +87,14 @@ export class AuthenticationService {
 
   public profile(): Observable<any> {
     return this.request('get', 'profile');
+  }
+
+  public saveAd(ad): Observable<any> {
+    return this.request('post', 'save_ad', ad);
+  }
+
+  public getAds(): Observable<any> {
+    return this.request('get', 'get_ads');
   }
 
   public logout(): void {

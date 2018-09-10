@@ -4,7 +4,7 @@
   <agm-map #map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [gestureHandling]="gesture" [mapTypeControl]=true 
   [panControl]=true (mapReady)="mapReady($event)">
     
-    <agm-marker [latitude]="lat" [longitude]="lng" [iconUrl]="icon" 
+    <agm-marker *ngFor="let ad of ads; let i=index" [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="icon" 
               (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()">
 
       <agm-info-window #infoWindow>
@@ -13,10 +13,10 @@
         </div>
         <div class="propertyDetails">
           <p class="mb-1">
-            <b>Rs. 70 Lac</b>
+            <b>Rs. {{ ad.demand }}</b>
           </p>
-          <p class="mb-1">Sector A</p>
-          <p class="mb-1">2,500 sqft</p>
+          <p class="mb-1">{{ ad.locationData.location }}</p>
+          <p class="mb-1">{{ ad.area }} {{ ad.areaType }}</p>
         </div>
       </agm-info-window>
 

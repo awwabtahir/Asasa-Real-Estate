@@ -1,6 +1,7 @@
 /// <reference types="@types/googlemaps" />
 declare var klokantech: any;
 import { Component, OnInit } from '@angular/core';
+import { PropertyService } from '../property.service';
 
 @Component({
   selector: 'map',
@@ -21,16 +22,19 @@ export class MapComponent implements OnInit {
 
   // marker image
   icon = {
-    url: "assets/images/red_square.svg",
+    url: "assets/images/square.svg",
     scaledSize: {
-      width: 10,
-      height: 10
+      width: 12,
+      height: 12
     }
   };
 
-  constructor() { }
+  ads = {};
+
+  constructor(private propertyService: PropertyService) { }
 
   ngOnInit() {
+    this.getAds();    
   }
 
   mapReady(map) {
@@ -58,11 +62,19 @@ export class MapComponent implements OnInit {
   }
 
   onMouseOut() {
-    setTimeout(()=> {
+    setTimeout(() => {
       if (this.map.lastOpen !== null) {
         this.map.lastOpen.close();
       }
     }, 2000);
+  }
+
+  getAds() {
+    this.propertyService.getAds().subscribe(ads => {
+      this.ads = ads;
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   private addOverLay(map, mapBounds, imgLoc) {

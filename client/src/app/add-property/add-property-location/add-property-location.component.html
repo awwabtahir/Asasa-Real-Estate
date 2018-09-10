@@ -22,16 +22,34 @@
       </div>
       <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlongitude }}" disabled>
     </div>
-    <div class="form-group input-group col-md-3">
+    <!-- <div class="form-group input-group col-md-3">
       <div class="input-group-prepend">
         <div class="input-group-text">Location: </div>
       </div>
       <input class="form-control mr-2" name="location" id="disabledInput" type="text" value="{{ location }}" required>
-    </div>
+    </div> -->
     <div class="form-group input-group col-md-3">
       <div class="input-group-prepend">
         <div class="input-group-text">City: </div>
       </div>
       <input class="form-control" name="city" id="disabledInput" type="text" placeholder="{{ city }}" disabled>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <select id="inputLocation" class="form-control" name="location" [(ngModel)]="location" (change)="locationChange()">
+        <option value="dha">Select Sector</option>
+        <option value="Sector A">Sector A</option>
+        <option value="Sector B">Sector B</option>
+        <option value="Sector C">Sector C</option>
+        <option value="Sector D">Sector D</option>
+        <option value="Sector E">Sector E</option>
+        <option value="Sector F">Sector F</option>
+        <option value="Sector G">Sector G</option>
+        <option value="Sector H">Sector H</option>
+        <option value="Sector I">Sector I</option>
+        <option value="Sector J">Sector J</option>
+      </select>
     </div>
   </div>

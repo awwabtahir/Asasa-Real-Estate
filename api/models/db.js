@@ -5,7 +5,7 @@ var dbURI = 'mongodb://iamasasa:warka123@ds231961.mlab.com:31961/asasadbweb';
 //   dbURI = process.env.MONGOLAB_URI;
 // }
 
-mongoose.connect(dbURI);
+mongoose.connect(dbURI, { useNewUrlParser: true });
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
@@ -47,3 +47,4 @@ process.on('SIGTERM', function() {
 
 // BRING IN YOUR SCHEMAS & MODELS
 require('./users');
+require('./ads');

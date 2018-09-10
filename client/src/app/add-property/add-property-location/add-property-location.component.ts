@@ -1,4 +1,5 @@
 /// <reference types="@types/googlemaps" />
+declare var klokantech: any;
 import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
@@ -22,8 +23,8 @@ export class AddPropertyLocationComponent implements OnInit {
   public mlongitude: number;
   public zoom: number;
 
-  public location: string;
-  public city: string;
+  public location = "dha";
+  public city = "Peshawar";
 
   gesture = "greedy";
 
@@ -75,15 +76,22 @@ export class AddPropertyLocationComponent implements OnInit {
     this.setLocationData();
   }
 
-  mapReady(event) {
-    event.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('search'));
+  mapReady(map) {
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('search'));
+    var mapBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(34.03589373, 71.40848471),
+      new google.maps.LatLng(34.08513423, 71.48481756));
+    this.addOverLay(map, mapBounds, "peshawar/dha");
+  }
+
+  locationChange() {
+    this.setLocationData();
   }
 
   private async setLocationData() {
     // wait 3 seconds
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    this.city = $('input[name=city]').val();
-    this.location = $('input[name=location]').val();
+    // this.city = $('input[name=city]').val();
     this.propertyService.addLocation({
       lat: this.mlatitude,
       lng: this.mlongitude,
@@ -95,15 +103,18 @@ export class AddPropertyLocationComponent implements OnInit {
 
 
   private setCurrentPosition() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.latitude = this.mlatitude = position.coords.latitude;
-        this.longitude = this.mlongitude = position.coords.longitude;
-        this.getCityWithLoc(this.latitude, this.longitude);
-        this.zoom = 15;
-        this.setLocationData();
-      });
-    }
+    // if ("geolocation" in navigator) {
+    //   navigator.geolocation.getCurrentPosition((position) => {
+    //     this.latitude = this.mlatitude = position.coords.latitude;
+    //     this.longitude = this.mlongitude = position.coords.longitude;
+    //     this.getCityWithLoc(this.latitude, this.longitude);
+    //     this.zoom = 15;
+    //     this.setLocationData();
+    //   });
+    // }
+    this.latitude = this.mlatitude = 34.052059005117556;
+    this.longitude = this.mlongitude = 71.42871650000006;
+    this.setLocationData();
   }
 
   private getCityWithLoc(lat, lng) {
@@ -120,6 +131,20 @@ export class AddPropertyLocationComponent implements OnInit {
         }
       } else console.log("Geocoder failed: " + status)
     });
+  }
+
+  private addOverLay(map, mapBounds, imgLoc) {
+    var mapMinZoom = 12;
+    var mapMaxZoom = 17;
+    var overlay = new klokantech.MapTilerMapType(map, function (x, y, z) {
+      return "assets/map/" + imgLoc + "/{z}/{x}/{y}.png".replace('{z}', z).replace('{x}', x).replace('{y}', y);
+    },
+      mapBounds, mapMinZoom, mapMaxZoom);
+
+    map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+    var opacitycontrol = new klokantech.OpacityControl(map, overlay);
+    var geoloccontrol = new klokantech.GeolocationControl(map, mapMaxZoom);
+    map.fitBounds(mapBounds);
   }
 
 }

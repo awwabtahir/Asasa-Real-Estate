@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthenticationService, TokenPayload } from '../authentication.service';
+import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+import {TokenPayload} from './../models/token';
 
 @Component({
   templateUrl: './register.component.html'

@@ -36,7 +36,7 @@
           <option value="Penthouse">Penthouse</option>
         </select>
         <select *ngIf="ad.type == 'plot'" id="inputType" class="form-control" name="type" [(ngModel)]="ad.subtype">
-            <option value="0">----Select Plot Type----</option>
+          <option value="0">----Select Plot Type----</option>
           <option value="Residential Plot">Residential Plot</option>
           <option value="Commercial Plot">Commercial Plot</option>
           <option value="Agricultural Land">Agricultural Land</option>
@@ -45,7 +45,7 @@
           <option value="Plot Form">Plot Form</option>
         </select>
         <select *ngIf="ad.type == 'commercial'" id="inputType" class="form-control" name="type" [(ngModel)]="ad.subtype">
-            <option value="0">----Select Commercial Type----</option>
+          <option value="0">----Select Commercial Type----</option>
           <option value="Office">Office</option>
           <option value="Shop">Shop</option>
           <option value="Warehouse">Warehouse</option>
@@ -110,13 +110,12 @@
 
     <div class="form-row mb-1">
       <div class="form-group col-md-6">
-        <input type="text" placeholder="Property Title" name="title" [(ngModel)]="ad.title" class="form-control" id="inputTitle"
-          #headline="ngModel" required>
-        <div *ngIf="headline.invalid && (headline.dirty || headline.touched)" class="invalid-feedback">
+        <input type="text" placeholder="Property Title" name="title" [(ngModel)]="ad.title" class="form-control" id="inputTitle">
+        <!-- <div *ngIf="headline.invalid && (headline.dirty || headline.touched)" class="invalid-feedback">
           <div *ngIf="headline.errors.required">
             Title is required.
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 

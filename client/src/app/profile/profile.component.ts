@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthenticationService, UserDetails } from '../authentication.service';
+import { AuthenticationService } from '../authentication.service';
+import { UserDetails } from './../models/UserDetails';
 
 @Component({
   templateUrl: './profile.component.html'
@@ -7,9 +8,9 @@ import { AuthenticationService, UserDetails } from '../authentication.service';
 export class ProfileComponent {
   details: UserDetails;
 
-  constructor(private auth: AuthenticationService) {}
-  
-  ngOnInit() {    
+  constructor(private auth: AuthenticationService) { }
+
+  ngOnInit() {
     this.auth.profile().subscribe(user => {
       this.details = user;
     }, (err) => {

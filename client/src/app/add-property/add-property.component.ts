@@ -9,8 +9,8 @@ import { PropertyService } from '../property.service';
 export class AddPropertyComponent implements OnInit {
 
   ad = {
-    type: "0",
-    subtype: "0",
+    type: "plot",
+    subtype: "Residential Plot",
     propNumber: "",
     street: "",
     demand: "",
