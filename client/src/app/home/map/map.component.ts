@@ -19,7 +19,7 @@ export class MapComponent implements OnInit {
 
   // marker image
   icon = {
-    url: "assets/images/square.svg",
+    url: "assets/images/white_circle.svg",
     scaledSize: {
       width: 12,
       height: 12
