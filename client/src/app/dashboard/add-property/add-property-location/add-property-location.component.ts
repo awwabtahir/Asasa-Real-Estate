@@ -103,7 +103,8 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
     this.addOverLay(map, mapBounds, "peshawar/dha");
   }
 
-  locationChange() {
+  locationChange(event) {
+    console.log(event);
     this.setLocationData();
   }
 

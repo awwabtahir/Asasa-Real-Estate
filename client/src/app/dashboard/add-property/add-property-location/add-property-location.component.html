@@ -38,7 +38,7 @@
 
   <div class="form-row">
     <div class="form-group col-md-3">
-      <select id="inputLocation" class="form-control" name="location" [(ngModel)]="location" (change)="locationChange()">
+      <select id="inputLocation" class="form-control" name="location" [(ngModel)]="location" (change)="locationChange($event)">
         <option value="dha">Select Sector</option>
         <option value="Sector A">Sector A</option>
         <option value="Sector B">Sector B</option>
