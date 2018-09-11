@@ -1,22 +1,24 @@
 <div class="map mt-2">
   <!-- this creates a google map on the page with the given lat/lng from -->
   <!-- the component as the initial center of the map: -->
-  <agm-map #map [latitude]="lat" [longitude]="lng" [gestureHandling]="gesture" [mapTypeControl]=true 
-  [panControl]=true (mapReady)="mapReady($event)">
-    
-    <agm-marker *ngFor="let ad of ads; let i=index" [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="icon" 
-              (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()">
+  <agm-map #map [latitude]="lat" [longitude]="lng" [gestureHandling]="gesture" [mapTypeControl]=true [panControl]=true (mapReady)="mapReady($event)">
+
+    <agm-marker *ngFor="let ad of ads; let i=index" [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="icon"
+      (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()">
 
       <agm-info-window #infoWindow>
         <div class="propertyImg mr-2">
-          <img src="assets/images/map-thumbnail.jpg" width="60" height="50">
+          <img src="assets/images/map-thumbnail.jpg" width="80" height="70">
         </div>
         <div class="propertyDetails">
           <p class="mb-1">
+            <b>{{ ad.type | titlecase }} no. {{ ad.propNumber }}</b>
+          </p>
+          <p class="mb-1">
             <b>Rs. {{ getDemand(ad.demand) }}</b>
           </p>
-          <p class="mb-1">{{ ad.locationData.location }}, {{ ad.locationData.city }}</p>
           <p class="mb-1">{{ ad.area }} {{ ad.areaType }}</p>
+          <p class="mb-1">{{ ad.locationData.location }}, DHA, {{ ad.locationData.city }}</p>
         </div>
       </agm-info-window>
 
