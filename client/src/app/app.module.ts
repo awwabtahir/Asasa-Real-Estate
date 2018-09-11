@@ -10,30 +10,31 @@ import { NgxEditorModule } from 'ngx-editor';
 import { AgmOverlays } from "agm-overlays";
 
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './profile/profile.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
+import { LoginComponent } from './navbar/login/login.component';
+import { RegisterComponent } from './navbar/register/register.component';
 import { HomeComponent } from './home/home.component';
-import { SearchComponent } from './search/search.component';
-import { MapComponent } from './map/map.component';
-import { PropertyComponent } from './property/property.component';
-import { FooterComponent } from './footer/footer.component';
-import { AddPropertyComponent } from './add-property/add-property.component';
+import { SearchComponent } from './home/search/search.component';
+import { MapComponent } from './home/map/map.component';
+import { PropertyComponent } from './home/property/property.component';
+import { FooterComponent } from './home/footer/footer.component';
+import { AddPropertyComponent } from './dashboard/add-property/add-property.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
-import { AuthenticationService } from './authentication.service';
-import { AuthGuardService } from './auth-guard.service';
-import { PropertyService } from './property.service';
-import { AddPropertyFeaturesComponent } from './add-property/add-property-modal/add-property-features/add-property-features.component';
-import { AddPropertyLocationComponent } from './add-property/add-property-location/add-property-location.component';
+import { AuthenticationService } from './services/authentication.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { PropertyService } from './services/property.service';
+import { AddPropertyFeaturesComponent } from './dashboard/add-property/add-property-modal/add-property-features/add-property-features.component';
+import { AddPropertyLocationComponent } from './dashboard/add-property/add-property-location/add-property-location.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AddPropertyModalComponent } from './add-property/add-property-modal/add-property-modal.component';
-import { AddPropertyBizCommComponent } from './add-property/add-property-modal/add-property-biz-comm/add-property-biz-comm.component';
-import { AddPropertyNearbyLocComponent } from './add-property/add-property-modal/add-property-nearby-loc/add-property-nearby-loc.component';
-import { AddPropertyRoomsComponent } from './add-property/add-property-modal/add-property-rooms/add-property-rooms.component';
-import { AddPropertyHealthcareComponent } from './add-property/add-property-modal/add-property-healthcare/add-property-healthcare.component';
-import { AddPropertyOtherComponent } from './add-property/add-property-modal/add-property-other/add-property-other.component';
-import { AddPropertyPlotFeaturesComponent } from './add-property/add-property-modal/add-property-plot-features/add-property-plot-features.component';
+import { AddPropertyModalComponent } from './dashboard/add-property/add-property-modal/add-property-modal.component';
+import { AddPropertyBizCommComponent } from './dashboard/add-property/add-property-modal/add-property-biz-comm/add-property-biz-comm.component';
+import { AddPropertyNearbyLocComponent } from './dashboard/add-property/add-property-modal/add-property-nearby-loc/add-property-nearby-loc.component';
+import { AddPropertyRoomsComponent } from './dashboard/add-property/add-property-modal/add-property-rooms/add-property-rooms.component';
+import { AddPropertyHealthcareComponent } from './dashboard/add-property/add-property-modal/add-property-healthcare/add-property-healthcare.component';
+import { AddPropertyOtherComponent } from './dashboard/add-property/add-property-modal/add-property-other/add-property-other.component';
+import { AddPropertyPlotFeaturesComponent } from './dashboard/add-property/add-property-modal/add-property-plot-features/add-property-plot-features.component';
+import { ActivePropertiesComponent } from './dashboard/active-properties/active-properties.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/peshawar/dha', pathMatch: 'full' },
@@ -42,7 +43,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
-  { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] }
+  { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] },
+  { path: 'activeProperties', component: ActivePropertiesComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
@@ -67,7 +69,8 @@ const routes: Routes = [
     AddPropertyRoomsComponent,
     AddPropertyHealthcareComponent,
     AddPropertyOtherComponent,
-    AddPropertyPlotFeaturesComponent
+    AddPropertyPlotFeaturesComponent,
+    ActivePropertiesComponent
   ],
   imports: [
     BrowserModule,
