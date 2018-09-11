@@ -4,6 +4,13 @@
     height: 70px;
 }
 
+.navbar-collapse {
+    z-index: 99;
+    background: white;
+    padding: 10px;
+    margin: 10px 10px 0px 0px;
+}
+
 .bg-light {
     background-color: white!important;
 }
