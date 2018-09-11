@@ -11,9 +11,6 @@ import { PropertyService } from '../../services/property.service';
 export class MapComponent implements OnInit {
   map: any;
 
-  // google maps zoom level
-  zoom: number = 10;
-
   // initial position
   lat: number = 34.052059005117556;
   lng: number = 71.42871650000006;
@@ -77,6 +74,10 @@ export class MapComponent implements OnInit {
     });
   }
 
+  getDemand(demand) {
+    return this.propertyService.localeString(demand);
+  }
+
   private addOverLay(map, mapBounds, imgLoc) {
     var mapMinZoom = 12;
     var mapMaxZoom = 17;
@@ -87,8 +88,8 @@ export class MapComponent implements OnInit {
 
     map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
     var opacitycontrol = new klokantech.OpacityControl(map, overlay);
-    var geoloccontrol = new klokantech.GeolocationControl(map, mapMaxZoom);
     map.fitBounds(mapBounds);
+    map.setZoom(13);
   }
 
 

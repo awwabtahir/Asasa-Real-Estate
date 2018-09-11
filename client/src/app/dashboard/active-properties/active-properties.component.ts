@@ -47,4 +47,8 @@ export class ActivePropertiesComponent implements OnInit {
     this.propertyService.delete(this.itemfordelete);
   }
 
+  getDemand(demand) {
+    return this.propertyService.localeString(demand);
+  }
+
 }

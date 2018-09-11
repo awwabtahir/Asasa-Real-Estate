@@ -104,13 +104,12 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
   }
 
   locationChange(event) {
-    console.log(event);
-    this.setLocationData();
+    this.setLocationData(false);
   }
 
-  private async setLocationData() {
+  private async setLocationData(wait = true) {
     // wait 3 seconds
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+    if(wait) await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     // this.city = $('input[name=city]').val();
     this.propertyService.addLocation({
       lat: this.mlatitude,

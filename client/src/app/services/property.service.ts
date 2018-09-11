@@ -98,4 +98,21 @@ export class PropertyService {
     ad["other"] = this.other;
   }
 
+  localeString(x, sep?, grp?) {
+    var sx = ('' + x).split('.'), s = '', i, j;
+    sep || (sep = ','); // default seperator
+    grp || grp === 0 || (grp = 2); // default grouping
+    i = sx[0].length;
+    s = sep + sx[0].slice(i-3, i) + s;
+    i = i-3;
+    while (i > grp) {
+      j = i - grp;
+      s = sep + sx[0].slice(j, i) + s;
+      i = j;
+    }
+    s = sx[0].slice(0, i) + s;
+    sx[0] = s;
+    return sx.join('.');
+  }
+
 }

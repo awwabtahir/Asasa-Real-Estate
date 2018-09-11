@@ -37,19 +37,20 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
-      if(this.id && this.propertyService.getItemforUpdate()) {
+      if (this.id && this.propertyService.getItemforUpdate()) {
         let item = this.propertyService.getItemforUpdate();
         this.setitem(item);
         this.edit = true;
       }
     });
+
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  save() { 
+  save() {
     this.propertyService.save(this.ad);
   }
 
@@ -58,7 +59,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   }
 
   onImgUpload(event) {
-    if(event.isStored) {
+    if (event.isStored) {
       this.ad.imgUID = event.uuid;
       this.ad.imgUrl = event.cdnUrl;
       this.ad.imgCount = event.count;

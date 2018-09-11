@@ -1,7 +1,7 @@
 <div class="map mt-2">
   <!-- this creates a google map on the page with the given lat/lng from -->
   <!-- the component as the initial center of the map: -->
-  <agm-map #map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [gestureHandling]="gesture" [mapTypeControl]=true 
+  <agm-map #map [latitude]="lat" [longitude]="lng" [gestureHandling]="gesture" [mapTypeControl]=true 
   [panControl]=true (mapReady)="mapReady($event)">
     
     <agm-marker *ngFor="let ad of ads; let i=index" [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="icon" 
@@ -13,9 +13,9 @@
         </div>
         <div class="propertyDetails">
           <p class="mb-1">
-            <b>Rs. {{ ad.demand }}</b>
+            <b>Rs. {{ getDemand(ad.demand) }}</b>
           </p>
-          <p class="mb-1">{{ ad.locationData.location }}</p>
+          <p class="mb-1">{{ ad.locationData.location }}, {{ ad.locationData.city }}</p>
           <p class="mb-1">{{ ad.area }} {{ ad.areaType }}</p>
         </div>
       </agm-info-window>
