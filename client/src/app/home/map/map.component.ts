@@ -19,7 +19,7 @@ export class MapComponent implements OnInit {
 
   // marker image
   icon = {
-    url: "assets/images/white_circle.svg",
+    url: "assets/images/blue_circle.svg",
     scaledSize: {
       width: 12,
       height: 12
@@ -31,7 +31,7 @@ export class MapComponent implements OnInit {
   constructor(private propertyService: PropertyService) { }
 
   ngOnInit() {
-    this.getAds();    
+    this.getAds();
   }
 
   mapReady(map) {
@@ -59,11 +59,9 @@ export class MapComponent implements OnInit {
   }
 
   onMouseOut() {
-    setTimeout(() => {
-      if (this.map.lastOpen !== null) {
-        this.map.lastOpen.close();
-      }
-    }, 2000);
+    if (this.map.lastOpen !== null) {
+      this.map.lastOpen.close();
+    }
   }
 
   getAds() {
