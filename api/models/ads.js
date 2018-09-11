@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 
+var autoIncrement = require('mongoose-auto-increment');
+autoIncrement.initialize(mongoose.connection);
+
 var adSchema = new mongoose.Schema({
     area: String,
     areaType: String,
@@ -23,4 +26,5 @@ var adSchema = new mongoose.Schema({
     subtype: String
 });
 
+adSchema.plugin(autoIncrement.plugin, 'Ad');
 mongoose.model('Ad', adSchema);

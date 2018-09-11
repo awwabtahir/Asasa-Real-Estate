@@ -1,17 +1,18 @@
 /// <reference types="@types/googlemaps" />
 declare var klokantech: any;
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 import * as $ from 'jquery';
 import { PropertyService } from '../../../services/property.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'add-property-location',
   templateUrl: './add-property-location.component.html',
   styleUrls: ['./add-property-location.component.css']
 })
-export class AddPropertyLocationComponent implements OnInit {
+export class AddPropertyLocationComponent implements OnInit, OnDestroy {
 
   @ViewChild("search")
   public searchElementRef: ElementRef;
@@ -28,15 +29,18 @@ export class AddPropertyLocationComponent implements OnInit {
 
   gesture = "greedy";
 
+  id: number;
+  private sub: any;
+
   constructor(
     private propertyService: PropertyService,
     private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
     //set google maps defaults
-    this.zoom = 15;
     this.latitude = this.mlatitude = 33.69;
     this.longitude = this.mlongitude = 73.01;
 
@@ -63,10 +67,25 @@ export class AddPropertyLocationComponent implements OnInit {
           this.longitude = this.mlongitude = place.geometry.location.lng();
           this.getCityWithLoc(this.latitude, this.longitude);
           this.setLocationData();
-          this.zoom = 15;
         });
       });
     });
+
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      if(this.id && this.propertyService.getItemforUpdate()) {
+        let item = this.propertyService.getItemforUpdate();
+        this.latitude = this.mlatitude = item.locationData.lat;
+        this.longitude = this.mlongitude = item.locationData.lng;
+        this.location = item.locationData.location;
+        this.city = item.locationData.city;
+      }
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   getMarkerPosition(event) {
@@ -145,6 +164,7 @@ export class AddPropertyLocationComponent implements OnInit {
     var opacitycontrol = new klokantech.OpacityControl(map, overlay);
     var geoloccontrol = new klokantech.GeolocationControl(map, mapMaxZoom);
     map.fitBounds(mapBounds);
+    map.setZoom(14);
   }
 
 }

@@ -19,6 +19,8 @@ router.post('/login', ctrlAuth.login);
 
 // ad operations
 router.post('/save_ad', ctrlAd.save);
+router.post('/update_ad', ctrlAd.update);
+router.post('/delete_ad', ctrlAd.delete);
 router.get('/get_ads', ctrlAd.getAll);
 
 module.exports = router;

@@ -49,7 +49,7 @@ export class AuthenticationService {
 
   private request(
     method: 'post'|'get', 
-    type: 'login'|'register'|'profile'|'save_ad'|'get_ads', 
+    type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad', 
     template?: TokenPayload | ad): Observable<any> {
 
     let base;
@@ -93,8 +93,16 @@ export class AuthenticationService {
     return this.request('post', 'save_ad', ad);
   }
 
+  public updateAd(ad): Observable<any> {
+    return this.request('post', 'update_ad', ad);
+  }
+
   public getAds(): Observable<any> {
     return this.request('get', 'get_ads');
+  }
+
+  public deleteAd(ad): Observable<any> {
+    return this.request('post', 'delete_ad', ad);
   }
 
   public logout(): void {

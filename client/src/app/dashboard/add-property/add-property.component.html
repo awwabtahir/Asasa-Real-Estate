@@ -136,7 +136,8 @@
 
     <div class="form-row mb-5">
       <div class="text-center">
-        <button (click)="save()" class="btn btn-danger" [disabled]="!propForm.valid">Post Ad</button>
+        <button *ngIf="!edit" (click)="save()" class="btn btn-danger" [disabled]="!propForm.valid">Post Ad</button>
+        <button *ngIf="edit" (click)="update()" class="btn btn-danger">Update Ad</button>
       </div>
     </div>
 

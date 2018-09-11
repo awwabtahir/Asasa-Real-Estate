@@ -1,3 +1,71 @@
-<p>
-  active-properties works!
-</p>
+<div class="container-fluid">
+  <table class="table table-striped" [mfData]="data" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" #mf="mfDataTable" [mfRowsOnPage]="50">
+    <thead>
+      <tr>
+        <th style="width: 5%">
+          <mfDefaultSorter by="id">ID</mfDefaultSorter>
+        </th>
+        <th style="width: 10%">
+          <mfDefaultSorter by="type">Type</mfDefaultSorter>
+        </th>
+        <th style="width: 5%">
+          <mfDefaultSorter by="number">Number</mfDefaultSorter>
+        </th>
+        <th style="width: 5%">
+          <mfDefaultSorter by="area">Area</mfDefaultSorter>
+        </th>
+        <th style="width: 10%">
+          <mfDefaultSorter by="location">Location</mfDefaultSorter>
+        </th>
+        <th style="width: 5%">
+          <mfDefaultSorter by="demand">Demand</mfDefaultSorter>
+        </th>
+        <th style="width: 10%">
+          <mfDefaultSorter by="operations">Operations</mfDefaultSorter>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of mf.data.slice().reverse()">
+        <td>{{item._id}}</td>
+        <td>{{item.subtype}}</td>
+        <td>{{item.propNumber}}</td>
+        <td>{{item.area}} {{item.areaType}}</td>
+        <td>{{item.locationData.location}}, {{item.locationData.city}}</td>
+        <td>{{item.demand}}</td>
+        <td>
+          <button class="btn btn-success btn-sm mr-1" (click)="edit(item)">Edit</button>
+          <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="confirmDelete(item)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[50,100,150]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete it?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

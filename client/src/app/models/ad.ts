@@ -1,4 +1,5 @@
 export interface ad {
+    _id?: number,
     area: string,
     areaType: string,
     biz_comm: object,

@@ -8,6 +8,7 @@ import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import { NgxEditorModule } from 'ngx-editor';
 import { AgmOverlays } from "agm-overlays";
+import {DataTableModule} from "angular-6-datatable";
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
@@ -44,6 +45,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] },
+  { path: 'editProperty/:id', component: AddPropertyComponent, canActivate: [AuthGuardService] },
   { path: 'activeProperties', component: ActivePropertiesComponent, canActivate: [AuthGuardService] }
 ];
 
@@ -80,6 +82,7 @@ const routes: Routes = [
     IonRangeSliderModule,
     UcWidgetModule,
     NgxEditorModule,
+    DataTableModule,
     RouterModule.forRoot(routes),
     AgmOverlays,
     AgmCoreModule.forRoot({

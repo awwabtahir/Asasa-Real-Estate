@@ -29,7 +29,7 @@ export class MapComponent implements OnInit {
     }
   };
 
-  ads = {};
+  ads = [];
 
   constructor(private propertyService: PropertyService) { }
 

@@ -19,24 +19,40 @@ export class PropertyService {
               private router: Router) { }
 
   save(ad) {
-    ad["locationData"] = this.locationData;
-    if (ad.type != 'plot') ad["features"] = this.features;
-    if (ad.type == 'plot') ad["plot_features"] = this.plot_features;
-    ad["rooms"] = this.rooms;
-    ad["biz_comm"] = this.biz_comm;
-    ad["healthcare"] = this.healthcare;
-    ad["nearby_loc"] = this.nearby_loc;
-    ad["other"] = this.other;
-    console.log(ad);
+    this.setAd(ad);
     this.auth.saveAd(ad).subscribe(() => {
-      this.router.navigateByUrl('/peshawar/dha');
+      this.router.navigateByUrl('/activeProperties');
     }, (err) => {
       console.error(err);
-    });;
+    });
+  }
+
+  update(ad) {
+    this.setAd(ad);
+    this.auth.updateAd(ad).subscribe(() => {
+      this.router.navigateByUrl('/activeProperties');
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   getAds() {
     return this.auth.getAds();
+  }
+
+  delete(ad) {
+    this.auth.deleteAd(ad).subscribe((result) => {
+      console.log("success");
+    });
+  }
+
+  adforUpdate;
+  setItemforUpdate(ad) {
+    this.adforUpdate = ad;
+  }
+
+  getItemforUpdate() {
+    return this.adforUpdate;
   }
 
   addLocation(data) {
@@ -69,6 +85,17 @@ export class PropertyService {
 
   addOther(other) {
     this.other = other;
+  }
+
+  private setAd(ad) {
+    ad["locationData"] = this.locationData;
+    if (ad.type != 'plot') ad["features"] = this.features;
+    if (ad.type == 'plot') ad["plot_features"] = this.plot_features;
+    ad["rooms"] = this.rooms;
+    ad["biz_comm"] = this.biz_comm;
+    ad["healthcare"] = this.healthcare;
+    ad["nearby_loc"] = this.nearby_loc;
+    ad["other"] = this.other;
   }
 
 }
