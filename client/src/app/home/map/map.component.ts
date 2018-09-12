@@ -84,7 +84,7 @@ export class MapComponent implements OnInit {
     },
       mapBounds, mapMinZoom, mapMaxZoom);
 
-    map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
+    map.setMapTypeId(google.maps.MapTypeId.HYBRID);
     var opacitycontrol = new klokantech.OpacityControl(map, overlay);
     map.fitBounds(mapBounds);
     map.setZoom(13);
