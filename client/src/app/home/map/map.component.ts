@@ -12,8 +12,8 @@ export class MapComponent implements OnInit {
   map: any;
 
   // initial position
-  lat: number = 34.052059005117556;
-  lng: number = 71.42871650000006;
+  lat: number = 34.062059005117556;
+  lng: number = 71.54871650000006;
 
   gesture = "greedy";
 
@@ -42,7 +42,7 @@ export class MapComponent implements OnInit {
     //     this.zoom = 15;
     //   });
     // }
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('Settings'));
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('Settings'));
     var mapBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(34.03589373, 71.40848471),
       new google.maps.LatLng(34.08513423, 71.48481756));
