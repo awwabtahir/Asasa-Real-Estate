@@ -32,15 +32,6 @@ agm-map {
     display: block;
 }
 
-.propertyImg {
-    float: left;
-}
-
-.propertyImg, 
-.propertyDetails {
-    display: inline-block;
-}
-
 .property-icon {
     height: 12px;
     margin-bottom: 4px; 

@@ -25,6 +25,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PropertyService } from './services/property.service';
+import { MapService } from './services/map.service';
 import { AddPropertyFeaturesComponent } from './dashboard/add-property/add-property-modal/add-property-features/add-property-features.component';
 import { AddPropertyLocationComponent } from './dashboard/add-property/add-property-location/add-property-location.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -36,6 +37,9 @@ import { AddPropertyHealthcareComponent } from './dashboard/add-property/add-pro
 import { AddPropertyOtherComponent } from './dashboard/add-property/add-property-modal/add-property-other/add-property-other.component';
 import { AddPropertyPlotFeaturesComponent } from './dashboard/add-property/add-property-modal/add-property-plot-features/add-property-plot-features.component';
 import { ActivePropertiesComponent } from './dashboard/active-properties/active-properties.component';
+import { MarkerComponent } from './home/map/marker/marker.component';
+import { MarkerModalComponent } from './home/map/marker-modal/marker-modal.component';
+import { PhotoSliderComponent } from './home/map/marker-modal/photo-slider/photo-slider.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/peshawar/dha', pathMatch: 'full' },
@@ -72,7 +76,10 @@ const routes: Routes = [
     AddPropertyHealthcareComponent,
     AddPropertyOtherComponent,
     AddPropertyPlotFeaturesComponent,
-    ActivePropertiesComponent
+    ActivePropertiesComponent,
+    MarkerComponent,
+    MarkerModalComponent,
+    PhotoSliderComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +100,8 @@ const routes: Routes = [
   providers: [
     AuthenticationService,
     AuthGuardService,
-    PropertyService
+    PropertyService,
+    MapService
   ],
   bootstrap: [AppComponent]
 })

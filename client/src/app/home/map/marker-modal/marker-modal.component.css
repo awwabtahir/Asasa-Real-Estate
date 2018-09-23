@@ -1,0 +1,31 @@
+.container-fluid {
+    padding-right: 0; 
+    padding-left: 0;
+}
+.nav-tabs .nav-item {
+    width: 33.333%;
+    text-align: center;
+}
+.nav-item .nav-link {
+    font-size: 1.2rem;
+    background-color: black;
+    color: white;
+    border-style: groove;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.nav-item .nav-link:hover,
+.active {
+    background-color: #37bba3!important;
+}
+.modal-lg {
+    max-width: 1320px!important;
+}
+
+.left-border {
+    border-top-left-radius: 35px;
+}
