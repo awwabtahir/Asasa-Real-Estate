@@ -8,6 +8,10 @@
 agm-map {
     height: 500px;
 }
+iframe{
+    width: 100%;
+    height: 500px;
+}
 .nav-tabs .nav-item {
     text-align: center;
 }

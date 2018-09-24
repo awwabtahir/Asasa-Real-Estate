@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { PropertyModalService } from '../../../services/property-modal.service';
-import { ad } from '../../../models/ad';
 import { MapService } from '../../../services/map.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'marker-modal',
@@ -10,7 +10,7 @@ import { MapService } from '../../../services/map.service';
 })
 export class MarkerModalComponent implements OnInit, OnChanges {
 
-  @Input() ad: any;
+  @Input() ad: any = {};
   basic: any;
   location: any;
   plot_features: any;
@@ -20,18 +20,23 @@ export class MarkerModalComponent implements OnInit, OnChanges {
   gesture = "greedy";
 
   constructor(private modalService: PropertyModalService,
-  private mapService: MapService) { }
+    private mapService: MapService, private _sanitizer: DomSanitizer) { }
 
   ngOnInit() { }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(!this.ad) return;
-    
+    if (!this.ad) return;
+
     this.basic = this.modalService.updateBasic(this.ad, this.basic);
     this.location = this.modalService.updateLocation(this.ad.locationData, this.location);
     this.plot_features = this.ad.plot_features;
     this.other = this.ad.other;
     this.nearby_loc = this.ad.nearby_loc;
+
+    if (this.ad.vidUrl != "") {
+      this.ad.vidUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));
+      
+    }
 
   }
 
@@ -41,8 +46,19 @@ export class MarkerModalComponent implements OnInit, OnChanges {
       lng0: 71.40848471,
       lat1: 34.08513423,
       lng1: 71.48481756
-    };    
+    };
     this.mapService.addOverLay(map, bounds, "peshawar/dha");
+  }
+
+  private getId(url) {
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+
+    if (match && match[2].length == 11) {
+      return match[2];
+    } else {
+      return 'error';
+    }
   }
 
 
