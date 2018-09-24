@@ -25,6 +25,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AuthenticationService } from './services/authentication.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PropertyService } from './services/property.service';
+import { PropertyModalService } from './services/property-modal.service';
 import { MapService } from './services/map.service';
 import { AddPropertyFeaturesComponent } from './dashboard/add-property/add-property-modal/add-property-features/add-property-features.component';
 import { AddPropertyLocationComponent } from './dashboard/add-property/add-property-location/add-property-location.component';
@@ -40,6 +41,7 @@ import { ActivePropertiesComponent } from './dashboard/active-properties/active-
 import { MarkerComponent } from './home/map/marker/marker.component';
 import { MarkerModalComponent } from './home/map/marker-modal/marker-modal.component';
 import { PhotoSliderComponent } from './home/map/marker-modal/photo-slider/photo-slider.component';
+import { KeysPipe } from './keys.pipe';
 
 const routes: Routes = [
   { path: '', redirectTo: '/peshawar/dha', pathMatch: 'full' },
@@ -79,7 +81,8 @@ const routes: Routes = [
     ActivePropertiesComponent,
     MarkerComponent,
     MarkerModalComponent,
-    PhotoSliderComponent
+    PhotoSliderComponent,
+    KeysPipe
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,8 @@ const routes: Routes = [
     AuthenticationService,
     AuthGuardService,
     PropertyService,
-    MapService
+    MapService,
+    PropertyModalService
   ],
   bootstrap: [AppComponent]
 })

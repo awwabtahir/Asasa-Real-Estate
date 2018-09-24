@@ -3,7 +3,7 @@
   <!-- the component as the initial center of the map: -->
   <agm-map #map [latitude]="lat" [longitude]="lng" [gestureHandling]="gesture" [mapTypeControl]=true [panControl]=true (mapReady)="mapReady($event)">
 
-    <marker [map]="map"></marker>
+    <marker [map]="map" (adEvent)="recieveModalAd($event)"></marker>
 
   </agm-map>
 
@@ -13,6 +13,6 @@
     <!-- <li><img src="assets/images/green_triangle.svg" class="property-icon"> Commercial</li> -->
   </ul>
 
-  <marker-modal></marker-modal>
+  <marker-modal [ad]="modalAd"></marker-modal>
 
 </div>

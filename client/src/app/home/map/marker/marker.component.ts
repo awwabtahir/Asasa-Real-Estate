@@ -1,6 +1,6 @@
 /// <reference types="@types/googlemaps" />
 declare var $ :any;
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PropertyService } from '../../../services/property.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { PropertyService } from '../../../services/property.service';
 export class MarkerComponent implements OnInit {
 
   @Input() map: any;
+  @Output() adEvent = new EventEmitter<object>();
 
   // marker image
   icon = {
@@ -44,7 +45,8 @@ export class MarkerComponent implements OnInit {
     }
   }
 
-  onMarkerClick() {
+  onMarkerClick(selectedMarkerData) {
+    this.adEvent.emit(selectedMarkerData);
     $('#markerModal').modal('show');
   }
 

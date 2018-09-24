@@ -23,8 +23,6 @@ export class MapService {
     map.setMapTypeId(google.maps.MapTypeId.HYBRID);
     var opacitycontrol = new klokantech.OpacityControl(map, overlay);
     var geoloccontrol = new klokantech.GeolocationControl(map, mapMaxZoom);
-    map.fitBounds(mapBounds);
-    map.setZoom(13);
   }
 
 }

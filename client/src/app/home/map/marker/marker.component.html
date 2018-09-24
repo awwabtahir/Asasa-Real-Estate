@@ -2,7 +2,7 @@
   *ngFor="let ad of ads; let i=index" 
   [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="icon"
   (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()"
-  (markerClick)="onMarkerClick()">
+  (markerClick)="onMarkerClick(ad)">
 
   <agm-info-window #infoWindow>
     <div class="propertyImg mr-2">
