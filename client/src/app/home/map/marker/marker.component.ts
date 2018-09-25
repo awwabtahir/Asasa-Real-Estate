@@ -2,6 +2,7 @@
 declare var $ :any;
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PropertyService } from '../../../services/property.service';
+import { PropertyModalService } from '../../../services/property-modal.service';
 
 @Component({
   selector: 'marker',
@@ -24,7 +25,8 @@ export class MarkerComponent implements OnInit {
 
   ads = [];
 
-  constructor(private propertyService: PropertyService) { }
+  constructor(private propertyService: PropertyService,
+    private propertyModalService: PropertyModalService) { }
 
   ngOnInit() {
     this.getAds();
@@ -60,6 +62,10 @@ export class MarkerComponent implements OnInit {
 
   getDemand(demand) {
     return this.propertyService.localeString(demand);
+  }
+
+  onPropClick(ad) {
+    this.propertyModalService.setAd(ad);
   }
 
 }

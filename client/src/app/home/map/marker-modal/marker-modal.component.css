@@ -1,72 +1,10 @@
+.modal-content {
+    height: 500px;
+}
 .container-fluid {
     padding-right: 0; 
     padding-left: 0;
 }
-.modal-content {
-    height: 500px;
-}
-agm-map {
-    height: 500px;
-}
-iframe{
-    width: 100%;
-    height: 500px;
-}
-.nav-tabs .nav-item {
-    text-align: center;
-}
-.nav-item .nav-link {
-    font-size: 1.2rem;
-    background-color: black;
-    color: white;
-    border-style: groove;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-}
-
-.nav-item .nav-link:hover,
-.active {
-    background-color: #37bba3!important;
-}
 .modal-lg {
     max-width: 1320px!important;
-}
-
-.left-border {
-    border-top-left-radius: 35px;
-}
-
-.scroll {
-    overflow-y: scroll;
-}
-
-.bluetick {
-    color: #37bba3;
-}
-
-.redcross {
-    color: red;
-}
-
-#style-2::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: #F5F5F5;
-}
-
-#style-2::-webkit-scrollbar
-{
-	width: 12px;
-	background-color: #F5F5F5;
-}
-
-#style-2::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #37bba3;
 }

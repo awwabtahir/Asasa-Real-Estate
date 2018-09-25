@@ -43,12 +43,14 @@ import { MarkerModalComponent } from './home/map/marker-modal/marker-modal.compo
 import { PhotoSliderComponent } from './home/map/marker-modal/photo-slider/photo-slider.component';
 import { KeysPipe } from './keys.pipe';
 import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
+import { MarkerModalContentComponent } from './home/map/marker-modal/marker-modal-content/marker-modal-content.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/peshawar/dha', pathMatch: 'full' },
   { path: 'peshawar/dha', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'property-details', component: MarkerModalContentComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] },
@@ -84,7 +86,8 @@ const routes: Routes = [
     MarkerModalComponent,
     PhotoSliderComponent,
     KeysPipe,
-    SafeResourceUrlPipe
+    SafeResourceUrlPipe,
+    MarkerModalContentComponent
   ],
   imports: [
     BrowserModule,

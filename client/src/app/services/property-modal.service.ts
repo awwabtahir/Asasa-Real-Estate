@@ -34,4 +34,14 @@ export class PropertyModalService {
     });
     return Object.assign({}, ...keyValues);
   }
+
+  ad;
+  setAd(ad) {
+    this.ad = ad;
+  }
+
+  getAd() {
+    return this.ad;
+  }
+
 }
