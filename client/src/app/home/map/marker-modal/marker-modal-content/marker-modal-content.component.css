@@ -32,9 +32,10 @@ iframe{
 .left-border {
     border-top-left-radius: 35px;
 }
-
-.scroll {
-    overflow-y: scroll;
+@media screen and (min-width: 400px) {
+    .scroll {
+        overflow-y: scroll;
+    }
 }
 
 .bluetick {
