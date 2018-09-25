@@ -4,8 +4,8 @@
     <div class="modal-content">
       <div class="container-fluid">
         <div class="row no-gutters">
-          <div class="col-md-8">
-            <ul *ngIf="ad" class="nav nav-tabs no-gutters" id="myTab" role="tablist">
+          <div *ngIf="ad" class="col-md-8">
+            <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
               <li *ngIf="ad.imgUrl" class="nav-item col">
                 <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos" aria-selected="false">Photos</a>
               </li>
@@ -21,7 +21,7 @@
                 <photo-slider></photo-slider>
               </div>
               <div *ngIf="ad.vidUrl" class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
-                  <iframe [src]='ad.vidUrl' frameborder="0" allowfullscreen></iframe>
+                  <iframe [src]='safeUrl' frameborder="0" allowfullscreen></iframe>
               </div>
               <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
                 <agm-map [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [gestureHandling]="gesture" 

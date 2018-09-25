@@ -42,6 +42,7 @@ import { MarkerComponent } from './home/map/marker/marker.component';
 import { MarkerModalComponent } from './home/map/marker-modal/marker-modal.component';
 import { PhotoSliderComponent } from './home/map/marker-modal/photo-slider/photo-slider.component';
 import { KeysPipe } from './keys.pipe';
+import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
 
 const routes: Routes = [
   { path: '', redirectTo: '/peshawar/dha', pathMatch: 'full' },
@@ -82,7 +83,8 @@ const routes: Routes = [
     MarkerComponent,
     MarkerModalComponent,
     PhotoSliderComponent,
-    KeysPipe
+    KeysPipe,
+    SafeResourceUrlPipe
   ],
   imports: [
     BrowserModule,

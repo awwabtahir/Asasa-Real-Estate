@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { PropertyModalService } from '../../../services/property-modal.service';
 import { MapService } from '../../../services/map.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ad } from '../../../models/ad';
 
 @Component({
   selector: 'marker-modal',
@@ -10,19 +11,28 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class MarkerModalComponent implements OnInit, OnChanges {
 
-  @Input() ad: any = {};
+  @Input() ad: ad;
   basic: any;
   location: any;
   plot_features: any;
   other: any;
   nearby_loc: any;
+  safeUrl: any;
 
   gesture = "greedy";
 
   constructor(private modalService: PropertyModalService,
     private mapService: MapService, private _sanitizer: DomSanitizer) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    
+    $('#markerModal').on('show.bs.modal', function (e) {
+      if (window.innerWidth < 800) {
+        return e.preventDefault();
+      }
+    });
+
+   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (!this.ad) return;
@@ -34,8 +44,7 @@ export class MarkerModalComponent implements OnInit, OnChanges {
     this.nearby_loc = this.ad.nearby_loc;
 
     if (this.ad.vidUrl != "") {
-      this.ad.vidUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));
-      
+      this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));      
     }
 
   }
