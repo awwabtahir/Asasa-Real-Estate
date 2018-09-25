@@ -6,6 +6,7 @@ import { MapsAPILoader } from '@agm/core';
 import * as $ from 'jquery';
 import { PropertyService } from '../../../services/property.service';
 import { ActivatedRoute } from '@angular/router';
+import { MapService } from '../../../services/map.service';
 
 @Component({
   selector: 'add-property-location',
@@ -36,7 +37,8 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
     private propertyService: PropertyService,
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private mapService: MapService
   ) { }
 
   ngOnInit() {
@@ -97,10 +99,14 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
 
   mapReady(map) {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('search'));
-    var mapBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(34.03589373, 71.40848471),
-      new google.maps.LatLng(34.08513423, 71.48481756));
-    this.addOverLay(map, mapBounds, "peshawar/dha");
+    map.setZoom(13);
+    var bounds = {
+      lat0: 34.03589373,
+      lng0: 71.40848471,
+      lat1: 34.08513423,
+      lng1: 71.48481756
+    };    
+    this.mapService.addOverLay(map, bounds, "peshawar/dha");
   }
 
   locationChange(event) {
@@ -110,7 +116,6 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
   private async setLocationData(wait = true) {
     // wait 3 seconds
     if(wait) await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    // this.city = $('input[name=city]').val();
     this.propertyService.addLocation({
       lat: this.mlatitude,
       lng: this.mlongitude,
@@ -150,21 +155,6 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
         }
       } else console.log("Geocoder failed: " + status)
     });
-  }
-
-  private addOverLay(map, mapBounds, imgLoc) {
-    var mapMinZoom = 12;
-    var mapMaxZoom = 17;
-    var overlay = new klokantech.MapTilerMapType(map, function (x, y, z) {
-      return "assets/map/" + imgLoc + "/{z}/{x}/{y}.png".replace('{z}', z).replace('{x}', x).replace('{y}', y);
-    },
-      mapBounds, mapMinZoom, mapMaxZoom);
-
-    map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-    var opacitycontrol = new klokantech.OpacityControl(map, overlay);
-    var geoloccontrol = new klokantech.GeolocationControl(map, mapMaxZoom);
-    map.fitBounds(mapBounds);
-    map.setZoom(14);
   }
 
 }

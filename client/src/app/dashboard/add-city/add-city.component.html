@@ -1,0 +1,35 @@
+<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [gestureHandling]="gesture"
+  [mapTypeControl]=true (mapReady)="mapReady($event)">
+
+  <input id="search" placeholder="Search for location" type="text" class="form-control searchControl" #search
+    [formControl]="searchControl">
+
+  <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
+  </agm-marker>
+</agm-map>
+
+<br>
+
+<div class="form-row">
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lat</div>
+    </div>
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlatitude }}" disabled>
+  </div>
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lng</div>
+    </div>
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlongitude }}" disabled>
+  </div>
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">City</div>
+    </div>
+    <input class="form-control mr-2" id="city" type="text" #city name="city">
+  </div>
+  <div class="form-group input-group col-md-3">
+    <button class="btn btn-primary" (click)="add(city)">Add City</button>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { UserDetails } from '../models/UserDetails';
 import { TokenResponse } from '../models/token';
 import { TokenPayload } from '../models/token';
 import { ad } from '../models/ad';
+import { city } from '../models/city';
 
 @Injectable()
 export class AuthenticationService {
@@ -49,8 +50,9 @@ export class AuthenticationService {
 
   private request(
     method: 'post'|'get', 
-    type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad', 
-    template?: TokenPayload | ad): Observable<any> {
+    type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|
+    'save_city'|'get_cities', 
+    template?: TokenPayload | ad | city): Observable<any> {
 
     let base;
     let prod = false;
@@ -93,12 +95,20 @@ export class AuthenticationService {
     return this.request('post', 'save_ad', ad);
   }
 
+  public saveCity(city): Observable<any> {
+    return this.request('post', 'save_city', city);
+  }
+
   public updateAd(ad): Observable<any> {
     return this.request('post', 'update_ad', ad);
   }
 
   public getAds(): Observable<any> {
     return this.request('get', 'get_ads');
+  }
+
+  public getCities(): Observable<any> {
+    return this.request('get', 'get_cities');
   }
 
   public deleteAd(ad): Observable<any> {

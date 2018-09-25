@@ -44,7 +44,7 @@ module.exports.delete = function (req, res) {
 module.exports.getAll = function (req, res) {
   Ad
     .find()
-    .exec(function (err, inventories) {
-      res.status(200).json(inventories);
+    .exec(function (err, ads) {
+      res.status(200).json(ads);
     });
 };

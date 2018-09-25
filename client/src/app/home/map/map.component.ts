@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '../../services/map.service';
 import { ad } from '../../models/ad';
+import { city } from '../../models/city';
 
 @Component({
   selector: 'map',
@@ -11,6 +12,7 @@ import { ad } from '../../models/ad';
 export class MapComponent implements OnInit {
   map: any;
   modalAd: ad;
+  city: city;
 
   // initial position
   lat: number = 34.06513423;
@@ -20,14 +22,19 @@ export class MapComponent implements OnInit {
 
   constructor(private mapService: MapService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.city = this.mapService.getCity().subscribe(city => {
+      this.city = city;
+      this.lat = this.city.lat;
+      this.lng = this.city.lng;
+    });
+  }
 
   mapReady(map) {
     // if ("geolocation" in navigator) {
     //   navigator.geolocation.getCurrentPosition((position) => {
     //     this.lat = position.coords.latitude;
     //     this.lng = position.coords.longitude;
-    //     this.zoom = 15;
     //   });
     // }
     this.map = map;

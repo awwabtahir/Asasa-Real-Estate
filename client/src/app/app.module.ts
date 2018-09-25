@@ -27,6 +27,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { PropertyService } from './services/property.service';
 import { PropertyModalService } from './services/property-modal.service';
 import { MapService } from './services/map.service';
+import { LocationService } from './services/location.service';
 import { AddPropertyFeaturesComponent } from './dashboard/add-property/add-property-modal/add-property-features/add-property-features.component';
 import { AddPropertyLocationComponent } from './dashboard/add-property/add-property-location/add-property-location.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -44,6 +45,7 @@ import { PhotoSliderComponent } from './home/map/marker-modal/photo-slider/photo
 import { KeysPipe } from './keys.pipe';
 import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
 import { MarkerModalContentComponent } from './home/map/marker-modal/marker-modal-content/marker-modal-content.component';
+import { AddCityComponent } from './dashboard/add-city/add-city.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/peshawar/dha', pathMatch: 'full' },
@@ -54,6 +56,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] },
+  { path: 'addCity', component: AddCityComponent, canActivate: [AuthGuardService] },
   { path: 'editProperty/:id', component: AddPropertyComponent, canActivate: [AuthGuardService] },
   { path: 'activeProperties', component: ActivePropertiesComponent, canActivate: [AuthGuardService] }
 ];
@@ -87,7 +90,8 @@ const routes: Routes = [
     PhotoSliderComponent,
     KeysPipe,
     SafeResourceUrlPipe,
-    MarkerModalContentComponent
+    MarkerModalContentComponent,
+    AddCityComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +114,8 @@ const routes: Routes = [
     AuthGuardService,
     PropertyService,
     MapService,
-    PropertyModalService
+    PropertyModalService,
+    LocationService
   ],
   bootstrap: [AppComponent]
 })

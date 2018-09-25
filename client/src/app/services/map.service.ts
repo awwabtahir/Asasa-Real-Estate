@@ -1,11 +1,12 @@
 /// <reference types="@types/googlemaps" />
 declare var klokantech: any;
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
+  @Output() fire: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -23,6 +24,14 @@ export class MapService {
     map.setMapTypeId(google.maps.MapTypeId.HYBRID);
     var opacitycontrol = new klokantech.OpacityControl(map, overlay);
     var geoloccontrol = new klokantech.GeolocationControl(map, mapMaxZoom);
+  }
+
+  cityChange(city) {
+    this.fire.emit(city);
+  }
+
+  getCity() {
+    return this.fire;
   }
 
 }
