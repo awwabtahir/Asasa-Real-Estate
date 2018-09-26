@@ -22,7 +22,6 @@ export class MapService {
     },
       mapBounds, mapMinZoom, mapMaxZoom);
 
-    map.setMapTypeId(google.maps.MapTypeId.HYBRID);
     var opacitycontrol = new klokantech.OpacityControl(map, overlay);
     var geoloccontrol = new klokantech.GeolocationControl(map, mapMaxZoom);
   }

@@ -17,8 +17,8 @@ export class MapComponent implements OnInit {
   location: location;
 
   // initial position
-  lat: number = 34.06513423;
-  lng: number = 71.44481756;
+  lat: number = 33.6;
+  lng: number = 73.01;
 
   gesture = "greedy";
 
@@ -47,6 +47,7 @@ export class MapComponent implements OnInit {
     }
     this.map = map;
     map.setZoom(14);
+    map.setMapTypeId(google.maps.MapTypeId.HYBRID);
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('Settings'));
   }
 
