@@ -6,7 +6,8 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class MapService {
-  @Output() fire: EventEmitter<any> = new EventEmitter();
+  @Output() cityFire: EventEmitter<any> = new EventEmitter();
+  @Output() locFire: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -27,11 +28,19 @@ export class MapService {
   }
 
   cityChange(city) {
-    this.fire.emit(city);
+    this.cityFire.emit(city);
   }
 
   getCity() {
-    return this.fire;
+    return this.cityFire;
+  }
+
+  locationChange(location) {
+    this.locFire.emit(location);
+  }
+
+  getLocation() {
+    return this.locFire;
   }
 
 }

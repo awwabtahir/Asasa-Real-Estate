@@ -10,6 +10,8 @@ import { MapService } from '../../services/map.service';
 export class SearchComponent implements OnInit {
 
   cities = [];
+  locations = [];
+
   constructor(private auth: AuthenticationService,
     private mapService: MapService) { }
 
@@ -36,6 +38,25 @@ export class SearchComponent implements OnInit {
       return city._id == cityId;
     });
     this.mapService.cityChange(cityData[0]);
+    this.getLocations(cityId);
+  }
+
+  getLocations(selectedCity) {
+    this.auth.getLocations().subscribe(locations => { 
+      this.locations = locations.filter(function(loc){
+        return loc.cityId == selectedCity;
+      });
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  locationChange(locObj) {
+    let locId = locObj.srcElement.value;
+    let locData = this.locations.filter(function(loc){
+      return loc._id == locId;
+    });
+    this.mapService.locationChange(locData[0]);
   }
 
 }

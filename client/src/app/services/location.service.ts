@@ -5,5 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class LocationService {
 
+  latlng;
+
   constructor() { }
+
+  setLatLng(latlng) {
+    this.latlng = latlng;
+  }
+
+  getLatLng() {
+    return this.latlng;
+  }
+  
 }

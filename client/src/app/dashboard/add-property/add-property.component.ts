@@ -1,6 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PropertyService } from '../../services/property.service';
 import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
+import { city } from '../../models/city';
+import { MapService } from '../../services/map.service';
+import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'add-property',
@@ -24,6 +28,8 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     imgCount: "0",
     vidUrl: ""
   };
+  cities = [];
+  locations = [];
 
   id: number;
   private sub: any;
@@ -31,7 +37,9 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
 
   constructor(
     private propertyService: PropertyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthenticationService,
+    private locService: LocationService
   ) { }
 
   ngOnInit() {
@@ -41,13 +49,65 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         let item = this.propertyService.getItemforUpdate();
         this.setitem(item);
         this.edit = true;
+        this.selectedCity = "1";
       }
     });
+
+    this.getCities();
 
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  getCities() {
+    this.auth.getCities().subscribe(cities => {
+      this.cities = cities;
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  getLocations(selectedCity) {
+    this.auth.getLocations().subscribe(locations => { 
+
+      this.locations = locations.filter(function(loc){
+        return loc.cityId == selectedCity;
+      });
+
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  selectedCity = "";
+  city: any;
+  cityChange() {
+    let selectedCity = this.selectedCity;
+    this.getLocations(selectedCity);
+    this.city = this.cities.filter(function(city){
+      return city._id == selectedCity;
+    });    
+    this.city = this.city[0];
+
+    let latlng = {
+      cityId: this.city._id,
+      lat: this.city.lat,
+      lng: this.city.lng
+    };
+    this.locService.setLatLng(latlng);
+    this.selectedLoc = "";
+  }
+
+  selectedLoc = "";
+  location: any;
+  locationChange() {
+    let selectedLoc = this.selectedLoc;
+    this.location = this.locations.filter(function(location){
+      return location._id == selectedLoc;
+    });    
+    this.location = this.location[0];
   }
 
   save() {

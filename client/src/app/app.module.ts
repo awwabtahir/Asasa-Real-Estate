@@ -46,16 +46,17 @@ import { KeysPipe } from './keys.pipe';
 import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
 import { MarkerModalContentComponent } from './home/map/marker-modal/marker-modal-content/marker-modal-content.component';
 import { AddCityComponent } from './dashboard/add-city/add-city.component';
+import { AddLocationComponent } from './dashboard/add-location/add-location.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/peshawar/dha', pathMatch: 'full' },
-  { path: 'peshawar/dha', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'property-details', component: MarkerModalContentComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] },
+  { path: 'addLocation', component: AddLocationComponent, canActivate: [AuthGuardService] },
   { path: 'addCity', component: AddCityComponent, canActivate: [AuthGuardService] },
   { path: 'editProperty/:id', component: AddPropertyComponent, canActivate: [AuthGuardService] },
   { path: 'activeProperties', component: ActivePropertiesComponent, canActivate: [AuthGuardService] }
@@ -91,7 +92,8 @@ const routes: Routes = [
     KeysPipe,
     SafeResourceUrlPipe,
     MarkerModalContentComponent,
-    AddCityComponent
+    AddCityComponent,
+    AddLocationComponent
   ],
   imports: [
     BrowserModule,

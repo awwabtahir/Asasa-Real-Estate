@@ -1,0 +1,80 @@
+<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [gestureHandling]="gesture"
+  [mapTypeControl]=true (mapReady)="mapReady($event)">
+
+  <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
+  </agm-marker>
+
+</agm-map>
+
+<br>
+
+<div class="form-row ml-2">
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lat</div>
+    </div>
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlatitude }}" disabled>
+  </div>
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lng</div>
+    </div>
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlongitude }}" disabled>
+  </div>
+  <div class="form-group input-group col-md-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Location</div>
+    </div>
+    <input class="form-control mr-2" id="location" type="text" #location name="location">
+  </div>
+  <div class="form-group input-group col-md-2">
+    <div class="input-group-prepend">
+      <div class="input-group-text">City</div>
+    </div>
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ city }}" disabled>
+  </div>
+  <div class="form-group input-group col-md-2">
+    <button class="btn btn-primary btn-sm" (click)="add(location)">Add Location</button>
+  </div>
+</div>
+
+<h5 class="ml-2">For Map Overlay (optional)</h5>
+
+<div class="form-row ml-2">
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lat0</div>
+    </div>
+    <input class="form-control mr-2" name="lat0" [(ngModel)]="overlayData.lat0" type="text">
+  </div>
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lng0</div>
+    </div>
+    <input class="form-control mr-2" name="lng0" [(ngModel)]="overlayData.lng0" type="text">
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lat1</div>
+    </div>
+    <input class="form-control mr-2" name="lat1" [(ngModel)]="overlayData.lat1" type="text">
+  </div>
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lng1</div>
+    </div>
+    <input class="form-control mr-2" name="lng1" [(ngModel)]="overlayData.lng1" type="text">
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Images Loc</div>
+    </div>
+    <input class="form-control mr-2" name="imgLoc" [(ngModel)]="overlayData.imgLoc" type="text">
+  </div>
+</div>

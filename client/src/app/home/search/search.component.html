@@ -1,10 +1,15 @@
 <div class="mt-2 form-inline">
-  <select class="form-control mr-2" (change)="cityChange($event)">
+  <select class="form-control mr-2 ml-2" (change)="cityChange($event)">
     <option value="">Select City</option>
     <option *ngFor="let city of cities" [value]="city._id">{{city.city}}</option>
   </select>
 
-  <input placeholder="Type location" type="text" class="form-control searchControl mr-2">
+  <select class="form-control ml-2" (change)="locationChange($event)">
+    <option value="">Select location</option>
+    <option *ngFor="let loc of locations" [value]="loc._id">{{loc.location}}</option>
+  </select>
+
+
 
   <!-- Size Slider
   <ion-range-slider #size *ngIf="sliders"
@@ -40,5 +45,5 @@
       <span *ngIf="!sliders"><i class="fas fa-bars"></i> Filter</span>
       <span *ngIf="sliders"><i class="fas fa-times"></i> Close</span>
   </button> -->
-  
+
 </div>

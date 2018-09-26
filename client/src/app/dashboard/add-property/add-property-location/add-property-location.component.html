@@ -1,7 +1,7 @@
 <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [gestureHandling]="gesture" [mapTypeControl]=true
     (mapReady)="mapReady($event)">
 
-    <input id="search" placeholder="Search for location" type="text" class="form-control searchControl" #search [formControl]="searchControl">
+    <!-- <input id="search" placeholder="Search for location" type="text" class="form-control searchControl" #search [formControl]="searchControl"> -->
 
     <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
     </agm-marker>
@@ -26,8 +26,8 @@
 
   <div class="form-row">
     <div class="form-group col-md-3">
-      <select id="inputLocation" class="form-control" name="location" [(ngModel)]="location" (change)="locationChange($event)">
-        <option value="dha">Select Sector</option>
+      <select id="inputLocation" class="form-control" name="sector" [(ngModel)]="sector" (change)="sectorChange($event)">
+        <option value="">Select Sector</option>
         <option value="Sector A">Sector A</option>
         <option value="Sector B">Sector B</option>
         <option value="Sector C">Sector C</option>

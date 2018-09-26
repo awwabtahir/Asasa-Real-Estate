@@ -1,8 +1,9 @@
 /// <reference types="@types/googlemaps" />
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { MapService } from '../../services/map.service';
 import { ad } from '../../models/ad';
 import { city } from '../../models/city';
+import { location } from '../../models/location';
 
 @Component({
   selector: 'map',
@@ -13,6 +14,7 @@ export class MapComponent implements OnInit {
   map: any;
   modalAd: ad;
   city: city;
+  location: location;
 
   // initial position
   lat: number = 34.06513423;
@@ -28,25 +30,36 @@ export class MapComponent implements OnInit {
       this.lat = this.city.lat;
       this.lng = this.city.lng;
     });
+    this.location = this.mapService.getLocation().subscribe(location => {
+      this.location = location;
+      this.lat = this.location.lat;
+      this.lng = this.location.lng;
+      this.updateOverlay(this.map, this.location);
+    });
   }
 
   mapReady(map) {
-    // if ("geolocation" in navigator) {
-    //   navigator.geolocation.getCurrentPosition((position) => {
-    //     this.lat = position.coords.latitude;
-    //     this.lng = position.coords.longitude;
-    //   });
-    // }
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+      });
+    }
     this.map = map;
-    map.setZoom(13);
+    map.setZoom(14);
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('Settings'));
-    var bounds = {
-      lat0: 34.03589373,
-      lng0: 71.40848471,
-      lat1: 34.08513423,
-      lng1: 71.48481756
-    };    
-    this.mapService.addOverLay(map, bounds, "peshawar/dha");
+  }
+
+  updateOverlay(map, location) {
+    if (location.overlayData.imgLoc) {
+      var bounds = {
+        lat0: location.overlayData.lat0,
+        lng0: location.overlayData.lng0,
+        lat1: location.overlayData.lat1,
+        lng1: location.overlayData.lng1
+      };
+      this.mapService.addOverLay(map, bounds, location.overlayData.imgLoc);
+    }
   }
 
   recieveModalAd(modalAd) {

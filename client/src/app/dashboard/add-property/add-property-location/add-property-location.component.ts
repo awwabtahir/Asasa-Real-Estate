@@ -1,23 +1,28 @@
 /// <reference types="@types/googlemaps" />
 declare var klokantech: any;
-import { Component, OnInit, ViewChild, ElementRef, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, NgZone, OnDestroy, Input, OnChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MapsAPILoader } from '@agm/core';
 import * as $ from 'jquery';
 import { PropertyService } from '../../../services/property.service';
 import { ActivatedRoute } from '@angular/router';
 import { MapService } from '../../../services/map.service';
+import { city } from '../../../models/city';
+import { location } from '../../../models/location';
 
 @Component({
   selector: 'add-property-location',
   templateUrl: './add-property-location.component.html',
   styleUrls: ['./add-property-location.component.css']
 })
-export class AddPropertyLocationComponent implements OnInit, OnDestroy {
+export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChanges {
 
-  @ViewChild("search")
-  public searchElementRef: ElementRef;
-  public searchControl: FormControl;
+  // @ViewChild("search")
+  // public searchElementRef: ElementRef;
+  // public searchControl: FormControl;
+
+  @Input() cityData: city;
+  @Input() locationData: location;
 
   public latitude: number;
   public longitude: number;
@@ -25,8 +30,9 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
   public mlongitude: number;
   public zoom: number;
 
-  public location = "dha";
-  public city = "Peshawar";
+  public sector = "";
+  public location: string;
+  public city: string;
 
   gesture = "greedy";
 
@@ -35,43 +41,40 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
 
   constructor(
     private propertyService: PropertyService,
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone,
-    private route: ActivatedRoute,
-    private mapService: MapService
+    private mapService: MapService,
+    // private mapsAPILoader: MapsAPILoader,
+    // private ngZone: NgZone,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    //set google maps defaults
-    this.latitude = this.mlatitude = 33.69;
-    this.longitude = this.mlongitude = 73.01;
 
     //create search FormControl
-    this.searchControl = new FormControl();
+    // this.searchControl = new FormControl();
 
-    //set current position
-    this.setCurrentPosition();
+    //set location data
+    this.setLocationData();
 
-    //load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {});
-      autocomplete.setComponentRestrictions({ 'country': ['pk'] });
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+    // //load Places Autocomplete
+    // this.mapsAPILoader.load().then(() => {
+    //   let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {});
+    //   autocomplete.setComponentRestrictions({ 'country': ['pk'] });
+    //   autocomplete.addListener("place_changed", () => {
+    //     this.ngZone.run(() => {
+    //       //get the place result
+    //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) return;
+    //       //verify result
+    //       if (place.geometry === undefined || place.geometry === null) return;
 
-          //set latitude, longitude and zoom
-          this.latitude = this.mlatitude = place.geometry.location.lat();
-          this.longitude = this.mlongitude = place.geometry.location.lng();
-          this.getCityWithLoc(this.latitude, this.longitude);
-          this.setLocationData();
-        });
-      });
-    });
+    //       //set latitude, longitude and zoom
+    //       this.latitude = this.mlatitude = place.geometry.location.lat();
+    //       this.longitude = this.mlongitude = place.geometry.location.lng();
+    //       this.getCityWithLoc(this.latitude, this.longitude);
+    //       this.setLocationData();
+    //     });
+    //   });
+    // });
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
@@ -84,6 +87,19 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
       }
     });
 
+    //set google map
+    if(!this.locationData) return;
+    this.latitude = this.mlatitude = this.locationData.lat;
+    this.longitude = this.mlongitude = this.locationData.lng;
+    this.location = this.locationData.location;
+    this.city = this.cityData.city;
+
+  }
+
+  ngOnChanges() {
+    this.latitude = this.mlatitude = this.locationData.lat;
+    this.longitude = this.mlongitude = this.locationData.lng;
+    this.city = this.cityData.city;
   }
 
   ngOnDestroy() {
@@ -100,16 +116,18 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
   mapReady(map) {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('search'));
     map.setZoom(13);
-    var bounds = {
-      lat0: 34.03589373,
-      lng0: 71.40848471,
-      lat1: 34.08513423,
-      lng1: 71.48481756
-    };    
-    this.mapService.addOverLay(map, bounds, "peshawar/dha");
+    if(this.locationData.overlayData.imgLoc) {
+      var bounds = {
+        lat0: this.locationData.overlayData.lat0,
+        lng0: this.locationData.overlayData.lng0,
+        lat1: this.locationData.overlayData.lat1,
+        lng1: this.locationData.overlayData.lng1
+      };    
+      this.mapService.addOverLay(map, bounds, this.locationData.overlayData.imgLoc);
+    }
   }
 
-  locationChange(event) {
+  sectorChange(event) {
     this.setLocationData(false);
   }
 
@@ -119,26 +137,10 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy {
     this.propertyService.addLocation({
       lat: this.mlatitude,
       lng: this.mlongitude,
+      sector: this.sector,
       location: this.location,
       city: this.city
     });
-  }
-
-
-
-  private setCurrentPosition() {
-    // if ("geolocation" in navigator) {
-    //   navigator.geolocation.getCurrentPosition((position) => {
-    //     this.latitude = this.mlatitude = position.coords.latitude;
-    //     this.longitude = this.mlongitude = position.coords.longitude;
-    //     this.getCityWithLoc(this.latitude, this.longitude);
-    //     this.zoom = 15;
-    //     this.setLocationData();
-    //   });
-    // }
-    this.latitude = this.mlatitude = 34.052059005117556;
-    this.longitude = this.mlongitude = 71.42871650000006;
-    this.setLocationData();
   }
 
   private getCityWithLoc(lat, lng) {

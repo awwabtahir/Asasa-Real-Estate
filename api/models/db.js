@@ -49,3 +49,4 @@ process.on('SIGTERM', function() {
 require('./users');
 require('./ads');
 require('./city');
+require('./location');
