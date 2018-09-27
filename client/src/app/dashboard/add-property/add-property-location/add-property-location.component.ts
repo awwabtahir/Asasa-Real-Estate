@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MapService } from '../../../services/map.service';
 import { city } from '../../../models/city';
 import { location } from '../../../models/location';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'add-property-location',
@@ -23,6 +24,7 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
 
   @Input() cityData: city;
   @Input() locationData: location;
+  @Input() edit;
 
   public latitude: number;
   public longitude: number;
@@ -44,7 +46,8 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
     private mapService: MapService,
     // private mapsAPILoader: MapsAPILoader,
     // private ngZone: NgZone,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
@@ -82,13 +85,14 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
         let item = this.propertyService.getItemforUpdate();
         this.latitude = this.mlatitude = item.locationData.lat;
         this.longitude = this.mlongitude = item.locationData.lng;
+        this.sector = item.locationData.sector;
         this.location = item.locationData.location;
         this.city = item.locationData.city;
       }
     });
 
     //set google map
-    if(!this.locationData) return;
+    if(!this.locationData || this.edit) return;
     this.latitude = this.mlatitude = this.locationData.lat;
     this.longitude = this.mlongitude = this.locationData.lng;
     this.location = this.locationData.location;
@@ -97,6 +101,7 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
   }
 
   ngOnChanges() {
+    if(this.edit) return;
     this.latitude = this.mlatitude = this.locationData.lat;
     this.longitude = this.mlongitude = this.locationData.lng;
     this.city = this.cityData.city;
@@ -104,6 +109,19 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  locations = [];
+  getLocations(selectedCity) {
+    this.auth.getLocations().subscribe(locations => { 
+
+      this.locations = locations.filter(function(loc){
+        return loc.cityId == selectedCity;
+      });
+
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   getMarkerPosition(event) {
@@ -116,6 +134,7 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
   mapReady(map) {
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('search'));
     map.setZoom(13);
+    map.setMapTypeId(google.maps.MapTypeId.HYBRID);
     if(this.locationData.overlayData.imgLoc) {
       var bounds = {
         lat0: this.locationData.overlayData.lat0,

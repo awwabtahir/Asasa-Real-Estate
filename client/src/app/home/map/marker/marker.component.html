@@ -16,7 +16,10 @@
         <b>Rs. {{ getDemand(ad.demand) }}</b>
       </p>
       <p class="mb-1">{{ ad.area }} {{ ad.areaType }}</p>
-      <p class="mb-1">{{ ad.locationData.location }}, {{ ad.locationData.city }}</p>
+      <p class="mb-1">
+        <span *ngIf="ad.locationData.sector">{{ad.locationData.sector}}, </span>
+        {{ ad.locationData.location }}, 
+        {{ ad.locationData.city }}</p>
       <p class="mb-1 d-sm-block d-md-none">
         <a routerLink="/property-details" (click)="onPropClick(ad)">Click here for more details</a>
       </p>

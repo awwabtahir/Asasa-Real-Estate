@@ -32,7 +32,7 @@
         <td>{{item.subtype}}</td>
         <td>{{item.propNumber}}</td>
         <td>{{item.area}} {{item.areaType}}</td>
-        <td>{{item.locationData.location}}, {{item.locationData.city}}</td>
+        <td>{{item.locationData.sector}}, {{item.locationData.location}}, {{item.locationData.city}}</td>
         <td>Rs. {{ getDemand(item.demand) }}</td>
         <td>
           <button class="btn btn-success btn-sm mr-1" (click)="edit(item)">Edit</button>

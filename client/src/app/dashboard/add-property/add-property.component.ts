@@ -42,18 +42,17 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     private locService: LocationService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {    
+    this.getCities();
+    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
       if (this.id && this.propertyService.getItemforUpdate()) {
         let item = this.propertyService.getItemforUpdate();
-        this.setitem(item);
-        this.edit = true;
-        this.selectedCity = "1";
+        this.setPage(item);
       }
     });
-
-    this.getCities();
 
   }
 
@@ -124,6 +123,22 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       this.ad.imgUrl = event.cdnUrl;
       this.ad.imgCount = event.count;
     }
+  }
+
+  private async setPage(item) {
+    let city = this.cities.filter(function(city){
+      return city.city == item.locationData.city;
+    });
+    this.selectedCity = city[0]._id;
+    this.getLocations(this.selectedCity);
+    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+    let location = this.locations.filter(function(location){
+      return location.location == item.locationData.location;
+    });
+    this.selectedLoc = location[0]._id;
+    this.locationChange();
+    this.setitem(item);
+    this.edit = true;
   }
 
   private setitem(item) {
