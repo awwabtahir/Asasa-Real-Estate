@@ -24,6 +24,7 @@ export class MarkerComponent implements OnInit {
   };
 
   ads = [];
+  filteredAds = [];
 
   constructor(private propertyService: PropertyService,
     private propertyModalService: PropertyModalService) { }
@@ -55,6 +56,7 @@ export class MarkerComponent implements OnInit {
   getAds() {
     this.propertyService.getAds().subscribe(ads => {
       this.ads = ads;
+      this.filteredAds = ads;
     }, (err) => {
       console.error(err);
     });

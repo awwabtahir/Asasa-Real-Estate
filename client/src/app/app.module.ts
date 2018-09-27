@@ -4,11 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
-import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import { NgxEditorModule } from 'ngx-editor';
 import { AgmOverlays } from "agm-overlays";
 import {DataTableModule} from "angular-6-datatable";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
@@ -47,6 +47,7 @@ import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
 import { MarkerModalContentComponent } from './home/map/marker-modal/marker-modal-content/marker-modal-content.component';
 import { AddCityComponent } from './dashboard/add-city/add-city.component';
 import { AddLocationComponent } from './dashboard/add-location/add-location.component';
+import { SearchFilterComponent } from './home/search-filter/search-filter.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -93,17 +94,18 @@ const routes: Routes = [
     SafeResourceUrlPipe,
     MarkerModalContentComponent,
     AddCityComponent,
-    AddLocationComponent
+    AddLocationComponent,
+    SearchFilterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    IonRangeSliderModule,
     UcWidgetModule,
     NgxEditorModule,
     DataTableModule,
+    NgSelectModule,
     RouterModule.forRoot(routes),
     AgmOverlays,
     AgmCoreModule.forRoot({

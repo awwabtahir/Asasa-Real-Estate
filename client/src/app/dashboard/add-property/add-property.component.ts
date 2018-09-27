@@ -81,7 +81,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectedCity = "";
+  selectedCity;
   city: any;
   cityChange() {
     let selectedCity = this.selectedCity;
@@ -97,10 +97,10 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       lng: this.city.lng
     };
     this.locService.setLatLng(latlng);
-    this.selectedLoc = "";
+    this.selectedLoc = null;
   }
 
-  selectedLoc = "";
+  selectedLoc;
   location: any;
   locationChange() {
     let selectedLoc = this.selectedLoc;

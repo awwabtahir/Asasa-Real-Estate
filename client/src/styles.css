@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
 
 .irs-from, 
 .irs-to, 
@@ -9,4 +10,8 @@
 
 .ngx-editor .ngx-wrapper .ngx-editor-textarea {
     min-height: 5rem!important;
+}
+
+ng-select {
+    width: 150px;
 }

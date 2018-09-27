@@ -1,5 +1,5 @@
 <agm-marker 
-  *ngFor="let ad of ads; let i=index" 
+  *ngFor="let ad of filteredAds; let i=index" 
   [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="icon"
   (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()"
   (markerClick)="onMarkerClick(ad)">

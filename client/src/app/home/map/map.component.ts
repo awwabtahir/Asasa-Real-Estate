@@ -14,7 +14,9 @@ export class MapComponent implements OnInit {
   map: any;
   modalAd: ad;
   city: city;
+  cityName;
   location: location;
+  locName;
 
   // initial position
   lat: number = 33.6;
@@ -27,11 +29,14 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.city = this.mapService.getCity().subscribe(city => {
       this.city = city;
+      this.locName = "";
+      this.cityName = this.city.city;
       this.lat = this.city.lat;
       this.lng = this.city.lng;
     });
     this.location = this.mapService.getLocation().subscribe(location => {
       this.location = location;
+      this.locName = this.location.location;
       this.lat = this.location.lat;
       this.lng = this.location.lng;
       this.updateOverlay(this.map, this.location);

@@ -1,21 +1,19 @@
 <div class="container mb-2">
   <div class="form-row mt-2">
     <div class="form-group mr-2">
-      <select class="form-control" [(ngModel)]="selectedCity" (change)="cityChange()">
-        <option value="">Select/Add City</option>
-        <option *ngFor="let city of cities" [value]="city._id">{{city.city}}</option>
-      </select>
+      <ng-select [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
+        [(ngModel)]="selectedCity" (change)="cityChange()">
+      </ng-select>
     </div>
-    <div *ngIf="selectedCity == ''" class="form-group mr-2 pt-1">
+    <div class="form-group mr-2">
+      <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Select Location"
+        [(ngModel)]="selectedLoc" (change)="locationChange()">
+      </ng-select>
+    </div>
+    <div class="form-group mr-2 pt-1">
       <a class="btn btn-primary btn-sm" routerLink="/addCity">Add City</a>
     </div>
-    <div *ngIf="selectedCity != ''" class="form-group mr-2">
-      <select class="form-control" [(ngModel)]="selectedLoc" (change)="locationChange()">
-        <option value="">Select/Add location</option>
-        <option *ngFor="let loc of locations" [value]="loc._id">{{loc.location}}</option>
-      </select>
-    </div>
-    <div *ngIf="selectedCity != '' && selectedLoc == ''" class="form-group mr-2 pt-1">
+    <div class="form-group mr-2 pt-1">
       <a class="btn btn-primary btn-sm" routerLink="/addLocation">Add Location</a>
     </div>
   </div>

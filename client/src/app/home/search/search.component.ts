@@ -19,11 +19,6 @@ export class SearchComponent implements OnInit {
     this.getCities();
   }
 
-  sliders = false;
-  onFilterClick() {
-    this.sliders = !this.sliders;
-  }
-
   getCities() {
     this.auth.getCities().subscribe(cities => {
       this.cities = cities;
@@ -33,11 +28,12 @@ export class SearchComponent implements OnInit {
   }
 
   cityChange(cityObj) {
-    let cityId = cityObj.srcElement.value;
+    let cityId = cityObj._id;
     let cityData = this.cities.filter(function(city){
       return city._id == cityId;
     });
     this.mapService.cityChange(cityData[0]);
+    this.locations = [];
     this.getLocations(cityId);
   }
 
@@ -52,7 +48,7 @@ export class SearchComponent implements OnInit {
   }
 
   locationChange(locObj) {
-    let locId = locObj.srcElement.value;
+    let locId = locObj._id;
     let locData = this.locations.filter(function(loc){
       return loc._id == locId;
     });

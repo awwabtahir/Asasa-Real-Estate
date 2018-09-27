@@ -12,11 +12,6 @@ input {
     margin-bottom: 0px;
 }
 
-button {
-    background: #25BDA4;
-    color: white;
-}
-
 ion-range-slider {
     width: 200px;
     margin-right: 30px;
