@@ -41,5 +41,5 @@ testem.log
 Thumbs.db
 
 # Assets
-/src/assets
-/dist/assets
+# /src/assets
+# /dist/assets
