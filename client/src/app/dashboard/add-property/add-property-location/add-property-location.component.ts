@@ -101,10 +101,14 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
   }
 
   ngOnChanges() {
-    if(this.edit) return;
+    if(this.edit) {
+      if(this.map) this.mapReady(this.map);
+      return;
+    };
     this.latitude = this.mlatitude = this.locationData.lat;
     this.longitude = this.mlongitude = this.locationData.lng;
     this.city = this.cityData.city;
+    if(this.map) this.mapReady(this.map);
   }
 
   ngOnDestroy() {
@@ -131,7 +135,9 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
     this.setLocationData();
   }
 
+  map: any;
   mapReady(map) {
+    this.map = map;
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById('search'));
     map.setZoom(13);
     map.setMapTypeId(google.maps.MapTypeId.HYBRID);

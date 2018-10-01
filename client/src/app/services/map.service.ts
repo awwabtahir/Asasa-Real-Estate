@@ -9,21 +9,36 @@ export class MapService {
   @Output() cityFire: EventEmitter<any> = new EventEmitter();
   @Output() locFire: EventEmitter<any> = new EventEmitter();
 
+  mapBounds: any;
+  mapMinZoom: any;
+  mapMaxZoom: any;
+  overlay: any;
+  opacitycontrol: any;
+
   constructor() { }
 
   addOverLay(map, bounds, imgLoc) {
-    var mapBounds = new google.maps.LatLngBounds(
+    this.setDefault();
+    this.mapBounds = new google.maps.LatLngBounds(
       new google.maps.LatLng(bounds.lat0, bounds.lng0),
       new google.maps.LatLng(bounds.lat1, bounds.lng1));
-    var mapMinZoom = 12;
-    var mapMaxZoom = 17;
-    var overlay = new klokantech.MapTilerMapType(map, function (x, y, z) {
+    this.mapMinZoom = 10;
+    this.mapMaxZoom = 22;
+    this.overlay = new klokantech.MapTilerMapType(map, function (x, y, z) {
       return "assets/map/" + imgLoc + "/{z}/{x}/{y}.png".replace('{z}', z).replace('{x}', x).replace('{y}', y);
     },
-      mapBounds, mapMinZoom, mapMaxZoom);
+    this.mapBounds, this.mapMinZoom, this.mapMaxZoom);
 
-    var opacitycontrol = new klokantech.OpacityControl(map, overlay);
-    var geoloccontrol = new klokantech.GeolocationControl(map, mapMaxZoom);
+    if(this.opacitycontrol) {
+      $(".goog-slider-horizontal").remove();
+    }
+    this.opacitycontrol = new klokantech.OpacityControl(map, this.overlay);
+    
+  }
+
+  setDefault() {
+    if(this.mapBounds) delete this.mapBounds;
+    if(this.overlay) delete this.overlay;
   }
 
   cityChange(city) {
