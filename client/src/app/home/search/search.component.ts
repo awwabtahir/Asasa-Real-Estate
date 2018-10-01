@@ -28,6 +28,7 @@ export class SearchComponent implements OnInit {
   }
 
   cityChange(cityObj) {
+    $(':focus').blur();
     let cityId = cityObj._id;
     let cityData = this.cities.filter(function(city){
       return city._id == cityId;
@@ -48,6 +49,7 @@ export class SearchComponent implements OnInit {
   }
 
   locationChange(locObj) {
+    $(':focus').blur();
     let locId = locObj._id;
     let locData = this.locations.filter(function(loc){
       return loc._id == locId;
