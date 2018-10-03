@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-6">
+      <h5>Cities</h5>
+      <div *ngFor="let city of cities">
+        <button class="btn btn-primary btn-sm mt-1 mb-1 mr-1" (click)="cityChanged(city._id, city.city)">
+          {{ city.city }}
+        </button>
+        <a routerLink="/{{ city.city }}"><i class="fas fa-external-link-alt"></i></a>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <h5>Locations</h5>
+      <ol>
+        <li class="mb-2" *ngFor="let loc of filteredlocations">
+          <a routerLink="/{{city}}/{{loc.location}}">{{loc.location}}</a>
+        </li>
+      </ol>
+    </div>
+
+  </div>
+</div>

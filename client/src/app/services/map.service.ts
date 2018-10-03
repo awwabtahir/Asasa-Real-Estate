@@ -33,7 +33,7 @@ export class MapService {
       $(".goog-slider-horizontal").remove();
     }
     this.opacitycontrol = new klokantech.OpacityControl(map, this.overlay);
-    
+    map.setZoom(14);
   }
 
   setDefault() {

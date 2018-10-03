@@ -48,9 +48,13 @@ import { MarkerModalContentComponent } from './home/map/marker-modal/marker-moda
 import { AddCityComponent } from './dashboard/add-city/add-city.component';
 import { AddLocationComponent } from './dashboard/add-location/add-location.component';
 import { SearchFilterComponent } from './home/search-filter/search-filter.component';
+import { LinksComponent } from './links/links.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'links', component: LinksComponent },
+  { path: ':city', component: HomeComponent },
+  { path: ':city/:location', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'property-details', component: MarkerModalContentComponent },
@@ -95,7 +99,8 @@ const routes: Routes = [
     MarkerModalContentComponent,
     AddCityComponent,
     AddLocationComponent,
-    SearchFilterComponent
+    SearchFilterComponent,
+    LinksComponent
   ],
   imports: [
     BrowserModule,

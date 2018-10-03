@@ -7,6 +7,7 @@
     bindValue="_id" 
     class="mr-2 ml-2"
     placeholder="Select City"
+    [(ngModel)]="selectedCity"
     (change)="cityChange($event)">
   </ng-select>
 
@@ -16,6 +17,7 @@
     bindValue="_id" 
     class="mr-2 ml-2"
     placeholder="Select Location"
+    [(ngModel)]="selectedLocation"
     (change)="locationChange($event)">
   </ng-select>
 
