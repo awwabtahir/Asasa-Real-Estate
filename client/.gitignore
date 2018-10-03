@@ -39,7 +39,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Assets
-# /src/assets
-# /dist/assets

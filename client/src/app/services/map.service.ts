@@ -25,7 +25,7 @@ export class MapService {
     this.mapMinZoom = 10;
     this.mapMaxZoom = 22;
     this.overlay = new klokantech.MapTilerMapType(map, function (x, y, z) {
-      return "assets/map/" + imgLoc + "/{z}/{x}/{y}.png".replace('{z}', z).replace('{x}', x).replace('{y}', y);
+      return "https://asasamaps.s3.us-east-2.amazonaws.com/map/" + imgLoc + "/{z}/{x}/{y}.png".replace('{z}', z).replace('{x}', x).replace('{y}', y);
     },
     this.mapBounds, this.mapMinZoom, this.mapMaxZoom);
 
@@ -33,7 +33,8 @@ export class MapService {
       $(".goog-slider-horizontal").remove();
     }
     this.opacitycontrol = new klokantech.OpacityControl(map, this.overlay);
-    map.setZoom(14);
+    map.fitBounds(this.mapBounds);
+    map.setZoom(13);
   }
 
   setDefault() {
