@@ -25,7 +25,7 @@ export class MarkerModalContentComponent implements OnInit {
   constructor(
     private modalService: PropertyModalService,
     private propertyModalService: PropertyModalService,
-    private _sanitizer: DomSanitizer, 
+    private _sanitizer: DomSanitizer,
     private auth: AuthenticationService,
     private mapService: MapService) { }
 
@@ -34,7 +34,7 @@ export class MarkerModalContentComponent implements OnInit {
     if (this.ad) {
       this.ngOnChanges();
     }
-    
+
   }
 
   ngOnChanges() {
@@ -45,22 +45,23 @@ export class MarkerModalContentComponent implements OnInit {
     this.plot_features = this.ad.plot_features;
     this.other = this.ad.other;
     this.nearby_loc = this.ad.nearby_loc;
-    if(this.map) this.mapReady(this.map);
+    if (this.map) this.mapReady(this.map);
 
     if (this.ad.vidUrl != "") {
-      this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));      
+      this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));
     }
 
   }
 
   map: any;
+  viewer: any;
   async mapReady(map) {
     this.map = map;
     let location = this.location.location;
     let locationObj;
-    this.auth.getLocations().subscribe(locations => { 
+    this.auth.getLocations().subscribe(locations => {
 
-      locationObj = locations.filter(function(loc){
+      locationObj = locations.filter(function (loc) {
         return loc.location == location;
       });
 
@@ -80,11 +81,14 @@ export class MarkerModalContentComponent implements OnInit {
       this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
     }
 
-    var viewer = new Kaleidoscope.Image({
-      source: 'https://asasamaps.s3.us-east-2.amazonaws.com/img/pano.jpg', 
-      containerId: '#target'
-    });
-    viewer.render();
+    if (!this.viewer) {
+      this.viewer = new Kaleidoscope.Image({
+        source: 'https://asasamaps.s3.us-east-2.amazonaws.com/img/pano.jpg',
+        containerId: '#target',
+        width: "320"
+      });
+      this.viewer.render();
+    }
   }
 
   private getId(url) {
