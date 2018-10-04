@@ -1,5 +1,5 @@
 /// <reference types="@types/googlemaps" />
-declare var $ :any;
+declare var $: any;
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PropertyService } from '../../../services/property.service';
 import { PropertyModalService } from '../../../services/property-modal.service';
@@ -50,8 +50,9 @@ export class MarkerComponent implements OnInit {
 
   onMarkerClick(selectedMarkerData) {
     this.adEvent.emit(selectedMarkerData);
-    if (window.innerWidth < 800) return;
-    $('#markerModal').modal('show');
+    if (window.innerWidth > 800) {
+      $('#markerModal').modal('show');
+    } 
   }
 
   getAds() {
