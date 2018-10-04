@@ -29,9 +29,9 @@ export class MarkerModalContentComponent implements OnInit {
 
   ngOnInit() {
     if (!this.ad) this.ad = this.propertyModalService.getAd();
-    // if (this.ad) {
-    //   this.ngOnChanges();
-    // }
+    if (this.ad) {
+      this.ngOnChanges();
+    }
     
   }
 
