@@ -4,9 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
-import { UcWidgetModule } from 'ngx-uploadcare-widget';
 import { NgxEditorModule } from 'ngx-editor';
-import { AgmOverlays } from "agm-overlays";
 import {DataTableModule} from "angular-6-datatable";
 import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -107,12 +105,10 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    UcWidgetModule,
     NgxEditorModule,
     DataTableModule,
     NgSelectModule,
     RouterModule.forRoot(routes),
-    AgmOverlays,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',
       libraries: ["places"]

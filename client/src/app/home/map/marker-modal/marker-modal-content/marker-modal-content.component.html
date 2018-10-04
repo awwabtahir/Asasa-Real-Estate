@@ -8,6 +8,10 @@
         <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos"
           aria-selected="false">Photos</a>
       </li>
+      <li class="nav-item col">
+        <a class="nav-link" id="3dImg-tab" data-toggle="tab" href="#3dImg" role="tab" aria-controls="3dImg"
+          aria-selected="false">360 View</a>
+      </li>
       <li *ngIf="ad.vidUrl" class="nav-item col">
         <a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos"
           aria-selected="false">Videos</a>
@@ -20,6 +24,9 @@
     <div class="tab-content" id="myTabContent">
       <div *ngIf="ad.imgUrl" class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
         <photo-slider></photo-slider>
+      </div>
+      <div class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
+        <div id="target"></div>
       </div>
       <div *ngIf="ad.vidUrl" class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
         <iframe [src]='safeUrl' frameborder="0" allowfullscreen></iframe>

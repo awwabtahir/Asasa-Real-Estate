@@ -5,6 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PropertyModalService } from '../../../../services/property-modal.service';
 import { AuthenticationService } from '../../../../services/authentication.service';
 
+declare var Kaleidoscope: any;
+
 @Component({
   selector: 'marker-modal-content',
   templateUrl: './marker-modal-content.component.html',
@@ -77,6 +79,12 @@ export class MarkerModalContentComponent implements OnInit {
       };
       this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
     }
+
+    var viewer = new Kaleidoscope.Image({
+      source: 'https://d34jj9muce0qbt.cloudfront.net/img/pano.jpg', 
+      containerId: '#target'
+    });
+    viewer.render();
   }
 
   private getId(url) {
