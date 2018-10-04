@@ -3,6 +3,7 @@ import { ad } from '../../../../models/ad';
 import { MapService } from '../../../../services/map.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PropertyModalService } from '../../../../services/property-modal.service';
+import { AuthenticationService } from '../../../../services/authentication.service';
 
 @Component({
   selector: 'marker-modal-content',
@@ -23,13 +24,14 @@ export class MarkerModalContentComponent implements OnInit {
     private modalService: PropertyModalService,
     private propertyModalService: PropertyModalService,
     private _sanitizer: DomSanitizer, 
+    private auth: AuthenticationService,
     private mapService: MapService) { }
 
   ngOnInit() {
     if (!this.ad) this.ad = this.propertyModalService.getAd();
-    if (this.ad) {
-      this.ngOnChanges();
-    }
+    // if (this.ad) {
+    //   this.ngOnChanges();
+    // }
     
   }
 
@@ -41,11 +43,40 @@ export class MarkerModalContentComponent implements OnInit {
     this.plot_features = this.ad.plot_features;
     this.other = this.ad.other;
     this.nearby_loc = this.ad.nearby_loc;
+    if(this.map) this.mapReady(this.map);
 
     if (this.ad.vidUrl != "") {
       this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));      
     }
 
+  }
+
+  map: any;
+  async mapReady(map) {
+    this.map = map;
+    let location = this.location.location;
+    let locationObj;
+    this.auth.getLocations().subscribe(locations => { 
+
+      locationObj = locations.filter(function(loc){
+        return loc.location == location;
+      });
+
+    }, (err) => {
+      console.error(err);
+    });
+    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+    locationObj = locationObj[0];
+
+    if (locationObj.overlayData.imgLoc) {
+      var bounds = {
+        lat0: locationObj.overlayData.lat0,
+        lng0: locationObj.overlayData.lng0,
+        lat1: locationObj.overlayData.lat1,
+        lng1: locationObj.overlayData.lng1
+      };
+      this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
+    }
   }
 
   private getId(url) {
@@ -57,16 +88,6 @@ export class MarkerModalContentComponent implements OnInit {
     } else {
       return 'error';
     }
-  }
-
-  mapReady(map) {
-    var bounds = {
-      lat0: 34.03589373,
-      lng0: 71.40848471,
-      lat1: 34.08513423,
-      lng1: 71.48481756
-    };
-    this.mapService.addOverLay(map, bounds, "peshawar/dha");
   }
 
 }

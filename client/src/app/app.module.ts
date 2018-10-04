@@ -53,8 +53,6 @@ import { LinksComponent } from './links/links.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'links', component: LinksComponent },
-  { path: ':city', component: HomeComponent },
-  { path: ':city/:location', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'property-details', component: MarkerModalContentComponent },
@@ -64,7 +62,9 @@ const routes: Routes = [
   { path: 'addLocation', component: AddLocationComponent, canActivate: [AuthGuardService] },
   { path: 'addCity', component: AddCityComponent, canActivate: [AuthGuardService] },
   { path: 'editProperty/:id', component: AddPropertyComponent, canActivate: [AuthGuardService] },
-  { path: 'activeProperties', component: ActivePropertiesComponent, canActivate: [AuthGuardService] }
+  { path: 'activeProperties', component: ActivePropertiesComponent, canActivate: [AuthGuardService] },
+  { path: ':city', component: HomeComponent },
+  { path: ':city/:location', component: HomeComponent }
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 /// <reference types="@types/googlemaps" />
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MapService } from '../../services/map.service';
 import { ad } from '../../models/ad';
 import { city } from '../../models/city';
