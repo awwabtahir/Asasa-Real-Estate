@@ -50,6 +50,7 @@ export class MarkerComponent implements OnInit {
 
   onMarkerClick(selectedMarkerData) {
     this.adEvent.emit(selectedMarkerData);
+    if (window.innerWidth < 800) return;
     $('#markerModal').modal('show');
   }
 
