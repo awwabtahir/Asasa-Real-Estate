@@ -81,7 +81,6 @@ export class MarkerModalContentComponent implements OnInit {
       this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
     }
 
-    if(this.viewer) this.viewer = undefined;
     this.viewer = new Kaleidoscope.Image({
       source: 'https://asasamaps.s3.us-east-2.amazonaws.com/img/pano1.jpg',
       containerId: '#target',
