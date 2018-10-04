@@ -81,7 +81,7 @@ export class MarkerModalContentComponent implements OnInit {
     }
 
     var viewer = new Kaleidoscope.Image({
-      source: 'https://d34jj9muce0qbt.cloudfront.net/img/pano.jpg', 
+      source: 'https://asasamaps.s3.us-east-2.amazonaws.com/img/pano.jpg', 
       containerId: '#target'
     });
     viewer.render();
