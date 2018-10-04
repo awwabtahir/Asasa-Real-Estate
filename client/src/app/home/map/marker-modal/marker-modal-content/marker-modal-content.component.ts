@@ -81,14 +81,15 @@ export class MarkerModalContentComponent implements OnInit {
       this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
     }
 
-    if (!this.viewer) {
+    if (this.viewer == undefined) {
       this.viewer = new Kaleidoscope.Image({
-        source: 'https://asasamaps.s3.us-east-2.amazonaws.com/img/pano.jpg',
+        source: 'https://asasamaps.s3.us-east-2.amazonaws.com/img/pano1.jpg',
         containerId: '#target',
-        width: "320"
+        width: "370"
       });
       this.viewer.render();
     }
+
   }
 
   private getId(url) {
