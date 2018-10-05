@@ -83,8 +83,7 @@ export class MarkerModalContentComponent implements OnInit {
 
     this.viewer = new Kaleidoscope.Image({
       source: 'https://asasamaps.s3.us-east-2.amazonaws.com/img/pano1.jpg',
-      containerId: '#target',
-      width: "370"
+      containerId: '#target'
     });
     this.viewer.render();
 

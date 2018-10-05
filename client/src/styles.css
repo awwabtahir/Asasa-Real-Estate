@@ -15,3 +15,8 @@
 ng-select {
     width: 150px;
 }
+
+canvas {
+    width: 100%!important;
+    height: auto!important;
+}

@@ -1,120 +1,121 @@
-<div class="row d-sm-block d-md-none">
-  <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1" routerLink="/"><i class="fas fa-arrow-left"></i> &nbsp; Go back</a>
-</div>
-<div class="row no-gutters">
-  <div *ngIf="ad" class="col-md-8">
-    <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
-      <li *ngIf="ad.imgUrl" class="nav-item col">
-        <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos"
-          aria-selected="false">Photos</a>
-      </li>
-      <li class="nav-item col">
-        <a class="nav-link" id="3dImg-tab" data-toggle="tab" href="#3dImg" role="tab" aria-controls="3dImg"
-          aria-selected="false">360 View</a>
-      </li>
-      <li *ngIf="ad.vidUrl" class="nav-item col">
-        <a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos"
-          aria-selected="false">Videos</a>
-      </li>
-      <li class="nav-item col">
-        <a class="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map"
-          aria-selected="true">Map</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-      <div *ngIf="ad.imgUrl" class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
-        <photo-slider></photo-slider>
-      </div>
-      <div class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
-        <div id="target"></div>
-      </div>
-      <div *ngIf="ad.vidUrl" class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
-        <iframe [src]='safeUrl' frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
-        <agm-map [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng"
-          [mapTypeControl]=true [panControl]=true [zoom]=17 
-          (mapReady)="mapReady($event)">
-
-          <agm-marker [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng">
-          </agm-marker>
-
-        </agm-map>
-      </div>
-    </div>
+<div class="container">
+  <div class="row d-sm-block d-md-none">
+    <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1" routerLink="/"><i class="fas fa-arrow-left"></i> &nbsp; Go
+      back</a>
   </div>
+  <div class="row no-gutters">
+    <div *ngIf="ad" class="col-md-8">
+      <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
+        <li *ngIf="ad.imgUrl" class="nav-item col">
+          <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos"
+            aria-selected="false">Photos</a>
+        </li>
+        <li class="nav-item col">
+          <a class="nav-link" id="3dImg-tab" data-toggle="tab" href="#3dImg" role="tab" aria-controls="3dImg"
+            aria-selected="false">360 View</a>
+        </li>
+        <li *ngIf="ad.vidUrl" class="nav-item col">
+          <a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos"
+            aria-selected="false">Videos</a>
+        </li>
+        <li class="nav-item col">
+          <a class="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map"
+            aria-selected="true">Map</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div *ngIf="ad.imgUrl" class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
+          <photo-slider></photo-slider>
+        </div>
+        <div class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
+          <div id="target"></div>
+        </div>
+        <div *ngIf="ad.vidUrl" class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
+          <iframe [src]='safeUrl' frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
+          <agm-map [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [mapTypeControl]=true
+            [panControl]=true [zoom]=17 (mapReady)="mapReady($event)">
 
-  <div class="col-md-4">
-    <div class="modal-header">
-      <h5 class="modal-title">Property Overview</h5>
-      <button type="button" class="close d-none d-md-block" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+            <agm-marker [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng">
+            </agm-marker>
+
+          </agm-map>
+        </div>
+      </div>
     </div>
-    <div *ngIf="ad" class="modal-content scroll" id="style-2">
-      <div class="container">
-        <div *ngIf="basic" class="row">
-          <div class="alert alert-info w-100 text-center">
-            <strong>Basics</strong>
-          </div>
-          <div *ngFor="let entry of basic | keys" class="col-md-6">
-            <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
-          </div>
-          <div *ngFor="let entry of location | keys" class="col-md-6">
-            <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
-          </div>
-        </div>
-        <div *ngIf="ad.description" class="row mt-2">
-          <div class="alert alert-info w-100 text-center">
-            <strong>Description</strong>
-          </div>
-          {{ ad.description }}
-        </div>
-        <div *ngIf="ad.type == 'plot'" class="row mt-2">
-          <div class="alert alert-info w-100 text-center">
-            <strong>Main Features</strong>
-          </div>
-          <ng-container *ngFor="let entry of plot_features | keys">
-            <div *ngIf="entry.value" class="col-md-6">
-              <b>{{entry.key | titlecase}}</b> &nbsp;
-              <i class="fas fa-check bluetick"></i>
+
+    <div class="col-md-4">
+      <div class="modal-header">
+        <h5 class="modal-title">Property Overview</h5>
+        <button type="button" class="close d-none d-md-block" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div *ngIf="ad" class="modal-content scroll" id="style-2">
+        <div class="container">
+          <div *ngIf="basic" class="row">
+            <div class="alert alert-info w-100 text-center">
+              <strong>Basics</strong>
             </div>
-            <div *ngIf="!entry.value" class="col-md-6">
-              <b>{{entry.key | titlecase}}</b> &nbsp;
-              <i class="fas fa-times redcross"></i>
-            </div>
-          </ng-container>
-        </div>
-        <div *ngIf="ad.other" class="row mt-2">
-          <div class="alert alert-info w-100 text-center">
-            <strong>Other</strong>
-          </div>
-          <ng-container *ngFor="let entry of other | keys">
-            <div *ngIf="entry.value" class="col-md-6">
-              <b>{{entry.key | titlecase}}</b> &nbsp;
-              <i class="fas fa-check bluetick"></i>
-            </div>
-            <div *ngIf="!entry.value" class="col-md-6">
-              <b>{{entry.key | titlecase}}</b> &nbsp;
-              <i class="fas fa-times redcross"></i>
-            </div>
-          </ng-container>
-        </div>
-        <div *ngIf="ad.nearby_loc" class="row mt-2">
-          <div class="alert alert-info w-100 text-center">
-            <strong>Nearby Locations</strong>
-          </div>
-          <ng-container *ngFor="let entry of nearby_loc | keys">
-            <div class="col-md-6">
+            <div *ngFor="let entry of basic | keys" class="col-md-6">
               <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
             </div>
-          </ng-container>
+            <div *ngFor="let entry of location | keys" class="col-md-6">
+              <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
+            </div>
+          </div>
+          <div *ngIf="ad.description" class="row mt-2">
+            <div class="alert alert-info w-100 text-center">
+              <strong>Description</strong>
+            </div>
+            {{ ad.description }}
+          </div>
+          <div *ngIf="ad.type == 'plot'" class="row mt-2">
+            <div class="alert alert-info w-100 text-center">
+              <strong>Main Features</strong>
+            </div>
+            <ng-container *ngFor="let entry of plot_features | keys">
+              <div *ngIf="entry.value" class="col-md-6">
+                <b>{{entry.key | titlecase}}</b> &nbsp;
+                <i class="fas fa-check bluetick"></i>
+              </div>
+              <div *ngIf="!entry.value" class="col-md-6">
+                <b>{{entry.key | titlecase}}</b> &nbsp;
+                <i class="fas fa-times redcross"></i>
+              </div>
+            </ng-container>
+          </div>
+          <div *ngIf="ad.other" class="row mt-2">
+            <div class="alert alert-info w-100 text-center">
+              <strong>Other</strong>
+            </div>
+            <ng-container *ngFor="let entry of other | keys">
+              <div *ngIf="entry.value" class="col-md-6">
+                <b>{{entry.key | titlecase}}</b> &nbsp;
+                <i class="fas fa-check bluetick"></i>
+              </div>
+              <div *ngIf="!entry.value" class="col-md-6">
+                <b>{{entry.key | titlecase}}</b> &nbsp;
+                <i class="fas fa-times redcross"></i>
+              </div>
+            </ng-container>
+          </div>
+          <div *ngIf="ad.nearby_loc" class="row mt-2">
+            <div class="alert alert-info w-100 text-center">
+              <strong>Nearby Locations</strong>
+            </div>
+            <ng-container *ngFor="let entry of nearby_loc | keys">
+              <div class="col-md-6">
+                <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
+              </div>
+            </ng-container>
+          </div>
+
         </div>
+        <br>
 
-      </div>
-      <br>
-
-      <!-- <div class="container">
+        <!-- <div class="container">
           <div class="row">
             <div *ngFor="let entry of ad | keys" class="col-md-6">
               <b>{{entry.key}}</b> : {{entry.value}}
@@ -122,6 +123,8 @@
           </div>
         </div> -->
 
+      </div>
     </div>
   </div>
+
 </div>
