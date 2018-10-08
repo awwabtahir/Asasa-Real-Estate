@@ -154,7 +154,20 @@
           id="inputVidUrl">
       </div>
       <div class="form-group col-md-3">
-        
+        <input type="file" name="3dImgSelect" (change)="on3DImageSelect($event)">
+        <button class="btn btn-primary btn-sm mt-1" id="3dUploadBtn" (click)="on3dUploadClicked()" [disabled]="!Img3dSelected">
+          Upload 3D Image</button>
+      </div>
+    </div>
+
+    <div class="form-row mb-2">
+      <div class="form-group col-md-6">
+        <file-pond #myPond 
+          [options]="pondOptions" 
+          [files]="pondFiles" 
+          (oninit)="pondHandleInit()" 
+          (onaddfile)="pondHandleAddFile($event)">
+        </file-pond>
       </div>
     </div>
 

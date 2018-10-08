@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { PropertyService } from '../../services/property.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -13,6 +13,8 @@ import { LocationService } from '../../services/location.service';
 })
 export class AddPropertyComponent implements OnInit, OnDestroy {
 
+  @ViewChild('myPond') myPond: any;
+
   ad = {
     type: "plot",
     subtype: "Residential Plot",
@@ -23,13 +25,17 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     areaType: "sqft",
     title: "",
     description: "",
-    imgUID: "",
-    imgUrl: "",
-    imgCount: "0",
     vidUrl: ""
   };
   cities = [];
   locations = [];
+
+  pondOptions = {
+    class: 'my-filepond',
+    multiple: true,
+    labelIdle: 'Drop images here',
+    acceptedFileTypes: 'image/jpeg, image/png'
+  }
 
   id: number;
   private sub: any;
@@ -57,7 +63,18 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    if(this.sub)
+      this.sub.unsubscribe();
+  }
+
+  pondFiles = []
+ 
+  pondHandleInit() {
+    console.log('FilePond has initialised', this.myPond);
+  }
+ 
+  pondHandleAddFile(event: any) {
+    console.log('A file was added', event);
   }
 
   getCities() {
@@ -119,10 +136,23 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
 
   onImgUpload(event) {
     if (event.isStored) {
-      this.ad.imgUID = event.uuid;
-      this.ad.imgUrl = event.cdnUrl;
-      this.ad.imgCount = event.count;
     }
+  }
+
+  image;
+  Img3dSelected = false;
+  on3DImageSelect(event) {
+    const reader = new FileReader();
+    this.Img3dSelected = true;
+    if(event.target.files &&
+      event.target.files.length > 0) {
+        const file = event.target.files[0];
+        console.log(file);
+      }
+  }
+
+  on3dUploadClicked() {
+    console.log(this.image);
   }
 
   private async setPage(item) {
@@ -152,9 +182,6 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     this.ad.areaType = item.areaType;
     this.ad.title = item.title;
     this.ad.description = item.description;
-    this.ad.imgUID = item.imgUID;
-    this.ad.imgUrl = item.imgUrl;
-    this.ad.imgCount = item.imgCount;
     this.ad.vidUrl = item.vidUrl;
   }
 

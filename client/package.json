@@ -30,6 +30,7 @@
     "ng2-ion-range-slider": "^2.0.0",
     "ngx-bootstrap": "^3.0.1",
     "ngx-editor": "^3.3.0",
+    "ngx-filepond": "^4.0.0",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.0.0-rc.0",
     "zone.js": "^0.8.26"

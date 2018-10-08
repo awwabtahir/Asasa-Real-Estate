@@ -7,6 +7,7 @@ import { AgmCoreModule } from '@agm/core';
 import { NgxEditorModule } from 'ngx-editor';
 import {DataTableModule} from "angular-6-datatable";
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FilePondModule, registerPlugin } from 'ngx-filepond';
 
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
@@ -105,6 +106,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FilePondModule,
     NgxEditorModule,
     DataTableModule,
     NgSelectModule,
