@@ -56,7 +56,7 @@ export class AuthenticationService {
     template?: TokenPayload | ad | city | location): Observable<any> {
 
     let base;
-    let prod = true;
+    let prod = false;
 
     if (method === 'post') {
       base = this.http.post(`/api/${type}`, template);
