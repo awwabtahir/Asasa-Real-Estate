@@ -86,6 +86,7 @@ export class MarkerModalContentComponent implements OnInit {
       containerId: '#target'
     });
     this.viewer.render();
+    delete this.viewer.controls.onDeviceMotion;
 
   }
 

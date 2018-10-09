@@ -3,6 +3,7 @@ declare var $: any;
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PropertyService } from '../../../services/property.service';
 import { PropertyModalService } from '../../../services/property-modal.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'marker',
@@ -27,7 +28,8 @@ export class MarkerComponent implements OnInit {
   filteredAds = [];
 
   constructor(private propertyService: PropertyService,
-    private propertyModalService: PropertyModalService) { }
+    private propertyModalService: PropertyModalService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getAds();
@@ -49,10 +51,8 @@ export class MarkerComponent implements OnInit {
   }
 
   onMarkerClick(selectedMarkerData) {
-    if (window.innerWidth > 800) {
-      this.adEvent.emit(selectedMarkerData);
-      $('#markerModal').modal('show');
-    }
+    this.propertyModalService.setAd(selectedMarkerData);
+    this.router.navigateByUrl('/property-details');
   }
 
   getAds() {
