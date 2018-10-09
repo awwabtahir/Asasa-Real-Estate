@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { PropertyService } from '../../services/property.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
-import { city } from '../../models/city';
-import { MapService } from '../../services/map.service';
 import { LocationService } from '../../services/location.service';
 
 @Component({
@@ -29,6 +27,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   };
   cities = [];
   locations = [];
+  item;
 
   pondOptions = {
     class: 'my-filepond',
@@ -48,31 +47,37 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     private locService: LocationService
   ) { }
 
-  async ngOnInit() {    
+  async ngOnInit() {
     this.getCities();
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
       if (this.id && this.propertyService.getItemforUpdate()) {
-        let item = this.propertyService.getItemforUpdate();
-        this.setPage(item);
+        this.item = this.propertyService.getItemforUpdate();
+        this.setPage(this.item);
+        if (this.item.imagesData !== undefined) {
+          this.propertyService.addImagesData(this.item.imagesData);
+          if (this.item.imagesData.image3d !== undefined)
+            $('#preview3d')
+              .attr('src', this.item.imagesData.image3d.url);
+        }
       }
     });
 
   }
 
   ngOnDestroy() {
-    if(this.sub)
+    if (this.sub)
       this.sub.unsubscribe();
   }
 
   pondFiles = []
- 
+
   pondHandleInit() {
-    console.log('FilePond has initialised', this.myPond);
+    // console.log('FilePond has initialised', this.myPond);
   }
- 
+
   pondHandleAddFile(event: any) {
     console.log('A file was added', event);
   }
@@ -86,9 +91,9 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   }
 
   getLocations(selectedCity) {
-    this.auth.getLocations().subscribe(locations => { 
+    this.auth.getLocations().subscribe(locations => {
 
-      this.locations = locations.filter(function(loc){
+      this.locations = locations.filter(function (loc) {
         return loc.cityId == selectedCity;
       });
 
@@ -102,9 +107,9 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   cityChange() {
     let selectedCity = this.selectedCity;
     this.getLocations(selectedCity);
-    this.city = this.cities.filter(function(city){
+    this.city = this.cities.filter(function (city) {
       return city._id == selectedCity;
-    });    
+    });
     this.city = this.city[0];
 
     let latlng = {
@@ -120,18 +125,25 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   location: any;
   locationChange() {
     let selectedLoc = this.selectedLoc;
-    this.location = this.locations.filter(function(location){
+    this.location = this.locations.filter(function (location) {
       return location._id == selectedLoc;
-    });    
+    });
     this.location = this.location[0];
   }
 
   save() {
     this.propertyService.save(this.ad);
+    this.uploadMedia = true;
   }
 
   update() {
     this.propertyService.update(this.ad);
+    this.uploadMedia = true;
+  }
+
+  uploadMedia = false;
+  updateMedia() {
+    this.propertyService.updateMedia(this.ad);
   }
 
   onImgUpload(event) {
@@ -139,30 +151,37 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     }
   }
 
-  image;
+  imagesData = {};
   Img3dSelected = false;
   on3DImageSelect(event) {
     const reader = new FileReader();
     this.Img3dSelected = true;
-    if(event.target.files &&
+    if (event.target.files &&
       event.target.files.length > 0) {
-        const file = event.target.files[0];
-        console.log(file);
-      }
-  }
-
-  on3dUploadClicked() {
-    console.log(this.image);
+      const file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        $('#preview3d')
+          .attr('src', URL.createObjectURL(event.target.files[0]));
+        let image3d = {
+          filename: file.name,
+          filetype: file.type,
+          value: reader.result.split(',')[1]
+        };
+        this.imagesData["image3d"] = image3d;
+        this.propertyService.addImagesData(this.imagesData);
+      };
+    }
   }
 
   private async setPage(item) {
-    let city = this.cities.filter(function(city){
+    let city = this.cities.filter(function (city) {
       return city.city == item.locationData.city;
     });
     this.selectedCity = city[0]._id;
     this.getLocations(this.selectedCity);
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
-    let location = this.locations.filter(function(location){
+    let location = this.locations.filter(function (location) {
       return location.location == item.locationData.location;
     });
     this.selectedLoc = location[0]._id;

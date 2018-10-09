@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class PropertyService {
+  adId;
+  imagesData = {};
   locationData = {};
   features = {};
   plot_features = {};
@@ -20,8 +22,8 @@ export class PropertyService {
 
   save(ad) {
     this.setAd(ad);
-    this.auth.saveAd(ad).subscribe(() => {
-      this.router.navigateByUrl('/activeProperties');
+    this.auth.saveAd(ad).subscribe((id) => {
+      this.adId = id;
     }, (err) => {
       console.error(err);
     });
@@ -29,6 +31,17 @@ export class PropertyService {
 
   update(ad) {
     this.setAd(ad);
+    this.auth.updateAd(ad).subscribe((id) => {
+      this.adId = id;
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  updateMedia(ad) {
+    this.setAd(ad);    
+    this.imagesData = {};
+    console.log(ad);
     this.auth.updateAd(ad).subscribe(() => {
       this.router.navigateByUrl('/activeProperties');
     }, (err) => {
@@ -55,8 +68,16 @@ export class PropertyService {
     return this.adforUpdate;
   }
 
-  addLocation(data) {
-    this.locationData = data;
+  addImagesData(imagesData) {
+    this.imagesData = imagesData;
+  }
+
+  addLocation(locationData) {
+    this.locationData = locationData;
+  }
+
+  addImages(imagesData) {
+    this.imagesData = imagesData;
   }
 
   addFeatures(features) {
@@ -88,6 +109,7 @@ export class PropertyService {
   }
 
   private setAd(ad) {
+    ad["imagesData"] = this.imagesData;
     ad["locationData"] = this.locationData;
     if (ad.type != 'plot') ad["features"] = this.features;
     if (ad.type == 'plot') ad["plot_features"] = this.plot_features;
@@ -96,6 +118,10 @@ export class PropertyService {
     ad["healthcare"] = this.healthcare;
     ad["nearby_loc"] = this.nearby_loc;
     ad["other"] = this.other;
+    if(this.adId) {
+      if(!ad["_id"]) ad["_id"] = this.adId;
+      this.imagesData["adId"] = this.adId;
+    }
   }
 
   localeString(x, sep?, grp?) {

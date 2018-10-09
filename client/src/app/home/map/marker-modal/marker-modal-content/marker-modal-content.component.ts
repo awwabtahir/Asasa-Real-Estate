@@ -14,13 +14,14 @@ declare var Kaleidoscope: any;
 })
 export class MarkerModalContentComponent implements OnInit {
 
-  @Input() ad: ad;
+  @Input() ad;
   basic: any;
   location: any;
   plot_features: any;
   other: any;
   nearby_loc: any;
   safeUrl: any;
+  image3d = false;
 
   constructor(
     private modalService: PropertyModalService,
@@ -81,8 +82,12 @@ export class MarkerModalContentComponent implements OnInit {
       this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
     }
 
+    if(this.ad.imagesData.image3d.url == undefined) return;
+
+    console.log(this.ad.imagesData.image3d.url);
+    this.image3d = true;
     this.viewer = new Kaleidoscope.Image({
-      source: 'https://asasamaps.s3.us-east-2.amazonaws.com/img/pano1.jpg',
+      source: this.ad.imagesData.image3d.url,
       containerId: '#target'
     });
     this.viewer.render();

@@ -12,6 +12,7 @@ var adSchema = new mongoose.Schema({
     description: String,
     healthcare: Object,
     vidUrl: String,
+    imagesData: Object,
     locationData: Object,
     nearby_loc: Object,
     other: Object,

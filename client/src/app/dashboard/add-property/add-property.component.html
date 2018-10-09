@@ -148,19 +148,25 @@
       <app-ngx-editor [spellcheck]="true" [(ngModel)]="ad.description" name="description"></app-ngx-editor>
     </div>
 
-    <div class="form-row mb-2">
+    <div *ngIf="!uploadMedia" class="form-row mb-5">
+      <div class="text-center">
+        <button *ngIf="!edit" (click)="save()" class="btn btn-danger" [disabled]="!propForm.valid">Add video & images</button>
+        <button *ngIf="edit" (click)="update()" class="btn btn-danger" [disabled]="!propForm.valid">Update video & images</button>
+      </div>
+    </div>
+
+    <div *ngIf="uploadMedia" class="form-row mb-2">
       <div class="form-group col-md-3">
         <input type="url" placeholder="Paste YouTube Video Url" name="vidUrl" [(ngModel)]="ad.vidUrl" class="form-control"
           id="inputVidUrl">
       </div>
       <div class="form-group col-md-3">
-        <input type="file" name="3dImgSelect" (change)="on3DImageSelect($event)">
-        <button class="btn btn-primary btn-sm mt-1" id="3dUploadBtn" (click)="on3dUploadClicked()" [disabled]="!Img3dSelected">
-          Upload 3D Image</button>
+        <input type="file" name="3dImgSelect" (change)="on3DImageSelect($event)" class="form-control">
+        <img id="preview3d" src="">
       </div>
     </div>
 
-    <div class="form-row mb-2">
+    <div *ngIf="uploadMedia" class="form-row mb-2">
       <div class="form-group col-md-6">
         <file-pond #myPond 
           [options]="pondOptions" 
@@ -171,10 +177,10 @@
       </div>
     </div>
 
-    <div class="form-row mb-5">
+    <div *ngIf="uploadMedia" class="form-row mb-5">
       <div class="text-center">
-        <button *ngIf="!edit" (click)="save()" class="btn btn-danger" [disabled]="!propForm.valid">Post Ad</button>
-        <button *ngIf="edit" (click)="update()" class="btn btn-danger" [disabled]="!propForm.valid">Update Ad</button>
+        <button *ngIf="!edit" (click)="updateMedia()" class="btn btn-danger" [disabled]="!propForm.valid">Post Ad</button>
+        <button *ngIf="edit" (click)="updateMedia()" class="btn btn-danger" [disabled]="!propForm.valid">Update Ad</button>
       </div>
     </div>
 

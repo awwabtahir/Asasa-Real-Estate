@@ -8,6 +8,7 @@ export interface ad {
     description: string,
     healthcare: object,
     vidUrl: string,
+    imagesData: object,
     locationData: object,
     nearby_loc: object,
     other: object,

@@ -24,7 +24,7 @@ export class MapService {
     this.mapMinZoom = 10;
     this.mapMaxZoom = 22;
     this.overlay = new klokantech.MapTilerMapType(map, function (x, y, z) {
-      return "https://d34jj9muce0qbt.cloudfront.net/map/" + imgLoc + "/{z}/{x}/{y}.png".replace('{z}', z).replace('{x}', x).replace('{y}', y);
+      return "https://asasamaps.s3.amazonaws.com/map/" + imgLoc + "/{z}/{x}/{y}.png".replace('{z}', z).replace('{x}', x).replace('{y}', y);
     },
     this.mapBounds, this.mapMinZoom, this.mapMaxZoom);
 
