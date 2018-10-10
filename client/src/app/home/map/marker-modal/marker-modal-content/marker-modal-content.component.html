@@ -77,10 +77,6 @@
                 <b>{{entry.key | titlecase}}</b> &nbsp;
                 <i class="fas fa-check bluetick"></i>
               </div>
-              <div *ngIf="!entry.value" class="col-md-6">
-                <b>{{entry.key | titlecase}}</b> &nbsp;
-                <i class="fas fa-times redcross"></i>
-              </div>
             </ng-container>
           </div>
           <div *ngIf="ad.other" class="row mt-2">
@@ -92,10 +88,6 @@
                 <b>{{entry.key | titlecase}}</b> &nbsp;
                 <i class="fas fa-check bluetick"></i>
               </div>
-              <div *ngIf="!entry.value" class="col-md-6">
-                <b>{{entry.key | titlecase}}</b> &nbsp;
-                <i class="fas fa-times redcross"></i>
-              </div>
             </ng-container>
           </div>
           <div *ngIf="ad.nearby_loc" class="row mt-2">
@@ -103,7 +95,7 @@
               <strong>Nearby Locations</strong>
             </div>
             <ng-container *ngFor="let entry of nearby_loc | keys">
-              <div class="col-md-6">
+              <div *ngIf="entry.value" class="col-md-6">
                 <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
               </div>
             </ng-container>

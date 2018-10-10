@@ -82,17 +82,16 @@ export class MarkerModalContentComponent implements OnInit {
       this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
     }
 
-    if(this.ad.imagesData.image3d.url == undefined) return;
+    if(this.ad.imagesData.image3d == undefined) return;
 
-    console.log(this.ad.imagesData.image3d.url);
     this.image3d = true;
     this.viewer = new Kaleidoscope.Image({
       source: this.ad.imagesData.image3d.url,
+      verticalPanning: false,
       containerId: '#target'
     });
-    this.viewer.render();
     delete this.viewer.controls.onDeviceMotion;
-
+    this.viewer.render();
   }
 
   private getId(url) {
