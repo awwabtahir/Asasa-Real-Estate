@@ -20,21 +20,20 @@ module.exports.save = function (req, res) {
 };
 
 module.exports.update = function (req, res) {
-
-  if (!req.body) {
+  var data = req.body;
+  if (!data) {
     res.status(401).json({
       "message": "No data found!"
     });
   } else {
-    if (req.body.imagesData.image3d !== undefined) {
-      add3dImage(req.body, res);
+    var image3d = data.imagesData.image3d;
+    if (image3d !== undefined) {
+      if (image3d.remove !== undefined) delete3dImage(data, res);
+      else if (image3d.url) updateAd(data, res);
+      else add3dImage(data, res);
     }
     else {
-      var query = { '_id': req.body._id };
-      delete req.body._id;
-      Ad.findOneAndUpdate(query, req.body, function (err, ad) {
-        res.status(200).json(ad._id);
-      });
+      updateAd(data, res);
     }
   }
 
@@ -54,7 +53,15 @@ module.exports.getAll = function (req, res) {
     });
 };
 
-function add3dImage(data, res) {  
+function updateAd(data, res) {
+  var query = { '_id': data._id };
+  delete data._id;
+  Ad.findOneAndUpdate(query, data, function (err, ad) {
+    res.status(200).json(ad._id);
+  });
+}
+
+function add3dImage(data, res) {
   const buf = new Buffer(
     data.imagesData.image3d.value.replace(
       /^data:image\/\w+;base64,/, ""), 'base64'
@@ -79,12 +86,23 @@ function add3dImage(data, res) {
       delete data.imagesData.image3d.value;
       data.imagesData.image3d['url'] = "https://asasamaps.s3.amazonaws.com/images3d/" + data._id + "/" +
         data.imagesData.image3d.filename;
-      var query = { '_id': data._id };
-      delete data._id;
-      Ad.findOneAndUpdate(query, data, function (err, ad) {
-        res.status(200).json(ad._id);
-      });
+      updateAd(data, res);
     }
 
   });
+}
+
+function delete3dImage(data, res) {
+  const params = {
+    Key: 'images3d/' + data._id + "/" + data.imagesData.image3d.filename,
+  };
+  s3Bucket.deleteObject(params, function (err, data) {
+    if (err) {
+      console.log(err);
+      return res.json({ success: false, msg: err });
+    }
+  });
+
+  delete data.imagesData.image3d;
+  updateAd(data, res);
 }

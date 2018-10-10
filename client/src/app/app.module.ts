@@ -48,6 +48,7 @@ import { AddCityComponent } from './dashboard/add-city/add-city.component';
 import { AddLocationComponent } from './dashboard/add-location/add-location.component';
 import { SearchFilterComponent } from './home/search-filter/search-filter.component';
 import { LinksComponent } from './links/links.component';
+import { UploadImage3dComponent } from './dashboard/add-property/upload-image3d/upload-image3d.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -99,7 +100,8 @@ const routes: Routes = [
     AddCityComponent,
     AddLocationComponent,
     SearchFilterComponent,
-    LinksComponent
+    LinksComponent,
+    UploadImage3dComponent
   ],
   imports: [
     BrowserModule,

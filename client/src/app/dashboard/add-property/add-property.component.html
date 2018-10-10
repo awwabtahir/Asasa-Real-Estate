@@ -151,7 +151,8 @@
     <div *ngIf="!uploadMedia" class="form-row mb-5">
       <div class="text-center">
         <button *ngIf="!edit" (click)="save()" class="btn btn-danger" [disabled]="!propForm.valid">Add video & images</button>
-        <button *ngIf="edit" (click)="update()" class="btn btn-danger" [disabled]="!propForm.valid">Update video & images</button>
+        <button *ngIf="edit" (click)="update()" class="btn btn-danger" [disabled]="!propForm.valid">Update video &
+          images</button>
       </div>
     </div>
 
@@ -160,20 +161,20 @@
         <input type="url" placeholder="Paste YouTube Video Url" name="vidUrl" [(ngModel)]="ad.vidUrl" class="form-control"
           id="inputVidUrl">
       </div>
-      <div class="form-group col-md-3">
-        <input type="file" name="3dImgSelect" (change)="on3DImageSelect($event)" class="form-control">
-        <img id="preview3d" src="">
-      </div>
     </div>
 
     <div *ngIf="uploadMedia" class="form-row mb-2">
       <div class="form-group col-md-6">
+        <h5>Add Images</h5>
         <file-pond #myPond 
           [options]="pondOptions" 
           [files]="pondFiles" 
           (oninit)="pondHandleInit()" 
           (onaddfile)="pondHandleAddFile($event)">
         </file-pond>
+      </div>
+      <div class="form-group col-md-3">
+        <upload-image3d [url]="image3dUrl" [item]="item"></upload-image3d>
       </div>
     </div>
 

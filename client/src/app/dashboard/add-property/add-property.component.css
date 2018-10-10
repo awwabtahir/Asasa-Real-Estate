@@ -53,8 +53,3 @@
 .checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
   outline: 1px solid #ddd; /* focus style */
 }
-
-#preview3d {
-    width: 200px;
-    height: auto;
-}

@@ -1,0 +1,8 @@
+<h5>Add 3D Image</h5>
+<input *ngIf="!Img3dSelected && !url" type="file" name="3dImgSelect" (change)="on3DImageSelect($event)" class="form-control">
+<img *ngIf="url" id="preview3d" src="{{ url }}">
+<img *ngIf="!url && Img3dSelected" id="preview3d" src="">
+<button *ngIf="Img3dSelected || url" class="btn btn-danger btn-sm mt-2" 
+(click)="remove3d()">
+  Remove 3D Image
+</button>

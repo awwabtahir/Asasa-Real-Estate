@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
 import { PropertyService } from '../../services/property.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -56,12 +56,8 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       if (this.id && this.propertyService.getItemforUpdate()) {
         this.item = this.propertyService.getItemforUpdate();
         this.setPage(this.item);
-        if (this.item.imagesData !== undefined) {
+        if (this.item.imagesData !== undefined) 
           this.propertyService.addImagesData(this.item.imagesData);
-          if (this.item.imagesData.image3d !== undefined)
-            $('#preview3d')
-              .attr('src', this.item.imagesData.image3d.url);
-        }
       }
     });
 
@@ -136,9 +132,15 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     this.uploadMedia = true;
   }
 
+  image3dUrl;
   update() {
     this.propertyService.update(this.ad);
     this.uploadMedia = true;
+    if (this.item.imagesData !== undefined) {
+      if (this.item.imagesData.image3d !== undefined) {
+        this.image3dUrl = this.item.imagesData.image3d.url;
+      }
+    }
   }
 
   uploadMedia = false;
@@ -148,29 +150,6 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
 
   onImgUpload(event) {
     if (event.isStored) {
-    }
-  }
-
-  imagesData = {};
-  Img3dSelected = false;
-  on3DImageSelect(event) {
-    const reader = new FileReader();
-    this.Img3dSelected = true;
-    if (event.target.files &&
-      event.target.files.length > 0) {
-      const file = event.target.files[0];
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        $('#preview3d')
-          .attr('src', URL.createObjectURL(event.target.files[0]));
-        let image3d = {
-          filename: file.name,
-          filetype: file.type,
-          value: reader.result.split(',')[1]
-        };
-        this.imagesData["image3d"] = image3d;
-        this.propertyService.addImagesData(this.imagesData);
-      };
     }
   }
 
