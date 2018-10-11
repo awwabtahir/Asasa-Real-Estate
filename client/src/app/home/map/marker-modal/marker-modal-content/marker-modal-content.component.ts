@@ -89,9 +89,11 @@ export class MarkerModalContentComponent implements OnInit {
     let container = document.querySelector( '#target' );
     this.panorama = new PANOLENS.ImagePanorama( this.ad.imagesData.image3d.url );
     this.viewer = new PANOLENS.Viewer({
-      container: container
+      container: container,
+      output: 'console'
     });
     this.viewer.add( this.panorama );
+    console.log(this.viewer);
 
 
     // this.viewer = new Kaleidoscope.Image({
