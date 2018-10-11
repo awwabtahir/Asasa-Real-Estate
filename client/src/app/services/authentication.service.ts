@@ -71,6 +71,7 @@ export class AuthenticationService {
 
     const request = base.pipe(
       map((data: TokenResponse) => {
+        if(!data) return;
         if (data.token) {
           this.saveToken(data.token);
         }
