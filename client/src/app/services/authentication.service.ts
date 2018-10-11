@@ -9,6 +9,7 @@ import { TokenPayload } from '../models/token';
 import { ad } from '../models/ad';
 import { city } from '../models/city';
 import { location } from '../models/location';
+import { image } from '../models/image';
 
 @Injectable()
 export class AuthenticationService {
@@ -52,8 +53,8 @@ export class AuthenticationService {
   private request(
     method: 'post'|'get', 
     type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|
-    'save_city'|'get_cities'|'save_location'|'get_locations', 
-    template?: TokenPayload | ad | city | location): Observable<any> {
+    'save_city'|'get_cities'|'save_location'|'get_locations'|'update_image', 
+    template?: TokenPayload | ad | city | location | image): Observable<any> {
 
     let base;
     let prod = false;
@@ -122,6 +123,10 @@ export class AuthenticationService {
 
   public deleteAd(ad): Observable<any> {
     return this.request('post', 'delete_ad', ad);
+  }
+
+  public updateImage(image): Observable<any> {
+    return this.request('post', 'update_image', image);
   }
 
   public logout(): void {

@@ -27,6 +27,8 @@ import { PropertyService } from './services/property.service';
 import { PropertyModalService } from './services/property-modal.service';
 import { MapService } from './services/map.service';
 import { LocationService } from './services/location.service';
+import { ImageService } from './services/image.service';
+
 import { AddPropertyFeaturesComponent } from './dashboard/add-property/add-property-modal/add-property-features/add-property-features.component';
 import { AddPropertyLocationComponent } from './dashboard/add-property/add-property-location/add-property-location.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -49,6 +51,7 @@ import { AddLocationComponent } from './dashboard/add-location/add-location.comp
 import { SearchFilterComponent } from './home/search-filter/search-filter.component';
 import { LinksComponent } from './links/links.component';
 import { UploadImage3dComponent } from './dashboard/add-property/upload-image3d/upload-image3d.component';
+import { UploadImagesComponent } from './dashboard/add-property/upload-images/upload-images.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -101,7 +104,8 @@ const routes: Routes = [
     AddLocationComponent,
     SearchFilterComponent,
     LinksComponent,
-    UploadImage3dComponent
+    UploadImage3dComponent,
+    UploadImagesComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +128,8 @@ const routes: Routes = [
     PropertyService,
     MapService,
     PropertyModalService,
-    LocationService
+    LocationService,
+    ImageService
   ],
   bootstrap: [AppComponent]
 })

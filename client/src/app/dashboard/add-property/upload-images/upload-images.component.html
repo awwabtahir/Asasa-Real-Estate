@@ -1,0 +1,19 @@
+<h5>Add Images</h5>
+<file-pond 
+  #myPond 
+  [options]="pondOptions" 
+  [files]="pondFiles" 
+  (oninit)="pondHandleInit()" 
+  (onaddfile)="onAddFile($event)"
+  (onremovefile)="onFileRemoved($event)">
+</file-pond>
+
+<div *ngIf="images">
+  <div class="imgblock" *ngFor="let image of images">
+    <img src="{{image.url}}">
+    <a class="cross" (click)="onFileRemoved(image)">
+      <i class="far fa-times-circle" style="color:red;"></i>
+    </a>
+  </div>
+
+</div>

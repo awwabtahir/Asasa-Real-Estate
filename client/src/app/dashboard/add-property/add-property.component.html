@@ -21,7 +21,10 @@
 
 <div *ngIf="selectedCity != '' && selectedLoc != '' && selectedLoc" class="container mb-2">
 
-  <add-property-location [cityData]="city" [locationData]="location" [edit]="edit">
+  <add-property-location 
+    [cityData]="city" 
+    [locationData]="location" 
+    [edit]="edit">
   </add-property-location>
 
   <br>
@@ -165,13 +168,7 @@
 
     <div *ngIf="uploadMedia" class="form-row mb-2">
       <div class="form-group col-md-6">
-        <h5>Add Images</h5>
-        <file-pond #myPond 
-          [options]="pondOptions" 
-          [files]="pondFiles" 
-          (oninit)="pondHandleInit()" 
-          (onaddfile)="pondHandleAddFile($event)">
-        </file-pond>
+        <upload-images></upload-images>
       </div>
       <div class="form-group col-md-3">
         <upload-image3d [url]="image3dUrl" [item]="item"></upload-image3d>

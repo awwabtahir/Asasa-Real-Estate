@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PropertyService } from '../../services/property.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -10,8 +10,6 @@ import { LocationService } from '../../services/location.service';
   styleUrls: ['./add-property.component.css']
 })
 export class AddPropertyComponent implements OnInit, OnDestroy {
-
-  @ViewChild('myPond') myPond: any;
 
   ad = {
     type: "plot",
@@ -28,13 +26,6 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   cities = [];
   locations = [];
   item;
-
-  pondOptions = {
-    class: 'my-filepond',
-    multiple: true,
-    labelIdle: 'Drop images here',
-    acceptedFileTypes: 'image/jpeg, image/png'
-  }
 
   id: number;
   private sub: any;
@@ -66,16 +57,6 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.sub)
       this.sub.unsubscribe();
-  }
-
-  pondFiles = []
-
-  pondHandleInit() {
-    // console.log('FilePond has initialised', this.myPond);
-  }
-
-  pondHandleAddFile(event: any) {
-    console.log('A file was added', event);
   }
 
   getCities() {
@@ -133,7 +114,8 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   }
 
   image3dUrl;
-  update() {
+  async update() {
+    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
     this.propertyService.update(this.ad);
     this.uploadMedia = true;
     if (this.item.imagesData !== undefined) {

@@ -24,6 +24,7 @@ router.post('/save_ad', ctrlAd.save);
 router.post('/update_ad', ctrlAd.update);
 router.post('/delete_ad', ctrlAd.delete);
 router.get('/get_ads', ctrlAd.getAll);
+router.post('/update_image', ctrlAd.updateImage);
 
 // city operations
 router.post('/save_city', ctrlCity.save);
@@ -32,5 +33,6 @@ router.get('/get_cities', ctrlCity.getAll);
 // location operations
 router.post('/save_location', ctrlLocation.save);
 router.get('/get_locations', ctrlLocation.getAll);
+
 
 module.exports = router;

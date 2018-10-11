@@ -101,6 +101,11 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
   }
 
   ngOnChanges() {
+    if (this.locationData) {
+      this.location = this.locationData.location;
+      this.setLocationData(false);
+    }
+
     if(this.edit) {
       if(this.map) this.mapReady(this.map);
       return;

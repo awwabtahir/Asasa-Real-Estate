@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 })
 export class PropertyService {
   adId;
+  ad;
   imagesData = {};
   locationData = {};
   features = {};
@@ -21,25 +22,27 @@ export class PropertyService {
               private router: Router) { }
 
   save(ad) {
-    this.setAd(ad);
-    this.auth.saveAd(ad).subscribe((id) => {
-      this.adId = id;
+    this.modifyAd(ad);
+    this.ad = ad;
+    this.auth.saveAd(ad).subscribe((ad) => {
+      this.adId = ad._id;
     }, (err) => {
       console.error(err);
     });
   }
 
   update(ad) {
-    this.setAd(ad);
-    this.auth.updateAd(ad).subscribe((id) => {
-      this.adId = id;
+    this.modifyAd(ad);
+    this.ad = ad;
+    this.auth.updateAd(ad).subscribe((ad) => {
+      this.adId = ad._id;
     }, (err) => {
       console.error(err);
     });
   }
 
   updateMedia(ad) {
-    this.setAd(ad);    
+    this.modifyAd(ad);    
     this.imagesData = {};
     console.log(ad);
     this.auth.updateAd(ad).subscribe(() => {
@@ -47,6 +50,18 @@ export class PropertyService {
     }, (err) => {
       console.error(err);
     });
+  }
+
+  getAdId() {
+    return this.adId;
+  }
+
+  setAd(ad) {
+    this.ad = ad;
+  }
+
+  getAd() {
+    return this.ad;
   }
 
   getAds() {
@@ -108,7 +123,7 @@ export class PropertyService {
     this.other = other;
   }
 
-  private setAd(ad) {
+  private modifyAd(ad) {
     ad["imagesData"] = this.imagesData;
     ad["locationData"] = this.locationData;
     if (ad.type != 'plot') ad["features"] = this.features;
