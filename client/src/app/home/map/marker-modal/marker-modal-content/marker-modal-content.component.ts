@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PropertyModalService } from '../../../../services/property-modal.service';
 import { AuthenticationService } from '../../../../services/authentication.service';
 
-declare var Kaleidoscope: any;
+declare var PANOLENS: any;
 
 @Component({
   selector: 'marker-modal-content',
@@ -55,6 +55,7 @@ export class MarkerModalContentComponent implements OnInit {
   }
 
   map: any;
+  panorama: any;
   viewer: any;
   async mapReady(map) {
     this.map = map;
@@ -85,13 +86,21 @@ export class MarkerModalContentComponent implements OnInit {
     if(this.ad.imagesData.image3d == undefined) return;
 
     this.image3d = true;
-    this.viewer = new Kaleidoscope.Image({
-      source: this.ad.imagesData.image3d.url,
-      verticalPanning: false,
-      containerId: '#target'
+    let container = document.querySelector( '#target' );
+    this.panorama = new PANOLENS.ImagePanorama( this.ad.imagesData.image3d.url );
+    this.viewer = new PANOLENS.Viewer({
+      container: container
     });
-    delete this.viewer.controls.onDeviceMotion;
-    this.viewer.render();
+    this.viewer.add( this.panorama );
+
+
+    // this.viewer = new Kaleidoscope.Image({
+    //   source: this.ad.imagesData.image3d.url,
+    //   verticalPanning: false,
+    //   containerId: '#target'
+    // });
+    // delete this.viewer.controls.onDeviceMotion;
+    // this.viewer.render();
   }
 
   private getId(url) {
