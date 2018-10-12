@@ -55,8 +55,6 @@ export class MarkerModalContentComponent implements OnInit {
   }
 
   map: any;
-  panorama: any;
-  viewer: any;
   async mapReady(map) {
     this.map = map;
     let location = this.location.location;
@@ -83,18 +81,8 @@ export class MarkerModalContentComponent implements OnInit {
       this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
     }
 
-    if(this.ad.imagesData.image3d == undefined) return;
-
+    if (this.ad.imagesData.image3d == undefined) return;
     this.image3d = true;
-    let container = document.querySelector( '#target' );
-    this.panorama = new PANOLENS.ImagePanorama( this.ad.imagesData.image3d.url );
-    this.viewer = new PANOLENS.Viewer({
-      container: container,
-      output: 'console'
-    });
-    this.viewer.add( this.panorama );
-    console.log(this.viewer);
-
 
     // this.viewer = new Kaleidoscope.Image({
     //   source: this.ad.imagesData.image3d.url,
@@ -103,6 +91,18 @@ export class MarkerModalContentComponent implements OnInit {
     // });
     // delete this.viewer.controls.onDeviceMotion;
     // this.viewer.render();
+  }
+
+  reload3D() {
+    let container = document.querySelector('#target');
+    let panorama = new PANOLENS.ImagePanorama(this.ad.imagesData.image3d.url);
+    setTimeout(function () {
+      let viewer = new PANOLENS.Viewer({
+        container: container,
+        output: 'console'
+      });
+      viewer.add(panorama);
+    }, 2000);
   }
 
   private getId(url) {
