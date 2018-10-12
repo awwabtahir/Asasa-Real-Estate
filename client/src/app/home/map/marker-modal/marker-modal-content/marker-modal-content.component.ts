@@ -102,7 +102,7 @@ export class MarkerModalContentComponent implements OnInit {
         output: 'console'
       });
       viewer.add(panorama);
-    }, 2000);
+    }, 500);
   }
 
   private getId(url) {
