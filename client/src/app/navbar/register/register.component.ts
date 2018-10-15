@@ -9,35 +9,39 @@ import {TokenPayload} from './../../models/token';
 export class RegisterComponent {
   credentials: TokenPayload = {
     email: '',
+    phone: '',
     name: '',
     password: '',
     access: 'agent',
     cityId: null,
     locationId: null,
-    subLocations: {}
+    subLocations: []
   };
-  subLocations = [];
   cities = [];
   locations = [];
+  location;
 
   constructor(private auth: AuthenticationService, private router: Router) {
     this.getCities();
   }
 
   register() {
-    Object.assign(this.credentials.subLocations, this.subLocations);
-    console.log(this.credentials);
-    // this.auth.register(this.credentials).subscribe(() => {
-    //   this.router.navigateByUrl('/profile');
-    // }, (err) => {
-    //   console.error(err);
-    // });
+    this.auth.register(this.credentials).subscribe(() => {
+      this.router.navigateByUrl('/agents');
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   cityChange(cityObj) {
     $(':focus').blur();
     let cityId = cityObj._id;
     this.getLocations(cityId);
+  }
+
+  locChange(locObj) {
+    $(':focus').blur();
+    this.location = locObj;
   }
 
   getCities() {

@@ -10,4 +10,5 @@ export interface TokenPayload {
     cityId?: string;
     locationId?: string;
     subLocations?: object;
+    phone?: string;
 }

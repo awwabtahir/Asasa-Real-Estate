@@ -53,6 +53,7 @@ import { LinksComponent } from './links/links.component';
 import { UploadImage3dComponent } from './dashboard/add-property/upload-image3d/upload-image3d.component';
 import { UploadImagesComponent } from './dashboard/add-property/upload-images/upload-images.component';
 import { AddSublocationComponent } from './dashboard/add-sublocation/add-sublocation.component';
+import { AgentsComponent } from './dashboard/agents/agents.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: 'addCity', component: AddCityComponent, canActivate: [AuthGuardService] },
   { path: 'editProperty/:id', component: AddPropertyComponent, canActivate: [AuthGuardService] },
   { path: 'activeProperties', component: ActivePropertiesComponent, canActivate: [AuthGuardService] },
+  { path: 'agents', component: AgentsComponent, canActivate: [AuthGuardService] },
   { path: ':city', component: HomeComponent },
   { path: ':city/:location', component: HomeComponent }
 ];
@@ -108,7 +110,8 @@ const routes: Routes = [
     LinksComponent,
     UploadImage3dComponent,
     UploadImagesComponent,
-    AddSublocationComponent
+    AddSublocationComponent,
+    AgentsComponent
   ],
   imports: [
     BrowserModule,

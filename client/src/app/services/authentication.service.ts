@@ -52,8 +52,8 @@ export class AuthenticationService {
 
   private request(
     method: 'post'|'get', 
-    type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|
-    'save_city'|'get_cities'|'save_location'|'get_locations'|'update_image'|'update_location', 
+    type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|'delete_agent'|
+    'save_city'|'get_cities'|'save_location'|'get_locations'|'update_image'|'update_location'|'getAgents', 
     template?: TokenPayload | ad | city | location | image): Observable<any> {
 
     let base;
@@ -92,6 +92,14 @@ export class AuthenticationService {
 
   public profile(): Observable<any> {
     return this.request('get', 'profile');
+  }
+
+  public getAgents(): Observable<any> {
+    return this.request('get', 'getAgents');
+  }
+
+  public deleteAgent(agent): Observable<any> {
+    return this.request('post', 'delete_agent', agent);
   }
 
   public saveAd(ad): Observable<any> {

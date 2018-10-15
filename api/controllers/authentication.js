@@ -27,6 +27,7 @@ module.exports.register = function(req, res) {
   if(req.body.cityId) user.cityId = req.body.cityId;
   if(req.body.locationId) user.locationId = req.body.locationId;
   if(req.body.subLocations) user.subLocations = req.body.subLocations;
+  if(req.body.phone) user.phone = req.body.phone;
 
   user.save(function(err) {
     var token;

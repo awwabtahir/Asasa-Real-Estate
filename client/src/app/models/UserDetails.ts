@@ -8,4 +8,5 @@ export interface UserDetails {
     cityId?: string;
     locationId?: string;
     subLocations?: object;
+    phone?: string;
   }

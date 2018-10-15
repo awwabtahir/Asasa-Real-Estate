@@ -14,6 +14,8 @@ var ctrlLocation = require('../controllers/location');
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
+router.get('/getAgents', auth, ctrlProfile.getAgents);
+router.post('/delete_agent', ctrlProfile.deleteAgent);
 
 // authentication
 router.post('/register', ctrlAuth.register);

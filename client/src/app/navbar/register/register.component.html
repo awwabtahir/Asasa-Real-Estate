@@ -7,6 +7,10 @@
         <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name">
       </div>
       <div class="form-group">
+        <label for="phone">Phone #</label>
+        <input type="phone" class="form-control" name="phone" placeholder="Enter phone" [(ngModel)]="credentials.phone">
+      </div>
+      <div class="form-group">
         <label for="email">Email address</label>
         <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
       </div>
@@ -27,18 +31,13 @@
 
       <div class="form-group">
         <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Select Location"
-          [(ngModel)]="credentials.locationId">
+          [(ngModel)]="credentials.locationId" (change)="locChange($event)">
         </ng-select>
       </div>
 
-      <div class="form-group">
-        <select multiple class="form-control" name="subLocations" 
-        [(ngModel)]="subLocations">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+      <div *ngIf="location" class="form-group">
+        <select multiple class="form-control" name="subLocations" [(ngModel)]="credentials.subLocations">
+          <option *ngFor="let sloc of location.subLocations" value="{{ sloc.subLocation }}">{{ sloc.subLocation }}</option>
         </select>
       </div>
 
