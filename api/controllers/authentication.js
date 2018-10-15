@@ -63,7 +63,15 @@ module.exports.login = function(req, res) {
       token = user.generateJwt();
       res.status(200);
       res.json({
-        "token" : token
+        "token" : token,
+        "data": {
+          userId : user._id,
+          name: user.name,
+          access : user.access,
+          cityId : user.cityId,
+          locationId : user.locationId,
+          subLocations : user.subLocations
+        }
       });
     } else {
       // If user is not found

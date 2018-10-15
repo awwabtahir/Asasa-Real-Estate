@@ -15,10 +15,17 @@ export class LoginComponent {
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   login() {
-    this.auth.login(this.credentials).subscribe(() => {
+    this.auth.login(this.credentials).subscribe((data) => {
+      this.saveData(data);
       this.router.navigateByUrl('/profile');
     }, (err) => {
       console.error(err);
     }); 
+  }
+
+  saveData(data) {
+    data = data.data;
+    localStorage.setItem('user', JSON.stringify(data));
+    // console.log(JSON.parse(localStorage.getItem('user')));
   }
 }

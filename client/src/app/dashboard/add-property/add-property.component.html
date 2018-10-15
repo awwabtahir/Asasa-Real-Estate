@@ -1,4 +1,4 @@
-<div class="container mb-2">
+<div *ngIf="!agent" class="container mb-2">
   <div class="form-row mt-2">
     <div class="form-group mr-2">
       <ng-select [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"

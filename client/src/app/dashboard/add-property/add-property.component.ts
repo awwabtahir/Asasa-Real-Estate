@@ -12,6 +12,7 @@ import { LocationService } from '../../services/location.service';
 export class AddPropertyComponent implements OnInit, OnDestroy {
 
   ad = {
+    userId: "",
     invId: "",
     type: "plot",
     subtype: "Residential Plot",
@@ -32,6 +33,9 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   private sub: any;
   edit = false;
 
+  user;
+  agent = false;
+
   constructor(
     private propertyService: PropertyService,
     private route: ActivatedRoute,
@@ -40,8 +44,20 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   ) { }
 
   async ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    if(this.user.access == "agent") this.agent = true;
+
     this.getCities();
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+
+    if(this.agent == true) {
+      this.ad.userId = this.user.userId;
+      this.selectedCity = this.user.cityId;
+      this.cityChange();
+      await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+      this.selectedLoc = this.user.locationId;
+      this.locationChange();
+    }
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];

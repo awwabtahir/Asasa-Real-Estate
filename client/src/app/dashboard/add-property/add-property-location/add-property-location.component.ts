@@ -23,7 +23,7 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
   // public searchControl: FormControl;
 
   @Input() cityData: city;
-  @Input() locationData: location;
+  @Input() locationData;
   @Input() edit;
 
   public latitude: number;
@@ -35,6 +35,9 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
   public sector = "";
   public location: string;
   public city: string;
+
+  user;
+  agent = false;
 
   gesture = "greedy";
 
@@ -78,6 +81,21 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
     //     });
     //   });
     // });
+
+    this.user = JSON.parse(localStorage.getItem('user'));
+    if(this.user.access == "agent") this.agent = true;
+
+    if(this.agent == true) {
+      let subLocations = [];
+      for(var i = 0; i < this.user.subLocations.length; i++) {
+        let subLocation = this.user.subLocations[i];
+        let foundSubLocation = this.locationData.subLocations.filter(function(loc){
+          return loc.subLocation == subLocation;
+        });
+        subLocations.push(foundSubLocation[0]);
+      }
+      this.locationData.subLocations = subLocations;
+    }
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
