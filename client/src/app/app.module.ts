@@ -52,6 +52,7 @@ import { SearchFilterComponent } from './home/search-filter/search-filter.compon
 import { LinksComponent } from './links/links.component';
 import { UploadImage3dComponent } from './dashboard/add-property/upload-image3d/upload-image3d.component';
 import { UploadImagesComponent } from './dashboard/add-property/upload-images/upload-images.component';
+import { AddSublocationComponent } from './dashboard/add-sublocation/add-sublocation.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -63,6 +64,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] },
   { path: 'addLocation', component: AddLocationComponent, canActivate: [AuthGuardService] },
+  { path: 'addSubLocation', component: AddSublocationComponent, canActivate: [AuthGuardService] },
   { path: 'addCity', component: AddCityComponent, canActivate: [AuthGuardService] },
   { path: 'editProperty/:id', component: AddPropertyComponent, canActivate: [AuthGuardService] },
   { path: 'activeProperties', component: ActivePropertiesComponent, canActivate: [AuthGuardService] },
@@ -105,7 +107,8 @@ const routes: Routes = [
     SearchFilterComponent,
     LinksComponent,
     UploadImage3dComponent,
-    UploadImagesComponent
+    UploadImagesComponent,
+    AddSublocationComponent
   ],
   imports: [
     BrowserModule,

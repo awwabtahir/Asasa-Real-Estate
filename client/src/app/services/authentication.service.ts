@@ -53,7 +53,7 @@ export class AuthenticationService {
   private request(
     method: 'post'|'get', 
     type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|
-    'save_city'|'get_cities'|'save_location'|'get_locations'|'update_image', 
+    'save_city'|'get_cities'|'save_location'|'get_locations'|'update_image'|'update_location', 
     template?: TokenPayload | ad | city | location | image): Observable<any> {
 
     let base;
@@ -104,6 +104,10 @@ export class AuthenticationService {
 
   public saveLocation(location): Observable<any> {
     return this.request('post', 'save_location', location);
+  }
+
+  public updateLocation(location): Observable<any> {
+    return this.request('post', 'update_location', location);
   }
 
   public updateAd(ad): Observable<any> {

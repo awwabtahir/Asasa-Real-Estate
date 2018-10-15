@@ -12,6 +12,10 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  access: String,
+  cityId: String,
+  locationId: String,
+  subLocations: Object,
   hash: String,
   salt: String
 });

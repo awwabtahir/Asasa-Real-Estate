@@ -4,4 +4,8 @@ export interface UserDetails {
     name: string;
     exp: number;
     iat: number;
+    access?: string;
+    cityId?: string;
+    locationId?: string;
+    subLocations?: object;
   }

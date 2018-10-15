@@ -1,43 +1,35 @@
-<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [gestureHandling]="gesture" [mapTypeControl]=true
-    (mapReady)="mapReady($event)">
+<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [gestureHandling]="gesture"
+  [mapTypeControl]=true (mapReady)="mapReady($event)">
 
-    <!-- <input id="search" placeholder="Search for location" type="text" class="form-control searchControl" #search [formControl]="searchControl"> -->
+  <!-- <input id="search" placeholder="Search for location" type="text" class="form-control searchControl" #search [formControl]="searchControl"> -->
 
-    <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
-    </agm-marker>
-  </agm-map>
+  <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
+  </agm-marker>
+</agm-map>
 
-  <br>
+<br>
 
-  <div class="form-row">
-    <div class="form-group input-group col-md-3">
-      <div class="input-group-prepend">
-        <div class="input-group-text">Lat</div>
-      </div>
-      <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlatitude }}" disabled>
+<div class="form-row">
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lat</div>
     </div>
-    <div class="form-group input-group col-md-3">
-      <div class="input-group-prepend">
-        <div class="input-group-text">Lng</div>
-      </div>
-      <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlongitude }}" disabled>
-    </div>
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlatitude }}" disabled>
   </div>
-
-  <div class="form-row">
-    <div class="form-group col-md-3">
-      <select id="inputLocation" class="form-control" name="sector" [(ngModel)]="sector" (change)="sectorChange($event)">
-        <option value="">Select Sector</option>
-        <option value="Sector A">Sector A</option>
-        <option value="Sector B">Sector B</option>
-        <option value="Sector C">Sector C</option>
-        <option value="Sector D">Sector D</option>
-        <option value="Sector E">Sector E</option>
-        <option value="Sector F">Sector F</option>
-        <option value="Sector G">Sector G</option>
-        <option value="Sector H">Sector H</option>
-        <option value="Sector I">Sector I</option>
-        <option value="Sector J">Sector J</option>
-      </select>
+  <div class="form-group input-group col-md-3">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Lng</div>
     </div>
+    <input class="form-control mr-2" id="disabledInput" type="text" placeholder="{{ mlongitude }}" disabled>
   </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group col-md-3">
+    <select id="inputLocation" class="form-control" name="sector" [(ngModel)]="sector" (change)="sectorChange($event)">
+      <option value="">Select Sub Location</option>
+      <option *ngFor="let loc of locationData.subLocations" value="{{ loc.subLocation }}">
+        {{ loc.subLocation }}</option>
+    </select>
+  </div>
+</div>

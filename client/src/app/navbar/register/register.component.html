@@ -1,25 +1,53 @@
 <div class="container">
 
-  <div class="row">
-    <div class="col-md-6">
-      <h1>Register</h1>
-      <p class="lead">Already a member? Please <a routerLink="/login">log in</a> instead.</p>
-      <form (submit)="register()">
-        <div class="form-group">
-          <label for="name">Full name</label>
-          <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name">
-        </div>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
-        </div>
-        <button type="submit" class="btn btn-default">Register!</button>
-      </form>
+  <div class="row mt-2">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label for="name">Full name</label>
+        <input type="text" class="form-control" name="name" placeholder="Enter your name" [(ngModel)]="credentials.name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+      </div>
     </div>
+
+    <div class="col-md-4 ml-1 mt-1" style="border:1px solid;">
+      <h4>Assign Location</h4>
+
+      <div class="form-group">
+        <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
+          [(ngModel)]="credentials.cityId" (change)="cityChange($event)">
+        </ng-select>
+      </div>
+
+      <div class="form-group">
+        <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Select Location"
+          [(ngModel)]="credentials.locationId">
+        </ng-select>
+      </div>
+
+      <div class="form-group">
+        <select multiple class="form-control" name="subLocations" 
+        [(ngModel)]="subLocations">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+    <button (click)="register()" class="btn btn-default">Register!</button>
   </div>
 
 </div>

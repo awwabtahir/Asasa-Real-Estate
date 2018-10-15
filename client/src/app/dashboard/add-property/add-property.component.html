@@ -21,11 +21,15 @@
 
 <div *ngIf="selectedCity != '' && selectedLoc != '' && selectedLoc" class="container mb-2">
 
-  <add-property-location 
-    [cityData]="city" 
-    [locationData]="location" 
-    [edit]="edit">
+  <add-property-location [cityData]="city" [locationData]="location" [edit]="edit">
   </add-property-location>
+
+  <div class="form-group input-group" style="width:30%;">
+    <div class="input-group-prepend">
+      <div class="input-group-text">Inventory Id</div>
+    </div>
+    <input type="text" class="form-control" name="invId" [(ngModel)]="ad.invId">
+  </div>
 
   <br>
 

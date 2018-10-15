@@ -2,6 +2,7 @@ export interface location {
     _id?: number,
     cityId: string,
     location: string,
+    subLocations: object,
     lat: number,
     lng: number,
     overlayData: {

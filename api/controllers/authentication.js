@@ -23,6 +23,11 @@ module.exports.register = function(req, res) {
 
   user.setPassword(req.body.password);
 
+  if(req.body.access) user.access = req.body.access;
+  if(req.body.cityId) user.cityId = req.body.cityId;
+  if(req.body.locationId) user.locationId = req.body.locationId;
+  if(req.body.subLocations) user.subLocations = req.body.subLocations;
+
   user.save(function(err) {
     var token;
     token = user.generateJwt();

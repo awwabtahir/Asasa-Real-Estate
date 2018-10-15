@@ -4,6 +4,7 @@ var autoIncrement = require('mongoose-auto-increment');
 autoIncrement.initialize(mongoose.connection);
 
 var adSchema = new mongoose.Schema({
+    invId: String,
     area: String,
     areaType: String,
     biz_comm: Object,

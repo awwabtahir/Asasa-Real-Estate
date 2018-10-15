@@ -8,7 +8,8 @@ var locationSchema = new mongoose.Schema({
     location: { required: true, type: String, unique: true },
     lat: { required: true, type: Number },
     lng: { required: true, type: Number },
-    overlayData: Object
+    overlayData: Object,
+    subLocations: Object
 });
 
 locationSchema.plugin(autoIncrement.plugin, 'Location');

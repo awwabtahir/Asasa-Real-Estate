@@ -12,6 +12,7 @@ import { LocationService } from '../../services/location.service';
 export class AddPropertyComponent implements OnInit, OnDestroy {
 
   ad = {
+    invId: "",
     type: "plot",
     subtype: "Residential Plot",
     propNumber: "",
@@ -153,6 +154,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
 
   private setitem(item) {
     this.ad["_id"] = item._id;
+    this.ad.invId = item.invId;
     this.ad.type = item.type;
     this.ad.subtype = item.subtype;
     this.ad.propNumber = item.propNumber;
