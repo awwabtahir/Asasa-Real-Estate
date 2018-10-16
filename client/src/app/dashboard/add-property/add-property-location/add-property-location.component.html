@@ -1,9 +1,18 @@
-<agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [gestureHandling]="gesture"
-  [mapTypeControl]=true (mapReady)="mapReady($event)">
+<agm-map 
+  [latitude]="latitude" 
+  [longitude]="longitude" 
+  [scrollwheel]="false" 
+  [gestureHandling]="gesture"
+  [mapTypeControl]=true 
+  (mapReady)="mapReady($event)">
 
   <!-- <input id="search" placeholder="Search for location" type="text" class="form-control searchControl" #search [formControl]="searchControl"> -->
 
-  <agm-marker [latitude]="mlatitude" [longitude]="mlongitude" [markerDraggable]=true (dragEnd)="getMarkerPosition($event)">
+  <agm-marker 
+    [latitude]="mlatitude" 
+    [longitude]="mlongitude" 
+    [markerDraggable]=true 
+    (dragEnd)="getMarkerPosition($event)">
   </agm-marker>
 </agm-map>
 

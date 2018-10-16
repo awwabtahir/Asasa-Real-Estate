@@ -4,6 +4,8 @@ import { MapService } from '../../../../services/map.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PropertyModalService } from '../../../../services/property-modal.service';
 import { AuthenticationService } from '../../../../services/authentication.service';
+import { ActivatedRoute } from '@angular/router';
+import { PropertyService } from '../../../../services/property.service';
 
 declare var PANOLENS: any;
 
@@ -12,7 +14,7 @@ declare var PANOLENS: any;
   templateUrl: './marker-modal-content.component.html',
   styleUrls: ['./marker-modal-content.component.css']
 })
-export class MarkerModalContentComponent implements OnInit {
+export class MarkerModalContentComponent implements OnInit, OnDestroy {
 
   @Input() ad;
   basic: any;
@@ -23,15 +25,28 @@ export class MarkerModalContentComponent implements OnInit {
   safeUrl: any;
   image3d = false;
 
+  id: number;
+  private sub: any;
+
   constructor(
     private modalService: PropertyModalService,
+    private propertyService: PropertyService,
     private propertyModalService: PropertyModalService,
     private _sanitizer: DomSanitizer,
     private auth: AuthenticationService,
+    private route: ActivatedRoute,
     private mapService: MapService) { }
 
   ngOnInit() {
     if (!this.ad) this.ad = this.propertyModalService.getAd();
+
+    if (!this.ad) {
+      this.sub = this.route.params.subscribe(params => {
+        this.id = +params['id'];
+        this.getAd(this.id);
+      });
+    }
+
     if (this.ad) {
       this.ngOnChanges();
     }
@@ -52,6 +67,23 @@ export class MarkerModalContentComponent implements OnInit {
       this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));
     }
 
+  }
+
+  ngOnDestroy() {
+    if (this.sub)
+      this.sub.unsubscribe();
+  }
+
+  getAd(id) {
+    this.propertyService.getAds().subscribe(ads => {
+      let ad = ads.filter(function (ad) {
+        return ad._id == id;
+      });
+      this.ad = ad[0];
+      this.ngOnChanges();
+    }, (err) => {
+      console.error(err);
+    });
   }
 
   map: any;

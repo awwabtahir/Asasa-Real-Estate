@@ -60,7 +60,7 @@ const routes: Routes = [
   { path: 'links', component: LinksComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'property-details', component: MarkerModalContentComponent },
+  { path: 'property-details/:id', component: MarkerModalContentComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'addProperty', component: AddPropertyComponent, canActivate: [AuthGuardService] },

@@ -53,7 +53,7 @@ export class MarkerComponent implements OnInit {
   onMarkerClick(selectedMarkerData) {
     if (window.innerWidth < 800) return;
     this.propertyModalService.setAd(selectedMarkerData);
-    this.router.navigateByUrl('/property-details');
+    this.router.navigate(['/property-details', selectedMarkerData._id]);
   }
 
   getAds() {

@@ -21,7 +21,7 @@
         {{ ad.locationData.location }}, 
         {{ ad.locationData.city }}</p>
       <p class="mb-1 d-sm-block d-md-none">
-        <a routerLink="/property-details" (click)="onPropClick(ad)">Click here for more details</a>
+        <a routerLink="/property-details/{{ad._id}}" (click)="onPropClick(ad)">Click here for more details</a>
       </p>
     </div>
   </agm-info-window>
