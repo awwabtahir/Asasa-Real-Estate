@@ -17,7 +17,7 @@ export class LoginComponent {
   login() {
     this.auth.login(this.credentials).subscribe((data) => {
       this.saveData(data);
-      this.router.navigateByUrl('/profile');
+      this.router.navigateByUrl('/dashboard');
     }, (err) => {
       console.error(err);
     }); 
