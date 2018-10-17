@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 import { MapService } from '../../services/map.service';
 import { LocationService } from '../../services/location.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-location',
   templateUrl: './add-location.component.html',
   styleUrls: ['./add-location.component.css']
 })
-export class AddLocationComponent implements OnInit {
+export class AddLocationComponent implements OnInit, OnDestroy {
 
   public latitude: number;
   public longitude: number;
@@ -18,12 +19,18 @@ export class AddLocationComponent implements OnInit {
 
   cityId: string;
   city: any;
+  location = "";
+  selectedLocation;
+
+  edit = false;
+  id: number;
+  private sub: any;
 
   overlayData = {
-    lat0 : 0,
-    lng0 : 0,
-    lat1 : 0,
-    lng1 : 0,
+    lat0: 0,
+    lng0: 0,
+    lat1: 0,
+    lng1: 0,
     imgLoc: '',
   };
 
@@ -32,22 +39,41 @@ export class AddLocationComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
     private router: Router,
+    private route: ActivatedRoute,
     private locService: LocationService
   ) { }
 
   ngOnInit() {
-    //set google map
-    let latlng = this.locService.getLatLng();
-    this.cityId = latlng.cityId;
-    this.latitude = this.mlatitude = latlng.lat;
-    this.longitude = this.mlongitude = latlng.lng;
+    this.sub = this.route.params.subscribe(params => {
+      this.id = +params['id'];
+      if (this.id) {
+        this.edit = true;
+        this.setLocation(this.id);
+      }
+    });
 
-    this.getCities(this.cityId);
+    if (!this.edit) {
+      //set google map
+      let latlng = this.locService.getLatLng();
+      this.cityId = latlng.cityId;
+      this.latitude = this.mlatitude = latlng.lat;
+      this.longitude = this.mlongitude = latlng.lng;
+
+      this.getCities(this.cityId);
+    }
+
+
+
+  }
+
+  ngOnDestroy() {
+    if (this.sub)
+      this.sub.unsubscribe();
   }
 
   getMarkerPosition(event) {
     this.mlatitude = event.coords.lat;
-    this.mlongitude = event.coords.lng;    
+    this.mlongitude = event.coords.lng;
     this.getCityWithLoc(this.mlatitude, this.mlongitude);
   }
 
@@ -59,11 +85,28 @@ export class AddLocationComponent implements OnInit {
 
   getCities(cityId) {
     this.auth.getCities().subscribe(cities => {
-      this.city = cities.filter(function(city){
+      this.city = cities.filter(function (city) {
         return city._id == cityId;
       });
       this.city = this.city[0].city;
-      console.log(this.city);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  setLocation(id) {
+    this.auth.getLocations().subscribe(locations => {
+      let location = locations.filter(function (loc) {
+        return loc._id == id;
+      });
+      location = location[0];
+      this.selectedLocation = location;
+      this.cityId = location.cityId;
+      this.getCities(this.cityId);
+      this.location = location.location;
+      this.latitude = this.mlatitude = location.lat;
+      this.longitude = this.mlongitude = location.lng;
+      this.overlayData = location.overlayData;
     }, (err) => {
       console.error(err);
     });
@@ -78,7 +121,24 @@ export class AddLocationComponent implements OnInit {
       overlayData: this.overlayData
     }
     this.auth.saveLocation(data).subscribe(() => {
-      this.router.navigateByUrl('/addProperty');
+      this.router.navigateByUrl('/editCityLoc');
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  editLoc(location) {
+    let data = {
+      _id: this.selectedLocation._id,
+      cityId: this.cityId,
+      location: location.value,
+      lat: this.mlatitude,
+      lng: this.mlongitude,
+      overlayData: this.overlayData,
+      subLocations: this.selectedLocation.subLocations
+    }
+    this.auth.updateLocation(data).subscribe(() => {
+      this.router.navigateByUrl('/editCityLoc');
     }, (err) => {
       console.error(err);
     });

@@ -39,8 +39,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   constructor(
     private propertyService: PropertyService,
     private route: ActivatedRoute,
-    private auth: AuthenticationService,
-    private locService: LocationService
+    private auth: AuthenticationService
   ) { }
 
   async ngOnInit() {
@@ -105,13 +104,6 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       return city._id == selectedCity;
     });
     this.city = this.city[0];
-
-    let latlng = {
-      cityId: this.city._id,
-      lat: this.city.lat,
-      lng: this.city.lng
-    };
-    this.locService.setLatLng(latlng);
     this.selectedLoc = null;
   }
 

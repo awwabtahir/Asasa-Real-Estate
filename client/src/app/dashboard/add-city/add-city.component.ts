@@ -78,7 +78,7 @@ export class AddCityComponent implements OnInit {
       lng: this.mlongitude
     }
     this.auth.saveCity(data).subscribe(() => {
-      this.router.navigateByUrl('/addProperty');
+      this.router.navigateByUrl('/editCityLoc');
     }, (err) => {
       console.error(err);
     });
