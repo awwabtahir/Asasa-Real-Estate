@@ -36,7 +36,7 @@ export class MapService {
     map.setMapTypeId(google.maps.MapTypeId.HYBRID);
 
     if(markerModal) map.setZoom(16); 
-    else map.setZoom(13); 
+    else map.setZoom(14); 
   }
 
   cityChange(city) {

@@ -19,24 +19,24 @@ export class MarkerComponent implements OnInit {
   houseIcon = {
     url: "assets/images/House.png",
     scaledSize: {
-      width: 30,
-      height: 40
+      width: 20,
+      height: 26
     }
   };
 
   plotIcon = {
     url: "assets/images/Plot1.png",
     scaledSize: {
-      width: 30,
-      height: 40
+      width: 20,
+      height: 26
     }
   };
 
   commercialIcon = {
     url: "assets/images/Commercial.png",
     scaledSize: {
-      width: 30,
-      height: 40
+      width: 20,
+      height: 26
     }
   };
 
