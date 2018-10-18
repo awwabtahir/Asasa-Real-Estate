@@ -125,9 +125,12 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     // this.viewer.render();
   }
 
+  panorama;
   reload3D() {
+    if(this.panorama) return;
     let container = document.querySelector('#target');
-    let panorama = new PANOLENS.ImagePanorama(this.ad.imagesData.image3d.url);
+    this.panorama = new PANOLENS.ImagePanorama(this.ad.imagesData.image3d.url);
+    let panorama = this.panorama;
     setTimeout(function () {
       let viewer = new PANOLENS.Viewer({
         container: container,

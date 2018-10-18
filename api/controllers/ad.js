@@ -13,6 +13,7 @@ module.exports.save = function (req, res) {
   } else {
     var ad = new Ad(req.body);
     ad.save(function (err, ad) {
+      if(err) res.status(401).json({"message": "failed"});
       res.status(200).json(ad._id);
     });
   }

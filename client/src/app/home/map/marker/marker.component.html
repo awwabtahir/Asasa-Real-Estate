@@ -1,29 +1,89 @@
-<agm-marker 
-  *ngFor="let ad of filteredAds; let i=index" 
-  [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="icon"
-  (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()"
-  (markerClick)="onMarkerClick(ad)">
+<ng-container *ngFor="let ad of filteredAds; let i=index">
 
-  <agm-info-window #infoWindow>
-    <div class="propertyImg mr-2">
-      <img src="assets/images/map-thumbnail.jpg" width="80" height="70">
-    </div>
-    <div class="propertyDetails">
-      <p class="mb-1">
-        <b>{{ ad.type | titlecase }} no. {{ ad.propNumber }}</b>
-      </p>
-      <p class="mb-1">
-        <b>Rs. {{ getDemand(ad.demand) }}</b>
-      </p>
-      <p class="mb-1">{{ ad.area }} {{ ad.areaType }}</p>
-      <p class="mb-1">
-        <span *ngIf="ad.locationData.sector">{{ad.locationData.sector}}, </span>
-        {{ ad.locationData.location }}, 
-        {{ ad.locationData.city }}</p>
-      <p class="mb-1 d-sm-block d-md-none">
-        <a routerLink="/property-details/{{ad._id}}" (click)="onPropClick(ad)">Click here for more details</a>
-      </p>
-    </div>
-  </agm-info-window>
+  <agm-marker *ngIf="ad.type == 'house'"
+    [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng"
+    [iconUrl]="houseIcon" 
+    (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()" (markerClick)="onMarkerClick(ad)">
 
-</agm-marker>
+    <agm-info-window #infoWindow>
+        <div class="propertyImg mr-2">
+          <img src="assets/images/map-thumbnail.jpg" width="80" height="70">
+        </div>
+        <div class="propertyDetails">
+          <p class="mb-1">
+            <b>{{ ad.type | titlecase }} no. {{ ad.propNumber }}</b>
+          </p>
+          <p class="mb-1">
+            <b>Rs. {{ getDemand(ad.demand) }}</b>
+          </p>
+          <p class="mb-1">{{ ad.area }} {{ ad.areaType }}</p>
+          <p class="mb-1">
+            <span *ngIf="ad.locationData.sector">{{ad.locationData.sector}}, </span>
+            {{ ad.locationData.location }},
+            {{ ad.locationData.city }}</p>
+          <p class="mb-1 d-sm-block d-md-none">
+            <a routerLink="/property-details/{{ad._id}}" (click)="onPropClick(ad)">Click here for more details</a>
+          </p>
+        </div>
+      </agm-info-window>
+  
+    </agm-marker>
+  
+  <agm-marker *ngIf="ad.type == 'plot'"
+    [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng"
+    [iconUrl]="plotIcon" 
+    (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()" (markerClick)="onMarkerClick(ad)">
+
+    <agm-info-window #infoWindow>
+        <div class="propertyImg mr-2">
+          <img src="assets/images/map-thumbnail.jpg" width="80" height="70">
+        </div>
+        <div class="propertyDetails">
+          <p class="mb-1">
+            <b>{{ ad.type | titlecase }} no. {{ ad.propNumber }}</b>
+          </p>
+          <p class="mb-1">
+            <b>Rs. {{ getDemand(ad.demand) }}</b>
+          </p>
+          <p class="mb-1">{{ ad.area }} {{ ad.areaType }}</p>
+          <p class="mb-1">
+            <span *ngIf="ad.locationData.sector">{{ad.locationData.sector}}, </span>
+            {{ ad.locationData.location }},
+            {{ ad.locationData.city }}</p>
+          <p class="mb-1 d-sm-block d-md-none">
+            <a routerLink="/property-details/{{ad._id}}" (click)="onPropClick(ad)">Click here for more details</a>
+          </p>
+        </div>
+      </agm-info-window>
+  
+    </agm-marker>
+
+  <agm-marker  *ngIf="ad.type == 'commercial'"
+    [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng"
+    [iconUrl]="commercialIcon" 
+    (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()" (markerClick)="onMarkerClick(ad)">
+
+    <agm-info-window #infoWindow>
+      <div class="propertyImg mr-2">
+        <img src="assets/images/map-thumbnail.jpg" width="80" height="70">
+      </div>
+      <div class="propertyDetails">
+        <p class="mb-1">
+          <b>{{ ad.type | titlecase }} no. {{ ad.propNumber }}</b>
+        </p>
+        <p class="mb-1">
+          <b>Rs. {{ getDemand(ad.demand) }}</b>
+        </p>
+        <p class="mb-1">{{ ad.area }} {{ ad.areaType }}</p>
+        <p class="mb-1">
+          <span *ngIf="ad.locationData.sector">{{ad.locationData.sector}}, </span>
+          {{ ad.locationData.location }},
+          {{ ad.locationData.city }}</p>
+        <p class="mb-1 d-sm-block d-md-none">
+          <a routerLink="/property-details/{{ad._id}}" (click)="onPropClick(ad)">Click here for more details</a>
+        </p>
+      </div>
+    </agm-info-window>
+
+  </agm-marker>
+</ng-container>

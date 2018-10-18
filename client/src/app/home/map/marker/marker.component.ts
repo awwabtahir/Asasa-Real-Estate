@@ -15,12 +15,28 @@ export class MarkerComponent implements OnInit {
   @Input() map: any;
   @Output() adEvent = new EventEmitter<object>();
 
-  // marker image
-  icon = {
-    url: "assets/images/blue_circle.svg",
+  // marker icon
+  houseIcon = {
+    url: "assets/images/House.png",
     scaledSize: {
-      width: 12,
-      height: 12
+      width: 30,
+      height: 40
+    }
+  };
+
+  plotIcon = {
+    url: "assets/images/Plot1.png",
+    scaledSize: {
+      width: 30,
+      height: 40
+    }
+  };
+
+  commercialIcon = {
+    url: "assets/images/Commercial.png",
+    scaledSize: {
+      width: 30,
+      height: 40
     }
   };
 
