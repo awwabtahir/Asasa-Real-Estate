@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { MapService } from '../../services/map.service';
+import { AuthenticationService } from '../../authentication.service';
+import { MapService } from 'shared/services/map.service';
 import { ActivatedRoute } from '@angular/router';
-import { LocationService } from '../../services/location.service';
+import { LocationService } from 'shared/services/location.service';
 
 @Component({
   selector: 'search',

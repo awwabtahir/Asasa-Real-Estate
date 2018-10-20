@@ -1,9 +1,9 @@
 /// <reference types="@types/googlemaps" />
 import { Component, OnInit } from '@angular/core';
-import { MapService } from '../../services/map.service';
-import { ad } from '../../models/ad';
-import { city } from '../../models/city';
-import { location } from '../../models/location';
+import { MapService } from 'shared/services/map.service';
+import { ad } from 'shared/models/ad';
+import { city } from 'shared/models/city';
+import { location } from 'shared/models/location';
 
 @Component({
   selector: 'map',

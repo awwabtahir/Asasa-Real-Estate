@@ -1,8 +1,8 @@
 /// <reference types="@types/googlemaps" />
 declare var $: any;
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PropertyService } from '../../../services/property.service';
-import { PropertyModalService } from '../../../services/property-modal.service';
+import { PropertyService } from 'shared/services/property.service';
+import { PropertyModalService } from 'shared/services/property-modal.service';
 import { Router } from '@angular/router';
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ad } from '../../../../models/ad';
-import { MapService } from '../../../../services/map.service';
+import { ad } from 'shared/models/ad';
+import { MapService } from 'shared/services/map.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { PropertyModalService } from '../../../../services/property-modal.service';
-import { AuthenticationService } from '../../../../services/authentication.service';
+import { PropertyModalService } from 'shared/services/property-modal.service';
+import { AuthenticationService } from '../../../../authentication.service';
 import { ActivatedRoute } from '@angular/router';
-import { PropertyService } from '../../../../services/property.service';
+import { PropertyService } from 'shared/services/property.service';
 
 declare var PANOLENS: any;
 

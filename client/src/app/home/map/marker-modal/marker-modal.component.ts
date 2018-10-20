@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ad } from '../../../models/ad';
+import { ad } from 'shared/models/ad';
 
 @Component({
   selector: 'marker-modal',

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from '../../authentication.service';
 import { Router } from '@angular/router';
-import {TokenPayload} from './../../models/token';
+import {TokenPayload} from 'shared/models/token';
 
 @Component({
   templateUrl: './login.component.html'
