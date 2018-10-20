@@ -121,7 +121,7 @@ export class AddLocationComponent implements OnInit, OnDestroy {
       overlayData: this.overlayData
     }
     this.auth.saveLocation(data).subscribe(() => {
-      this.router.navigateByUrl('/editCityLoc');
+      this.router.navigateByUrl('/dashboard/editCityLoc');
     }, (err) => {
       console.error(err);
     });
@@ -138,7 +138,7 @@ export class AddLocationComponent implements OnInit, OnDestroy {
       subLocations: this.selectedLocation.subLocations
     }
     this.auth.updateLocation(data).subscribe(() => {
-      this.router.navigateByUrl('/editCityLoc');
+      this.router.navigateByUrl('/dashboard/editCityLoc');
     }, (err) => {
       console.error(err);
     });

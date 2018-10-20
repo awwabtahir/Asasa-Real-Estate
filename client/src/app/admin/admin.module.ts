@@ -2,13 +2,12 @@ import { AgmCoreModule } from '@agm/core';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DataTableModule } from 'angular-6-datatable';
 import { NgxEditorModule } from 'ngx-editor';
 import { FilePondModule } from 'ngx-filepond';
-import { AuthGuardService } from 'shared/services/auth-guard.service';
 
+import { AdminRoutingModule } from './admin-routing.module';
 import { ActivePropertiesComponent } from './components/active-properties/active-properties.component';
 import { AddCityComponent } from './components/add-city/add-city.component';
 import { AddLocationComponent } from './components/add-location/add-location.component';
@@ -46,51 +45,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EditCityLocComponent } from './components/edit-city-loc/edit-city-loc.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
-const routes: Routes = [
-  { path: 'profile', 
-    component: ProfileComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'dashboard', 
-    component: DashboardComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'addProperty', 
-    component: AddPropertyComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'addLocation', 
-    component: AddLocationComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'editLocation/:id', 
-    component: AddLocationComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'addSubLocation', 
-    component: AddSublocationComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'addCity', 
-    component: AddCityComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'editProperty/:id', 
-    component: AddPropertyComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'editCityLoc', 
-    component: EditCityLocComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'activeProperties', 
-    component: ActivePropertiesComponent, 
-    canActivate: [AuthGuardService] },
-
-  { path: 'agents', 
-    component: AgentsComponent, 
-    canActivate: [AuthGuardService] }
-];
 
 @NgModule({
   imports: [
@@ -101,7 +55,7 @@ const routes: Routes = [
     NgSelectModule,
     NgxEditorModule,
     FilePondModule,
-    RouterModule.forChild(routes),
+    AdminRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',
       libraries: ["places"]

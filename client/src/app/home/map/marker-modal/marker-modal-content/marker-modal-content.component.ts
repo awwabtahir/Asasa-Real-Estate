@@ -87,7 +87,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   }
 
   map: any;
-  async mapReady(map) {
+  async mapReady(map) {    
+    this.loadScripts();
     this.map = map;
     let location = this.location.location;
     let locationObj;
@@ -138,6 +139,21 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
       });
       viewer.add(panorama);
     }, 500);
+  }
+
+  private loadScripts() {
+    const dynamicScripts = [
+     'assets/js/three.min.js',
+     'assets/js/panolens.min.js'
+    ];
+    for (let i = 0; i < dynamicScripts.length; i++) {
+      const node = document.createElement('script');
+      node.src = dynamicScripts[i];
+      node.type = 'text/javascript';
+      node.async = false;
+      node.charset = 'utf-8';
+      document.getElementsByTagName('head')[0].appendChild(node);
+    }
   }
 
   private getId(url) {

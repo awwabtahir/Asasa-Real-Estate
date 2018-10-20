@@ -46,7 +46,7 @@ export class PropertyService {
     this.imagesData = {};
     console.log(ad);
     this.auth.updateAd(ad).subscribe(() => {
-      this.router.navigateByUrl('/activeProperties');
+      this.router.navigateByUrl('/dashboard/activeProperties');
     }, (err) => {
       console.error(err);
     });

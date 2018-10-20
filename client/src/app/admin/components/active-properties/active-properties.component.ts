@@ -53,7 +53,7 @@ export class ActivePropertiesComponent implements OnInit {
 
   edit(item) {
     this.propertyService.setItemforUpdate(item);
-    this.router.navigate(['/editProperty', item._id]);
+    this.router.navigate(['/dashboard/editProperty', item._id]);
   }
 
   itemfordelete;

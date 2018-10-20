@@ -1,13 +1,12 @@
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from 'shared/shared.module';
 
-import { AdminModule } from './admin/admin.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationService } from './authentication.service';
 import { FooterComponent } from './home/footer/footer.component';
@@ -26,16 +25,6 @@ import { LoginComponent } from './navbar/login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './navbar/register/register.component';
 import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
-
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'links', component: LinksComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'property-details/:id', component: MarkerModalContentComponent },
-  { path: ':city', component: HomeComponent },
-  { path: ':city/:location', component: HomeComponent }
-];
 
 @NgModule({
   declarations: [
@@ -60,12 +49,10 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     SharedModule,
-    AdminModule,
     FormsModule,
-    ReactiveFormsModule,
     HttpClientModule,    
     NgSelectModule,
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',
       libraries: ["places"]

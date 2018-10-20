@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mt-4">
     <div class="col-6">
-      <h5>Cities  <a class="btn btn-success btn-sm" routerLink="/addCity">Add new</a>
+      <h5>Cities  <a class="btn btn-success btn-sm" routerLink="/dashboard/addCity">Add new</a>
       </h5>
       <div *ngFor="let city of cities">
         <button class="btn btn-primary btn-sm mt-1 mb-1 mr-1" (click)="cityChanged(city._id, city.city)">
@@ -12,10 +12,10 @@
 
     <div class="col-6">
       <h5>Locations (click to edit) 
-        <a *ngIf="city" class="btn btn-success btn-sm" routerLink="/addLocation">Add new location</a></h5>
+        <a *ngIf="city" class="btn btn-success btn-sm" routerLink="/dashboard/addLocation">Add new location</a></h5>
       <ol>
         <li class="mb-2" *ngFor="let loc of filteredlocations">
-          <a routerLink="/editLocation/{{loc._id}}">{{loc.location}}</a>
+          <a routerLink="/dashboard/editLocation/{{loc._id}}">{{loc.location}}</a>
         </li>
       </ol>
     </div>

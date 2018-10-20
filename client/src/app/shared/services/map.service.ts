@@ -15,7 +15,9 @@ export class MapService {
   overlay: any;
   opacitycontrol: any;
 
-  constructor() { }
+  constructor() { 
+    this.loadScripts();
+  }
 
   addOverLay(map, bounds, imgLoc, markerModal?) {
     this.mapBounds = new google.maps.LatLngBounds(
@@ -54,5 +56,20 @@ export class MapService {
   getLocation() {
     return this.locFire;
   }
+
+  private loadScripts() {
+    const dynamicScripts = [
+     'assets/js/klokantech.js'
+    ];
+    for (let i = 0; i < dynamicScripts.length; i++) {
+      const node = document.createElement('script');
+      node.src = dynamicScripts[i];
+      node.type = 'text/javascript';
+      node.async = false;
+      node.charset = 'utf-8';
+      document.getElementsByTagName('head')[0].appendChild(node);
+    }
+  }
+
 
 }

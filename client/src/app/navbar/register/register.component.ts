@@ -27,7 +27,7 @@ export class RegisterComponent {
 
   register() {
     this.auth.register(this.credentials).subscribe(() => {
-      this.router.navigateByUrl('/agents');
+      this.router.navigateByUrl('/dashboard/agents');
     }, (err) => {
       console.error(err);
     });
