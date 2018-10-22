@@ -135,7 +135,9 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   }
 
   uploadMedia = false;
+  uploadMediaClicked = true;
   updateMedia() {
+    this.uploadMediaClicked = false;
     this.propertyService.updateMedia(this.ad);
   }
 

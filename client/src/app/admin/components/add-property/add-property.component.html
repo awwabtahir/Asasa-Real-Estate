@@ -174,7 +174,7 @@
     </div>
 
     <div *ngIf="uploadMedia" class="form-row mb-5">
-      <div class="text-center">
+      <div *ngIf="uploadMediaClicked" class="text-center">
         <button *ngIf="!edit" (click)="updateMedia()" class="btn btn-danger" [disabled]="!propForm.valid">Post Ad</button>
         <button *ngIf="edit" (click)="updateMedia()" class="btn btn-danger" [disabled]="!propForm.valid">Update Ad</button>
       </div>
