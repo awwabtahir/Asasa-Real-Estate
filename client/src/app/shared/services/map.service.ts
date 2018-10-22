@@ -25,6 +25,8 @@ export class MapService {
       new google.maps.LatLng(bounds.lat1, bounds.lng1));
     this.mapMinZoom = 10;
     this.mapMaxZoom = 22;
+    
+    map.overlayMapTypes.clear();
     this.overlay = new klokantech.MapTilerMapType(map, function (x, y, z) {
       return "https://asasamaps.s3.amazonaws.com/map/" + imgLoc + "/{z}/{x}/{y}.png".replace('{z}', z).replace('{x}', x).replace('{y}', y);
     },
