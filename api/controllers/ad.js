@@ -148,6 +148,7 @@ function addImage(data, res) {
       data['url'] = "https://asasamaps.s3.amazonaws.com/property_images/" + data.adId + "/" +
         data.filename;
       Ad.find({ _id: data.adId }).exec(function (err, ad) {
+        if(err) res.json({ success: false, msg: err });
         ad = ad[0];
         if (ad.imagesData.images == undefined) ad.imagesData.images = [];
         ad.imagesData["images"].push(data);
