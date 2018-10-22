@@ -71,6 +71,7 @@ function updateAd(data, res) {
   var query = { '_id': data._id };
   delete data._id;
   Ad.findOneAndUpdate(query, data,{new: true}, function (err, ad) {
+    if(err) res.json({ success: false, msg: err });
     res.status(200).json(ad);
   });
 }
