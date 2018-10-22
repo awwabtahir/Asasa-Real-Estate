@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ImageService } from 'shared/services/image.service';
 
 @Component({
   selector: 'photo-slider',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./photo-slider.component.css']
 })
 export class PhotoSliderComponent implements OnInit {
+
+  @Input() images: any;
 
   constructor() { }
 
