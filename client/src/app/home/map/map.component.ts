@@ -4,6 +4,7 @@ import { MapService } from 'shared/services/map.service';
 import { ad } from 'shared/models/ad';
 import { city } from 'shared/models/city';
 import { location } from 'shared/models/location';
+import { PropertyModalService } from 'shared/services/property-modal.service';
 
 @Component({
   selector: 'map',
@@ -54,6 +55,10 @@ export class MapComponent implements OnInit {
     map.setZoom(14);
     map.setMapTypeId(google.maps.MapTypeId.HYBRID);
     map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('Settings'));
+
+    // await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+    // $('.sebm-google-map-container .agm-map-container-inner div div.gm-style button[title="Toggle fullscreen view"]')
+    // .trigger('click');
   }
 
   updateOverlay(map, location) {

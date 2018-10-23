@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
-    <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1" routerLink="/"><i class="fas fa-arrow-left"></i> &nbsp; Go
+    <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block" routerLink="/">
+      <i class="fas fa-arrow-left"></i> &nbsp; Go
       back</a>
+    
+    <div class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none ml-auto">
+      <a routerLink="/"><i class="far fa-times-circle fa-2x"></i></a>
+    </div>
   </div>
   <div class="row no-gutters">
     <div *ngIf="ad" class="col-md-8">
