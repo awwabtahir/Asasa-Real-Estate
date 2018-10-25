@@ -7,6 +7,7 @@ import { LocationService } from './services/location.service';
 import { MapService } from './services/map.service';
 import { PropertyModalService } from './services/property-modal.service';
 import { PropertyService } from './services/property.service';
+import { FilterService } from './services/filter.service';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { PropertyService } from './services/property.service';
     MapService,
     PropertyModalService,
     LocationService,
-    ImageService
+    ImageService,
+    FilterService
   ]
 })
 export class SharedModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FilterService } from 'shared/services/filter.service';
 
 @Component({
   selector: 'search-filter',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class SearchFilterComponent implements OnInit {
 
   filterOpts = {
+    type: "",
     lowPrice: 0,
     highPrice: 0,
     areaUnit: "",
@@ -15,13 +17,31 @@ export class SearchFilterComponent implements OnInit {
     highArea: 0
   };
 
-  constructor() { }
+  Opts = {
+    type: "",
+    lowPrice: 0,
+    highPrice: 0,
+    areaUnit: "",
+    lowArea: 0,
+    highArea: 0
+  };
+
+  constructor(
+    private filterService: FilterService
+  ) { }
 
   ngOnInit() {
   }
 
   filter() {
-    console.log(this.filterOpts);
+    this.filterOpts["reset"] = false;
+    this.filterService.apply(this.filterOpts);
+  }
+
+  reset() {
+    this.filterOpts = this.Opts;
+    this.filterOpts["reset"] = true;
+    this.filterService.apply(this.filterOpts);
   }
 
 }

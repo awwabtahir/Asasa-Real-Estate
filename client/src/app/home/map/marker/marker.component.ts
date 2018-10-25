@@ -4,6 +4,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PropertyService } from 'shared/services/property.service';
 import { PropertyModalService } from 'shared/services/property-modal.service';
 import { Router } from '@angular/router';
+import { FilterService } from 'shared/services/filter.service';
 
 @Component({
   selector: 'marker',
@@ -40,15 +41,24 @@ export class MarkerComponent implements OnInit {
     }
   };
 
+  filterOpts;
+
   ads = [];
   filteredAds = [];
+  
 
-  constructor(private propertyService: PropertyService,
+  constructor(
+    private propertyService: PropertyService,
     private propertyModalService: PropertyModalService,
-    private router: Router) { }
+    private router: Router,
+    private filterService: FilterService
+  ) { }
 
   ngOnInit() {
     this.getAds();
+    this.filterOpts = this.filterService.getFilterOpts().subscribe(filterOpts => {
+      this.applyFilter(filterOpts);
+    });
   }
 
   onMouseOver(infoWindow, map) {
@@ -87,6 +97,15 @@ export class MarkerComponent implements OnInit {
 
   getDemand(demand) {
     return this.propertyService.localeString(demand);
+  }
+
+  applyFilter(filterOpts) {
+    if(filterOpts.reset) {
+      this.filteredAds = this.ads;
+      return;
+    }
+    this.filteredAds = this.ads;
+    this.filteredAds = this.filterService.applyFilter(this.filteredAds, filterOpts);     
   }
 
 }

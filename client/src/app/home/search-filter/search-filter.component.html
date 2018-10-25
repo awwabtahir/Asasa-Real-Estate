@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-deflaut btn-sm ml-2" data-toggle="modal" data-target="#searchFilterModal">
+<button type="button" class="btn btn-primary btn-sm ml-2" data-toggle="modal" data-target="#searchFilterModal">
   <i class="fas fa-bars"></i> Filter
 </button>
 
@@ -15,6 +15,27 @@
         </a>
       </div>
       <div class="modal-body">
+
+        <!-- Property Type Filter -->
+        <div class="form-row mb-2">
+          <div class="form-group">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption1"
+                value="house" [(ngModel)]="filterOpts.type">
+              <label class="form-check-label radio-custom-label" for="propertyOption1">House</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption2"
+                value="plot" [(ngModel)]="filterOpts.type">
+              <label class="form-check-label radio-custom-label" for="propertyOption2">Plot</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption3"
+                value="commercial" [(ngModel)]="filterOpts.type">
+              <label class="form-check-label radio-custom-label" for="propertyOption3">Commercial</label>
+            </div>
+          </div>
+        </div>
 
         <!-- Price Filter -->
         <h5>Price</h5>
@@ -67,6 +88,9 @@
 
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" (click)="reset()">
+          Reset
+        </button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="filter()">
           Apply Filter
         </button>
