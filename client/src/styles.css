@@ -3,6 +3,7 @@
 
 @media (max-width: 600px) {
     .i-embedded-chat {
+      margin: 5px !important;
       width:100% !important;
       height:100% !important;
     }
