@@ -10,38 +10,38 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto left-nav">
       <li [routerLinkActive]="['active']" class="nav-item">
-        <a class="nav-link" routerLink="/">Home
+        <a class="nav-link dropdown-toggle"  data-toggle="collapse" routerLink="/">Home
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li [routerLinkActive]="['active']" class="nav-item">
-        <a class="nav-link" href="#">Buy</a>
+      <li [routerLinkActive]="['active']"  data-toggle="collapse" class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#">Buy</a>
       </li>
-      <li [routerLinkActive]="['active']" class="nav-item">
-        <a class="nav-link" href="#">Rent</a>
+      <li [routerLinkActive]="['active']"  data-toggle="collapse" class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#">Rent</a>
       </li>
-      <li [routerLinkActive]="['active']" class="nav-item">
-        <a class="nav-link" href="#">Sell</a>
+      <li [routerLinkActive]="['active']"  data-toggle="collapse" class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#">Sell</a>
       </li>
-      <li [routerLinkActive]="['active']" class="nav-item">
-        <a class="nav-link" href="#">New Projects</a>
+      <li [routerLinkActive]="['active']"  data-toggle="collapse" class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#">New Projects</a>
       </li>
-      <li [routerLinkActive]="['active']" class="nav-item">
-        <a class="nav-link" href="#">House Architecture</a>
+      <li [routerLinkActive]="['active']"  data-toggle="collapse" class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#">House Architecture</a>
       </li>
       <li class="nav-item">
-        <div *ngIf="!auth.isLoggedIn()" class="nav-link call">Call Now: +92-311-2233656</div>
+        <div *ngIf="!auth.isLoggedIn()" class="nav-link dropdown-toggle call">Call Now: +92-311-2233656</div>
       </li>
     </ul>
     <ul class="navbar-nav pull-right right-nav">
       <li *ngIf="!auth.isLoggedIn()" class="nav-item">
-        <a class="nav-link sign-in" routerLink="/login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+        <a class="nav-link dropdown-toggle sign-in"  data-toggle="collapse" routerLink="/login"><i class="fas fa-sign-in-alt"></i> Sign In</a>
       </li>
       <li *ngIf="auth.isLoggedIn()" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard"><i class="fas fa-toolbox fa-2x"></i> Dashboard</a>
+        <a class="nav-link dropdown-toggle"  data-toggle="collapse" routerLink="/dashboard"><i class="fas fa-toolbox fa-2x"></i> Dashboard</a>
       </li>
       <li *ngIf="auth.isLoggedIn()" class="nav-item">
-        <a class="nav-link logout" (click)="auth.logout()"><i class="fas fa-sign-out-alt fa-2x"></i> Logout</a>
+        <a class="nav-link dropdown-toggle logout"  data-toggle="collapse" (click)="auth.logout()"><i class="fas fa-sign-out-alt fa-2x"></i> Logout</a>
       </li>
     </ul>
   </div>
