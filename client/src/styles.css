@@ -1,14 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
 
-@media (max-width: 600px) {
-    .i-embedded-chat {
-      margin: 10px !important;
-      width:100% !important;
-      height:100% !important;
-    }
-  }
-
 .irs-from, 
 .irs-to, 
 .irs-single,
