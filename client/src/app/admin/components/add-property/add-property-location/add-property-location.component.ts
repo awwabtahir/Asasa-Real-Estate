@@ -94,7 +94,7 @@ export class AddPropertyLocationComponent implements OnInit, OnDestroy, OnChange
         });
         subLocations.push(foundSubLocation[0]);
       }
-      this.locationData.subLocations = subLocations;
+      if(this.user.subLocations.length !== 0) this.locationData.subLocations = subLocations;
     }
 
     this.sub = this.route.params.subscribe(params => {

@@ -36,6 +36,7 @@
       </div>
 
       <div *ngIf="location" class="form-group">
+        <h6 style="color:red;">This is optional</h6>
         <select multiple class="form-control" name="subLocations" [(ngModel)]="credentials.subLocations">
           <option *ngFor="let sloc of location.subLocations" value="{{ sloc.subLocation }}">{{ sloc.subLocation }}</option>
         </select>
