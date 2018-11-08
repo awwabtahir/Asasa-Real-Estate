@@ -11,7 +11,7 @@
   <div class="row no-gutters">
     <div *ngIf="ad" class="col-md-8">
       <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
-        <li *ngIf="ad.imagesData.images" class="nav-item col">
+        <li *ngIf="ad.imagesData" class="nav-item col">
           <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos"
             aria-selected="false">Photos</a>
         </li>
@@ -29,7 +29,7 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div *ngIf="ad.imagesData.images" class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
+        <div *ngIf="ad.imagesData" class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
           <photo-slider [images]="ad.imagesData.images"></photo-slider>
         </div>
         <div class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">

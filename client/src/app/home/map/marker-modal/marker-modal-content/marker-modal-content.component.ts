@@ -114,16 +114,9 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
       this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
     }
 
+    if (this.ad.imagesData == undefined) return;
     if (this.ad.imagesData.image3d == undefined) return;
     this.image3d = true;
-
-    // this.viewer = new Kaleidoscope.Image({
-    //   source: this.ad.imagesData.image3d.url,
-    //   verticalPanning: false,
-    //   containerId: '#target'
-    // });
-    // delete this.viewer.controls.onDeviceMotion;
-    // this.viewer.render();
   }
 
   panorama;
