@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PropertyService } from 'shared/services/property.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../../authentication.service';
 import { LocationService } from 'shared/services/location.service';
 
@@ -38,6 +38,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
 
   constructor(
     private propertyService: PropertyService,
+    private router: Router,
     private route: ActivatedRoute,
     private auth: AuthenticationService
   ) { }
@@ -117,21 +118,23 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     this.location = this.location[0];
   }
 
-  save() {
+  save(uploadMedia) {
     this.propertyService.save(this.ad);
-    this.uploadMedia = true;
+    this.uploadMedia = uploadMedia;
+    if(!uploadMedia) this.router.navigateByUrl('/dashboard/activeProperties');
   }
 
   image3dUrl;
-  async update() {
+  async update(uploadMedia) {
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
     this.propertyService.update(this.ad);
-    this.uploadMedia = true;
+    this.uploadMedia = uploadMedia;
     if (this.item.imagesData !== undefined) {
       if (this.item.imagesData.image3d !== undefined) {
         this.image3dUrl = this.item.imagesData.image3d.url;
       }
     }
+    if(!uploadMedia) this.router.navigateByUrl('/dashboard/activeProperties');
   }
 
   uploadMedia = false;

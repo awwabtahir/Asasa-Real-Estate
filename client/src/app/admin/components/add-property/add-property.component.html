@@ -149,11 +149,18 @@
       <app-ngx-editor [spellcheck]="true" [(ngModel)]="ad.description" name="description"></app-ngx-editor>
     </div>
 
+    <div *ngIf="!uploadMedia" class="form-row mb-2">
+      <div class="text-center">
+        <button *ngIf="!edit" (click)="save(false)" class="btn btn-danger" [disabled]="!propForm.valid">Add Ad</button>
+        <button *ngIf="edit" (click)="update(false)" class="btn btn-danger" [disabled]="!propForm.valid">Update Ad</button>
+      </div>
+    </div>
+
     <div *ngIf="!uploadMedia" class="form-row mb-5">
       <div class="text-center">
-        <button *ngIf="!edit" (click)="save()" class="btn btn-danger" [disabled]="!propForm.valid">Add video & images</button>
-        <button *ngIf="edit" (click)="update()" class="btn btn-danger" [disabled]="!propForm.valid">Update video &
-          images</button>
+        <button *ngIf="!edit" (click)="save(true)" class="btn btn-danger" [disabled]="!propForm.valid">Add video & images (optional)</button>
+        <button *ngIf="edit" (click)="update(true)" class="btn btn-danger" [disabled]="!propForm.valid">Update video &
+          images (optional)</button>
       </div>
     </div>
 
