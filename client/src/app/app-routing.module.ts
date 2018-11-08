@@ -6,12 +6,13 @@ import { HomeComponent } from './home/home.component';
 import { MarkerModalContentComponent } from './home/map/marker-modal/marker-modal-content/marker-modal-content.component';
 import { LoginComponent } from './navbar/login/login.component';
 import { RegisterComponent } from './navbar/register/register.component';
+import { AuthGuardService } from 'shared/services/auth-guard.service';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'links', component: LinksComponent },
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: 'register', component: RegisterComponent, canActivate: [AuthGuardService] },
     { path: 'property-details/:id', component: MarkerModalContentComponent },
     {
         path: "dashboard",
