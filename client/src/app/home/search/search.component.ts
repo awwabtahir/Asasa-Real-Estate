@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../authentication.service';
 import { MapService } from 'shared/services/map.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocationService } from 'shared/services/location.service';
 
 @Component({
@@ -25,7 +25,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     private auth: AuthenticationService,
     private mapService: MapService,
     private locationService: LocationService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -46,8 +47,10 @@ export class SearchComponent implements OnInit, OnDestroy {
         let foundCity = this.cities.filter(function (c) {
           return c.city == city;
         });
-        this.selectedCity = foundCity[0]._id;
-        this.cityChange(foundCity[0]);
+        if (foundCity[0]) {
+          this.selectedCity = foundCity[0]._id;
+          this.cityChange(foundCity[0]);
+        }
       }
 
       if (this.location) {
@@ -89,6 +92,8 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.locations = [];
       this.getLocations(cityId);
     }
+
+    this.router.navigateByUrl('/' + cityData[0].city);
   }
 
   getLocations(selectedCity?) {
@@ -113,6 +118,11 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
     this.mapService.locationChange(locData[0]);
     this.locationService.setLocObj(locData[0]);
+
+    if (this.city)
+      this.router.navigateByUrl('/' + this.city + '/' + locData[0].location);
+    else
+      this.router.navigateByUrl('/' + locData[0].location);
   }
 
 }
