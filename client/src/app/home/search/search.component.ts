@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../authentication.service';
 import { MapService } from 'shared/services/map.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LocationService } from 'shared/services/location.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'search',
@@ -21,18 +22,23 @@ export class SearchComponent implements OnInit, OnDestroy {
   location: string;
   private sub: any;
 
+  // Google Analytics
+  ga;
+
   constructor(
     private auth: AuthenticationService,
     private mapService: MapService,
     private locationService: LocationService,
     private route: ActivatedRoute,
-    private router: Router
+    private locationUrl: Location
   ) { }
 
   async ngOnInit() {
     this.getCities();
     this.getLocations();
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+
+    this.ga = this.locationService.getGa();
 
     // if (this.locationService.getCity()) this.cityChange(this.locationService.getCity(), true);
     // if (this.locationService.getLoc()) this.locationChange(this.locationService.getLoc());
@@ -92,8 +98,12 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.locations = [];
       this.getLocations(cityId);
     }
+    this.city = cityData[0].city;
 
-    this.router.navigateByUrl('/' + cityData[0].city);
+    this.locationUrl.go('/' + cityData[0].city);
+    this.ga('set', 'page', this.locationUrl.path());
+    this.ga('send', 'pageview');
+    console.log(this.ga);
   }
 
   getLocations(selectedCity?) {
@@ -120,9 +130,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.locationService.setLocObj(locData[0]);
 
     if (this.city)
-      this.router.navigateByUrl('/' + this.city + '/' + locData[0].location);
+      this.locationUrl.go('/' + this.city + '/' + locData[0].location);
     else
-      this.router.navigateByUrl('/' + locData[0].location);
+      this.locationUrl.go('/' + locData[0].location);
+
+    this.ga('set', 'page', this.locationUrl.path());
+    this.ga('send', 'pageview');
   }
 
 }

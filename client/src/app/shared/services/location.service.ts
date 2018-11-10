@@ -36,5 +36,15 @@ export class LocationService {
   getLoc() {
     return this.locObj;
   }
+
+  ga;
+
+  setGa(ga) {
+    this.ga = ga;
+  }
+
+  getGa() {
+    return this.ga;
+  }
   
 }
