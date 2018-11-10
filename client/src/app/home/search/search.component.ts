@@ -34,8 +34,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.getLocations();
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
 
-    if (this.locationService.getCity()) this.cityChange(this.locationService.getCity(), true);
-    if (this.locationService.getLoc()) this.locationChange(this.locationService.getLoc());
+    // if (this.locationService.getCity()) this.cityChange(this.locationService.getCity(), true);
+    // if (this.locationService.getLoc()) this.locationChange(this.locationService.getLoc());
 
     this.sub = this.route.params.subscribe(params => {
       this.city = params['city'];
