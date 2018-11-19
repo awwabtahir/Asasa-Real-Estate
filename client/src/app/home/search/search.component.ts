@@ -40,8 +40,8 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.ga = this.locationService.getGa();
 
-    // if (this.locationService.getCity()) this.cityChange(this.locationService.getCity(), true);
-    // if (this.locationService.getLoc()) this.locationChange(this.locationService.getLoc());
+    if (this.locationService.getCity()) this.cityChange(this.locationService.getCity(), true);
+    if (this.locationService.getLoc()) this.locationChange(this.locationService.getLoc());
 
     this.sub = this.route.params.subscribe(params => {
       this.city = params['city'];
