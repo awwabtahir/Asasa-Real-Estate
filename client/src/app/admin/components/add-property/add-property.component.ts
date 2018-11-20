@@ -20,7 +20,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     street: "",
     demand: "",
     area: "",
-    areaType: "sqft",
+    areaType: "kanal",
     title: "",
     description: "",
     vidUrl: ""
