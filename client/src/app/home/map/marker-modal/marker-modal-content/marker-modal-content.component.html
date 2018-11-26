@@ -3,7 +3,7 @@
     <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block" routerLink="/">
       <i class="fas fa-arrow-left"></i> &nbsp; Go
       back</a>
-    
+
     <div class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none ml-auto">
       <a routerLink="/"><i class="far fa-times-circle fa-2x"></i></a>
     </div>
@@ -29,7 +29,8 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div *ngIf="ad.imagesData && ad.imagesData.images" class="tab-pane fade" id="photos" role="tabpanel" aria-labelledby="photos-tab">
+        <div *ngIf="ad.imagesData && ad.imagesData.images" class="tab-pane fade" id="photos" role="tabpanel"
+          aria-labelledby="photos-tab">
           <photo-slider [images]="ad.imagesData.images"></photo-slider>
         </div>
         <div class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
@@ -55,6 +56,13 @@
         <h5 class="modal-title">Property Overview</h5>
       </div>
       <div *ngIf="ad" class="modal-content scroll" id="style-2">
+
+        <div class="d-sm-block d-md-none" 
+          style="padding: 8px;color:blue;font-weight: bold;">
+          For More Details <br>
+          Call Now: +92-311-2233656
+        </div>
+
         <div class="container">
           <div *ngIf="basic" class="row">
             <div class="alert alert-info w-100 text-center">
