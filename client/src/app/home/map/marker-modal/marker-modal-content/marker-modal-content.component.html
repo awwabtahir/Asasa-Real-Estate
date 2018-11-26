@@ -41,7 +41,7 @@
         </div>
         <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
           <agm-map [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [mapTypeControl]=true
-            [panControl]=true [zoom]=17 (mapReady)="mapReady($event)">
+            [panControl]=true [zoom]=17 [mapTypeId]="satellite" (mapReady)="mapReady($event)">
 
             <agm-marker [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng">
             </agm-marker>
@@ -57,8 +57,7 @@
       </div>
       <div *ngIf="ad" class="modal-content scroll" id="style-2">
 
-        <div class="d-sm-block d-md-none" 
-          style="padding: 8px;color:blue;font-weight: bold;">
+        <div style="padding: 8px;color:blue;font-weight: bold;">
           For More Details <br>
           Call Now: +92-311-2233656
         </div>
