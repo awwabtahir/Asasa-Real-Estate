@@ -7,10 +7,14 @@ import { MarkerModalContentComponent } from './home/map/marker-modal/marker-moda
 import { LoginComponent } from './navbar/login/login.component';
 import { RegisterComponent } from './navbar/register/register.component';
 import { AuthGuardService } from 'shared/services/auth-guard.service';
+import { TermsComponent } from './home/footer/terms/terms.component';
+import { PrivacyComponent } from './home/footer/privacy/privacy.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'links', component: LinksComponent },
+    { path: 'terms', component: TermsComponent },
+    { path: 'privacy-policy', component: PrivacyComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuardService] },
     { path: 'property-details/:id', component: MarkerModalContentComponent },

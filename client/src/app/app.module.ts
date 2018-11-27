@@ -5,6 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from 'shared/shared.module';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "angular-6-social-login";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +31,26 @@ import { LoginComponent } from './navbar/login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './navbar/register/register.component';
 import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
+import { SocialLoginComponent } from './home/social-login/social-login.component';
+import { TermsComponent } from './home/footer/terms/terms.component';
+import { PrivacyComponent } from './home/footer/privacy/privacy.component';
+
+// Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider("290889998216820")
+        }
+        // {
+        //   id: GoogleLoginProvider.PROVIDER_ID,
+        //   provider: new GoogleLoginProvider("Your-Google-Client-Id")
+        // }
+      ]
+  );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -44,7 +70,10 @@ import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
     SafeResourceUrlPipe,
     MarkerModalContentComponent,    
     SearchFilterComponent,
-    LinksComponent
+    LinksComponent,
+    SocialLoginComponent,
+    TermsComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +81,7 @@ import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
     FormsModule,
     HttpClientModule,    
     NgSelectModule,
+    SocialLoginModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',
@@ -59,7 +89,11 @@ import { SafeResourceUrlPipe } from './safe-resource-url.pipe';
     })
   ],
   providers: [
-    AuthenticationService
+    AuthenticationService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
   ],
   bootstrap: [AppComponent]
 })
