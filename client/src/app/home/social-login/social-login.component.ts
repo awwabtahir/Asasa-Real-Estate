@@ -52,14 +52,13 @@ export class SocialLoginComponent implements OnInit {
     });
   }
 
-  private async registered(user) {
-    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+  private registered(user) {
     console.log(user);
     console.log(this.customers);
 
     var i;
     for (i = 0; i < this.customers.length; i++) {
-        if (this.customers[i] === user) {
+        if (this.customers[i].id === user.id) {
             return true;
         }
     }
