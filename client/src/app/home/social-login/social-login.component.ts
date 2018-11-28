@@ -36,7 +36,7 @@ export class SocialLoginComponent implements OnInit {
         console.log(socialPlatform+" sign in data : " , userData);
         delete userData['token'];
 
-        this.registerCustomer(userData);
+        this.registered(userData);
 
         // if(!this.registered(userData)) this.registerCustomer(userData);
         // this.loginCustomer(userData);            
@@ -47,13 +47,18 @@ export class SocialLoginComponent implements OnInit {
   getCustomers() {
     this.auth.getCustomers().subscribe(customers => {
       this.customers = customers;
-      console.log(this.customers);
     }, (err) => {
       console.error(err);
     });
   }
 
   private registered(user) {
+    var i;
+    for (i = 0; i < this.customers.length; i++) {
+        if (this.customers[i] === user) {
+            return true;
+        }
+    }
     return false;
   }
 
