@@ -58,7 +58,7 @@ export class SocialLoginComponent implements OnInit {
 
     var i;
     for (i = 0; i < this.customers.length; i++) {
-        if (this.customers[i].id === user.id) {
+        if (this.customers[i].email === user.email) {
             return true;
         }
     }
