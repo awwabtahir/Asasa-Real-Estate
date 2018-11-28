@@ -36,9 +36,8 @@ export class SocialLoginComponent implements OnInit {
         console.log(socialPlatform+" sign in data : " , userData);
         delete userData['token'];
 
-        console.log(this.registered(userData));
-
-        // if(!this.registered(userData)) this.registerCustomer(userData);
+        if(!this.registered(userData)) this.registerCustomer(userData);
+        console.log("successfully logined");
         // this.loginCustomer(userData);            
       }
     );
@@ -53,9 +52,6 @@ export class SocialLoginComponent implements OnInit {
   }
 
   private registered(user) {
-    console.log(user);
-    console.log(this.customers);
-
     var i;
     for (i = 0; i < this.customers.length; i++) {
         if (this.customers[i].email === user.email) {
