@@ -22,6 +22,8 @@ export class SocialLoginComponent implements OnInit {
     private auth: AuthenticationService) { }
 
   ngOnInit() {
+    var user = JSON.parse(localStorage.getItem('user')); 
+    if(user) this.loginCustomer(user);
     this.getCustomers();
   }
 
@@ -70,6 +72,7 @@ export class SocialLoginComponent implements OnInit {
   }
 
   private loginCustomer(userData) {
+    localStorage.setItem('user', JSON.stringify(userData));
     this.user = userData;
     this.logined = true;
   }
