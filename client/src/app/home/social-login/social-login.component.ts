@@ -38,10 +38,10 @@ export class SocialLoginComponent implements OnInit {
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
         console.log(userData);
-        // delete userData['token'];
+        delete userData['token'];
 
-        // if(!this.registered(userData)) this.registerCustomer(userData);
-        // this.loginCustomer(userData);            
+        if(!this.registered(userData)) this.registerCustomer(userData);
+        this.loginCustomer(userData);            
       }
     );
   }
