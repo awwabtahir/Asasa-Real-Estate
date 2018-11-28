@@ -14,6 +14,8 @@ import { AuthenticationService } from 'app/authentication.service';
 export class SocialLoginComponent implements OnInit {
 
   customers;
+  user;
+  logined = false;
 
   constructor(
     private socialAuthService: AuthService,
@@ -33,12 +35,10 @@ export class SocialLoginComponent implements OnInit {
     
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
-        console.log(socialPlatform+" sign in data : " , userData);
         delete userData['token'];
 
         if(!this.registered(userData)) this.registerCustomer(userData);
-        console.log("successfully logined");
-        // this.loginCustomer(userData);            
+        this.loginCustomer(userData);            
       }
     );
   }
@@ -69,8 +69,9 @@ export class SocialLoginComponent implements OnInit {
     });
   }
 
-  private loginCustomer(user) {
-
+  private loginCustomer(userData) {
+    this.user = userData;
+    this.logined = true;
   }
 
 }

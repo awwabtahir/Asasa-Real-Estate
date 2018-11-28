@@ -1,1 +1,2 @@
-<button class="btn btn-success btn-sm mt-2 ml-2" (click)="socialSignIn('facebook')">Sign in with Facebook</button>
+<button *ngIf="!logined" class="btn btn-success btn-sm mt-2 ml-2" (click)="socialSignIn('facebook')">Sign in with Facebook</button>
+<p *ngIf="logined" class="mt-2 ml-2">Welcome, {{ user.name }}</p>
