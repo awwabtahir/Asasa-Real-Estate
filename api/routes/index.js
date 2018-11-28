@@ -40,6 +40,6 @@ router.get('/get_locations', ctrlLocation.getAll);
 
 // customer operations
 router.post('/save_customer', ctrlCustomer.save);
-
+router.get('/get_customers', ctrlCustomer.getAll);
 
 module.exports = router;

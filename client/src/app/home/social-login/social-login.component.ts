@@ -20,6 +20,7 @@ export class SocialLoginComponent implements OnInit {
     private auth: AuthenticationService) { }
 
   ngOnInit() {
+    this.getCustomers();
   }
 
   public socialSignIn(socialPlatform : string) {
@@ -46,6 +47,7 @@ export class SocialLoginComponent implements OnInit {
   getCustomers() {
     this.auth.getCustomers().subscribe(customers => {
       this.customers = customers;
+      console.log(this.customers);
     }, (err) => {
       console.error(err);
     });

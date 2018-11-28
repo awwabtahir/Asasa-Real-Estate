@@ -20,3 +20,11 @@ module.exports.save = function (req, res) {
     }
 
 };
+
+module.exports.getAll = function (req, res) {
+    Customer
+      .find()
+      .exec(function (err, customers) {
+        res.status(200).json(customers);
+      });
+  };
