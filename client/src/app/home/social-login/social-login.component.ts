@@ -4,6 +4,7 @@ import {
   FacebookLoginProvider,
   GoogleLoginProvider
 } from 'angular-6-social-login';
+import { AuthenticationService } from 'app/authentication.service';
 
 @Component({
   selector: 'social-login',
@@ -12,7 +13,11 @@ import {
 })
 export class SocialLoginComponent implements OnInit {
 
-  constructor(private socialAuthService: AuthService) { }
+  customers;
+
+  constructor(
+    private socialAuthService: AuthService,
+    private auth: AuthenticationService) { }
 
   ngOnInit() {
   }
@@ -28,11 +33,38 @@ export class SocialLoginComponent implements OnInit {
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
         console.log(socialPlatform+" sign in data : " , userData);
-        // Now sign-in with userData
-        // ...
-            
+        delete userData['token'];
+
+        this.registerCustomer(userData);
+
+        // if(!this.registered(userData)) this.registerCustomer(userData);
+        // this.loginCustomer(userData);            
       }
     );
+  }
+
+  getCustomers() {
+    this.auth.getCustomers().subscribe(customers => {
+      this.customers = customers;
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  private registered(user) {
+    return false;
+  }
+
+  private registerCustomer(user) {
+    this.auth.saveCustomer(user).subscribe(() => {
+      console.log("success");
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  private loginCustomer(user) {
+
   }
 
 }

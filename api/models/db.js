@@ -50,3 +50,4 @@ require('./users');
 require('./ads');
 require('./city');
 require('./location');
+require('./customer');
