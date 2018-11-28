@@ -19,7 +19,7 @@ router.get('/getAgents', auth, ctrlProfile.getAgents);
 router.post('/delete_agent', auth, ctrlProfile.deleteAgent);
 
 // authentication
-router.post('/register', auth, ctrlAuth.register);
+router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
 // ad operations
