@@ -30,12 +30,12 @@ router.get('/get_ads', ctrlAd.getAll);
 router.post('/update_image', auth, ctrlAd.updateImage);
 
 // city operations
-router.post('/save_city', auth, ctrlCity.save);
+router.post('/save_city', ctrlCity.save);
 router.get('/get_cities', ctrlCity.getAll);
 
 // location operations
-router.post('/save_location', auth, ctrlLocation.save);
-router.post('/update_location', auth, ctrlLocation.update);
+router.post('/save_location', ctrlLocation.save);
+router.post('/update_location', ctrlLocation.update);
 router.get('/get_locations', ctrlLocation.getAll);
 
 // customer operations
