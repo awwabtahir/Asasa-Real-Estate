@@ -16,18 +16,18 @@ var ctrlCustomer = require('../controllers/customer');
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
 router.get('/getAgents', auth, ctrlProfile.getAgents);
-router.post('/delete_agent', auth, ctrlProfile.deleteAgent);
+router.post('/delete_agent', ctrlProfile.deleteAgent);
 
 // authentication
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
 
 // ad operations
-router.post('/save_ad', auth, ctrlAd.save);
-router.post('/update_ad', auth, ctrlAd.update);
-router.post('/delete_ad', auth, ctrlAd.delete);
+router.post('/save_ad', ctrlAd.save);
+router.post('/update_ad', ctrlAd.update);
+router.post('/delete_ad', ctrlAd.delete);
 router.get('/get_ads', ctrlAd.getAll);
-router.post('/update_image', auth, ctrlAd.updateImage);
+router.post('/update_image', ctrlAd.updateImage);
 
 // city operations
 router.post('/save_city', ctrlCity.save);
