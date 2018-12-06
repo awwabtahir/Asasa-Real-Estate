@@ -6,6 +6,7 @@ import { PropertyModalService } from 'shared/services/property-modal.service';
 import { AuthenticationService } from '../../../../authentication.service';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyService } from 'shared/services/property.service';
+import { Location } from '@angular/common';
 
 declare var PANOLENS: any;
 
@@ -35,6 +36,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     private _sanitizer: DomSanitizer,
     private auth: AuthenticationService,
     private route: ActivatedRoute,
+    private locationUrl: Location,
     private mapService: MapService) { }
 
   ngOnInit() {
@@ -55,6 +57,13 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
 
   ngOnChanges() {
     if (!this.ad) return;
+
+    this.locationUrl.replaceState(
+      "/" + 
+      this.ad.locationData.city + "/" + 
+      this.ad.locationData.location + "/" +
+      this.ad.type + "/" +
+      this.ad._id);
 
     this.basic = this.modalService.updateBasic(this.ad, this.basic);
     this.location = this.modalService.updateLocation(this.ad.locationData, this.location);

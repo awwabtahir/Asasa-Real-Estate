@@ -23,7 +23,8 @@ const routes: Routes = [
         loadChildren: "../app/admin/admin.module#AdminModule"
     },
     { path: ':city', component: HomeComponent },
-    { path: ':city/:location', component: HomeComponent }
+    { path: ':city/:location', component: HomeComponent },
+    { path: ':city/:location/:type/:id', component: MarkerModalContentComponent }
 ];
 
 @NgModule({

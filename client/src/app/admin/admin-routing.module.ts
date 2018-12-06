@@ -11,52 +11,81 @@ import { AgentsComponent } from './components/agents/agents.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EditCityLocComponent } from './components/edit-city-loc/edit-city-loc.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { GDriveComponent } from './components/g-drive/g-drive.component';
 
 
 const routes: Routes = [
-    { path: '', 
-      component: DashboardComponent, 
-      canActivate: [AuthGuardService] },
+    {
+        path: '',
+        component: DashboardComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'profile', 
-        component: ProfileComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'addProperty', 
-        component: AddPropertyComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'addProperty',
+        component: AddPropertyComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'addLocation', 
-        component: AddLocationComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'addLocation',
+        component: AddLocationComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'editLocation/:id', 
-        component: AddLocationComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'editLocation/:id',
+        component: AddLocationComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'addSubLocation', 
-        component: AddSublocationComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'addSubLocation',
+        component: AddSublocationComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'addCity', 
-        component: AddCityComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'addCity',
+        component: AddCityComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'editProperty/:id', 
-        component: AddPropertyComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'editProperty/:id',
+        component: AddPropertyComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'editCityLoc', 
-        component: EditCityLocComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'editCityLoc',
+        component: EditCityLocComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'activeProperties', 
-        component: ActivePropertiesComponent, 
-        canActivate: [AuthGuardService] },
+    {
+        path: 'activeProperties',
+        component: ActivePropertiesComponent,
+        canActivate: [AuthGuardService]
+    },
 
-    { path: 'agents', 
-        component: AgentsComponent, 
-        canActivate: [AuthGuardService] }
+    {
+        path: 'agents',
+        component: AgentsComponent,
+        canActivate: [AuthGuardService]
+    },
+
+    {
+        path: 'storage',
+        component: GDriveComponent,
+        canActivate: [AuthGuardService]
+    }
 ];
 
 @NgModule({

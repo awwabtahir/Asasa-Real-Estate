@@ -44,6 +44,7 @@ import { AgentsComponent } from './components/agents/agents.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EditCityLocComponent } from './components/edit-city-loc/edit-city-loc.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { GDriveComponent } from './components/g-drive/g-drive.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     UploadImagesComponent,
     AddSublocationComponent,
     AgentsComponent,
-    EditCityLocComponent
+    EditCityLocComponent,
+    GDriveComponent
   ]
 })
 export class AdminModule { }
