@@ -41,7 +41,7 @@
         </div>
         <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
           <agm-map [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [mapTypeControl]=true
-            [panControl]=true [zoom]=17 [mapTypeId]="satellite" (mapReady)="mapReady($event)">
+            [panControl]=true [zoom]=17 [maxZoom]=19 [mapTypeId]="satellite" (mapReady)="mapReady($event)">
 
             <agm-marker [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng">
             </agm-marker>
