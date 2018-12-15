@@ -5,6 +5,7 @@ import { PropertyService } from 'shared/services/property.service';
 import { PropertyModalService } from 'shared/services/property-modal.service';
 import { Router } from '@angular/router';
 import { FilterService } from 'shared/services/filter.service';
+import { MapService } from 'shared/services/map.service';
 
 @Component({
   selector: 'marker',
@@ -45,11 +46,13 @@ export class MarkerComponent implements OnInit {
 
   ads = [];
   filteredAds = [];
+  type;
   
 
   constructor(
     private propertyService: PropertyService,
     private propertyModalService: PropertyModalService,
+    private mapService: MapService,
     private router: Router,
     private filterService: FilterService
   ) { }
@@ -58,6 +61,12 @@ export class MarkerComponent implements OnInit {
     this.getAds();
     this.filterOpts = this.filterService.getFilterOpts().subscribe(filterOpts => {
       this.applyFilter(filterOpts);
+    });
+    this.type = this.mapService.getType().subscribe(type => {
+      this.filteredAds = this.ads;
+      this.filteredAds = this.filteredAds.filter(function (ad) {
+        return ad.type == type;
+      });
     });
   }
 

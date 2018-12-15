@@ -17,6 +17,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   selectedCity;
   selectedLocation;
+  selectedType;
 
   city: string;
   location: string;
@@ -136,6 +137,10 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.ga('set', 'page', this.locationUrl.path());
     this.ga('send', 'pageview');
+  }
+
+  typeChange(type) {
+    this.mapService.typeChange(this.selectedType);
   }
 
 }

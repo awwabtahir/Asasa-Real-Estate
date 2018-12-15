@@ -13,5 +13,9 @@
 }
 
 ng-select {
-    width: 200px;
+    width: 170px;
+}
+
+ng-dropdown-panel {
+    width: 120%!important;
 }

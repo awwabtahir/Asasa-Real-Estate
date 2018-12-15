@@ -1,25 +1,33 @@
 <div class="mt-2 form-inline">
 
-  <ng-select 
-    #city
-    [items]="cities" 
-    bindLabel="city" 
-    bindValue="_id" 
-    class="mr-2 ml-2"
-    placeholder="Select City"
-    [(ngModel)]="selectedCity"
+  <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" 
+    class="mr-2 ml-2" placeholder="Select City" [(ngModel)]="selectedCity" 
     (change)="cityChange($event)">
   </ng-select>
 
-  <ng-select 
-    [items]="locations" 
-    bindLabel="location" 
-    bindValue="_id" 
-    class="mr-2 ml-2"
-    placeholder="Search Location"
-    [(ngModel)]="selectedLocation"
+  <ng-select [items]="locations" bindLabel="location" bindValue="_id" 
+    class="mr-2 ml-2" placeholder="Search Location" [(ngModel)]="selectedLocation" 
     (change)="locationChange($event)">
   </ng-select>
+
+  <div class="form-group">
+    <div class="form-check form-check-inline">
+      <input class="form-check-input radio-custom" type="radio" name="propertyOptionHome"
+       id="propertyOption1" value="house" [(ngModel)]="selectedType"
+       (change)="typeChange($event)">
+      <label class="form-check-label radio-custom-label" for="propertyOption1">House</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input radio-custom" type="radio" name="propertyOptionHome" id="propertyOption2" value="plot"
+        [(ngModel)]="selectedType" (change)="typeChange($event)">
+      <label class="form-check-label radio-custom-label" for="propertyOption2">Plot</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input radio-custom" type="radio" name="propertyOptionHome" id="propertyOption3" value="commercial"
+        [(ngModel)]="selectedType" (change)="typeChange($event)">
+      <label class="form-check-label radio-custom-label" for="propertyOption3">Commercial</label>
+    </div>
+  </div>
 
   <search-filter></search-filter>
 

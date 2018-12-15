@@ -8,6 +8,7 @@ import { Injectable, Output, EventEmitter } from '@angular/core';
 export class MapService {
   @Output() cityFire: EventEmitter<any> = new EventEmitter();
   @Output() locFire: EventEmitter<any> = new EventEmitter();
+  @Output() typeFire: EventEmitter<any> = new EventEmitter();
 
   mapBounds: any;
   mapMinZoom: any;
@@ -57,6 +58,14 @@ export class MapService {
 
   getLocation() {
     return this.locFire;
+  }
+
+  typeChange(type) {
+    this.typeFire.emit(type);
+  }
+
+  getType() {
+    return this.typeFire;
   }
 
   private loadScripts() {
