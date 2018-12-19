@@ -1,16 +1,14 @@
 <div class="mt-2 form-inline">
 
-  <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" 
-    class="mr-2 ml-2" placeholder="Select City" [(ngModel)]="selectedCity" 
-    (change)="cityChange($event)">
+  <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
+    [(ngModel)]="selectedCity" (change)="cityChange($event)">
   </ng-select>
 
-  <ng-select [items]="locations" bindLabel="location" bindValue="_id" 
-    class="mr-2 ml-2" placeholder="Search Location" [(ngModel)]="selectedLocation" 
-    (change)="locationChange($event)">
+  <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Search Location"
+    [(ngModel)]="selectedLocation" (change)="locationChange($event)">
   </ng-select>
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <div class="form-check form-check-inline">
       <input class="form-check-input radio-custom" type="radio" name="propertyOptionHome"
        id="propertyOption1" value="house" [(ngModel)]="selectedType"
@@ -27,8 +25,60 @@
         [(ngModel)]="selectedType" (change)="typeChange($event)">
       <label class="form-check-label radio-custom-label" for="propertyOption3">Commercial</label>
     </div>
+  </div> -->
+
+  <div class="dropdown ml-2 mt-1">
+    <button class="btn btn-info btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false" (click)="hideDropDown()">
+      Select Property Type
+    </button>
+    <div class="dropdown-menu keepopen" aria-labelledby="dropdownMenuButton">
+      <div class="tabbable-line">
+        <ul class="nav nav-tabs">
+          <li>
+            <a href="#home" data-toggle="tab" class="active">
+              Home </a>
+          </li>
+          <li>
+            <a href="#plot" data-toggle="tab">
+              Plot </a>
+          </li>
+          <li>
+            <a href="#commercial" data-toggle="tab">
+              Commercial </a>
+          </li>
+        </ul>
+        <div class="tab-content" (click)="typeChange($event)">
+          <div class="tab-pane active" id="home">
+            <a class="btn btn-outline-success btn-sm">House</a>
+            <a class="btn btn-outline-success btn-sm">Flat</a>
+            <a class="btn btn-outline-success btn-sm">Upper Portion</a>
+            <a class="btn btn-outline-success btn-sm">Lower Portion</a>
+            <a class="btn btn-outline-success btn-sm">Farm House</a>
+            <a class="btn btn-outline-success btn-sm">Room</a>
+            <a class="btn btn-outline-success btn-sm">Penthouse</a>
+          </div>
+          <div class="tab-pane" id="plot">
+            <a class="btn btn-outline-success btn-sm">Residential Plot</a>
+            <a class="btn btn-outline-success btn-sm">Commercial Plot</a>
+            <a class="btn btn-outline-success btn-sm">Agricultural Land</a>
+            <a class="btn btn-outline-success btn-sm">Industrial Land</a>
+            <a class="btn btn-outline-success btn-sm">Plot File</a>
+            <a class="btn btn-outline-success btn-sm">Plot Form</a>
+          </div>
+          <div class="tab-pane" id="commercial">
+            <a class="btn btn-outline-success btn-sm">Office</a>
+            <a class="btn btn-outline-success btn-sm">Shop</a>
+            <a class="btn btn-outline-success btn-sm">Warehouse</a>
+            <a class="btn btn-outline-success btn-sm">Factory</a>
+            <a class="btn btn-outline-success btn-sm">Building</a>
+            <a class="btn btn-outline-success btn-sm">Other</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <search-filter></search-filter>
+  <search-filter class="mt-1"></search-filter>
 
 </div>

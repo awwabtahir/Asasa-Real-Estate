@@ -35,6 +35,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   ) { }
 
   async ngOnInit() {
+    $('.dropdown').on('hide.bs.dropdown', function (e) {
+      e.preventDefault();      
+    });
+
+
     this.getCities();
     this.getLocations();
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
@@ -140,7 +145,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   typeChange(type) {
-    this.mapService.typeChange(this.selectedType);
+    $('.dropdown-toggle')[0].innerText = "Type: " + type.target.innerText;
+    this.hideDropDown();
+    // this.mapService.typeChange(this.selectedType);
+  }
+
+  hideDropDown() {
+    $('.dropdown-menu').toggle();
   }
 
 }
