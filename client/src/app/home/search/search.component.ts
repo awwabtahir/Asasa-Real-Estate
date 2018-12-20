@@ -145,9 +145,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   typeChange(type) {
+    if(type.target.innerText.length > 20) return;
     $('.dropdown-toggle')[0].innerText = "Type: " + type.target.innerText;
     this.hideDropDown();
-    // this.mapService.typeChange(this.selectedType);
+    this.mapService.typeChange(type.target.innerText);
   }
 
   hideDropDown() {

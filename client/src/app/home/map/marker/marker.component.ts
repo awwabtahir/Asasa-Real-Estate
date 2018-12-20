@@ -65,7 +65,7 @@ export class MarkerComponent implements OnInit {
     this.type = this.mapService.getType().subscribe(type => {
       this.filteredAds = this.ads;
       this.filteredAds = this.filteredAds.filter(function (ad) {
-        return ad.type == type;
+        return ad.subtype.toLowerCase() == type.toLowerCase();
       });
     });
   }
