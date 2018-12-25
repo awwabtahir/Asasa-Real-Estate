@@ -1,0 +1,22 @@
+<!-- <div class="propertyImg mr-2">
+  <img src="assets/images/map-thumbnail.jpg" width="80" height="70">
+</div> -->
+<div class="propertyDetails">
+  <p class="mb-1">
+    <b>Ref ID: {{ ad._id }}</b>
+  </p>
+  <p class="mb-1">
+    <b>{{ ad.type | titlecase }} no. {{ ad.propNumber }}</b>
+  </p>
+  <p class="mb-1">
+    <b>Rs. {{ getDemand(ad.demand) }}</b>
+  </p>
+  <p class="mb-1">{{ ad.area }} {{ ad.areaType | titlecase }}</p>
+  <p class="mb-1">
+    <span *ngIf="ad.locationData.sector">{{ad.locationData.sector}}, </span>
+    {{ ad.locationData.location }}</p>
+  <p class="mb-1">{{ ad.locationData.city }}</p>
+  <p class="mb-1 d-sm-block d-md-none">
+    <a class="btn btn-outline-danger" routerLink="/property-details/{{ad._id}}" (click)="onPropClick(ad)">More Info</a>
+  </p>
+</div>

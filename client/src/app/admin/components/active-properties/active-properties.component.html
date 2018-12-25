@@ -1,9 +1,20 @@
-<div class="container-fluid">
-  <button class="btn btn-primary mt-2 mb-2" routerLink="/dashboard/addProperty">Add New</button>
-  <table class="table table-hover" [mfData]="data" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" #mf="mfDataTable"
+<div class="container-fluid">  
+  <div class="form-inline">
+    <button class="btn btn-primary mt-2 mb-2" routerLink="/dashboard/addProperty">Add New</button>
+    <input 
+      type="text" 
+      class="form-control ml-2" 
+      placeholder="Search Ref ID" 
+      [(ngModel)]="refId"
+      (keyup)="filterByRef()">
+  </div>
+  <table class="table table-hover" [mfData]="filteredData" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" #mf="mfDataTable"
     [mfRowsOnPage]="50">
     <thead>
       <tr>
+        <th style="width: 5%">
+          <mfDefaultSorter by="refid">Ref ID</mfDefaultSorter>
+        </th>
         <th style="width: 5%">
           <mfDefaultSorter by="id">Inv ID</mfDefaultSorter>
         </th>
@@ -32,10 +43,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of mf.data.slice().reverse()">
+        <td>{{item._id}}</td>
         <td>{{item.invId}}</td>
         <td>{{item.subtype}}</td>
         <td>{{item.propNumber}}</td>
-        <td>{{item.area}} {{item.areaType}}</td>
+        <td>{{item.area}} {{item.areaType | titlecase}}</td>
         <td><span *ngIf="item.locationData.sector">{{item.locationData.sector}},</span>
           {{item.locationData.location}},
           {{item.locationData.city}}</td>

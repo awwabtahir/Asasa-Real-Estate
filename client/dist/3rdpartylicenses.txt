@@ -515,10 +515,10 @@ MIT
 MIT
 MIT
 
-@angular/platform-browser@6.1.0
+@angular/forms@6.1.0
 MIT
 MIT
 
-@angular/forms@6.1.0
+@angular/platform-browser@6.1.0
 MIT
 MIT

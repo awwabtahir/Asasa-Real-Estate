@@ -1,8 +1,0 @@
-.propertyImg {
-    float: left;
-}
-
-.propertyImg, 
-.propertyDetails {
-    display: inline-block;
-}

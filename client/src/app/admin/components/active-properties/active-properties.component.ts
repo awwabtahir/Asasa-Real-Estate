@@ -12,6 +12,7 @@ import { AuthenticationService } from '../../../authentication.service';
 export class ActivePropertiesComponent implements OnInit {
 
   data: any[];
+  filteredData: any[];
   public sortBy = "id";
   public sortOrder = "desc";
   user;
@@ -38,6 +39,7 @@ export class ActivePropertiesComponent implements OnInit {
           return d.userId == userId;
         });
       }
+      this.filteredData = this.data;
     }, (err) => {
       console.error(err);
     });
@@ -78,7 +80,21 @@ export class ActivePropertiesComponent implements OnInit {
     let agent = this.agents.filter(function (d) {
       return d._id == userId;
     });
+    if(agent[0] == undefined) return "";
     return agent[0].name;
+  }
+
+  refId;
+  filterByRef() {
+    let id = this.refId;
+    let data = Object.assign([], this.data);
+    if (id == "") {
+      this.filteredData = data;
+      return;
+    }
+    this.filteredData = data.filter(function (d) {
+      return d._id == id;
+    });
   }
 
 }

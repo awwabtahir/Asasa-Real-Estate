@@ -91,10 +91,6 @@ export class MarkerComponent implements OnInit {
     this.router.navigate(['/property-details', selectedMarkerData._id]);
   }
 
-  onPropClick(ad) {
-    this.propertyModalService.setAd(ad);
-  }
-
   getAds() {
     this.propertyService.getAds().subscribe(ads => {
       this.ads = ads;
@@ -102,10 +98,6 @@ export class MarkerComponent implements OnInit {
     }, (err) => {
       console.error(err);
     });
-  }
-
-  getDemand(demand) {
-    return this.propertyService.localeString(demand);
   }
 
   applyFilter(filterOpts) {
