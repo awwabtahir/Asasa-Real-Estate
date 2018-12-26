@@ -6,6 +6,7 @@ export interface ad {
     areaType: string,
     biz_comm: object,
     demand: string,
+    comment: string,
     title: string,
     description: string,
     healthcare: object,

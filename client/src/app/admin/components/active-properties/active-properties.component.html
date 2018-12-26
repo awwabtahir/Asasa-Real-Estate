@@ -34,6 +34,9 @@
           <mfDefaultSorter by="demand">Demand</mfDefaultSorter>
         </th>
         <th style="width: 5%">
+          <mfDefaultSorter by="comment">Comment</mfDefaultSorter>
+        </th>
+        <th style="width: 5%">
           <mfDefaultSorter by="updatedBy">Updated by</mfDefaultSorter>
         </th>
         <th style="width: 10%">
@@ -52,6 +55,7 @@
           {{item.locationData.location}},
           {{item.locationData.city}}</td>
         <td>Rs. {{ getDemand(item.demand) }}</td>
+        <td>{{ item.comment }}</td>
         <td *ngIf="agents">{{ getName(item.userId) }}</td>
         <td>
           <button class="btn btn-success btn-sm mr-1" (click)="edit(item)">Edit</button>

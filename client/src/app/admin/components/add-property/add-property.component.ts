@@ -21,6 +21,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     demand: "",
     area: "",
     areaType: "kanal",
+    comment:"",
     title: "",
     description: "",
     vidUrl: ""
@@ -175,6 +176,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     this.ad.demand = item.demand;
     this.ad.area = item.area;
     this.ad.areaType = item.areaType;
+    this.ad.comment = item.comment;
     this.ad.title = item.title;
     this.ad.description = item.description;
     this.ad.vidUrl = item.vidUrl;

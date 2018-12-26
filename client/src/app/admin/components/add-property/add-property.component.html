@@ -137,6 +137,12 @@
 
     <div class="form-row mb-1">
       <div class="form-group col-md-6">
+        <input type="text" placeholder="Comments (Only Visible to Agent)" name="comment" [(ngModel)]="ad.comment" class="form-control" id="inputComment">
+      </div>
+    </div>
+
+    <div class="form-row mb-1">
+      <div class="form-group col-md-6">
         <input type="text" placeholder="Property Title" name="title" [(ngModel)]="ad.title" class="form-control" id="inputTitle">
         <!-- <div *ngIf="headline.invalid && (headline.dirty || headline.touched)" class="invalid-feedback">
           <div *ngIf="headline.errors.required">
