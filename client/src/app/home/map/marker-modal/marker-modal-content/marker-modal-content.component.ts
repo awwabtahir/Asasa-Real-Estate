@@ -110,7 +110,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     }, (err) => {
       console.error(err);
     });
-    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     locationObj = locationObj[0];
 
     if (locationObj.overlayData.imgLoc) {

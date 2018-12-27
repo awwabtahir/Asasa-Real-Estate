@@ -35,6 +35,8 @@ import { SocialLoginComponent } from './home/social-login/social-login.component
 import { TermsComponent } from './home/footer/terms/terms.component';
 import { PrivacyComponent } from './home/footer/privacy/privacy.component';
 import { InfoWindowContentComponent } from './home/map/marker/info-window-content/info-window-content.component';
+import { CallComponent } from './home/call/call.component';
+import { EmailComponent } from './home/email/email.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -75,7 +77,9 @@ export function getAuthServiceConfigs() {
     SocialLoginComponent,
     TermsComponent,
     PrivacyComponent,
-    InfoWindowContentComponent
+    InfoWindowContentComponent,
+    CallComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,

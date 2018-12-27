@@ -1,0 +1,16 @@
+form {
+    font-size: 0.7rem;
+}
+.form-group {
+    margin-bottom: 0.4rem;
+}
+
+.form-control {
+    height: calc(1.8rem + 2px);
+    font-size: 0.7rem;
+}
+
+textarea {
+    overflow: hidden;
+    height: calc(2.8rem + 2px)!important;
+}
