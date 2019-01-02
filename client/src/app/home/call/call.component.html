@@ -1,1 +1,31 @@
-<button type="button" class="btn btn-outline-success" style="width: 45%;">Call</button>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-success" style="width: 45%;" data-toggle="modal" data-target="#callModal">
+    Call
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="callModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Phone</td>
+                            <td><a href="tel:+923112233656">+92-3112233656</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-center">Please quote property reference</p>
+                <p class="text-center" style="font-weight: bold;">ID-{{ id }}</p>
+                <p class="text-center">when calling us.</p>
+            </div>
+        </div>
+    </div>
+</div>
