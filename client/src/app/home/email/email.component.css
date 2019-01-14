@@ -14,3 +14,7 @@ textarea {
     overflow: hidden;
     height: calc(2.8rem + 2px)!important;
 }
+
+.modal-body {
+    font-size: 18px;
+}
