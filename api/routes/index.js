@@ -12,6 +12,7 @@ var ctrlAd = require('../controllers/ad');
 var ctrlCity = require('../controllers/city');
 var ctrlLocation = require('../controllers/location');
 var ctrlCustomer = require('../controllers/customer');
+var ctrlEmail = require('../controllers/email');
 
 // profile
 router.get('/profile', auth, ctrlProfile.profileRead);
@@ -41,5 +42,8 @@ router.get('/get_locations', ctrlLocation.getAll);
 // customer operations
 router.post('/save_customer', ctrlCustomer.save);
 router.get('/get_customers', ctrlCustomer.getAll);
+
+// email operations
+router.post('/send_email', ctrlEmail.send);
 
 module.exports = router;

@@ -11,6 +11,7 @@ import { city } from 'shared/models/city';
 import { location } from 'shared/models/location';
 import { image } from 'shared/models/image';
 import { customer } from 'shared/models/customer';
+import { email } from 'shared/models/email';
 
 @Injectable()
 export class AuthenticationService {
@@ -55,8 +56,8 @@ export class AuthenticationService {
     method: 'post'|'get', 
     type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|'delete_agent'|
     'save_city'|'get_cities'|'save_location'|'get_locations'|'update_image'|'update_location'|'getAgents'|
-    'get_customers'|'save_customer', 
-    template?: TokenPayload | ad | city | location | image | customer): Observable<any> {
+    'get_customers'|'save_customer'|'send_email', 
+    template?: TokenPayload | ad | city | location | image | customer | email): Observable<any> {
 
     let base;
     let prod = false;
@@ -150,6 +151,10 @@ export class AuthenticationService {
 
   public getCustomers(): Observable<any> {
     return this.request('get', 'get_customers');
+  }
+
+  public sendEmail(email): Observable<any> {
+    return this.request('post', 'send_email', email);
   }
 
   public logout(): void {
