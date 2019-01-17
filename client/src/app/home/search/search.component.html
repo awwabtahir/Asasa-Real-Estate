@@ -4,7 +4,7 @@
     [(ngModel)]="selectedCity" (change)="cityChange($event)">
   </ng-select>
 
-  <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Search Location"
+  <ng-select *ngIf="selectedCity" [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Search Location"
     [(ngModel)]="selectedLocation" (change)="locationChange($event)">
   </ng-select>
 
@@ -27,7 +27,7 @@
     </div>
   </div> -->
 
-  <div class="dropdown ml-2 mr-2 mt-1">
+  <div *ngIf="selectedCity" class="dropdown ml-2 mr-2 mt-1">
     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false" (click)="hideDropDown()">
       Select Property Type
