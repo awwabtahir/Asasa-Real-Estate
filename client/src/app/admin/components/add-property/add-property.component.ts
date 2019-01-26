@@ -120,17 +120,17 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     this.location = this.location[0];
   }
 
+  filtered;
   filterLocations(agentLocs) {
-    var filtered = [];
-
+    this.filtered = [];
     for (var arr in this.locations) {
       for (var filter in agentLocs) {
         if (this.locations[arr].location == agentLocs[filter]) {
-          filtered.push(this.locations[arr]);
+          this.filtered.push(this.locations[arr]);
         }
       }
     }
-    this.locations = filtered;
+    this.locations = this.filtered;
   }
 
   save(uploadMedia) {
