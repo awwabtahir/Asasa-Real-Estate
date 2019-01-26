@@ -14,7 +14,7 @@ export class RegisterComponent {
     password: '',
     access: 'agent',
     cityId: null,
-    locationId: null,
+    locationId: [],
     subLocations: []
   };
   cities = [];
@@ -41,7 +41,10 @@ export class RegisterComponent {
 
   locChange(locObj) {
     $(':focus').blur();
-    this.location = locObj;
+    let locations = [];
+    for(var i = 0; i < locObj.length; i++)
+      locations.push(locObj[i].location);
+    this.credentials.locationId = locations;
   }
 
   getCities() {

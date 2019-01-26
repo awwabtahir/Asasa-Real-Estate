@@ -30,9 +30,9 @@
           <td>{{item.email}}</td>
           <td>{{item.phone}}</td>
           <td *ngIf="cities && locations">
-            {{getLocation(item.locationId)}}, {{getCity(item.cityId)}}
+            {{getCity(item.cityId)}}
             <ul>
-              <li *ngFor="let sloc of item.subLocations">{{sloc}}</li>
+              <li *ngFor="let sloc of item.locationId">{{sloc}}</li>
             </ul>
           </td>
           <td>

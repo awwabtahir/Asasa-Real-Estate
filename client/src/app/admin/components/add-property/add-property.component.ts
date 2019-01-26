@@ -21,7 +21,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     demand: "",
     area: "",
     areaType: "kanal",
-    comment:"",
+    comment: "",
     title: "",
     description: "",
     vidUrl: ""
@@ -36,6 +36,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
 
   user;
   agent = false;
+  agentLocs;
 
   constructor(
     private propertyService: PropertyService,
@@ -46,18 +47,18 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('user'));
-    if(this.user.access == "agent") this.agent = true;
+    if (this.user.access == "agent") this.agent = true;
 
     this.getCities();
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
 
-    if(this.agent == true) {
+    if (this.agent == true) {
       this.ad.userId = this.user.userId;
       this.selectedCity = this.user.cityId;
       this.cityChange();
       await new Promise((resolve, reject) => setTimeout(resolve, 1500));
-      this.selectedLoc = this.user.locationId;
-      this.locationChange();
+      this.agentLocs = this.user.locationId;
+      this.filterLocations(this.agentLocs);
     }
 
     this.sub = this.route.params.subscribe(params => {
@@ -65,7 +66,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       if (this.id && this.propertyService.getItemforUpdate()) {
         this.item = this.propertyService.getItemforUpdate();
         this.setPage(this.item);
-        if (this.item.imagesData !== undefined) 
+        if (this.item.imagesData !== undefined)
           this.propertyService.addImagesData(this.item.imagesData);
       }
     });
@@ -119,10 +120,23 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     this.location = this.location[0];
   }
 
+  filterLocations(agentLocs) {
+    var filtered = [];
+
+    for (var arr in this.locations) {
+      for (var filter in agentLocs) {
+        if (this.locations[arr].location == agentLocs[filter]) {
+          filtered.push(this.locations[arr]);
+        }
+      }
+    }
+    this.locations = filtered;
+  }
+
   save(uploadMedia) {
     this.propertyService.save(this.ad);
     this.uploadMedia = uploadMedia;
-    if(!uploadMedia) this.router.navigateByUrl('/dashboard/activeProperties');
+    if (!uploadMedia) this.router.navigateByUrl('/dashboard/activeProperties');
   }
 
   image3dUrl;
@@ -135,7 +149,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         this.image3dUrl = this.item.imagesData.image3d.url;
       }
     }
-    if(!uploadMedia) this.router.navigateByUrl('/dashboard/activeProperties');
+    if (!uploadMedia) this.router.navigateByUrl('/dashboard/activeProperties');
   }
 
   uploadMedia = false;

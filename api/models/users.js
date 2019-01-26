@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
   },
   access: String,
   cityId: String,
-  locationId: String,
+  locationId: Object,
   subLocations: Object,
   phone: String,
   hash: String,

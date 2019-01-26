@@ -8,7 +8,7 @@ export interface TokenPayload {
     name?: string;
     access?: string;
     cityId?: string;
-    locationId?: string;
+    locationId?: object;
     subLocations?: object;
     phone?: string;
 }
