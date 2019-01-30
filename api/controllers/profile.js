@@ -47,7 +47,7 @@ module.exports.updateAgent = function (req, res) {
     });
     user.save(function (err, updatedUser) {
       if (err) return handleError(err);
-      res.send("success");
+      res.send(updatedUser);
     });
   });
 };
