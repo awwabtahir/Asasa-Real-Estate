@@ -130,17 +130,17 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
 
   panorama;
   reload3D() {
-    if(this.panorama) return;
-    let container = document.querySelector('#target');
-    this.panorama = new PANOLENS.ImagePanorama(this.ad.imagesData.image3d.url);
-    let panorama = this.panorama;
-    setTimeout(function () {
-      let viewer = new PANOLENS.Viewer({
-        container: container,
-        output: 'console'
-      });
-      viewer.add(panorama);
-    }, 500);
+    // if(this.panorama) return;
+    // let container = document.querySelector('#target');
+    // this.panorama = new PANOLENS.ImagePanorama(this.ad.imagesData.image3d.url);
+    // let panorama = this.panorama;
+    // setTimeout(function () {
+    //   let viewer = new PANOLENS.Viewer({
+    //     container: container,
+    //     output: 'console'
+    //   });
+    //   viewer.add(panorama);
+    // }, 500);
   }
 
   private loadScripts() {
