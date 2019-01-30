@@ -45,6 +45,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EditCityLocComponent } from './components/edit-city-loc/edit-city-loc.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { GDriveComponent } from './components/g-drive/g-drive.component';
+import { RegisterComponent } from 'app/navbar/register/register.component';
 
 
 @NgModule({

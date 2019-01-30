@@ -14,7 +14,7 @@
         <label for="email">Email address</label>
         <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
       </div>
-      <div class="form-group">
+      <div *ngIf="!edit" class="form-group">
         <label for="password">Password</label>
         <input type="text" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
       </div>
@@ -30,8 +30,8 @@
       </div>
 
       <div class="form-group">
-        <ng-select [items]="locations" [multiple]="true" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Select Location"
-        (change)="locChange($event)">
+        <ng-select [items]="locations" [multiple]="true" bindLabel="location" bindValue="location" class="mr-2 ml-2" placeholder="Select Location"
+          [(ngModel)]="credentials.locationId" (change)="locChange($event)">
         </ng-select>
       </div>
 
@@ -47,7 +47,8 @@
   </div>
 
   <div class="row">
-    <button (click)="register()" class="btn btn-default">Register!</button>
+    <button *ngIf="!edit" (click)="register()" class="btn btn-default">Register!</button>
+    <button *ngIf="edit" (click)="update()" class="btn btn-default mb-4">Update</button>
   </div>
 
 </div>

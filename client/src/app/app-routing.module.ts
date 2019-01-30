@@ -17,6 +17,7 @@ const routes: Routes = [
     { path: 'privacy-policy', component: PrivacyComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent, canActivate: [AuthGuardService] },
+    { path: 'editAgent/:id', component: RegisterComponent, canActivate: [AuthGuardService] },
     { path: 'property-details/:id', component: MarkerModalContentComponent },
     {
         path: "dashboard",

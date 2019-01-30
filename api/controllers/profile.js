@@ -33,6 +33,25 @@ module.exports.getAgents = function (req, res) {
 
 };
 
+module.exports.updateAgent = function (req, res) {
+  let agent = req.body;
+  User.findById(agent._id, function (err, user) {
+    if (err) return handleError(err);
+
+    user.set({ 
+      name: agent.name,
+      phone: agent.phone,
+      email: agent.email,
+      cityId: agent.cityId,
+      locationId: agent.locationId
+    });
+    user.save(function (err, updatedUser) {
+      if (err) return handleError(err);
+      res.send("success");
+    });
+  });
+};
+
 module.exports.deleteAgent = function (req, res) {
   User.find({ _id: req.body._id }).remove().exec(function (err) {
     res.status(200).json("success");

@@ -54,7 +54,7 @@ export class AuthenticationService {
 
   private request(
     method: 'post'|'get', 
-    type: 'login'|'register'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|'delete_agent'|
+    type: 'login'|'register'|'update_agent'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|'delete_agent'|
     'save_city'|'get_cities'|'save_location'|'get_locations'|'update_image'|'update_location'|'getAgents'|
     'get_customers'|'save_customer'|'send_email', 
     template?: TokenPayload | ad | city | location | image | customer | email): Observable<any> {
@@ -87,6 +87,10 @@ export class AuthenticationService {
 
   public register(user: TokenPayload): Observable<any> {
     return this.request('post', 'register', user);
+  }
+
+  public updateAgent(user: TokenPayload): Observable<any> {
+    return this.request('post', 'update_agent', user);
   }
 
   public login(user: TokenPayload): Observable<any> {

@@ -18,6 +18,7 @@ var ctrlEmail = require('../controllers/email');
 router.get('/profile', auth, ctrlProfile.profileRead);
 router.get('/getAgents', auth, ctrlProfile.getAgents);
 router.post('/delete_agent', ctrlProfile.deleteAgent);
+router.post('/update_agent', ctrlProfile.updateAgent);
 
 // authentication
 router.post('/register', ctrlAuth.register);
