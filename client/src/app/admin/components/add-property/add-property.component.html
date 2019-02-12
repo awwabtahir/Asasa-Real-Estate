@@ -5,7 +5,7 @@
         [(ngModel)]="selectedCity" (change)="cityChange()">
       </ng-select>
     </div>
-    <div *ngIf="filtered" class="form-group mr-2">
+    <div *ngIf="filtered || !agent" class="form-group mr-2">
       <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Select Location"
         [(ngModel)]="selectedLoc" (change)="locationChange()">
       </ng-select>
