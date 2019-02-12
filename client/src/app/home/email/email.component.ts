@@ -24,7 +24,7 @@ export class EmailComponent implements OnInit {
   send() {
     if(this.email == "" || this.phone == "") return;
 
-    let message = "<p>Name: "+ this.name +"</p><p>Type: "+ this.type +"</p><p>Email: "+ this.email +"</p><p>Phone: "+ this.phone +"</p><p>Message: "+ $("#message").text() +"</p><p>Opt-in for future updates: "+ this.optin +"</p>";
+    let message = "<p>Name: "+ this.name +"</p><p>Type: "+ this.type +"</p><p>Email: "+ this.email +"</p><p>Phone: "+ this.phone +"</p><p>Message: "+ $("#message").text() + "</p>";
     let email = {
       email: this.email,
       message: message
