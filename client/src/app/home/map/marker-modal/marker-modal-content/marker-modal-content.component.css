@@ -1,6 +1,23 @@
 .modal-content {
     height: 500px;
 }
+.modal-header {
+    border: 1px solid #e9ecef;
+}
+.fav {
+    font-size: 1.4rem;
+}
+.acfav {
+    display: none;
+    color: red;
+    font-size: 1.4rem;
+}
+.fav:hover {
+    display: none;
+}
+.acfav:hover {
+    display: inline;
+}
 agm-map {
     height: 500px;
 }

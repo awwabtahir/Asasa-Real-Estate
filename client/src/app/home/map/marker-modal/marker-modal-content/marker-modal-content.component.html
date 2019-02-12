@@ -55,10 +55,15 @@
     <div class="col-md-4">
       <div class="modal-header">
         <h5 class="modal-title">Property Overview</h5>
+        <!-- <div class="fav">
+          <i class="far fa-heart"></i>
+        </div>
+        <div class="acfav">
+          <i class="fas fa-heart"></i>
+        </div>         -->
       </div>
       <div *ngIf="ad" class="modal-content scroll" id="style-2">
         <!-- <social-login></social-login> -->
-        <email [id]="ad._id"></email>
 
         <div class="container">
           <div *ngIf="basic" class="row">
@@ -112,6 +117,7 @@
           </div>
 
         </div>
+        <email [id]="ad._id"></email>
         <br>
 
         <!-- <div class="container">
