@@ -10,23 +10,23 @@
   <div class="collapse navbar-collapse" id="navContent">
     <ul class="navbar-nav mr-auto left-nav">
       <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <a class="nav-link" href="#">Buy</a>
+        <a class="nav-link" routerLink="/">Find Your Best Property</a>
       </li>
       <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <a class="nav-link" href="#">Rent</a>
+        <a class="nav-link" href="#">Find Rental Property</a>
+      </li>
+      <li data-toggle="collapse" data-target="#navContent" class="nav-item">
+        <a class="nav-link" routerLink="/" onclick="openForm(); return false;">Add Property FREE</a>
       </li>
       <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <a class="nav-link" onclick="openForm(); return false;">Add Property FREE</a>
-      </li>
-      <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <a class="nav-link" href="#">New Projects</a>
+        <a class="nav-link" href="#">Discover New Projects</a>
       </li>
       <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
         <a class="nav-link" href="#">House Architecture</a>
       </li>
-      <li class="nav-item">
-        <div *ngIf="!auth.isLoggedIn()" class="nav-link call">Call Now: +92-311-2233656</div>
-      </li>
+      <!-- <li class="nav-item">
+        <div *ngIf="!auth.isLoggedIn()" class="nav-link"><i class="fas fa-mobile-alt"></i> +92-311-2233656</div>
+      </li> -->
     </ul>
     <ul class="navbar-nav pull-right right-nav">
       <li *ngIf="!auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">

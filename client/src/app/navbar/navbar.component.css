@@ -29,12 +29,17 @@
 .left-nav li a {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
-    color: black!important;
+    color: black;
+    font-size: 15px;
+    text-align: center;
 }
 
-.active,
+.active a,
 .left-nav li a:hover {
-    border-bottom: 3px solid #25BDA4;
+    border: 1px solid #25BDA4;
+    border-radius: 10%;
+    background-color: #25BDA4;
+    color: white!important;
 }
 
 .right-nav li a {
@@ -88,5 +93,8 @@
     }
     .call {
         margin-bottom: 10px;
+    }
+    .nav-link {
+        border-bottom: 1px solid gainsboro;
     }
 }
