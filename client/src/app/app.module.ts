@@ -37,6 +37,7 @@ import { PrivacyComponent } from './home/footer/privacy/privacy.component';
 import { InfoWindowContentComponent } from './home/map/marker/info-window-content/info-window-content.component';
 import { CallComponent } from './home/call/call.component';
 import { EmailComponent } from './home/email/email.component';
+import { RegionsComponent } from './home/regions/regions.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -79,7 +80,8 @@ export function getAuthServiceConfigs() {
     PrivacyComponent,
     InfoWindowContentComponent,
     CallComponent,
-    EmailComponent
+    EmailComponent,
+    RegionsComponent
   ],
   imports: [
     BrowserModule,
