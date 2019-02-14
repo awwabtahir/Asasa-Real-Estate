@@ -8,15 +8,8 @@
     font-size: 1.4rem;
 }
 .acfav {
-    display: none;
     color: red;
     font-size: 1.4rem;
-}
-.fav:hover {
-    display: none;
-}
-.acfav:hover {
-    display: inline;
 }
 agm-map {
     height: 500px;

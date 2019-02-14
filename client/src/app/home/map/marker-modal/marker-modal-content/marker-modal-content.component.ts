@@ -143,6 +143,11 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     // }, 500);
   }
 
+  fav = false;
+  favClicked() {
+    this.fav = !this.fav;
+  }
+
   private loadScripts() {
     const dynamicScripts = [
      'assets/js/three.min.js',
