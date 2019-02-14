@@ -5,7 +5,7 @@ autoIncrement.initialize(mongoose.connection);
 
 var locationSchema = new mongoose.Schema({
     cityId: { required: true, type: String },
-    location: { required: true, type: String, unique: true },
+    location: { required: true, type: String },
     lat: { required: true, type: Number },
     lng: { required: true, type: Number },
     overlayData: Object,
