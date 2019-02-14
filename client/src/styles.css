@@ -23,3 +23,9 @@ ng-select {
 ng-dropdown-panel {
     width: 120%!important;
 }
+
+@media (max-width: 768px) {
+    .modal-backdrop {
+        display: none;
+    }
+}

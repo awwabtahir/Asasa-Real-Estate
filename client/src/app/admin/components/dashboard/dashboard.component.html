@@ -1,38 +1,50 @@
 <div class="container">
 
-  <div class="row mt-3">
-    <div class="col-md-2">
-      <a class="btn btn-primary btn-lg btn-huge" routerLink="/dashboard/profile">
+  <div class="row mt-2">
+    <div class="col">
+      <a class="btn btn-primary" routerLink="/dashboard/profile">
         <i class="fas fa-user-alt"></i> Profile</a>
     </div>
-    <div *ngIf="!agent" class="col-md-2">
-      <a class="btn btn-primary btn-lg btn-huge" routerLink="/dashboard/agents">
+  </div>
+
+  <div *ngIf="!agent" class="row mt-2">
+    <div class="col">
+      <a class="btn btn-primary" routerLink="/dashboard/agents">
         <i class="fas fa-users"></i> Agents</a>
     </div>
-    <div class="col-md-2">
-      <a class="btn btn-success btn-lg btn-huge" routerLink="/dashboard/addProperty">
+  </div>
+
+  <div class="row mt-2">
+    <div class="col">
+      <a class="btn btn-success" routerLink="/dashboard/addProperty">
         <i class="fas fa-plus"></i> Add Property</a>
     </div>
   </div>
 
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <a class="btn btn-info btn-lg btn-huge" routerLink="/dashboard/activeProperties">
+  <div class="row mt-2">
+    <div class="col">
+      <a class="btn btn-info" routerLink="/dashboard/activeProperties">
         <i class="fas fa-th-list"></i> Active Properties</a>
     </div>
-    <div *ngIf="!agent" class="col-md-2">
-      <a class="btn btn-info btn-lg btn-huge" routerLink="/dashboard/editCityLoc">
+  </div>
+
+  <div *ngIf="!agent" class="row mt-2">
+    <div class="col">
+      <a class="btn btn-info" routerLink="/dashboard/editCityLoc">
         <i class="fas fa-plus"></i> Edit City/Location</a>
     </div>
-    <div *ngIf="!agent" class="col-md-2 ml-4">
-      <a class="btn btn-success btn-lg btn-huge ml-4" routerLink="/dashboard/addSubLocation">
+  </div>
+
+  <div *ngIf="!agent" class="row mt-2">
+    <div class="col">
+      <a class="btn btn-success" routerLink="/dashboard/addSubLocation">
         <i class="fas fa-plus"></i> Add Sub Locations</a>
     </div>
   </div>
 
-  <div class="row mt-3">
-    <div class="col-md-3">
-      <a class="btn btn-primary btn-lg btn-huge" routerLink="/dashboard/storage">
+  <div class="row mt-2">
+    <div class="col">
+      <a class="btn btn-primary" routerLink="/dashboard/storage">
         <i class="fas fa-hdd"></i> File Sharing</a>
     </div>
   </div>

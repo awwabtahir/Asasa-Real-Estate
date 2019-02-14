@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {TokenPayload} from 'shared/models/token';
 
 @Component({
+  selector: 'signin',
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
@@ -11,6 +12,9 @@ export class LoginComponent {
     email: '',
     password: ''
   };
+
+  regForm = false;
+  phone = '';
 
   constructor(private auth: AuthenticationService, private router: Router) {}
 
@@ -23,9 +27,17 @@ export class LoginComponent {
     }); 
   }
 
+  registerCustomer() {
+    console.log("register");
+  }
+
   saveData(data) {
     data = data.data;
     localStorage.setItem('user', JSON.stringify(data));
     // console.log(JSON.parse(localStorage.getItem('user')));
+  }
+
+  reg() {
+    this.regForm = !this.regForm;
   }
 }
