@@ -22,7 +22,7 @@
           <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos"
             aria-selected="false">Photos</a>
         </li>
-        <li *ngIf="image3d" class="nav-item col">
+        <li *ngIf="ad.imagesData && ad.imagesData.image3d && (ad.imagesData.image3d.value != '')" class="nav-item col">
           <a class="nav-link" id="3dImg-tab" data-toggle="tab" href="#3dImg" role="tab" aria-controls="3dImg"
             aria-selected="false" (click)="reload3D()">360&deg;</a>
         </li>
@@ -40,7 +40,7 @@
           aria-labelledby="photos-tab">
           <photo-slider [images]="ad.imagesData.images"></photo-slider>
         </div>
-        <div class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
+        <div *ngIf="ad.imagesData && ad.imagesData.image3d" class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
           <!-- <div id="target"></div> -->
           <iframe allowfullscreen="true" [src]="url3d()"></iframe>
         </div>

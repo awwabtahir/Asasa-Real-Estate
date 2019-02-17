@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PropertyService } from 'shared/services/property.service';
+import { ItemsList } from '@ng-select/ng-select/ng-select/items-list';
 
 @Component({
   selector: 'upload-image3d',
@@ -49,6 +50,12 @@ export class UploadImage3dComponent implements OnInit {
     //     this.propertyService.addImagesData(this.imagesData);
     //   };
     // }
+  }
+
+  getValue() {
+    if(this.item && this.item.imagesData && this.item.imagesData.image3d)
+      return this.item.imagesData.image3d.value;
+    else return "";
   }
 
   remove3d() {
