@@ -27,15 +27,16 @@ module.exports.update = function (req, res) {
       "message": "No data found!"
     });
   } else {
-    var image3d = data.imagesData.image3d;
-    if (image3d !== undefined) {
-      if (image3d.remove !== undefined) delete3dImage(data, res);
-      else if (image3d.url) updateAd(data, res);
-      else add3dImage(data, res);
-    }
-    else {
-      updateAd(data, res);
-    }
+    updateAd(data, res);
+    // var image3d = data.imagesData.image3d;
+    // if (image3d !== undefined) {
+    //   if (image3d.remove !== undefined) delete3dImage(data, res);
+    //   else if (image3d.url) updateAd(data, res);
+    //   else add3dImage(data, res);
+    // }
+    // else {
+    //   updateAd(data, res);
+    // }
   }
 
 };
