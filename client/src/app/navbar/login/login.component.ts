@@ -1,34 +1,51 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../../authentication.service';
 import { Router } from '@angular/router';
-import {TokenPayload} from 'shared/models/token';
+
+declare var $:any;
 
 @Component({
   selector: 'signin',
   templateUrl: './login.component.html'
 })
 export class LoginComponent {
-  credentials: TokenPayload = {
+  credentials = {
     email: '',
     password: ''
   };
 
   regForm = false;
+  name = '';
   phone = '';
+  repassword = '';
 
-  constructor(private auth: AuthenticationService, private router: Router) {}
+  constructor(private auth: AuthenticationService, private router: Router) { }
 
   login() {
     this.auth.login(this.credentials).subscribe((data) => {
       this.saveData(data);
-      this.router.navigateByUrl('/dashboard');
     }, (err) => {
       console.error(err);
-    }); 
+    });
   }
 
+  invalid = false;
   registerCustomer() {
-    console.log("register");
+    this.credentials['name'] = this.name;
+    this.credentials['phone'] = this.phone;
+    this.credentials['access'] = 'customer';
+
+    if (this.credentials.email == '' || this.credentials.password == ''
+      || this.credentials['name'] == '' || this.credentials['phone'] == '') {
+      this.invalid = true;
+    } else {
+      $('#signinModel').modal('hide');
+      this.auth.register(this.credentials).subscribe(() => {
+        console.log("registered");
+      }, (err) => {
+        console.error(err);
+      });
+    }
   }
 
   saveData(data) {

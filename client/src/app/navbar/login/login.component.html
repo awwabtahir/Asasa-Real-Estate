@@ -4,7 +4,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="signinModel" tabindex="-1" role="dialog" aria-labelledby="signinModelLabel" aria-hidden="true">
+<div class="modal fade" id="signinModel" tabindex="-1" role="dialog" aria-labelledby="signinModelLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -16,13 +17,21 @@
       <div class="modal-body">
         <div class="container">
           <div class="row">
-            <p *ngIf="!regForm" class="lead">Not a member? Please <a (click)="reg()" class="btn btn-outline-success btn-sm">register</a> instead.</p>
-            <p *ngIf="regForm" class="lead">Already a member? Please <a (click)="reg()" class="btn btn-outline-success btn-sm">login</a> instead.</p>
+            <p *ngIf="!regForm" class="lead">Not a member? Please <a (click)="reg()"
+                class="btn btn-outline-success btn-sm">register</a> instead.</p>
+            <p *ngIf="regForm" class="lead">Already a member? Please <a (click)="reg()"
+                class="btn btn-outline-success btn-sm">login</a> instead.</p>
 
             <form>
+              <div *ngIf="regForm" class="form-group">
+                <label for="name">Your Name</label>
+                <input type="name" class="form-control" name="name" placeholder="Enter name"
+                  [(ngModel)]="name">
+              </div>
               <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+                <input type="email" class="form-control" name="email" placeholder="Enter email"
+                  [(ngModel)]="credentials.email">
               </div>
               <div *ngIf="regForm" class="form-group">
                 <label for="phone">Mobile No</label>
@@ -30,14 +39,19 @@
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+                <input type="password" class="form-control" name="password" placeholder="Password"
+                  [(ngModel)]="credentials.password">
               </div>
               <div *ngIf="regForm" class="form-group">
                 <label for="password">Type Password Again</label>
-                <input type="password" class="form-control" placeholder="Type Password Again">
+                <input type="password" class="form-control" name="reenterpassword" placeholder="Type Password Again"
+                [(ngModel)]="repassword">
               </div>
+              <div *ngIf="(credentials.password !== repassword) && regForm" class="text-danger">*Password not match!!!</div>
+              <div *ngIf="invalid && regForm" class="text-danger">*Please fill all fields!!!</div>
+
               <button *ngIf="!regForm" (click)="login()" data-dismiss="modal" class="btn btn-default">Sign in!</button>
-              <button *ngIf="regForm" (click)="registerCustomer()" data-dismiss="modal" class="btn btn-default">Register!</button>
+              <button *ngIf="regForm" (click)="registerCustomer()" class="btn btn-default">Register!</button>
             </form>
 
           </div>
