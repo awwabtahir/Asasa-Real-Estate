@@ -10,6 +10,7 @@ module.exports.save = function (req, res) {
   } else {
     var location = new Location(req.body);
     location.save(function (err) {
+      console.log(err);
       res.status(200);
       res.json({
         "message": "success"

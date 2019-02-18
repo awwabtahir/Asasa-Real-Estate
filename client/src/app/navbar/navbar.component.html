@@ -2,8 +2,8 @@
   <a class="navbar-brand" routerLink="/">
     <img src="/assets/images/asasa_logo.png" class="logo">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navContent"
-    aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent"
+    aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -30,7 +30,12 @@
     </ul>
     <ul class="navbar-nav pull-right right-nav">
       <li *ngIf="!auth.isLoggedIn()" class="nav-item">
-        <div class="nav-link sign-in"><signin></signin></div>
+        <div class="nav-link sign-in">
+          <!-- Button trigger modal -->
+          <div data-toggle="modal" data-target="#signinModel">
+            <i class="fas fa-sign-in-alt"></i> Sign In/Register
+          </div>
+        </div>
       </li>
       <li *ngIf="auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">
         <a class="nav-link" routerLink="/dashboard"><i class="fas fa-toolbox fa-2x"></i> Dashboard</a>
@@ -41,3 +46,5 @@
     </ul>
   </div>
 </nav>
+
+<signin></signin>

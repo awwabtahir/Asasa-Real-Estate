@@ -38,6 +38,7 @@ import { InfoWindowContentComponent } from './home/map/marker/info-window-conten
 import { CallComponent } from './home/call/call.component';
 import { EmailComponent } from './home/email/email.component';
 import { RegionsComponent } from './home/regions/regions.component';
+import { FavHeartComponent } from './home/fav-heart/fav-heart.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -81,7 +82,8 @@ export function getAuthServiceConfigs() {
     InfoWindowContentComponent,
     CallComponent,
     EmailComponent,
-    RegionsComponent
+    RegionsComponent,
+    FavHeartComponent
   ],
   imports: [
     BrowserModule,

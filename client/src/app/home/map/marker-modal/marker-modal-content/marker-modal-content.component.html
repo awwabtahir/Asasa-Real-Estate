@@ -3,13 +3,8 @@
     <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block" routerLink="/">
       <i class="fas fa-arrow-left"></i> &nbsp; Go
       back</a>
-
-    <div *ngIf="!fav" class="fav mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none" (click)="favClicked()">
-      <i class="far fa-heart"></i>
-    </div>
-    <div *ngIf="fav" class="acfav mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none" (click)="favClicked()">
-      <i class="fas fa-heart"></i>
-    </div>
+    
+    <fav-heart class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none"></fav-heart>
 
     <div class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none ml-auto">
       <a routerLink="/"><i class="far fa-times-circle fa-2x"></i></a>
@@ -62,12 +57,7 @@
     <div class="col-md-4">
       <div class="modal-header">
         <h5 class="modal-title">Property Overview</h5>
-        <div *ngIf="!fav" class="fav d-none d-md-block" (click)="favClicked()">
-          <i class="far fa-heart"></i>
-        </div>
-        <div *ngIf="fav" class="acfav d-none d-md-block" (click)="favClicked()">
-          <i class="fas fa-heart"></i>
-        </div>
+        <fav-heart class="d-none d-md-block"></fav-heart>
       </div>
       <div *ngIf="ad" class="modal-content scroll" id="style-2">
         <!-- <social-login></social-login> -->
