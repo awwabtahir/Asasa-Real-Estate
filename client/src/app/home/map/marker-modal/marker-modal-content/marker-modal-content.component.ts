@@ -97,7 +97,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
 
   map: any;
   async mapReady(map) {    
-    this.loadScripts();
+    // this.loadScripts();
     this.map = map;
     let location = this.location.location;
     let locationObj;

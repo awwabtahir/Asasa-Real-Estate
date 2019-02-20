@@ -9,4 +9,5 @@ export interface UserDetails {
     locationId?: object;
     subLocations?: object;
     phone?: string;
+    favourites?: Array<number>;
   }

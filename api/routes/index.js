@@ -19,6 +19,7 @@ router.get('/profile', auth, ctrlProfile.profileRead);
 router.get('/getAgents', auth, ctrlProfile.getAgents);
 router.post('/delete_agent', ctrlProfile.deleteAgent);
 router.post('/update_agent', ctrlProfile.updateAgent);
+router.post('/update_fav', ctrlProfile.updateFav);
 
 // authentication
 router.post('/register', ctrlAuth.register);

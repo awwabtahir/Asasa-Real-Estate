@@ -17,6 +17,10 @@ var userSchema = new mongoose.Schema({
   locationId: Object,
   subLocations: Object,
   phone: String,
+  favourites: {
+    type: Array,
+    default: []
+  },
   hash: String,
   salt: String
 });

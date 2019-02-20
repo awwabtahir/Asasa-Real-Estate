@@ -13,6 +13,7 @@ import { EditCityLocComponent } from './components/edit-city-loc/edit-city-loc.c
 import { ProfileComponent } from './components/profile/profile.component';
 import { GDriveComponent } from './components/g-drive/g-drive.component';
 import { RegisterComponent } from 'app/navbar/register/register.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,12 @@ const routes: Routes = [
     {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [AuthGuardService]
+    },
+
+    {
+        path: 'favourites',
+        component: FavouritesComponent,
         canActivate: [AuthGuardService]
     },
 

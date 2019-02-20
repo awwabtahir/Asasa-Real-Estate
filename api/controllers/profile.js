@@ -33,12 +33,27 @@ module.exports.getAgents = function (req, res) {
 
 };
 
+module.exports.updateFav = function (req, res) {
+  let fav = req.body;
+  User.findById(fav.userId, function (err, user) {
+    if (err) console.log(err);
+
+    user.set({
+      favourites: fav.favourites
+    });
+    user.save(function (err, updatedUser) {
+      if (err) console.log(err);
+      res.send(updatedUser);
+    });
+  });
+}
+
 module.exports.updateAgent = function (req, res) {
   let agent = req.body;
   User.findById(agent._id, function (err, user) {
     if (err) return handleError(err);
 
-    user.set({ 
+    user.set({
       name: agent.name,
       phone: agent.phone,
       email: agent.email,

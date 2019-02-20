@@ -12,6 +12,7 @@ import { location } from 'shared/models/location';
 import { image } from 'shared/models/image';
 import { customer } from 'shared/models/customer';
 import { email } from 'shared/models/email';
+import { fav } from 'shared/models/fav';
 
 @Injectable()
 export class AuthenticationService {
@@ -56,8 +57,8 @@ export class AuthenticationService {
     method: 'post'|'get', 
     type: 'login'|'register'|'update_agent'|'profile'|'save_ad'|'get_ads'|'delete_ad'|'update_ad'|'delete_agent'|
     'save_city'|'get_cities'|'save_location'|'get_locations'|'update_image'|'update_location'|'getAgents'|
-    'get_customers'|'save_customer'|'send_email', 
-    template?: TokenPayload | ad | city | location | image | customer | email): Observable<any> {
+    'get_customers'|'save_customer'|'send_email'|'update_fav', 
+    template?: TokenPayload | ad | city | location | image | customer | email | fav): Observable<any> {
 
     let base;
     let prod = false;
@@ -76,6 +77,7 @@ export class AuthenticationService {
       map((data: TokenResponse) => {
         if(!data) return;
         if (data.token) {
+          localStorage.setItem('customer-data', JSON.stringify(data.data));
           this.saveToken(data.token);
         }
         return data;
@@ -99,6 +101,10 @@ export class AuthenticationService {
 
   public profile(): Observable<any> {
     return this.request('get', 'profile');
+  }
+
+  public updateFav(fav): Observable<any> {
+    return this.request('post', 'update_fav', fav);
   }
 
   public getAgents(): Observable<any> {

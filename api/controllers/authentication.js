@@ -70,7 +70,8 @@ module.exports.login = function(req, res) {
           access : user.access,
           cityId : user.cityId,
           locationId : user.locationId,
-          subLocations : user.subLocations
+          subLocations : user.subLocations,
+          favourites: user.favourites
         }
       });
     } else {

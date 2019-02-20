@@ -1,5 +1,6 @@
 export interface TokenResponse {
     token: string;
+    data: object;
 }
 
 export interface TokenPayload {
@@ -11,4 +12,5 @@ export interface TokenPayload {
     locationId?: object;
     subLocations?: object;
     phone?: string;
+    favourites?: Array<number>;
 }
