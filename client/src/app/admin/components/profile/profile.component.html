@@ -1,18 +1,32 @@
 <div class="container">
   <div class="row">
-    
-     <div class="col-md-6">
 
-      <h1 class="form-signin-heading">Your profile</h1>
+    <div class="col-md-4">
+
+      <h3 class="form-signin-heading">Your Profile</h3>
+      <button *ngIf="!edit" class="btn btn-primary btn-sm" (click)="editClicked()"><i class="fas fa-user-edit"></i>
+        Edit</button>
 
       <div class="form-horizontal">
         <div class="form-group">
-          <label class="col-sm-3 control-label">Full name</label>
-          <p class="form-control-static">{{ details?.name }}</p>
+          <label class="col-sm-3 control-label"><b>Email</b></label>
+          <p class="form-control-static">{{ details?.email }}</p>
         </div>
         <div class="form-group">
-          <label class="col-sm-3 control-label">Email</label>
-          <p class="form-control-static">{{ details?.email }}</p>
+          <label class="col-sm-3 control-label"><b>Name</b></label>
+          <p *ngIf="!edit" class="form-control-static">{{ details?.name }}</p>
+          <input *ngIf="edit" type="name" class="form-control" name="name" placeholder="Enter name"
+            [(ngModel)]="details.name">
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 control-label"><b>Phone</b></label>
+          <p *ngIf="!edit" class="form-control-static">{{ details?.phone }}</p>
+          <input *ngIf="edit" type="text" class="form-control" name="phone" placeholder="Enter phone"
+            [(ngModel)]="details.phone">
+        </div>
+        <div *ngIf="edit" class="form-group">
+          <button class="btn btn-danger btn-sm" (click)="updateClicked()"><i class="fas fa-user-edit"></i>
+            Update</button>
         </div>
       </div>
 

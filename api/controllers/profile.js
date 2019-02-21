@@ -48,6 +48,22 @@ module.exports.updateFav = function (req, res) {
   });
 }
 
+module.exports.updateUser = function (req, res) {
+  let updatedUser = req.body;
+  User.findById(updatedUser._id, function (err, user) {
+    if (err) return handleError(err);
+
+    user.set({
+      name: updatedUser.name,
+      phone: updatedUser.phone
+    });
+    user.save(function (err, updatedUser) {
+      if (err) return handleError(err);
+      res.send(updatedUser);
+    });
+  });
+};
+
 module.exports.updateAgent = function (req, res) {
   let agent = req.body;
   User.findById(agent._id, function (err, user) {
