@@ -8,12 +8,21 @@ import { MapService } from './services/map.service';
 import { PropertyModalService } from './services/property-modal.service';
 import { PropertyService } from './services/property.service';
 import { FilterService } from './services/filter.service';
+import { ListviewComponent } from './components/listview/listview.component';
+import { FavHeartComponent } from './components/fav-heart/fav-heart.component';
+import { CallComponent } from './components/call/call.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
-  declarations: [],
+  declarations: [
+    ListviewComponent,
+    FavHeartComponent,
+    CallComponent
+  ],
   providers: [
     AuthGuardService,
     PropertyService,
@@ -22,6 +31,11 @@ import { FilterService } from './services/filter.service';
     LocationService,
     ImageService,
     FilterService
+  ],
+  exports: [
+    ListviewComponent,
+    FavHeartComponent,
+    CallComponent
   ]
 })
 export class SharedModule { }

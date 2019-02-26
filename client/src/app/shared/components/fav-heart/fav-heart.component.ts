@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { AuthenticationService } from 'app/authentication.service';
 import { ActivatedRoute } from '@angular/router';
-import { ɵINTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS } from '@angular/platform-browser-dynamic';
 
 declare var $: any;
 
@@ -12,6 +11,7 @@ declare var $: any;
 })
 export class FavHeartComponent implements OnInit, OnDestroy {
 
+  @Input() adId; 
   ad_id;
   customer;
   fav = false;
@@ -26,6 +26,10 @@ export class FavHeartComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.ad_id = +params['id'];
     });
+
+    if(this.adId) {
+      this.ad_id = this.adId;
+    }
 
     this.setCustomerDetails();
     for (var i = 0; i < this.customer.favourites.length; i++) {

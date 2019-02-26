@@ -1,0 +1,95 @@
+p {
+    font-size: 13.9px;
+    color: #707070;
+}
+
+.feature-item {
+    margin-bottom: 50px;
+}
+
+.feature-pic {
+    height: 250px;
+}
+
+.set-bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+
+.feature-pic .sale-notic, .feature-pic .rent-notic {
+    margin: 20px;
+}
+
+.rent-notic {
+    background: #eca643;
+}
+
+.sale-notic, .rent-notic {
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    background: #e94646;
+    padding: 7px 13px;
+    display: inline-block;
+    border-radius: 2px;
+    position: relative;
+    z-index: 3;
+}
+
+fav-heart {
+    position: relative;
+    float: right;
+    margin: 20px;
+    background: white;
+    padding: 1px 6px;
+    border-radius: 10px;
+    opacity: 0.9;
+}
+
+.feature-text {
+    border-left: 1px solid #ebebeb;
+    border-right: 1px solid #ebebeb;
+}
+
+.feature-title {
+    padding-top: 20px;
+}
+
+.feature-title p {
+    margin-bottom: 0;
+}
+
+.room-info-warp {
+    padding: 25px;
+    padding-bottom: 0;
+}
+
+.room-info {
+    border-top: 1px solid #ebebeb;
+    padding-top: 15px;
+    overflow: hidden;
+}
+
+.room-info .rf-left {
+    float: left;
+}
+
+.room-info .rf-right {
+    float: right;
+}
+
+.feature-item .room-price {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    background: #fff;
+    text-align: center;
+    padding: 13px;
+    background: #30caa0;
+    color: #fff;
+}
+
+call>button {
+    width: 100%!important;
+}

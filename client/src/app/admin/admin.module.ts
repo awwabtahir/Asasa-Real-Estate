@@ -47,6 +47,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { GDriveComponent } from './components/g-drive/g-drive.component';
 import { RegisterComponent } from 'app/navbar/register/register.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
+import { SharedModule } from 'shared/shared.module';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { FavouritesComponent } from './components/favourites/favourites.componen
     NgSelectModule,
     NgxEditorModule,
     FilePondModule,
+    SharedModule,
     AdminRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',

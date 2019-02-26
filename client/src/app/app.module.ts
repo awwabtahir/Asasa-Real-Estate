@@ -35,10 +35,8 @@ import { SocialLoginComponent } from './home/social-login/social-login.component
 import { TermsComponent } from './home/footer/terms/terms.component';
 import { PrivacyComponent } from './home/footer/privacy/privacy.component';
 import { InfoWindowContentComponent } from './home/map/marker/info-window-content/info-window-content.component';
-import { CallComponent } from './home/call/call.component';
 import { EmailComponent } from './home/email/email.component';
 import { RegionsComponent } from './home/regions/regions.component';
-import { FavHeartComponent } from './home/fav-heart/fav-heart.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -80,10 +78,8 @@ export function getAuthServiceConfigs() {
     TermsComponent,
     PrivacyComponent,
     InfoWindowContentComponent,
-    CallComponent,
     EmailComponent,
-    RegionsComponent,
-    FavHeartComponent
+    RegionsComponent
   ],
   imports: [
     BrowserModule,

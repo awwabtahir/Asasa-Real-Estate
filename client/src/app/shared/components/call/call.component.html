@@ -1,5 +1,5 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-success" style="width: 45%;" data-toggle="modal" data-target="#callModal">
+<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#callModal">
     Call
 </button>
 
@@ -23,7 +23,7 @@
                     </tbody>
                 </table>
                 <p class="text-center">Please quote property reference</p>
-                <p class="text-center" style="font-weight: bold;">ID-{{ id }}</p>
+                <p *ngIf="id" class="text-center" style="font-weight: bold;">ID-{{ id }}</p>
                 <p class="text-center">when calling us.</p>
             </div>
         </div>
