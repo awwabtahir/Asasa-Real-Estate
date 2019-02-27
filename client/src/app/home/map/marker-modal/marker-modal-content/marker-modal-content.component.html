@@ -40,7 +40,7 @@
           <iframe allowfullscreen="true" [src]="url3d()"></iframe>
         </div>
         <div *ngIf="ad.vidUrl" class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
-          <iframe [src]='safeUrl' frameborder="0" allowfullscreen></iframe>
+          <iframe [src]='safeUrl' frameborder="0" scrolling="no" allowfullscreen></iframe>
         </div>
         <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
           <agm-map [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [mapTypeControl]=true
