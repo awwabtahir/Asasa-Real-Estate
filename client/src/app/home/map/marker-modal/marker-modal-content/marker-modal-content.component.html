@@ -37,7 +37,7 @@
         </div>
         <div *ngIf="ad.imagesData && ad.imagesData.image3d" class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
           <!-- <div id="target"></div> -->
-          <iframe allowfullscreen="true" [src]="url3d()"></iframe>
+          <iframe frameborder="0" scrolling="no" [src]="url3D" allowfullscreen></iframe>
         </div>
         <div *ngIf="ad.vidUrl" class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
           <iframe [src]='safeUrl' frameborder="0" scrolling="no" allowfullscreen></iframe>

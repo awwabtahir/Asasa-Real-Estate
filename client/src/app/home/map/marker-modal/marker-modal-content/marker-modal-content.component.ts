@@ -128,8 +128,9 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     this.image3d = true;
   }
 
+  url3D;
   url3d() {
-    return this._sanitizer.bypassSecurityTrustResourceUrl(this.ad.imagesData.image3d.value);
+    this.url3D = this._sanitizer.bypassSecurityTrustResourceUrl(this.ad.imagesData.image3d.value);
   }
 
   panorama;
