@@ -19,7 +19,7 @@
         </li>
         <li *ngIf="ad.imagesData && ad.imagesData.image3d && (ad.imagesData.image3d.value != '')" class="nav-item col">
           <a class="nav-link" id="3dImg-tab" data-toggle="tab" href="#3dImg" role="tab" aria-controls="3dImg"
-            aria-selected="false" (click)="reload3D()">360&deg;</a>
+            aria-selected="false" (click)="url3d()">360&deg;</a>
         </li>
         <li *ngIf="ad.vidUrl" class="nav-item col">
           <a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos"
@@ -37,7 +37,7 @@
         </div>
         <div *ngIf="ad.imagesData && ad.imagesData.image3d" class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
           <!-- <div id="target"></div> -->
-          <iframe frameborder="0" scrolling="no" [src]="url3D" allowfullscreen></iframe>
+          <iframe *ngIf="image3d" frameborder="0" scrolling="no" [src]="url3D" allowfullscreen></iframe>
         </div>
         <div *ngIf="ad.vidUrl" class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
           <iframe [src]='safeUrl' frameborder="0" scrolling="no" allowfullscreen></iframe>
