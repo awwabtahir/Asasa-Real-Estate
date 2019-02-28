@@ -32,9 +32,17 @@ export class ListviewComponent implements OnInit {
     this.propertyService.getAds().subscribe(properties => {
       this.properties = properties;
       this.propertiesAvailable = true;
+      if(!this.list) {
+        this.getList();
+      }
     }, (err) => {
       console.error(err);
     });
+  }
+
+  getList() {
+    let result = this.properties.map(a => a._id);
+    this.list = result;
   }
 
 }

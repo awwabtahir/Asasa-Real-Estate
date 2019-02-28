@@ -12,6 +12,7 @@ import { ListviewComponent } from './components/listview/listview.component';
 import { FavHeartComponent } from './components/fav-heart/fav-heart.component';
 import { CallComponent } from './components/call/call.component';
 import { RouterModule } from '@angular/router';
+import { ViewService } from './services/view.service';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { RouterModule } from '@angular/router';
     PropertyModalService,
     LocationService,
     ImageService,
-    FilterService
+    FilterService,
+    ViewService
   ],
   exports: [
     ListviewComponent,

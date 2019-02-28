@@ -4,6 +4,7 @@ import { MapService } from 'shared/services/map.service';
 import { ActivatedRoute } from '@angular/router';
 import { LocationService } from 'shared/services/location.service';
 import { Location } from '@angular/common';
+import { ViewService } from 'shared/services/view.service';
 
 @Component({
   selector: 'search',
@@ -30,6 +31,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private auth: AuthenticationService,
     private mapService: MapService,
     private locationService: LocationService,
+    private viewService: ViewService,
     private route: ActivatedRoute,
     private locationUrl: Location
   ) { }
@@ -153,6 +155,21 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   hideDropDown() {
     $('.dropdown-menu').toggle();
+  }
+
+  mapView = false;
+  listView = true;
+
+  listViewClicked() {
+    this.mapView = true;
+    this.listView = false;
+    this.viewService.viewChange("listview");
+  }
+
+  mapViewClicked() {
+    this.mapView = false;
+    this.listView = true;
+    this.viewService.viewChange("mapview");
   }
 
 }

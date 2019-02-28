@@ -1,6 +1,7 @@
 <div class="container">
   <search class="row"></search>
-  <map class="row"></map>
+  <map *ngIf="mapView" class="row"></map>
+  <listview *ngIf="listView" class="row mt-2"></listview>
   <regions class="row"></regions>
   <asasa-footer class="row"></asasa-footer>
 </div>

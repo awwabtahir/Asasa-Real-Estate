@@ -81,4 +81,11 @@
 
   <search-filter class="mt-1"></search-filter>
 
+  <button *ngIf="listView" (click)="listViewClicked()" class="btn btn-info btn-sm mt-1 mr-1 ml-2">
+    <i class="fas fa-th-list"></i> List View</button>
+
+  <button *ngIf="mapView" (click)="mapViewClicked()" class="btn btn-info btn-sm mt-1 mr-1 ml-2">
+        <i class="fas fa-th-list"></i> Map View</button>
+
+
 </div>
