@@ -74,6 +74,11 @@ export class FavHeartComponent implements OnInit, OnDestroy {
 
   setCustomerDetails() {
     this.customer = JSON.parse(localStorage.getItem('customer-data'));
+    if(this.customer == null) {
+      this.customer = {
+        favourites: []
+      };
+    }
   }
 
   updateCustomerDetails(data) {
