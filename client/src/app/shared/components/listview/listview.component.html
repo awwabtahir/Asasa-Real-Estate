@@ -20,6 +20,7 @@
       <div class="text-center feature-title">
         <h5>{{ ad.subtype }}</h5>
         <p><i class="fa fa-map-marker"></i> {{ ad.locationData.location }} {{ ad.locationData.sector }}, {{ ad.locationData.city }}</p>
+        <a class="btn btn-outline-success btn-sm" routerLink="/property-details/{{ ad._id }}">Click Here For More Details</a>
       </div>
       <div class="room-info-warp">
         <div class="room-info">
@@ -43,7 +44,7 @@
           </div>
         </div>
       </div>
-      <a routerLink="/property-details/{{ ad._id }}" class="room-price">Rs. {{ ad.demand }}</a>
+      <div class="room-price">Rs. {{ ad.demand }}</div>
     </div>
   </div>
 </ng-template>
