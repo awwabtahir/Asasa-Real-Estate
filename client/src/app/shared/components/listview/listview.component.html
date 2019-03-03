@@ -1,11 +1,17 @@
 <div class="container">
   <div *ngIf="propertiesAvailable" class="row">
-    <ng-container *ngFor="let l of list; let i = index">
+    <pagination-controls (pageChange)="p = $event" responsive="true"></pagination-controls>
+  </div>
+  <div *ngIf="propertiesAvailable" class="row">
+    <ng-container *ngFor="let l of list | paginate: { itemsPerPage: 6, currentPage: p }; let i = index">
       <div class="col-sm-4">
         <ng-container *ngTemplateOutlet="adTemplate;context:getAd(l)">
         </ng-container>
       </div>
     </ng-container>
+  </div>
+  <div *ngIf="propertiesAvailable" class="row">
+    <pagination-controls (pageChange)="p = $event" responsive="true"></pagination-controls>
   </div>
 </div>
 
@@ -19,8 +25,10 @@
     <div class="feature-text">
       <div class="text-center feature-title">
         <h5>{{ ad.subtype }}</h5>
-        <p><i class="fa fa-map-marker"></i> {{ ad.locationData.location }} {{ ad.locationData.sector }}, {{ ad.locationData.city }}</p>
-        <a class="btn btn-outline-success btn-sm" routerLink="/property-details/{{ ad._id }}">Click Here For More Details</a>
+        <p><i class="fa fa-map-marker"></i> {{ ad.locationData.location }} {{ ad.locationData.sector }},
+          {{ ad.locationData.city }}</p>
+        <a class="btn btn-outline-success btn-sm" routerLink="/property-details/{{ ad._id }}">Click Here For More
+          Details</a>
       </div>
       <div class="room-info-warp">
         <div class="room-info">
@@ -40,7 +48,9 @@
             <p><i class="fas fa-mobile"></i> Agent</p>
           </div>
           <div class="rf-right">
-            <p><call></call></p>
+            <p>
+              <call></call>
+            </p>
           </div>
         </div>
       </div>

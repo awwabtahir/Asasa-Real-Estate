@@ -12,6 +12,8 @@ export class ListviewComponent implements OnInit {
   propertiesAvailable = false;
   properties;
 
+  p: number = 1;
+
   constructor(
     private propertyService: PropertyService
   ) { }

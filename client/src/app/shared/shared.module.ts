@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AuthGuardService } from './services/auth-guard.service';
 import { ImageService } from './services/image.service';
@@ -17,7 +18,8 @@ import { ViewService } from './services/view.service';
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    NgxPaginationModule
   ],
   declarations: [
     ListviewComponent,
