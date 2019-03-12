@@ -1,3 +1,6 @@
+p{
+    margin-bottom: 0;
+}
 .modal-content {
     height: 500px;
 }
@@ -41,6 +44,12 @@ iframe{
     }
 }
 
+@media screen and (max-width: 400px) { 
+    .modal-content {
+        height: auto;
+    }
+}
+
 .bluetick {
     color: #37bba3;
 }
@@ -74,4 +83,17 @@ iframe{
     margin-right: auto;
     width: 100%;
     height: 400px;
+}
+
+.navigation {
+    margin-left: 2px;
+    margin-bottom: 2px; 
+}
+
+.breadcrumb {
+    background-color: white;
+    margin-bottom: 0;
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 10px;
 }

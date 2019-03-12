@@ -3,13 +3,25 @@
     <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block" routerLink="/">
       <i class="fas fa-arrow-left"></i> &nbsp; Go
       back</a>
-    
+
     <fav-heart [id]="id" class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none"></fav-heart>
+
+    <nav *ngIf="ad" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+        <li class="breadcrumb-item"><a routerLink="/{{ ad.locationData.city }}">{{ ad.locationData.city }}</a></li>
+        <li class="breadcrumb-item"><a
+            routerLink="/{{ ad.locationData.city }}/{{ ad.locationData.location }}">{{ ad.locationData.location }}</a>
+        </li>
+        <li class="breadcrumb-item">{{ ad._id }}</li>
+      </ol>
+    </nav>
 
     <div class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none ml-auto">
       <a routerLink="/"><i class="far fa-times-circle fa-2x"></i></a>
     </div>
   </div>
+
   <div class="row no-gutters">
     <div *ngIf="ad" class="col-md-8">
       <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
@@ -35,7 +47,8 @@
           aria-labelledby="photos-tab">
           <photo-slider [images]="ad.imagesData.images"></photo-slider>
         </div>
-        <div *ngIf="ad.imagesData && ad.imagesData.image3d" class="tab-pane fade" id="3dImg" role="tabpanel" aria-labelledby="3dImg-tab">
+        <div *ngIf="ad.imagesData && ad.imagesData.image3d" class="tab-pane fade" id="3dImg" role="tabpanel"
+          aria-labelledby="3dImg-tab">
           <!-- <div id="target"></div> -->
           <iframe *ngIf="image3d" frameborder="0" scrolling="no" [src]="url3D" allowfullscreen></iframe>
         </div>
@@ -56,33 +69,63 @@
 
     <div class="col-md-4">
       <div class="modal-header">
-        <h5 class="modal-title">Property Overview</h5>
+        <h5 class="d-none d-md-block modal-title">Add to Favourite</h5>
         <fav-heart class="d-none d-md-block"></fav-heart>
       </div>
       <div *ngIf="ad" class="modal-content scroll" id="style-2">
         <!-- <social-login></social-login> -->
 
         <div class="container">
-          <div *ngIf="basic" class="row">
+
+          <div class="row mb-2 mt-2">
+            <div class="col mt-1 text-center">
+              <i class="fab fa-houzz fa-2x" style="color:#37bba3;"></i>
+              <p>Property Type</p>
+              <p><b>{{ ad.subtype }}</b></p>
+            </div>
+            <div class="col mt-1 text-center">
+              <i class="fas fa-vector-square fa-2x" style="color:#37bba3;"></i>
+              <p>Unit Area ({{ ad.areaType }})</p>
+              <p><b>{{ ad.area }}</b></p>
+            </div>
+            <div class="col mt-1 text-center">
+              <i class="fas fa-hand-holding-usd fa-2x" style="color:#37bba3;"></i>
+              <p>Price (Rs)</p>
+              <p><b>{{ ad.demand }}</b></p>
+            </div>
+          </div>
+
+          <div *ngIf="basic" class="row mb-1">
             <div class="alert alert-info w-100 text-center">
               <strong>Basics</strong>
             </div>
-            <div *ngFor="let entry of basic | keys" class="col-md-6">
-              <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
-            </div>
-            <div *ngFor="let entry of location | keys" class="col-md-6">
-              <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
-            </div>
+
+            <table class="table table-striped" style="margin: 10px; margin-top: 0;">
+              <tbody>
+                <tr>
+                  <b>Property Ref Id</b> : {{ ad._id }}
+                </tr>
+                <tr *ngFor="let entry of basic | keys">
+                  <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
+                </tr>
+                <tr *ngFor="let entry of location | keys">
+                  <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
+                </tr>
+              </tbody>
+            </table>
+
           </div>
+
           <div *ngIf="ad.description" class="row mt-2">
             <div class="alert alert-info w-100 text-center">
               <strong>Description</strong>
             </div>
             <div innerHTML="{{ad.description}}" class="ml-1"></div>
           </div>
+
           <div *ngIf="ad.type == 'plot'" class="row mt-2">
             <div class="alert alert-info w-100 text-center">
-              <strong>Main Features</strong>
+              <strong>Features</strong>
             </div>
             <ng-container *ngFor="let entry of plot_features | keys">
               <div *ngIf="entry.value" class="col-md-6">
@@ -90,27 +133,24 @@
                 <i class="fas fa-check bluetick"></i>
               </div>
             </ng-container>
-          </div>
-          <div *ngIf="ad.other" class="row mt-2">
-            <div class="alert alert-info w-100 text-center">
-              <strong>Other</strong>
-            </div>
-            <ng-container *ngFor="let entry of other | keys">
-              <div *ngIf="entry.value" class="col-md-6">
-                <b>{{entry.key | titlecase}}</b> &nbsp;
-                <i class="fas fa-check bluetick"></i>
-              </div>
+
+            <ng-container *ngIf="ad.other">
+              <ng-container *ngFor="let entry of other | keys">
+                <div *ngIf="entry.value" class="col-md-6">
+                  <b>{{entry.key | titlecase}}</b> &nbsp;
+                  <i class="fas fa-check bluetick"></i>
+                </div>
+              </ng-container>
             </ng-container>
-          </div>
-          <div *ngIf="ad.nearby_loc" class="row mt-2">
-            <div class="alert alert-info w-100 text-center">
-              <strong>Nearby Locations</strong>
-            </div>
-            <ng-container *ngFor="let entry of nearby_loc | keys">
-              <div *ngIf="entry.value" class="col-md-6">
-                <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
-              </div>
+
+            <ng-container *ngIf="ad.nearby_loc">
+              <ng-container *ngFor="let entry of nearby_loc | keys">
+                <div *ngIf="entry.value" class="col-md-6">
+                  <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
+                </div>
+              </ng-container>
             </ng-container>
+
           </div>
 
         </div>

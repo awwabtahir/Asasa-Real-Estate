@@ -58,6 +58,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   ngOnChanges() {
     if (!this.ad) return;
 
+    console.log(this.ad);
+
     this.locationUrl.replaceState(
       "/" + 
       this.ad.locationData.city + "/" + 
