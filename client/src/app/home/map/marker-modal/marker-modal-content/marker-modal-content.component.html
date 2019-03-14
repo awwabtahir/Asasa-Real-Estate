@@ -124,7 +124,7 @@
           </div>
 
           <div *ngIf="ad.type == 'plot'" class="row mt-2">
-            <div class="alert alert-info w-100 text-center">
+            <div *ngIf="plot_features.length > 0" class="alert alert-info w-100 text-center">
               <strong>Features</strong>
             </div>
             <ng-container *ngFor="let entry of plot_features | keys">
