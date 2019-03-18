@@ -46,7 +46,7 @@ export class UploadImagesComponent implements OnInit {
         adId: this.adId,
         filename: file.name,
         filetype: file.type,
-        value: reader.result.split(',')[1]
+        value: (<string>reader.result).split(',')[1]
       };
       this.imageService.addImage(image);
     };

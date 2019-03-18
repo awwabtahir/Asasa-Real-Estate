@@ -133,6 +133,7 @@ export class PropertyService {
     ad["healthcare"] = this.healthcare;
     ad["nearby_loc"] = this.nearby_loc;
     ad["other"] = this.other;
+    console.log(this.adId);
     if(this.adId) {
       if(!ad["_id"]) ad["_id"] = this.adId;
       this.imagesData["adId"] = this.adId;

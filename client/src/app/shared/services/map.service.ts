@@ -1,6 +1,8 @@
 /// <reference types="@types/googlemaps" />
 declare var klokantech: any;
 import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs';
+import { city } from 'shared/models/city';
 
 @Injectable({
   providedIn: 'root'

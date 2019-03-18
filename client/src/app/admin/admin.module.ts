@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DataTableModule } from 'angular-6-datatable';
 import { NgxEditorModule } from 'ngx-editor';
-import { FilePondModule } from 'ngx-filepond';
+import { FilePondModule  } from 'ngx-filepond';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { ActivePropertiesComponent } from './components/active-properties/active-properties.component';

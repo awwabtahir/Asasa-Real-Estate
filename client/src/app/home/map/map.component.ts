@@ -28,14 +28,14 @@ export class MapComponent implements OnInit {
   constructor(private mapService: MapService) { }
 
   ngOnInit() {
-    this.city = this.mapService.getCity().subscribe(city => {
+    this.mapService.getCity().subscribe(city => {
       this.city = city;
       this.locName = "";
       this.cityName = this.city.city;
       this.lat = this.city.lat;
       this.lng = this.city.lng;
     });
-    this.location = this.mapService.getLocation().subscribe(location => {
+    this.mapService.getLocation().subscribe(location => {
       this.location = location;
       this.locName = this.location.location;
       this.lat = this.location.lat;
