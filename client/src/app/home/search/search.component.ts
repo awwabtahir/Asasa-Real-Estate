@@ -95,6 +95,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   cityChange(cityObj, prevData?) {
     $(':focus').blur();
+    if(!cityObj) return;
     let cityId = cityObj._id;
     this.selectedCity = cityObj._id;
     let cityData = this.cities.filter(function (city) {
@@ -129,6 +130,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   locationChange(locObj) {
     $(':focus').blur();
+    if(!locObj) return;
     let locId = locObj._id;
     this.selectedLocation = locObj._id;
     let locData = this.locations.filter(function (loc) {
