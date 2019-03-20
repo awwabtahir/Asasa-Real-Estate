@@ -7,3 +7,8 @@
 .steps {
     padding: 20px;
 }
+
+.greentick {
+    color: #25BDA4;
+    margin-right: 2px; 
+}
