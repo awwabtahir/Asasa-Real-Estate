@@ -23,9 +23,7 @@ export class ListviewComponent implements OnInit {
   ngOnInit() {
     this.getAds();
 
-    this.mapService.getCity().subscribe(city => {
-      this.cityChange(city.city);
-    });
+    this.getCurrentCity();
   }
 
   getAd(id) {
@@ -51,6 +49,12 @@ export class ListviewComponent implements OnInit {
   getList(props) {
     let result = props.map(a => a._id);
     this.list = result;
+  }
+
+  getCurrentCity() {
+    this.mapService.getCity().subscribe(city => {
+      this.cityChange(city.city);
+    });
   }
 
   cityChange(city) {
