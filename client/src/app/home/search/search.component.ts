@@ -109,7 +109,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.city = cityData[0].city;
 
-    this.locationUrl.go('/' + cityData[0].city);
+    this.locationUrl.go('map/' + cityData[0].city);
     this.ga('set', 'page', this.locationUrl.path());
     this.ga('send', 'pageview');
     console.log(this.ga);
@@ -140,9 +140,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.locationService.setLocObj(locData[0]);
 
     if (this.city)
-      this.locationUrl.go('/' + this.city + '/' + locData[0].location);
+      this.locationUrl.go('map/' + this.city + '/' + locData[0].location);
     else
-      this.locationUrl.go('/' + locData[0].location);
+      this.locationUrl.go('map/' + locData[0].location);
 
     this.ga('set', 'page', this.locationUrl.path());
     this.ga('send', 'pageview');
