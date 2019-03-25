@@ -64,13 +64,13 @@ export class AuthenticationService {
     let prod = false;
 
     if (method === 'post') {
-      base = this.http.post(`/api/${type}`, template);
+      base = this.http.post(`https://www.asasa.com/api/${type}`, template);
       if(prod)
-        base = this.http.post(`http://localhost:3000/api/${type}`, template);
+        base = this.http.post(`https://www.asasa.com/api/${type}`, template);
     } else {
-      base = this.http.get(`/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`https://www.asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
       if(prod)
-        base = this.http.get(`http://localhost:3000/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+        base = this.http.get(`https://www.asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
     const request = base.pipe(
