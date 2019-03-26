@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'mongodb://iamasasa:warka123@ds231961.mlab.com:31961/asasadbweb';
+var dbURI = 'mongodb+srv://iamasasa:warka123@cluster0-ijdgl.mongodb.net';
 // if (process.env.NODE_ENV === 'production') {
 //   dbURI = process.env.MONGOLAB_URI;
 // }
 
-mongoose.connect(dbURI, { useNewUrlParser: true });
+mongoose.connect(dbURI, {dbName: 'asasadbweb'});
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {

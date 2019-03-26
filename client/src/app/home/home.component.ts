@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewService } from 'shared/services/view.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './home.component.html',
@@ -7,26 +7,14 @@ import { ViewService } from 'shared/services/view.service';
 })
 export class HomeComponent implements OnInit {
 
-  view;
-
-  mapView = true;
-  listView = false;
-
   constructor(
-    private viewService: ViewService
+    private router: Router
   ) { }
 
-  ngOnInit() {
-    this.view = this.viewService.getView().subscribe(view => {
-      if(view == "listview") {
-        this.mapView = false;
-        this.listView = true;
-      } else {
-        this.mapView = true;
-        this.listView = false;
-      }
-    });
+  ngOnInit() {}
 
+  welcomeClicked() {
+   this.router.navigateByUrl("/map");
   }
 
 }
