@@ -62,7 +62,7 @@ import { SharedModule } from 'shared/shared.module';
     SharedModule,
     AdminRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8',
+      apiKey: 'AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4',
       libraries: ["places"]
     })
   ],
