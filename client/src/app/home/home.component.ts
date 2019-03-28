@@ -1,24 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ViewService } from 'shared/services/view.service';
+import { Component, OnInit, HostListener, Inject } from "@angular/core";
+import { ViewService } from "shared/services/view.service";
 
 @Component({
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: "home-page",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
-
   view;
 
   mapView = true;
   listView = false;
+  searchBarFixed = false;
 
-  constructor(
-    private viewService: ViewService
-  ) { }
+  constructor(private viewService: ViewService) {}
 
   ngOnInit() {
     this.view = this.viewService.getView().subscribe(view => {
-      if(view == "listview") {
+      if (view == "listview") {
         this.mapView = false;
         this.listView = true;
       } else {
@@ -26,7 +25,5 @@ export class HomeComponent implements OnInit {
         this.listView = false;
       }
     });
-
   }
-
 }
