@@ -88,7 +88,7 @@ export class AuthenticationService {
       | fav
   ): Observable<any> {
     let base;
-    let prod = false;
+    let prod = true;
 
     if (method === "post") {
       base = this.http.post(`https://asasa.com/api/${type}`, template);

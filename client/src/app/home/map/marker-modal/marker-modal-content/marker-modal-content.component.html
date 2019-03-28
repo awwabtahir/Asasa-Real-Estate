@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block" routerLink="/">
+    <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block" routerLink="/map">
       <i class="fas fa-arrow-left"></i> &nbsp; Go
       back</a>
 
@@ -8,10 +8,10 @@
 
     <nav *ngIf="ad" aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item"><a routerLink="/{{ ad.locationData.city }}">{{ ad.locationData.city }}</a></li>
+        <li class="breadcrumb-item"><a routerLink="/map">Map</a></li>
+        <li class="breadcrumb-item"><a routerLink="/map/{{ ad.locationData.city }}">{{ ad.locationData.city }}</a></li>
         <li class="breadcrumb-item"><a
-            routerLink="/{{ ad.locationData.city }}/{{ ad.locationData.location }}">{{ ad.locationData.location }}</a>
+            routerLink="/map/{{ ad.locationData.city }}/{{ ad.locationData.location }}">{{ ad.locationData.location }}</a>
         </li>
         <li class="breadcrumb-item">{{ ad._id }}</li>
       </ol>
