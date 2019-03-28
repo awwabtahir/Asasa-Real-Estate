@@ -113,7 +113,7 @@
     <search-filter *ngIf="selectedCity" class="mt-1 mr-2"></search-filter>
 
     <button
-      *ngIf="listView && num >= 635"
+      *ngIf="listView && num >= 600"
       (click)="listViewClicked()"
       class="btn btn-info btn-sm mt-1 mr-1 ml-2"
     >
@@ -121,7 +121,7 @@
     </button>
 
     <button
-      *ngIf="mapView && num >= 635"
+      *ngIf="mapView && num >= 600"
       (click)="mapViewClicked()"
       class="btn btn-info btn-sm mt-1 mr-1 ml-2 "
     >
@@ -129,7 +129,7 @@
     </button>
     <button
       [disabled]="!selectedCity"
-      *ngIf="num < 635"
+      *ngIf="num < 600"
       (click)="search()"
       class="btn btn-info btn-sm mt-1 mr-1 ml-2 btnSearch"
     >
