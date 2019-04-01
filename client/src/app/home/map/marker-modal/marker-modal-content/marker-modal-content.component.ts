@@ -59,7 +59,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     if (!this.ad) return;
 
     this.locationUrl.replaceState(
-      "/" + 
+      "map/" + 
       this.ad.locationData.city + "/" + 
       this.ad.locationData.location + "/" +
       this.ad.type + "/" +
@@ -75,6 +75,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     if (this.ad.vidUrl != "") {
       this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));
     }
+
+    this.propertyService.localeString(this.ad.demand);
 
   }
 
