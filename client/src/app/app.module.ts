@@ -40,6 +40,7 @@ import { RegionsComponent } from "./home/regions/regions.component";
 import { DashboardComponent } from "./admin/components/dashboard/dashboard.component";
 import { SearchHomeComponent } from "./home/search-home/search-home.component";
 import { HomeFeaturesComponent } from "./home/home-features/home-features.component";
+import { HowWorksComponent } from "./home/how-works/how-works.component";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -67,6 +68,7 @@ export function getAuthServiceConfigs() {
     SearchComponent,
     SearchHomeComponent,
     HomeFeaturesComponent,
+    HowWorksComponent,
     MapComponent,
     PropertyComponent,
     FooterComponent,
