@@ -1,199 +1,210 @@
-<div class="container mb-2">
-  <div class="form-row mt-2">
-    <div *ngIf="!agent" class="form-group mr-2">
-      <ng-select [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
-        [(ngModel)]="selectedCity" (change)="cityChange()">
-      </ng-select>
-    </div>
-    <div *ngIf="filtered || !agent" class="form-group mr-2">
-      <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Select Location"
-        [(ngModel)]="selectedLoc" (change)="locationChange()">
-      </ng-select>
+<app-dashboard></app-dashboard>
+<div class="col-md-9">
+  <div class="container mb-2">
+    <div class="form-row mt-2">
+      <div *ngIf="!agent" class="form-group mr-2">
+        <ng-select [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
+          [(ngModel)]="selectedCity" (change)="cityChange()">
+        </ng-select>
+      </div>
+      <div *ngIf="filtered || !agent" class="form-group mr-2">
+        <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2"
+          placeholder="Select Location" [(ngModel)]="selectedLoc" (change)="locationChange()">
+        </ng-select>
+      </div>
     </div>
   </div>
-</div>
+  <!-- </div> -->
+  <div *ngIf="selectedCity != '' && selectedLoc != '' && selectedLoc" class="container mb-2">
 
-<div *ngIf="selectedCity != '' && selectedLoc != '' && selectedLoc" class="container mb-2">
+    <add-property-location [cityData]="city" [locationData]="location" [edit]="edit">
+    </add-property-location>
 
-  <add-property-location [cityData]="city" [locationData]="location" [edit]="edit">
-  </add-property-location>
-
-  <div class="form-group input-group" style="width:30%;">
-    <div class="input-group-prepend">
-      <div class="input-group-text">Inventory Id</div>
-    </div>
-    <input type="text" class="form-control" name="invId" [(ngModel)]="ad.invId">
-  </div>
-
-  <br>
-
-  <form #propForm="ngForm">
-    <div class="form-row">
-      <div class="form-group">
-        <div class="form-check form-check-inline">
-          <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption1" value="house"
-            [(ngModel)]="ad.type">
-          <label class="form-check-label radio-custom-label" for="propertyOption1">House</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption2" value="plot"
-            [(ngModel)]="ad.type">
-          <label class="form-check-label radio-custom-label" for="propertyOption2">Plot</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption3" value="commercial"
-            [(ngModel)]="ad.type">
-          <label class="form-check-label radio-custom-label" for="propertyOption3">Commercial</label>
-        </div>
+    <div class="form-group input-group" style="width:30%;">
+      <div class="input-group-prepend">
+        <div class="input-group-text">Inventory Id</div>
       </div>
+      <input type="text" class="form-control" name="invId" [(ngModel)]="ad.invId">
     </div>
-    <div *ngIf="ad.type != '0'" class="form-row">
-      <div class="form-group">
-        <!-- Property Type Selection -->
-        <select *ngIf="ad.type == 'house'" id="inputType" class="form-control" name="type" [(ngModel)]="ad.subtype">
-          <option value="0">----Select House Type----</option>
-          <option value="House">House</option>
-          <option value="Flat">Flat</option>
-          <option value="Upper Portion">Upper Portion</option>
-          <option value="Lower Portion">Lower Portion</option>
-          <option value="Farm House">Farm House</option>
-          <option value="Room">Room</option>
-          <option value="Penthouse">Penthouse</option>
-        </select>
-        <select *ngIf="ad.type == 'plot'" id="inputType" class="form-control" name="type" [(ngModel)]="ad.subtype">
-          <option value="0">----Select Plot Type----</option>
-          <option value="Residential Plot">Residential Plot</option>
-          <option value="Commercial Plot">Commercial Plot</option>
-          <option value="Agricultural Land">Agricultural Land</option>
-          <option value="Industrial Land">Industrial Land</option>
-          <option value="Plot File">Plot File</option>
-          <option value="Plot Form">Plot Form</option>
-        </select>
-        <select *ngIf="ad.type == 'commercial'" id="inputType" class="form-control" name="type" [(ngModel)]="ad.subtype">
-          <option value="0">----Select Commercial Type----</option>
-          <option value="Office">Office</option>
-          <option value="Shop">Shop</option>
-          <option value="Warehouse">Warehouse</option>
-          <option value="Factory">Factory</option>
-          <option value="Building">Building</option>
-          <option value="Other">Other</option>
-        </select>
-        <!-- End Property Type Selection -->
-      </div>
-      <div class="form-group col-md-3">
-        <!-- Property # Selection -->
-        <input type="text" class="form-control" name="propNumber" id="inputPropNumber" placeholder="{{ ad.subtype }} #"
-          [(ngModel)]="ad.propNumber" #pNum="ngModel" required>
-        <div *ngIf="pNum.invalid && (pNum.dirty || pNum.touched)" class="invalid-feedback">
-          <div *ngIf="pNum.errors.required">
-            {{ type }} # is required.
+
+    <br>
+
+    <form #propForm="ngForm">
+      <div class="form-row">
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption1"
+              value="house" [(ngModel)]="ad.type">
+            <label class="form-check-label radio-custom-label" for="propertyOption1">House</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption2"
+              value="plot" [(ngModel)]="ad.type">
+            <label class="form-check-label radio-custom-label" for="propertyOption2">Plot</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input radio-custom" type="radio" name="propertyOption" id="propertyOption3"
+              value="commercial" [(ngModel)]="ad.type">
+            <label class="form-check-label radio-custom-label" for="propertyOption3">Commercial</label>
           </div>
         </div>
       </div>
-      <div class="form-group col-md-3">
-        <!-- Street # Selection -->
-        <input type="text" class="form-control" name="street" id="inputStreet" placeholder="Street # (optional)"
-          [(ngModel)]="ad.street">
-      </div>
-      <!-- End Street # Selection -->
-    </div>
-    <div *ngIf="ad.type != '0'" class="form-row">
-      <div class="form-group input-group col-md-3">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Rs.</div>
+      <div *ngIf="ad.type != '0'" class="form-row">
+        <div class="form-group">
+          <!-- Property Type Selection -->
+          <select *ngIf="ad.type == 'house'" id="inputType" class="form-control" name="type" [(ngModel)]="ad.subtype">
+            <option value="0">----Select House Type----</option>
+            <option value="House">House</option>
+            <option value="Flat">Flat</option>
+            <option value="Upper Portion">Upper Portion</option>
+            <option value="Lower Portion">Lower Portion</option>
+            <option value="Farm House">Farm House</option>
+            <option value="Room">Room</option>
+            <option value="Penthouse">Penthouse</option>
+          </select>
+          <select *ngIf="ad.type == 'plot'" id="inputType" class="form-control" name="type" [(ngModel)]="ad.subtype">
+            <option value="0">----Select Plot Type----</option>
+            <option value="Residential Plot">Residential Plot</option>
+            <option value="Commercial Plot">Commercial Plot</option>
+            <option value="Agricultural Land">Agricultural Land</option>
+            <option value="Industrial Land">Industrial Land</option>
+            <option value="Plot File">Plot File</option>
+            <option value="Plot Form">Plot Form</option>
+          </select>
+          <select *ngIf="ad.type == 'commercial'" id="inputType" class="form-control" name="type"
+            [(ngModel)]="ad.subtype">
+            <option value="0">----Select Commercial Type----</option>
+            <option value="Office">Office</option>
+            <option value="Shop">Shop</option>
+            <option value="Warehouse">Warehouse</option>
+            <option value="Factory">Factory</option>
+            <option value="Building">Building</option>
+            <option value="Other">Other</option>
+          </select>
+          <!-- End Property Type Selection -->
         </div>
-        <input type="text" class="form-control" name="demand" id="inputDemand" placeholder="Demand" [(ngModel)]="ad.demand"
-          #price="ngModel" required>
-        <div *ngIf="price.invalid && (price.dirty || price.touched)" class="invalid-feedback">
-          <div *ngIf="price.errors.required">
-            Demand is required.
+        <div class="form-group col-md-3">
+          <!-- Property # Selection -->
+          <input type="text" class="form-control" name="propNumber" id="inputPropNumber"
+            placeholder="{{ ad.subtype }} #" [(ngModel)]="ad.propNumber" #pNum="ngModel" required>
+          <div *ngIf="pNum.invalid && (pNum.dirty || pNum.touched)" class="invalid-feedback">
+            <div *ngIf="pNum.errors.required">
+              {{ type }} # is required.
+            </div>
           </div>
         </div>
+        <div class="form-group col-md-3">
+          <!-- Street # Selection -->
+          <input type="text" class="form-control" name="street" id="inputStreet" placeholder="Street # (optional)"
+            [(ngModel)]="ad.street">
+        </div>
+        <!-- End Street # Selection -->
       </div>
-      <div class="form-group col-md-3">
-        <input type="text" class="form-control" name="area" id="inputArea" placeholder="Land Area" [(ngModel)]="ad.area"
-          #ar="ngModel" required>
-        <div *ngIf="ar.invalid && (ar.dirty || ar.touched)" class="invalid-feedback">
-          <div *ngIf="ar.errors.required">
-            Area is required.
+      <div *ngIf="ad.type != '0'" class="form-row">
+        <div class="form-group input-group col-md-3">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Rs.</div>
+          </div>
+          <input type="text" class="form-control" name="demand" id="inputDemand" placeholder="Demand"
+            [(ngModel)]="ad.demand" #price="ngModel" required>
+          <div *ngIf="price.invalid && (price.dirty || price.touched)" class="invalid-feedback">
+            <div *ngIf="price.errors.required">
+              Demand is required.
+            </div>
           </div>
         </div>
+        <div class="form-group col-md-3">
+          <input type="text" class="form-control" name="area" id="inputArea" placeholder="Land Area"
+            [(ngModel)]="ad.area" #ar="ngModel" required>
+          <div *ngIf="ar.invalid && (ar.dirty || ar.touched)" class="invalid-feedback">
+            <div *ngIf="ar.errors.required">
+              Area is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <select id="inputSize" class="form-control" name="areaType" [(ngModel)]="ad.areaType">
+            <option value="sqft">Sq. Feet</option>
+            <option value="sqyd">Sq. Yards</option>
+            <option value="marla">Marla</option>
+            <option value="kanal">Kanal</option>
+          </select>
+        </div>
       </div>
-      <div class="form-group col-md-3">
-        <select id="inputSize" class="form-control" name="areaType" [(ngModel)]="ad.areaType">
-          <option value="sqft">Sq. Feet</option>
-          <option value="sqyd">Sq. Yards</option>
-          <option value="marla">Marla</option>
-          <option value="kanal">Kanal</option>
-        </select>
-      </div>
-    </div>
 
-    <div *ngIf="ad.type != '0'" class="form-row">
-      <div class="form-group col-md-3">
-        <add-property-modal [type]="ad.type"></add-property-modal>
+      <div *ngIf="ad.type != '0'" class="form-row">
+        <div class="form-group col-md-3">
+          <add-property-modal [type]="ad.type"></add-property-modal>
+        </div>
       </div>
-    </div>
 
-    <div class="form-row mb-1">
-      <div class="form-group col-md-6">
-        <input type="text" placeholder="Comments (Only Visible to Agent)" name="comment" [(ngModel)]="ad.comment" class="form-control" id="inputComment">
+      <div class="form-row mb-1">
+        <div class="form-group col-md-6">
+          <input type="text" placeholder="Comments (Only Visible to Agent)" name="comment" [(ngModel)]="ad.comment"
+            class="form-control" id="inputComment">
+        </div>
       </div>
-    </div>
 
-    <div class="form-row mb-1">
-      <div class="form-group col-md-6">
-        <input type="text" placeholder="Property Title" name="title" [(ngModel)]="ad.title" class="form-control" id="inputTitle">
-        <!-- <div *ngIf="headline.invalid && (headline.dirty || headline.touched)" class="invalid-feedback">
+      <div class="form-row mb-1">
+        <div class="form-group col-md-6">
+          <input type="text" placeholder="Property Title" name="title" [(ngModel)]="ad.title" class="form-control"
+            id="inputTitle">
+          <!-- <div *ngIf="headline.invalid && (headline.dirty || headline.touched)" class="invalid-feedback">
           <div *ngIf="headline.errors.required">
             Title is required.
           </div>
         </div> -->
+        </div>
       </div>
-    </div>
 
-    <div class="form-row mb-3">
-      <app-ngx-editor [spellcheck]="true" [(ngModel)]="ad.description" name="description"></app-ngx-editor>
-    </div>
-
-    <div *ngIf="!uploadMedia" class="form-row mb-2">
-      <div class="text-center">
-        <button *ngIf="!edit" (click)="save(false)" class="btn btn-danger" [disabled]="!propForm.valid">Add Ad</button>
-        <button *ngIf="edit" (click)="update(false)" class="btn btn-danger" [disabled]="!propForm.valid">Update Ad</button>
+      <div class="form-row mb-3">
+        <app-ngx-editor [spellcheck]="true" [(ngModel)]="ad.description" name="description"></app-ngx-editor>
       </div>
-    </div>
 
-    <div *ngIf="!uploadMedia" class="form-row mb-5">
-      <div class="text-center">
-        <button *ngIf="!edit" (click)="save(true)" class="btn btn-danger" [disabled]="!propForm.valid">Add video & images (optional)</button>
-        <button *ngIf="edit" (click)="update(true)" class="btn btn-danger" [disabled]="!propForm.valid">Update video &
-          images (optional)</button>
+      <div *ngIf="!uploadMedia" class="form-row mb-2">
+        <div class="text-center">
+          <button *ngIf="!edit" (click)="save(false)" class="btn btn-danger" [disabled]="!propForm.valid">Add
+            Ad</button>
+          <button *ngIf="edit" (click)="update(false)" class="btn btn-danger" [disabled]="!propForm.valid">Update
+            Ad</button>
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="uploadMedia" class="form-row mb-2">
-      <div class="form-group col-md-3">
-        <input type="url" placeholder="Paste YouTube Video Url" name="vidUrl" [(ngModel)]="ad.vidUrl" class="form-control"
-          id="inputVidUrl">
+      <div *ngIf="!uploadMedia" class="form-row mb-5">
+        <div class="text-center">
+          <button *ngIf="!edit" (click)="save(true)" class="btn btn-danger" [disabled]="!propForm.valid">Add video &
+            images (optional)</button>
+          <button *ngIf="edit" (click)="update(true)" class="btn btn-danger" [disabled]="!propForm.valid">Update video &
+            images (optional)</button>
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="uploadMedia" class="form-row mb-2">
-      <div class="form-group col-md-6">
-        <upload-images></upload-images>
+      <div *ngIf="uploadMedia" class="form-row mb-2">
+        <div class="form-group col-md-3">
+          <input type="url" placeholder="Paste YouTube Video Url" name="vidUrl" [(ngModel)]="ad.vidUrl"
+            class="form-control" id="inputVidUrl">
+        </div>
       </div>
-      <div class="form-group col-md-3">
-        <upload-image3d [url]="image3dUrl" [item]="item"></upload-image3d>
+
+      <div *ngIf="uploadMedia" class="form-row mb-2">
+        <div class="form-group col-md-6">
+          <upload-images></upload-images>
+        </div>
+        <div class="form-group col-md-3">
+          <upload-image3d [url]="image3dUrl" [item]="item"></upload-image3d>
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="uploadMedia" class="form-row mb-5">
-      <div *ngIf="uploadMediaClicked" class="text-center">
-        <button *ngIf="!edit" (click)="updateMedia()" class="btn btn-danger" [disabled]="!propForm.valid">Post Ad</button>
-        <button *ngIf="edit" (click)="updateMedia()" class="btn btn-danger" [disabled]="!propForm.valid">Update Ad</button>
+      <div *ngIf="uploadMedia" class="form-row mb-5">
+        <div *ngIf="uploadMediaClicked" class="text-center">
+          <button *ngIf="!edit" (click)="updateMedia()" class="btn btn-danger" [disabled]="!propForm.valid">Post
+            Ad</button>
+          <button *ngIf="edit" (click)="updateMedia()" class="btn btn-danger" [disabled]="!propForm.valid">Update
+            Ad</button>
+        </div>
       </div>
-    </div>
 
-  </form>
+    </form>
 
+  </div>
 </div>

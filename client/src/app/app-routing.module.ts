@@ -9,7 +9,6 @@ import { RegisterComponent } from './navbar/register/register.component';
 import { AuthGuardService } from 'shared/services/auth-guard.service';
 import { TermsComponent } from './home/footer/terms/terms.component';
 import { PrivacyComponent } from './home/footer/privacy/privacy.component';
-import { MapHomeComponent } from './home/map-home/map-home.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -24,10 +23,9 @@ const routes: Routes = [
         path: "dashboard",
         loadChildren: "../app/admin/admin.module#AdminModule"
     },
-    { path: 'map', component: MapHomeComponent },
-    { path: 'map/:city', component: MapHomeComponent },
-    { path: 'map/:city/:location', component: MapHomeComponent },
-    { path: 'map/:city/:location/:type/:id', component: MarkerModalContentComponent }
+    { path: ':city', component: HomeComponent },
+    { path: ':city/:location', component: HomeComponent },
+    { path: ':city/:location/:type/:id', component: MarkerModalContentComponent }
 ];
 
 @NgModule({

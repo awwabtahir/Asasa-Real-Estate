@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PropertyService } from 'shared/services/property.service';
-import { MapService } from 'shared/services/map.service';
 
 @Component({
   selector: 'listview',
@@ -16,14 +15,11 @@ export class ListviewComponent implements OnInit {
   p: number = 1;
 
   constructor(
-    private propertyService: PropertyService,
-    private mapService: MapService
+    private propertyService: PropertyService
   ) { }
 
   ngOnInit() {
     this.getAds();
-
-    this.getCurrentCity();
   }
 
   getAd(id) {
@@ -39,29 +35,16 @@ export class ListviewComponent implements OnInit {
       this.properties = properties;
       this.propertiesAvailable = true;
       if(!this.list) {
-        this.getList(this.properties);
+        this.getList();
       }
     }, (err) => {
       console.error(err);
     });
   }
 
-  getList(props) {
-    let result = props.map(a => a._id);
+  getList() {
+    let result = this.properties.map(a => a._id);
     this.list = result;
-  }
-
-  getCurrentCity() {
-    this.mapService.getCity().subscribe(city => {
-      this.cityChange(city.city);
-    });
-  }
-
-  cityChange(city) {
-    let result = this.properties.filter(function (p) {
-      return p.locationData.city == city;
-    });
-    this.getList(result);
   }
 
 }

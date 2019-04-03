@@ -1,55 +1,79 @@
 .invalid-feedback {
-    display: block!important;
+  display: block !important;
 }
 
-.checkbox-custom, .radio-custom {
-    opacity: 0;
-    position: absolute;   
+.checkbox-custom,
+.radio-custom {
+  opacity: 0;
+  position: absolute;
 }
 
-.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
-    display: inline-block;
-    vertical-align: middle;
-    margin: 5px;
-    cursor: pointer;
+.checkbox-custom,
+.checkbox-custom-label,
+.radio-custom,
+.radio-custom-label {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+  cursor: pointer;
 }
 
-.checkbox-custom-label, .radio-custom-label {
-    position: relative;
+.checkbox-custom-label,
+.radio-custom-label {
+  position: relative;
 }
 
-.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
-    content: '';
-    background: #fff;
-    border: 2px solid #ddd;
-    display: inline-block;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    text-align: center;
+.checkbox-custom+.checkbox-custom-label:before,
+.radio-custom+.radio-custom-label:before {
+  content: '';
+  background: #fff;
+  border: 2px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  text-align: center;
 }
 
-.checkbox-custom:checked + .checkbox-custom-label:before {
-    content: "\f00c";
-    font-family: FontAwesome;
-    background: rebeccapurple;
-    color: #fff;
+.checkbox-custom:checked+.checkbox-custom-label:before {
+  content: "\f00c";
+  font-family: FontAwesome;
+  background: rebeccapurple;
+  color: #fff;
 }
 
-.radio-custom + .radio-custom-label:before {
-    border-radius: 50%;
+.radio-custom+.radio-custom-label:before {
+  border-radius: 50%;
 }
 
-.radio-custom:checked + .radio-custom-label:before {
-    content: "\f058";
-    border: 0px;
-    font-size: 22px;
-    margin-bottom: 12px;
-    font-family: 'Font Awesome 5 Free';
-    color: #000;
+.radio-custom:checked+.radio-custom-label:before {
+  content: "\f058";
+  border: 0px;
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-family: 'Font Awesome 5 Free';
+  color: #000;
 }
 
-.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
-  outline: 1px solid #ddd; /* focus style */
+.checkbox-custom:focus+.checkbox-custom-label,
+.radio-custom:focus+.radio-custom-label {
+  outline: 1px solid #ddd;
+  /* focus style */
+}
+
+.col-md-9 {
+  margin-top: 5%;
+  margin-left: 20%;
+
+}
+
+@media (max-width: 768px) {
+
+
+  .col-md-9 {
+    margin-top: 16%;
+    margin-left: 38%;
+
+  }
 }

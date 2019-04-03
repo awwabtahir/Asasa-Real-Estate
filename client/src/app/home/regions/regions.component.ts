@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'app/authentication.service';
+import { Component, OnInit } from "@angular/core";
+import { AuthenticationService } from "app/authentication.service";
 
 @Component({
-  selector: 'regions',
-  templateUrl: './regions.component.html',
-  styleUrls: ['./regions.component.css']
+  selector: "regions",
+  templateUrl: "./regions.component.html",
+  styleUrls: ["./regions.component.css"]
 })
 export class RegionsComponent implements OnInit {
-
   cities;
   locations;
 
@@ -15,9 +14,7 @@ export class RegionsComponent implements OnInit {
   peshawarCount = 0;
   karachiCount = 0;
 
-  constructor(
-    private auth: AuthenticationService
-  ) { }
+  constructor(private auth: AuthenticationService) {}
 
   async ngOnInit() {
     this.getCities();
@@ -30,13 +27,12 @@ export class RegionsComponent implements OnInit {
   }
 
   getPropCounts(cityName) {
-
-    let city = this.cities.filter(function (c) {
+    let city = this.cities.filter(function(c) {
       return c.city == cityName;
     });
     let cityId = city[0]._id;
 
-    let locations = this.locations.filter(function (i) {
+    let locations = this.locations.filter(function(i) {
       return i.cityId == cityId;
     });
 
@@ -44,19 +40,24 @@ export class RegionsComponent implements OnInit {
   }
 
   getCities() {
-    this.auth.getCities().subscribe(cities => {
-      this.cities = cities;
-    }, (err) => {
-      console.error(err);
-    });
+    this.auth.getCities().subscribe(
+      cities => {
+        this.cities = cities;
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   getLocations(selectedCity?) {
-    this.auth.getLocations().subscribe(locations => {
-      this.locations = locations;
-    }, (err) => {
-      console.error(err);
-    });
+    this.auth.getLocations().subscribe(
+      locations => {
+        this.locations = locations;
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
-
 }

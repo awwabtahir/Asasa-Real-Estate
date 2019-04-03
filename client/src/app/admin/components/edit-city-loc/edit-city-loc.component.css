@@ -1,0 +1,15 @@
+.col-md-9 {
+  margin-top: 5%;
+  margin-left: 20%;
+
+}
+
+@media (max-width: 768px) {
+
+
+  .col-md-9 {
+    margin-top: 15%;
+    margin-left: 37%;
+
+  }
+}

@@ -1,6 +1,6 @@
 p {
     font-size: 13.9px;
-    color:white;
+    color: #707070;
 }
 
 .feature-item {
@@ -48,17 +48,8 @@ fav-heart {
 }
 
 .feature-text {
-    position: relative;
-    top: 110px;
-    height: 70px;
-    background-color: black;
-    opacity: 0.8;
     border-left: 1px solid #ebebeb;
     border-right: 1px solid #ebebeb;
-}
-
-.feature-text div {
-    opacity: 1;
 }
 
 .feature-title {
@@ -74,28 +65,18 @@ fav-heart {
     padding-bottom: 0;
 }
 
-/* .room-info {
+.room-info {
     border-top: 1px solid #ebebeb;
     padding-top: 15px;
     overflow: hidden;
-} */
+}
 
-.rf-left {
+.room-info .rf-left {
     float: left;
 }
 
-.rf-left p {
-    margin-left: 10px;
-    margin-bottom: -4px;
-}
-
-.rf-right {
+.room-info .rf-right {
     float: right;
-}
-
-.rf-right p {
-    margin-left: 10px;
-    margin-bottom: 1px;
 }
 
 .feature-item .room-price {

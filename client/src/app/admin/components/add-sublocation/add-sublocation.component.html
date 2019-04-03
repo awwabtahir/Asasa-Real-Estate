@@ -1,39 +1,31 @@
-<div class="mt-2 form-inline">
+<app-dashboard></app-dashboard>
+<div class="col-md-9">
+  <div class="mt-2 form-inline">
 
-  <ng-select 
-    #city
-    [items]="cities" 
-    bindLabel="city" 
-    bindValue="_id" 
-    class="mr-2 ml-2"
-    placeholder="Select City"
-    (change)="cityChange($event)">
-  </ng-select>
+    <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
+      (change)="cityChange($event)">
+    </ng-select>
 
-  <ng-select 
-    [items]="locations" 
-    bindLabel="location" 
-    bindValue="_id" 
-    class="mr-2 ml-2"
-    placeholder="Select Location"
-    (change)="locationChange($event)">
-  </ng-select>
+    <ng-select [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Select Location"
+      (change)="locationChange($event)">
+    </ng-select>
 
-  <input type="text" class="form-control" name="subLocation" [(ngModel)]="subLocation">
+    <input type="text" class="form-control" name="subLocation" [(ngModel)]="subLocation">
 
-  <button class="btn btn-info ml-2" (click)="add()">Add Sub Location</button>
+    <button class="btn btn-info ml-2" (click)="add()" style="margin-top: 5px;width: 160px">Add Sub Location</button>
 
-  <button class="btn btn-success ml-2" (click)="push()">Push Changes</button>
+    <button class="btn btn-success ml-2" (click)="push()" style="margin-top: 5px;width: 160px">Push Changes</button>
 
-</div>
+  </div>
 
-<div *ngIf="location">
-  <div *ngIf="location.subLocations">
-    <ul>
-      <li *ngFor="let subLoc of location.subLocations" class="mt-2">
-        {{subLoc.subLocation}}
-        <button class="btn btn-danger btn-sm" (click)="remove(subLoc)">Remove</button>
-      </li>
-    </ul>
+  <div *ngIf="location">
+    <div *ngIf="location.subLocations">
+      <ul>
+        <li *ngFor="let subLoc of location.subLocations" class="mt-2">
+          {{subLoc.subLocation}}
+          <button class="btn btn-danger btn-sm" (click)="remove(subLoc)">Remove</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

@@ -1,31 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
+/* You can add global styles to this file, and also import other style files */
 
-.irs-from, 
-.irs-to, 
+
+
+.irs-from,
+.irs-to,
 .irs-single,
 .irs-bar {
-    background: #25BDA4;
+  background: #25BDA4;
 }
 
 .gm-svpc {
-    display: none!important;
+  display: none !important;
 }
 
 .ngx-editor .ngx-wrapper .ngx-editor-textarea {
-    min-height: 5rem!important;
+  min-height: 5rem !important;
 }
 
-ng-select {
-    width: 170px;
+.ng-select {
+  width: 170px;
 }
 
-ng-dropdown-panel {
-    width: 120%!important;
+.ng-dropdown-panel {
+  width: 120% !important;
 }
 
 @media (max-width: 768px) {
-    .modal-backdrop {
-        display: none;
-    }
+  .modal-backdrop {
+    display: none;
+  }
 }

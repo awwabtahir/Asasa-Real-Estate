@@ -1,24 +1,28 @@
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-6">
-      <h5>Cities  <a class="btn btn-success btn-sm" routerLink="/dashboard/addCity">Add new</a>
-      </h5>
-      <div *ngFor="let city of cities">
-        <button class="btn btn-primary btn-sm mt-1 mb-1 mr-1" (click)="cityChanged(city._id, city.city)">
-          {{ city.city }}
-        </button>
+<app-dashboard></app-dashboard>
+<div class="col-md-9">
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-6">
+        <h5>Cities <a class="btn btn-success btn-sm" routerLink="/dashboard/addCity">Add new</a>
+        </h5>
+        <div *ngFor="let city of cities">
+          <button class="btn btn-primary btn-sm mt-1 mb-1 mr-1" (click)="cityChanged(city._id, city.city)"
+            style="width: 100px">
+            {{ city.city }}
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="col-6">
-      <h5>Locations (click to edit) 
-        <a *ngIf="city" class="btn btn-success btn-sm" routerLink="/dashboard/addLocation">Add new location</a></h5>
-      <ol>
-        <li class="mb-2" *ngFor="let loc of filteredlocations">
-          <a routerLink="/dashboard/editLocation/{{loc._id}}">{{loc.location}}</a>
-        </li>
-      </ol>
-    </div>
+      <div class="col-6">
+        <h5>Locations (click to edit)
+          <a *ngIf="city" class="btn btn-success btn-sm" routerLink="/dashboard/addLocation">Add new location</a></h5>
+        <ol>
+          <li class="mb-2" *ngFor="let loc of filteredlocations">
+            <a routerLink="/dashboard/editLocation/{{loc._id}}">{{loc.location}}</a>
+          </li>
+        </ol>
+      </div>
 
+    </div>
   </div>
 </div>

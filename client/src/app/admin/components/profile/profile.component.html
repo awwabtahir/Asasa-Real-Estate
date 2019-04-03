@@ -1,36 +1,134 @@
-<div class="container">
+<style>
+  body {
+    background-image: url(http://eomcreative.com/hsm2/wp-content/uploads/2014/01/slider1.jpg);
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #999;
+
+  }
+
+  .col-md-9 {
+    margin-top: 5%;
+    margin-left: 20%;
+
+  }
+
+  .card {
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+  }
+
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
+
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+  }
+
+  button:hover,
+  a:hover {
+    opacity: 0.7;
+  }
+
+  @media (max-width: 768px) {
+
+    .card {
+
+      width: 50%;
+      margin-top: 55px;
+      margin-left: 172px;
+    }
+
+  }
+
+</style>
+
+<app-dashboard></app-dashboard>
+
+<body>
+
+
+  <div class="card" style="margin-top: 55px">
+    <img src="../../../../assets/images/DP.jpg" alt="John" style="width:100%" />
+    <h1 *ngIf="!edit" class="form-control-static">{{ details?.name }}</h1>
+    <input *ngIf="edit" type="name" class="form-control" name="name" placeholder="Enter name"
+      [(ngModel)]="details.name">
+    <p class="title">ADMIN</p>
+    <p>{{ details?.email }}</p>
+    <p *ngIf="!edit">{{ details?.phone }}</p>
+    <input *ngIf="edit" type="text" class="form-control" name="phone" placeholder="Enter phone"
+      [(ngModel)]="details.phone">
+    <div style="margin: 5px 0;">
+      <a><i class="fab fa-facebook-f" style="margin:5px"></i></a>
+      <a><i class="fab fa-google" style="margin:5px"></i></a>
+      <a><i class="fab fa-skype" style="margin:5px"></i></a>
+      <a><i class="fab fa-twitter" style="margin:5px"></i></a>
+    </div>
+    <p><button *ngIf="!edit" (click)="editClicked()"><i class="fas fa-user-edit"></i>Edit</button></p>
+    <p> <button *ngIf="edit" (click)="updateClicked()"><i class="fas fa-user-edit"></i>
+        Update</button></p>
+  </div>
+</body>
+<!-- <div class="col-md-9"> -->
+
+<!-- <div class="container">
   <div class="row">
 
-    <div class="col-md-4">
 
-      <h3 class="form-signin-heading">Your Profile</h3>
-      <button *ngIf="!edit" class="btn btn-primary btn-sm" (click)="editClicked()"><i class="fas fa-user-edit"></i>
-        Edit</button>
+    <h3 class="form-signin-heading">Your Profile</h3>
+    <button *ngIf="!edit" class="btn btn-primary btn-sm" (click)="editClicked()"><i class="fas fa-user-edit"></i>
+      Edit</button>
 
-      <div class="form-horizontal">
-        <div class="form-group">
-          <label class="col-sm-3 control-label"><b>Email</b></label>
-          <p class="form-control-static">{{ details?.email }}</p>
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label"><b>Name</b></label>
-          <p *ngIf="!edit" class="form-control-static">{{ details?.name }}</p>
-          <input *ngIf="edit" type="name" class="form-control" name="name" placeholder="Enter name"
-            [(ngModel)]="details.name">
-        </div>
-        <div class="form-group">
-          <label class="col-sm-3 control-label"><b>Phone</b></label>
-          <p *ngIf="!edit" class="form-control-static">{{ details?.phone }}</p>
-          <input *ngIf="edit" type="text" class="form-control" name="phone" placeholder="Enter phone"
-            [(ngModel)]="details.phone">
-        </div>
-        <div *ngIf="edit" class="form-group">
-          <button class="btn btn-danger btn-sm" (click)="updateClicked()"><i class="fas fa-user-edit"></i>
-            Update</button>
-        </div>
+    <div class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-3 control-label"><b>Email</b></label>
+        <p class="form-control-static">{{ details?.email }}</p>
       </div>
-
+      <div class="form-group">
+        <label class="col-sm-3 control-label"><b>Name</b></label>
+        <p *ngIf="!edit" class="form-control-static">{{ details?.name }}</p>
+        <input *ngIf="edit" type="name" class="form-control" name="name" placeholder="Enter name"
+          [(ngModel)]="details.name">
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label"><b>Phone</b></label>
+        <p *ngIf="!edit" class="form-control-static">{{ details?.phone }}</p>
+        <input *ngIf="edit" type="text" class="form-control" name="phone" placeholder="Enter phone"
+          [(ngModel)]="details.phone">
+      </div>
+      <div *ngIf="edit" class="form-group">
+        <button class="btn btn-danger btn-sm" (click)="updateClicked()"><i class="fas fa-user-edit"></i>
+          Update</button>
+      </div>
     </div>
 
   </div>
-</div>
+
+</div> -->
+
+
+
+<!-- </div> -->

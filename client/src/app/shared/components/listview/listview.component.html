@@ -18,54 +18,43 @@
 <ng-template #adTemplate let-ad="ad">
   <div class="feature-item">
     <div class="feature-pic set-bg" data-setbg="img/feature/1.jpg"
-      style="background-image: url(https://cdn1.tekrevue.com/wp-content/uploads/2015/04/map-location-pin-960x540.jpg);">
+      style="background-image: url(https://grantcardonetv.com/wp-content/uploads/gctv-recommend-real-estate.jpg);">
       <div class="sale-notic">FOR SALE</div>
       <fav-heart [adId]="ad._id"></fav-heart>
-
-      <div routerLink="/property-details/{{ ad._id }}" class="feature-text">
-
-        <div class="rf-left">
-          <p><b>Property Ref</b>: {{ ad._id }}</p>
-          <p>Rs. {{ ad.demand }}</p>
-          <p> <b>Size</b>: {{ ad.area }} {{ ad.areaType | titlecase }}</p>
-          <p>{{ ad.type | titlecase }} - {{ ad.locationData.location }} {{ ad.locationData.sector }},
-            {{ ad.locationData.city }}</p>
-        </div>
-
-        <!-- <div class="text-center feature-title">
-          <h5>{{ ad.subtype }}</h5>
-          <p><i class="fa fa-map-marker"></i> {{ ad.locationData.location }} {{ ad.locationData.sector }},
-            {{ ad.locationData.city }}</p>
-          <a class="btn btn-outline-success btn-sm" routerLink="/property-details/{{ ad._id }}">Click Here For More
-            Details</a>
-        </div>
-        <div class="room-info-warp">
-          <div class="room-info">
-            <div class="rf-left">
-              <p><b>Property Reference</b>: {{ ad._id }}</p>
-              <p><i class="fa fa-th-large"></i> {{ ad.area }} {{ ad.areaType | titlecase }}</p>
-              <p><i class="fa fa-bed"></i> 10 Bedrooms</p>
-            </div>
-            <div class="rf-right">
-              <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-              <p><i class="fas fa-landmark"></i> {{ ad.type | titlecase }}</p>
-              <p><i class="fa fa-bath"></i> 6 Bathrooms</p>
-            </div>
-          </div>
-          <div class="room-info">
-            <div class="rf-left">
-              <p><i class="fas fa-mobile"></i> Agent</p>
-            </div>
-            <div class="rf-right">
-              <p>
-                <call></call>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="room-price">Rs. {{ ad.demand }}</div> -->
+    </div>
+    <div class="feature-text">
+      <div class="text-center feature-title">
+        <h5>{{ ad.subtype }}</h5>
+        <p><i class="fa fa-map-marker"></i> {{ ad.locationData.location }} {{ ad.locationData.sector }},
+          {{ ad.locationData.city }}</p>
+        <a class="btn btn-outline-success btn-sm" routerLink="/property-details/{{ ad._id }}">Click Here For More
+          Details</a>
       </div>
-      
+      <div class="room-info-warp">
+        <div class="room-info">
+          <div class="rf-left">
+            <p><b>Property Reference</b>: {{ ad._id }}</p>
+            <p><i class="fa fa-th-large"></i> {{ ad.area }} {{ ad.areaType | titlecase }}</p>
+            <!-- <p><i class="fa fa-bed"></i> 10 Bedrooms</p> -->
+          </div>
+          <div class="rf-right">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            <p><i class="fas fa-landmark"></i> {{ ad.type | titlecase }}</p>
+            <!-- <p><i class="fa fa-bath"></i> 6 Bathrooms</p> -->
+          </div>
+        </div>
+        <div class="room-info">
+          <div class="rf-left">
+            <p><i class="fas fa-mobile"></i> Agent</p>
+          </div>
+          <div class="rf-right">
+            <p>
+              <call></call>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="room-price">Rs. {{ ad.demand }}</div>
     </div>
   </div>
 </ng-template>
