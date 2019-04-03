@@ -6,12 +6,9 @@
   top: 0%;
   z-index: 20 !important;
   width: 100%;
-<<<<<<< HEAD
-=======
 }
 .navbar {
   padding: 0rem 1rem !important;
->>>>>>> upload-ready
 }
 @media only screen and (max-width: 768px) {
   .navbar-collapse {
@@ -32,13 +29,8 @@
 }
 
 /* .left-nav li {
-<<<<<<< HEAD
-    margin-right: 8px;
-  } */
-=======
   margin-right: 8px;
 } */
->>>>>>> upload-ready
 
 .left-nav li a {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -48,11 +40,7 @@
   font-size: 14px;
   text-align: center;
   /* height: 3.6rem;
-<<<<<<< HEAD
-    padding-top: 1rem; */
-=======
   padding-top: 1rem; */
->>>>>>> upload-ready
   padding: 1rem 1rem;
 }
 
@@ -92,21 +80,13 @@
 @media (max-width: 768px) {
   .navbar-collapse {
     position: absolute;
-<<<<<<< HEAD
-    top: 54px;
-=======
     top: 45px;
->>>>>>> upload-ready
     left: 0;
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
     width: 100%;
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> upload-ready
   .navbar-collapse.collapsing {
     height: auto;
     -webkit-transition: left 0.3s ease;
@@ -115,10 +95,6 @@
     transition: left 0.3s ease;
     left: -100%;
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> upload-ready
   .navbar-collapse.show {
     left: 0;
     -webkit-transition: left 0.3s ease-in;
@@ -126,17 +102,9 @@
     -moz-transition: left 0.3s ease-in;
     transition: left 0.3s ease-in;
   }
-<<<<<<< HEAD
-
   .call {
     margin-bottom: 10px;
   }
-
-=======
-  .call {
-    margin-bottom: 10px;
-  }
->>>>>>> upload-ready
   .nav-link {
     border-bottom: 1px solid gainsboro;
   }

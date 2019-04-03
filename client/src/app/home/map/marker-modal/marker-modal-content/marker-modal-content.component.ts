@@ -59,13 +59,6 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     if (!this.ad) return;
 
     this.locationUrl.replaceState(
-<<<<<<< HEAD
-      "/" + 
-      this.ad.locationData.city + "/" + 
-      this.ad.locationData.location + "/" +
-      this.ad.type + "/" +
-      this.ad._id);
-=======
       "/" +
         this.ad.locationData.city +
         "/" +
@@ -75,7 +68,6 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
         "/" +
         this.ad._id
     );
->>>>>>> upload-ready
 
     this.basic = this.modalService.updateBasic(this.ad, this.basic);
     this.location = this.modalService.updateLocation(
@@ -92,10 +84,6 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
         "//www.youtube.com/embed/" + this.getId(this.ad.vidUrl)
       );
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> upload-ready
   }
 
   ngOnDestroy() {

@@ -11,28 +11,6 @@ export class HomeComponent implements OnInit {
   innerWidth: number;
   view;
 
-<<<<<<< HEAD
-  view;
-
-  mapView = true;
-  listView = false;
-
-  constructor(
-    private viewService: ViewService
-  ) { }
-
-  ngOnInit() {
-    this.view = this.viewService.getView().subscribe(view => {
-      if(view == "listview") {
-        this.mapView = false;
-        this.listView = true;
-      } else {
-        this.mapView = true;
-        this.listView = false;
-      }
-    });
-
-=======
   mapView = true;
   listView = false;
   mapSearchBar = false;
@@ -74,6 +52,5 @@ export class HomeComponent implements OnInit {
         this.mapSearchBar = false;
       }
     }
->>>>>>> upload-ready
   }
 }

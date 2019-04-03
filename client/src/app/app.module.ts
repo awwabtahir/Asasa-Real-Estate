@@ -38,6 +38,8 @@ import { InfoWindowContentComponent } from "./home/map/marker/info-window-conten
 import { EmailComponent } from "./home/email/email.component";
 import { RegionsComponent } from "./home/regions/regions.component";
 import { DashboardComponent } from "./admin/components/dashboard/dashboard.component";
+import { SearchHomeComponent } from "./home/search-home/search-home.component";
+import { HomeFeaturesComponent } from "./home/home-features/home-features.component";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -64,6 +66,7 @@ export function getAuthServiceConfigs() {
     HomeComponent,
     SearchComponent,
     SearchHomeComponent,
+    HomeFeaturesComponent,
     MapComponent,
     PropertyComponent,
     FooterComponent,
@@ -92,7 +95,7 @@ export function getAuthServiceConfigs() {
     SocialLoginModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyAStx_HXP0pu0TvzaNnu9q3a1VL4R-LSX8",
+      apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",
       libraries: ["places"]
     })
   ],

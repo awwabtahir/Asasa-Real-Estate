@@ -108,12 +108,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   cityChange(cityObj, prevData?) {
-<<<<<<< HEAD
-    $(':focus').blur();
-=======
     $(":focus").blur();
     if (!cityObj) return;
->>>>>>> upload-ready
     let cityId = cityObj._id;
     this.selectedCity = cityObj._id;
     let cityData = this.cities.filter(function(city) {
@@ -127,15 +123,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.city = cityData[0].city;
 
-<<<<<<< HEAD
     this.locationUrl.go('/' + cityData[0].city);
     this.ga('set', 'page', this.locationUrl.path());
     this.ga('send', 'pageview');
-=======
-    this.locationUrl.go("map/" + cityData[0].city);
-    this.ga("set", "page", this.locationUrl.path());
-    this.ga("send", "pageview");
->>>>>>> upload-ready
     console.log(this.ga);
   }
 
@@ -156,12 +146,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   locationChange(locObj) {
-<<<<<<< HEAD
-    $(':focus').blur();
-=======
     $(":focus").blur();
     if (!locObj) return;
->>>>>>> upload-ready
     let locId = locObj._id;
     this.selectedLocation = locObj._id;
     let locData = this.locations.filter(function(loc) {
@@ -171,14 +157,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.locationService.setLocObj(locData[0]);
 
     if (this.city)
-<<<<<<< HEAD
       this.locationUrl.go('/' + this.city + '/' + locData[0].location);
     else
       this.locationUrl.go('/' + locData[0].location);
-=======
-      this.locationUrl.go("map/" + this.city + "/" + locData[0].location);
-    else this.locationUrl.go("map/" + locData[0].location);
->>>>>>> upload-ready
 
     this.ga("set", "page", this.locationUrl.path());
     this.ga("send", "pageview");
