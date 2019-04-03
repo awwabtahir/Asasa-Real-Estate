@@ -84,12 +84,6 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
         "//www.youtube.com/embed/" + this.getId(this.ad.vidUrl)
       );
     }
-<<<<<<< HEAD
-
-    this.propertyService.localeString(this.ad.demand);
-
-=======
->>>>>>> Usama
   }
 
   ngOnDestroy() {
