@@ -1,4 +1,12 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Inject,
+  HostListener
+} from "@angular/core";
+import { DOCUMENT } from "@angular/platform-browser";
+
 import { AuthenticationService } from "../../authentication.service";
 import { MapService } from "shared/services/map.service";
 import { ActivatedRoute } from "@angular/router";
@@ -7,11 +15,11 @@ import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
 
 @Component({
-  selector: "search",
-  templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.css"]
+  selector: "search-home",
+  templateUrl: "./search-home.component.html",
+  styleUrls: ["./search-home.component.css"]
 })
-export class SearchComponent implements OnInit, OnDestroy {
+export class SearchHomeComponent implements OnInit, OnDestroy {
   cities = [];
   locations = [];
 
@@ -22,9 +30,13 @@ export class SearchComponent implements OnInit, OnDestroy {
   city: string;
   location: string;
   private sub: any;
+  searchBarFixed: boolean = false;
+  mapSearchBar: boolean = false;
+  num: number = 0;
 
   // Google Analytics
   ga;
+  public innerWidth: any;
 
   constructor(
     private auth: AuthenticationService,
@@ -32,7 +44,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     private locationService: LocationService,
     private viewService: ViewService,
     private route: ActivatedRoute,
-    private locationUrl: Location
+    private locationUrl: Location,
+    @Inject(DOCUMENT) private doc: Document
   ) {}
 
   async ngOnInit() {
@@ -46,9 +59,9 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.selectedLocation = value._id;
     });
     this.mapService.typeEmit.subscribe(value => {
-      $(".dropdown-toggle")[0].innerText = "Type: " + value;
-      console.log($(".dropdown-toggle")[0].innerText);
+      $(".dropdown-toggle1")[0].innerText = "Type: " + value;
     });
+    this.innerWidth = window.innerWidth;
     $(".dropdown").on("hide.bs.dropdown", function(e) {
       e.preventDefault();
     });
@@ -91,7 +104,44 @@ export class SearchComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    this.num = this.doc.documentElement.scrollTop;
+    // For Desktop
+    if (this.innerWidth > 600) {
+      if (this.num > 210) {
+        this.searchBarFixed = true;
+      } else if (this.num < 210) {
+        this.searchBarFixed = false;
+      }
+      if (this.num > 565) {
+        this.mapSearchBar = true;
+      } else if (this.num < 565) {
+        this.mapSearchBar = false;
+      }
+    }
+    //For Mobile
+    if (this.innerWidth < 600) {
+      if (this.num > 140) {
+        this.searchBarFixed = true;
+      } else if (this.num < 140) {
+        this.searchBarFixed = false;
+      }
+      if (this.num > 345) {
+        this.mapSearchBar = true;
+      } else if (this.num < 345) {
+        this.mapSearchBar = false;
+      }
+    }
+  }
+  search() {
+    if (this.innerWidth > 600) {
+      this.doc.documentElement.scrollTo({ top: 650, behavior: "smooth" });
+    } else if (this.innerWidth < 600) {
+      this.doc.documentElement.scrollTo({ top: 422, behavior: "smooth" });
+    }
+    // this.doc.documentElement.scrollTop = 610;
+  }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
@@ -108,12 +158,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   cityChange(cityObj, prevData?) {
-<<<<<<< HEAD
-    $(':focus').blur();
-=======
     $(":focus").blur();
     if (!cityObj) return;
->>>>>>> upload-ready
     let cityId = cityObj._id;
     this.selectedCity = cityObj._id;
     let cityData = this.cities.filter(function(city) {
@@ -127,16 +173,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.city = cityData[0].city;
 
-<<<<<<< HEAD
-    this.locationUrl.go('/' + cityData[0].city);
-    this.ga('set', 'page', this.locationUrl.path());
-    this.ga('send', 'pageview');
-=======
-    this.locationUrl.go("map/" + cityData[0].city);
+    this.locationUrl.go("/" + cityData[0].city);
     this.ga("set", "page", this.locationUrl.path());
     this.ga("send", "pageview");
->>>>>>> upload-ready
-    console.log(this.ga);
   }
 
   getLocations(selectedCity?) {
@@ -148,6 +187,7 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.locations = locations.filter(function(loc) {
             return loc.cityId == selectedCity;
           });
+        this.locationService.locations = this.locations;
       },
       err => {
         console.error(err);
@@ -156,12 +196,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   locationChange(locObj) {
-<<<<<<< HEAD
-    $(':focus').blur();
-=======
     $(":focus").blur();
     if (!locObj) return;
->>>>>>> upload-ready
     let locId = locObj._id;
     this.selectedLocation = locObj._id;
     let locData = this.locations.filter(function(loc) {
@@ -171,14 +207,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.locationService.setLocObj(locData[0]);
 
     if (this.city)
-<<<<<<< HEAD
-      this.locationUrl.go('/' + this.city + '/' + locData[0].location);
-    else
-      this.locationUrl.go('/' + locData[0].location);
-=======
-      this.locationUrl.go("map/" + this.city + "/" + locData[0].location);
-    else this.locationUrl.go("map/" + locData[0].location);
->>>>>>> upload-ready
+      this.locationUrl.go("/" + this.city + "/" + locData[0].location);
+    else this.locationUrl.go("/" + locData[0].location);
 
     this.ga("set", "page", this.locationUrl.path());
     this.ga("send", "pageview");
@@ -186,7 +216,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   typeChange(type) {
     if (type.target.innerText.length > 20) return;
-    $(".dropdown-toggle")[0].innerText = "Type: " + type.target.innerText;
+    $(".dropdown-toggle1")[0].innerText = "Type: " + type.target.innerText;
     this.hideDropDown();
     this.mapService.typeChange(type.target.innerText);
   }

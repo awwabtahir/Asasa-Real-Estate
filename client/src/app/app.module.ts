@@ -63,6 +63,7 @@ export function getAuthServiceConfigs() {
     RegisterComponent,
     HomeComponent,
     SearchComponent,
+    SearchHomeComponent,
     MapComponent,
     PropertyComponent,
     FooterComponent,

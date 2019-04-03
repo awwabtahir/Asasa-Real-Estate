@@ -1,13 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class LocationService {
-
+  locations = [];
   latlng;
+  type: any;
+  cityChange: Subject<any> = new Subject<any>();
+  locationsChange: Subject<any> = new Subject<any>();
+  locChange: Subject<any> = new Subject<any>();
 
-  constructor() { }
+  constructor() {}
 
   setLatLng(latlng) {
     this.latlng = latlng;
@@ -21,6 +26,8 @@ export class LocationService {
 
   setCityObj(cityObj) {
     this.cityObj = cityObj;
+    this.cityChange.next(this.cityObj);
+    this.locationsChange.next(this.locations);
   }
 
   getCity() {
@@ -31,6 +38,7 @@ export class LocationService {
 
   setLocObj(locObj) {
     this.locObj = locObj;
+    this.locChange.next(this.locObj);
   }
 
   getLoc() {
@@ -46,5 +54,4 @@ export class LocationService {
   getGa() {
     return this.ga;
   }
-  
 }
