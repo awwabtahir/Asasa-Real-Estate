@@ -1,100 +1,111 @@
 .navbar-light {
-    border-top: 3px solid #25BDA4;
-    border-bottom: 3px solid #25BDA4; 
-    height: 70px;
+  border-top: 1px solid #25bda4;
+  border-bottom: 1px solid #25bda4;
+  height: 55px;
+  position: fixed;
+  top: 0%;
+  z-index: 20 !important;
+  width: 100%;
 }
-
+.navbar {
+  padding: 0rem 1rem !important;
+}
 @media only screen and (max-width: 768px) {
-    .navbar-collapse {
-        z-index: 99;
-        background: white;
-        padding: 10px;
-        margin: 10px 10px 0px 0px;
-    }
+  .navbar-collapse {
+    z-index: 99;
+    background: white;
+    padding: 10px;
+    margin: 10px 10px 0px 0px;
+  }
 }
 
 .bg-light {
-    background-color: white!important;
+  background-color: white !important;
 }
 
 .logo {
-    width: 180px;
-    height: 40px;
+  width: 180px;
+  height: 40px;
 }
 
-.left-nav li {
-    margin-right: 8px; 
-}
+/* .left-nav li {
+  margin-right: 8px;
+} */
 
 .left-nav li a {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-weight: bold;
-    color: black;
-    font-size: 15px;
-    text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  color: black;
+  font-size: 14px;
+  text-align: center;
+  /* height: 3.6rem;
+  padding-top: 1rem; */
+  padding: 1rem 1rem;
 }
 
 .active a,
 .left-nav li a:hover {
-    border: 1px solid #25BDA4;
-    border-radius: 10%;
-    background-color: #25BDA4;
-    color: white!important;
+  border: 1px solid #25bda4;
+  /* border-radius: 10%; */
+  background-color: #25bda4;
+  color: white !important;
 }
 
 .right-nav li a {
-    color: #25BDA4!important;
-    font-size: 12px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-weight: bold;
+  color: #25bda4 !important;
+  font-size: 12px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-weight: bold;
 }
 
 .right-nav li a:hover {
-    color: #25BDA4!important;
+  color: #25bda4 !important;
 }
 
 .sign-in,
 .logout {
-    border: 2px solid;
-    border-radius: 25px;
-    cursor: pointer;
+  cursor: pointer;
+  background: #ececec;
+  border-radius: 5px;
 }
 
 .call {
-    color:blue!important;
-    border: 5px solid red;
-    border-radius: 10px!important;
+  color: blue !important;
+  border: 5px solid red;
+  border-radius: 10px !important;
 }
 
 @media (max-width: 768px) {
-    .navbar-collapse {
-        position: absolute;
-        top: 54px;
-        left: 0;
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-bottom: 15px;
-        width: 100%;
-    }
-    .navbar-collapse.collapsing {
-        height: auto;
-        -webkit-transition: left 0.3s ease;
-        -o-transition: left 0.3s ease;
-        -moz-transition: left 0.3s ease;
-        transition: left 0.3s ease;
-        left: -100%;
-    }
-    .navbar-collapse.show {
-        left: 0;
-        -webkit-transition: left 0.3s ease-in;
-        -o-transition: left 0.3s ease-in;
-        -moz-transition: left 0.3s ease-in;
-        transition: left 0.3s ease-in;
-    }
-    .call {
-        margin-bottom: 10px;
-    }
-    .nav-link {
-        border-bottom: 1px solid gainsboro;
-    }
+  .navbar-collapse {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+  }
+  .navbar-collapse.collapsing {
+    height: auto;
+    -webkit-transition: left 0.3s ease;
+    -o-transition: left 0.3s ease;
+    -moz-transition: left 0.3s ease;
+    transition: left 0.3s ease;
+    left: -100%;
+  }
+  .navbar-collapse.show {
+    left: 0;
+    -webkit-transition: left 0.3s ease-in;
+    -o-transition: left 0.3s ease-in;
+    -moz-transition: left 0.3s ease-in;
+    transition: left 0.3s ease-in;
+  }
+  .call {
+    margin-bottom: 10px;
+  }
+  .nav-link {
+    border-bottom: 1px solid gainsboro;
+  }
 }

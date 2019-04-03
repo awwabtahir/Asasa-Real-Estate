@@ -1,22 +1,21 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ad } from 'shared/models/ad';
-import { MapService } from 'shared/services/map.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { PropertyModalService } from 'shared/services/property-modal.service';
-import { AuthenticationService } from '../../../../authentication.service';
-import { ActivatedRoute } from '@angular/router';
-import { PropertyService } from 'shared/services/property.service';
-import { Location } from '@angular/common';
+import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import { ad } from "shared/models/ad";
+import { MapService } from "shared/services/map.service";
+import { DomSanitizer } from "@angular/platform-browser";
+import { PropertyModalService } from "shared/services/property-modal.service";
+import { AuthenticationService } from "../../../../authentication.service";
+import { ActivatedRoute } from "@angular/router";
+import { PropertyService } from "shared/services/property.service";
+import { Location } from "@angular/common";
 
 declare var PANOLENS: any;
 
 @Component({
-  selector: 'marker-modal-content',
-  templateUrl: './marker-modal-content.component.html',
-  styleUrls: ['./marker-modal-content.component.css']
+  selector: "marker-modal-content",
+  templateUrl: "./marker-modal-content.component.html",
+  styleUrls: ["./marker-modal-content.component.css"]
 })
 export class MarkerModalContentComponent implements OnInit, OnDestroy {
-
   @Input() ad;
   basic: any;
   location: any;
@@ -37,81 +36,97 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     private auth: AuthenticationService,
     private route: ActivatedRoute,
     private locationUrl: Location,
-    private mapService: MapService) { }
+    private mapService: MapService
+  ) {}
 
   ngOnInit() {
     if (!this.ad) this.ad = this.propertyModalService.getAd();
 
     if (!this.ad) {
       this.sub = this.route.params.subscribe(params => {
-        this.id = +params['id'];
+        this.id = +params["id"];
         this.getAd(this.id);
       });
     }
 
     if (this.ad) {
       this.ngOnChanges();
+      console.log(this.ad);
     }
-
   }
 
   ngOnChanges() {
     if (!this.ad) return;
 
     this.locationUrl.replaceState(
-      "map/" + 
-      this.ad.locationData.city + "/" + 
-      this.ad.locationData.location + "/" +
-      this.ad.type + "/" +
-      this.ad._id);
+      "/" +
+        this.ad.locationData.city +
+        "/" +
+        this.ad.locationData.location +
+        "/" +
+        this.ad.type +
+        "/" +
+        this.ad._id
+    );
 
     this.basic = this.modalService.updateBasic(this.ad, this.basic);
-    this.location = this.modalService.updateLocation(this.ad.locationData, this.location);
+    this.location = this.modalService.updateLocation(
+      this.ad.locationData,
+      this.location
+    );
     this.plot_features = this.ad.plot_features;
     this.other = this.ad.other;
     this.nearby_loc = this.ad.nearby_loc;
     if (this.map) this.mapReady(this.map);
 
     if (this.ad.vidUrl != "") {
-      this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl("//www.youtube.com/embed/" + this.getId(this.ad.vidUrl));
+      this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl(
+        "//www.youtube.com/embed/" + this.getId(this.ad.vidUrl)
+      );
     }
+<<<<<<< HEAD
 
     this.propertyService.localeString(this.ad.demand);
 
+=======
+>>>>>>> Usama
   }
 
   ngOnDestroy() {
-    if (this.sub)
-      this.sub.unsubscribe();
+    if (this.sub) this.sub.unsubscribe();
   }
 
   getAd(id) {
-    this.propertyService.getAds().subscribe(ads => {
-      let ad = ads.filter(function (ad) {
-        return ad._id == id;
-      });
-      this.ad = ad[0];
-      this.ngOnChanges();
-    }, (err) => {
-      console.error(err);
-    });
+    this.propertyService.getAds().subscribe(
+      ads => {
+        let ad = ads.filter(function(ad) {
+          return ad._id == id;
+        });
+        this.ad = ad[0];
+        this.ngOnChanges();
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   map: any;
-  async mapReady(map) {    
+  async mapReady(map) {
     // this.loadScripts();
     this.map = map;
     let location = this.location.location;
     let locationObj;
-    this.auth.getLocations().subscribe(locations => {
-
-      locationObj = locations.filter(function (loc) {
-        return loc.location == location;
-      });
-
-    }, (err) => {
-      console.error(err);
-    });
+    this.auth.getLocations().subscribe(
+      locations => {
+        locationObj = locations.filter(function(loc) {
+          return loc.location == location;
+        });
+      },
+      err => {
+        console.error(err);
+      }
+    );
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     locationObj = locationObj[0];
 
@@ -122,7 +137,12 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
         lat1: locationObj.overlayData.lat1,
         lng1: locationObj.overlayData.lng1
       };
-      this.mapService.addOverLay(map, bounds, locationObj.overlayData.imgLoc, true);
+      this.mapService.addOverLay(
+        map,
+        bounds,
+        locationObj.overlayData.imgLoc,
+        true
+      );
     }
 
     if (this.ad.imagesData == undefined) return;
@@ -133,7 +153,9 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   url3D;
   url3d() {
     this.image3d = true;
-    this.url3D = this._sanitizer.bypassSecurityTrustResourceUrl(this.ad.imagesData.image3d.value);
+    this.url3D = this._sanitizer.bypassSecurityTrustResourceUrl(
+      this.ad.imagesData.image3d.value
+    );
   }
 
   panorama;
@@ -153,16 +175,16 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
 
   private loadScripts() {
     const dynamicScripts = [
-     'assets/js/three.min.js',
-     'assets/js/panolens.min.js'
+      "assets/js/three.min.js",
+      "assets/js/panolens.min.js"
     ];
     for (let i = 0; i < dynamicScripts.length; i++) {
-      const node = document.createElement('script');
+      const node = document.createElement("script");
       node.src = dynamicScripts[i];
-      node.type = 'text/javascript';
+      node.type = "text/javascript";
       node.async = false;
-      node.charset = 'utf-8';
-      document.getElementsByTagName('head')[0].appendChild(node);
+      node.charset = "utf-8";
+      document.getElementsByTagName("head")[0].appendChild(node);
     }
   }
 
@@ -173,8 +195,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     if (match && match[2].length == 11) {
       return match[2];
     } else {
-      return 'error';
+      return "error";
     }
   }
-
 }

@@ -1,21 +1,36 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-sm ml-2" data-toggle="modal" data-target="#searchFilterModal">
+<button
+  type="button"
+  class="btn btn-primary btn-sm ml-2 btnFilter"
+  data-toggle="modal"
+  data-target="#searchFilterModal"
+>
   <i class="fas fa-bars"></i> Filter
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="searchFilterModal" tabindex="-1" role="dialog" aria-labelledby="searchFilterModalLabel"
-  aria-hidden="true">
+<div
+  class="modal fade"
+  id="searchFilterModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="searchFilterModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="searchFilterModalLabel">Filters</h5>
-        <a class="btn btn-default btn-sm" class="close" data-dismiss="modal" aria-label="Close">
+        <a
+          class="btn btn-default btn-sm"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </a>
       </div>
       <div class="modal-body">
-
         <!-- Property Type Filter -->
         <!-- <div class="form-row mb-2">
           <div class="form-group">
@@ -40,12 +55,16 @@
         <!-- Price Filter -->
         <h5>Price</h5>
         <form class="form-inline">
-
           <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
               <div class="input-group-text">Rs.</div>
             </div>
-            <input type="text" class="form-control" name="lowPrice" [(ngModel)]="filterOpts.lowPrice">
+            <input
+              type="text"
+              class="form-control"
+              name="lowPrice"
+              [(ngModel)]="filterOpts.lowPrice"
+            />
           </div>
 
           <div class="input-group mb-2 mr-sm-2">
@@ -56,9 +75,13 @@
             <div class="input-group-prepend">
               <div class="input-group-text">Rs.</div>
             </div>
-            <input type="text" class="form-control" name="highPrice" [(ngModel)]="filterOpts.highPrice">
+            <input
+              type="text"
+              class="form-control"
+              name="highPrice"
+              [(ngModel)]="filterOpts.highPrice"
+            />
           </div>
-
         </form>
 
         <!-- Area Filter -->
@@ -71,9 +94,13 @@
         </select>
 
         <form class="form-inline">
-
           <div class="input-group mb-2 mr-sm-2">
-            <input type="text" class="form-control" name="lowArea" [(ngModel)]="filterOpts.lowArea">
+            <input
+              type="text"
+              class="form-control"
+              name="lowArea"
+              [(ngModel)]="filterOpts.lowArea"
+            />
           </div>
 
           <div class="input-group mb-2 mr-sm-2">
@@ -81,17 +108,30 @@
           </div>
 
           <div class="input-group mb-2 mr-sm-2">
-            <input type="text" class="form-control" name="highArea" [(ngModel)]="filterOpts.highArea">
+            <input
+              type="text"
+              class="form-control"
+              name="highArea"
+              [(ngModel)]="filterOpts.highArea"
+            />
           </div>
-
         </form>
-
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" (click)="reset()">
+        <button
+          type="button"
+          class="btn btn-danger btn-sm"
+          data-dismiss="modal"
+          (click)="reset()"
+        >
           Reset
         </button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="filter()">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+          (click)="filter()"
+        >
           Apply Filter
         </button>
       </div>
