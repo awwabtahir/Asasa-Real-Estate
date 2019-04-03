@@ -31,10 +31,12 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   location: string;
   private sub: any;
   searchBarFixed: boolean = false;
+  mapSearchBar: boolean = false;
   num: number = 0;
 
   // Google Analytics
   ga;
+  public innerWidth: any;
 
   constructor(
     private auth: AuthenticationService,
@@ -47,6 +49,19 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
+    this.locationService.cityChange.subscribe(value => {
+      this.selectedCity = value._id;
+    });
+    this.locationService.locationsChange.subscribe(value => {
+      this.locations = value;
+    });
+    this.locationService.locChange.subscribe(value => {
+      this.selectedLocation = value._id;
+    });
+    this.mapService.typeEmit.subscribe(value => {
+      $(".dropdown-toggle1")[0].innerText = "Type: " + value;
+    });
+    this.innerWidth = window.innerWidth;
     $(".dropdown").on("hide.bs.dropdown", function(e) {
       e.preventDefault();
     });
@@ -92,18 +107,39 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   @HostListener("window:scroll", [])
   onWindowScroll() {
     this.num = this.doc.documentElement.scrollTop;
-    console.log(this.num);
-    if (this.num > 210) {
-      this.searchBarFixed = true;
-      console.log(this.searchBarFixed);
-    } else if (this.num < 210) {
-      this.searchBarFixed = false;
-      console.log(this.searchBarFixed);
+    // For Desktop
+    if (this.innerWidth > 600) {
+      if (this.num > 210) {
+        this.searchBarFixed = true;
+      } else if (this.num < 210) {
+        this.searchBarFixed = false;
+      }
+      if (this.num > 565) {
+        this.mapSearchBar = true;
+      } else if (this.num < 565) {
+        this.mapSearchBar = false;
+      }
     }
-    // console.log(this.doc.getElementById("search"));
+    //For Mobile
+    if (this.innerWidth < 600) {
+      if (this.num > 140) {
+        this.searchBarFixed = true;
+      } else if (this.num < 140) {
+        this.searchBarFixed = false;
+      }
+      if (this.num > 345) {
+        this.mapSearchBar = true;
+      } else if (this.num < 345) {
+        this.mapSearchBar = false;
+      }
+    }
   }
   search() {
-    this.doc.documentElement.scrollTo({ top: 635, behavior: "smooth" });
+    if (this.innerWidth > 600) {
+      this.doc.documentElement.scrollTo({ top: 650, behavior: "smooth" });
+    } else if (this.innerWidth < 600) {
+      this.doc.documentElement.scrollTo({ top: 422, behavior: "smooth" });
+    }
     // this.doc.documentElement.scrollTop = 610;
   }
   ngOnDestroy() {
@@ -140,7 +176,6 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.locationUrl.go("/" + cityData[0].city);
     this.ga("set", "page", this.locationUrl.path());
     this.ga("send", "pageview");
-    console.log(this.ga);
   }
 
   getLocations(selectedCity?) {
@@ -152,6 +187,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
           this.locations = locations.filter(function(loc) {
             return loc.cityId == selectedCity;
           });
+        this.locationService.locations = this.locations;
       },
       err => {
         console.error(err);
@@ -180,7 +216,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
 
   typeChange(type) {
     if (type.target.innerText.length > 20) return;
-    $(".dropdown-toggle")[0].innerText = "Type: " + type.target.innerText;
+    $(".dropdown-toggle1")[0].innerText = "Type: " + type.target.innerText;
     this.hideDropDown();
     this.mapService.typeChange(type.target.innerText);
   }

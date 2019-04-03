@@ -41,6 +41,7 @@ import { HomeFeaturesComponent } from './home/home-features/home-features.compon
 import { HowWorksComponent } from './home/how-works/how-works.component';
 import { WelcomeScreenComponent } from './home/welcome-screen/welcome-screen.component';
 import { MapHomeComponent } from './home/map-home/map-home.component';
+import { SearchHomeComponent } from 'app/home/search-home/search-home.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -66,6 +67,7 @@ export function getAuthServiceConfigs() {
     RegisterComponent,
     HomeComponent,
     SearchComponent,
+    SearchHomeComponent,
     MapComponent,
     PropertyComponent,
     FooterComponent,    

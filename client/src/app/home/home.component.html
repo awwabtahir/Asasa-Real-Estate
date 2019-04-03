@@ -1,6 +1,9 @@
 <div class="container">
   <search-home id="search"></search-home>
-  <!-- <search class="row"></search> -->
+  <search
+    [ngStyle]="!mapSearchBar && { visibility: 'hidden' }"
+    class="row"
+  ></search>
   <map *ngIf="mapView" class="row"></map>
   <listview *ngIf="listView" class="row mt-2"></listview>
   <regions class="row"></regions>
