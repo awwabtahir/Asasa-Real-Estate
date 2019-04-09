@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   mapView = true;
   listView = false;
   mapSearchBar = false;
+  start = true;
   num: number;
 
   constructor(
@@ -52,5 +53,17 @@ export class HomeComponent implements OnInit {
         this.mapSearchBar = false;
       }
     }
+  }
+
+  search(scroll) {
+    let el = document.getElementById("mapSearch");
+    let pos = el.style.position;
+    let top = el.style.top;
+    el.style.position = "relative";
+    el.style.top = "-55px";
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    el.style.top = top;
+    el.style.position = pos;
+    this.start = false;
   }
 }

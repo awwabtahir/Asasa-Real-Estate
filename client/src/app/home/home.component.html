@@ -1,11 +1,26 @@
 <div class="container">
-  <search-home id="search"></search-home>
+  <search-home
+    (searched)="search($event, searchBarMap)"
+    id="search"
+  ></search-home>
   <search
-    [ngStyle]="!mapSearchBar && { visibility: 'hidden' }"
+    id="mapSearch"
+    [ngStyle]="
+      (!mapSearchBar && { visibility: 'hidden' }) ||
+      (start && { display: 'none' })
+    "
     class="row"
   ></search>
-  <map *ngIf="mapView" class="row"></map>
-  <listview *ngIf="listView" class="row mt-2"></listview>
+  <map
+    [ngStyle]="start && { display: 'none' }"
+    *ngIf="mapView"
+    class="row"
+  ></map>
+  <listview
+    [ngStyle]="start && { display: 'none' }"
+    *ngIf="listView"
+    class="row mt-2"
+  ></listview>
   <regions class="row"></regions>
   <home-features class="row"></home-features>
   <how-works class="row"></how-works>

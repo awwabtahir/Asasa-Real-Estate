@@ -3,7 +3,9 @@ import {
   OnInit,
   OnDestroy,
   Inject,
-  HostListener
+  HostListener,
+  Output,
+  EventEmitter
 } from "@angular/core";
 import { DOCUMENT } from "@angular/platform-browser";
 
@@ -20,6 +22,7 @@ import { ViewService } from "shared/services/view.service";
   styleUrls: ["./search-home.component.css"]
 })
 export class SearchHomeComponent implements OnInit, OnDestroy {
+  @Output() searched = new EventEmitter<any>();
   cities = [];
   locations = [];
 
@@ -135,11 +138,12 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     }
   }
   search() {
-    if (this.innerWidth > 600) {
-      this.doc.documentElement.scrollTo({ top: 650, behavior: "smooth" });
-    } else if (this.innerWidth < 600) {
-      this.doc.documentElement.scrollTo({ top: 422, behavior: "smooth" });
-    }
+    this.searched.emit("scroll");
+    // if (this.innerWidth > 600) {
+    //   this.doc.documentElement.scrollTo({ top: 650, behavior: "smooth" });
+    // } else if (this.innerWidth < 600) {
+    //   this.doc.documentElement.scrollTo({ top: 422, behavior: "smooth" });
+    // }
     // this.doc.documentElement.scrollTop = 610;
   }
   ngOnDestroy() {
