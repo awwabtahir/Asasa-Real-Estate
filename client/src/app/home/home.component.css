@@ -1,6 +1,6 @@
 .container {
   margin-top: 4rem;
 }
-#mapSearch {
-  /* padding-top: 3.5rem; */
+.displayNone {
+  display: none !important;
 }

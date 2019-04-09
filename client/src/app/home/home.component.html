@@ -5,12 +5,12 @@
   ></search-home>
   <search
     id="mapSearch"
-    [ngStyle]="
-      (!mapSearchBar && { visibility: 'hidden' }) ||
-      (start && { display: 'none' })
-    "
+    [ngClass]="{ displayNone: start }"
+    [ngStyle]="!mapSearchBar && { visibility: 'hidden' }"
     class="row"
   ></search>
+  <!-- ||
+      (start && { display: 'none' }) -->
   <map
     [ngStyle]="start && { display: 'none' }"
     *ngIf="mapView"
