@@ -58,9 +58,9 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.locationService.locChange.subscribe(value => {
       this.selectedLocation = value._id;
     });
-    this.mapService.typeEmit.subscribe(value => {
-      $(".dropdown-toggle1")[0].innerText = "Type: " + value;
-    });
+    // this.mapService.typeEmit.subscribe(value => {
+    //   $(".dropdown-toggle1")[0].innerText = "Type: " + value;
+    // });
     this.innerWidth = window.innerWidth;
     $(".dropdown").on("hide.bs.dropdown", function(e) {
       e.preventDefault();
@@ -214,12 +214,12 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.ga("send", "pageview");
   }
 
-  typeChange(type) {
-    if (type.target.innerText.length > 20) return;
-    $(".dropdown-toggle1")[0].innerText = "Type: " + type.target.innerText;
-    this.hideDropDown();
-    this.mapService.typeChange(type.target.innerText);
-  }
+  // typeChange(type) {
+  //   if (type.target.innerText.length > 20) return;
+  //   $(".dropdown-toggle1")[0].innerText = "Type: " + type.target.innerText;
+  //   this.hideDropDown();
+  //   this.mapService.typeChange(type.target.innerText);
+  // }
 
   hideDropDown() {
     $(".dropdown-menu").toggle();

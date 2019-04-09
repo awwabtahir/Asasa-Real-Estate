@@ -14,7 +14,6 @@ import { ViewService } from "shared/services/view.service";
 export class SearchComponent implements OnInit, OnDestroy {
   cities = [];
   locations = [];
-
   selectedCity;
   selectedLocation;
   selectedType;
@@ -45,10 +44,10 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.locationService.locChange.subscribe(value => {
       this.selectedLocation = value._id;
     });
-    this.mapService.typeEmit.subscribe(value => {
-      $(".dropdown-toggle")[0].innerText = "Type: " + value;
-      console.log($(".dropdown-toggle")[0].innerText);
-    });
+    // this.mapService.typeEmit.subscribe(value => {
+    //   $(".dropdown-toggle")[0].innerText = "Type: " + value;
+    //   console.log($(".dropdown-toggle")[0].innerText);
+    // });
     $(".dropdown").on("hide.bs.dropdown", function(e) {
       e.preventDefault();
     });
@@ -123,9 +122,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
     this.city = cityData[0].city;
 
-    this.locationUrl.go('/' + cityData[0].city);
-    this.ga('set', 'page', this.locationUrl.path());
-    this.ga('send', 'pageview');
+    this.locationUrl.go("/" + cityData[0].city);
+    this.ga("set", "page", this.locationUrl.path());
+    this.ga("send", "pageview");
     console.log(this.ga);
   }
 
@@ -157,20 +156,19 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.locationService.setLocObj(locData[0]);
 
     if (this.city)
-      this.locationUrl.go('/' + this.city + '/' + locData[0].location);
-    else
-      this.locationUrl.go('/' + locData[0].location);
+      this.locationUrl.go("/" + this.city + "/" + locData[0].location);
+    else this.locationUrl.go("/" + locData[0].location);
 
     this.ga("set", "page", this.locationUrl.path());
     this.ga("send", "pageview");
   }
 
-  typeChange(type) {
-    if (type.target.innerText.length > 20) return;
-    $(".dropdown-toggle")[0].innerText = "Type: " + type.target.innerText;
-    this.hideDropDown();
-    this.mapService.typeChange(type.target.innerText);
-  }
+  // typeChange(type) {
+  //   if (type.target.innerText.length > 20) return;
+  //   $(".dropdown-toggle")[0].innerText = "Type: " + type.target.innerText;
+  //   this.hideDropDown();
+  //   this.mapService.typeChange(type.target.innerText);
+  // }
 
   hideDropDown() {
     $(".dropdown-menu").toggle();

@@ -2,55 +2,26 @@
   <a class="navbar-brand" routerLink="/">
     <img src="/assets/images/asasa_logo.png" class="logo" />
   </a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navContent"
-    aria-controls="navContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent"
+    aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navContent">
     <ul class="navbar-nav mr-auto left-nav">
-      <li
-        [routerLinkActive]="['active']"
-        data-toggle="collapse"
-        data-target="#navContent"
-        class="nav-item"
-      >
+      <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
         <a class="nav-link" routerLink="/">Find Your Best Property</a>
       </li>
-      <li
-        [routerLinkActive]="['active']"
-        data-toggle="collapse"
-        data-target="#navContent"
-        class="nav-item"
-      >
+      <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
         <a class="nav-link" href="#">Find Rental Property</a>
       </li>
       <li data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <a class="nav-link" routerLink="/" onclick="openForm(); return false;"
-          >Add Property FREE</a
-        >
+        <a class="nav-link" routerLink="/" onclick="openForm(); return false;">Add Property FREE</a>
       </li>
-      <li
-        [routerLinkActive]="['active']"
-        data-toggle="collapse"
-        data-target="#navContent"
-        class="nav-item"
-      >
+      <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
         <a class="nav-link" href="#">Discover New Projects</a>
       </li>
-      <li
-        [routerLinkActive]="['active']"
-        data-toggle="collapse"
-        data-target="#navContent"
-        class="nav-item"
-      >
+      <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
         <a class="nav-link" href="#">House Architecture</a>
       </li>
       <!-- <li class="nav-item">
@@ -58,12 +29,7 @@
       </li> -->
     </ul>
     <ul class="navbar-nav pull-right right-nav">
-      <li
-        *ngIf="!auth.isLoggedIn()"
-        data-toggle="collapse"
-        data-target="#navContent"
-        class="nav-item"
-      >
+      <li *ngIf="!auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">
         <div class="nav-link sign-in">
           <!-- Button trigger modal -->
           <div data-toggle="modal" data-target="#signinModel">
@@ -71,25 +37,11 @@
           </div>
         </div>
       </li>
-      <li
-        *ngIf="auth.isLoggedIn()"
-        data-toggle="collapse"
-        data-target="#navContent"
-        class="nav-item"
-      >
-        <a class="nav-link" routerLink="/dashboard"
-          ><i class="fas fa-toolbox fa-2x"></i> Dashboard</a
-        >
+      <li *ngIf="auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard/profile"><i class="fas fa-toolbox fa-2x"></i> Dashboard</a>
       </li>
-      <li
-        *ngIf="auth.isLoggedIn()"
-        data-toggle="collapse"
-        data-target="#navContent"
-        class="nav-item"
-      >
-        <a class="nav-link logout" (click)="auth.logout()"
-          ><i class="fas fa-sign-out-alt fa-2x"></i> Logout</a
-        >
+      <li *ngIf="auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">
+        <a class="nav-link logout" (click)="auth.logout()"><i class="fas fa-sign-out-alt fa-2x"></i> Logout</a>
       </li>
     </ul>
   </div>
