@@ -218,12 +218,12 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.ga("send", "pageview");
   }
 
-  // typeChange(type) {
-  //   if (type.target.innerText.length > 20) return;
-  //   $(".dropdown-toggle1")[0].innerText = "Type: " + type.target.innerText;
-  //   this.hideDropDown();
-  //   this.mapService.typeChange(type.target.innerText);
-  // }
+  typeChange(type) {
+    if (type.target.innerText.length > 20) return;
+    $(".dropdown-toggle1")[0].innerText = "Type: " + type.target.innerText;
+    this.hideDropDown();
+    this.mapService.typeChange(type.target.innerText);
+  }
 
   hideDropDown() {
     $(".dropdown-menu").toggle();
