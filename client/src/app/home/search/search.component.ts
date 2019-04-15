@@ -35,11 +35,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
+    console.log(
+      this.locationService.locObj,
+      "locations",
+      this.locationService.cityObj
+    );
     this.locationService.cityChange.subscribe(value => {
       this.selectedCity = value._id;
     });
     this.locationService.locationsChange.subscribe(value => {
       this.locations = value;
+      console.log(this.locations, "search");
     });
     this.locationService.locChange.subscribe(value => {
       this.selectedLocation = value._id;

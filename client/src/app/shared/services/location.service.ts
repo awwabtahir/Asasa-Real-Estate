@@ -27,7 +27,7 @@ export class LocationService {
   setCityObj(cityObj) {
     this.cityObj = cityObj;
     this.cityChange.next(this.cityObj);
-    this.locationsChange.next(this.locations);
+    // this.locationsChange.next(this.locations);
   }
 
   getCity() {

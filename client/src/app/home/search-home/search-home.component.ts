@@ -57,6 +57,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     });
     this.locationService.locationsChange.subscribe(value => {
       this.locations = value;
+      console.log(this.locations, "searchHome");
     });
     this.locationService.locChange.subscribe(value => {
       this.selectedLocation = value._id;
@@ -192,6 +193,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
             return loc.cityId == selectedCity;
           });
         this.locationService.locations = this.locations;
+        this.locationService.locationsChange.next(this.locations);
       },
       err => {
         console.error(err);

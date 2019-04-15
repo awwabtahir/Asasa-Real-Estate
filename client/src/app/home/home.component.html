@@ -1,5 +1,6 @@
 <div class="container">
   <search-home
+    *ngIf="firstVisit"
     (searched)="search($event)"
     id="search"
   ></search-home>
