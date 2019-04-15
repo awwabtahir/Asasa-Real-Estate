@@ -27,7 +27,7 @@ export class MarkerComponent implements OnInit {
   };
 
   plotIcon = {
-    url: "assets/images/Plot1.png",
+    url: "assets/images/Plot.png",
     scaledSize: {
       width: 20,
       height: 26
