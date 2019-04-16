@@ -35,17 +35,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    console.log(
-      this.locationService.locObj,
-      "locations",
-      this.locationService.cityObj
-    );
     this.locationService.cityChange.subscribe(value => {
       this.selectedCity = value._id;
     });
     this.locationService.locationsChange.subscribe(value => {
       this.locations = value;
-      console.log(this.locations, "search");
     });
     this.locationService.locChange.subscribe(value => {
       this.selectedLocation = value._id;
@@ -126,12 +120,12 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.locations = [];
       this.getLocations(cityId);
     }
-    this.city = cityData[0].city;
-
-    this.locationUrl.go("/" + cityData[0].city);
+    if (cityData) {
+      this.city = cityData[0].city;
+      this.locationUrl.go("/" + cityData[0].city);
+    }
     this.ga("set", "page", this.locationUrl.path());
     this.ga("send", "pageview");
-    console.log(this.ga);
   }
 
   getLocations(selectedCity?) {

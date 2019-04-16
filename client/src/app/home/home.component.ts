@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
     if (!this.firstVisit) {
       this.mapSearchBar = true;
     }
-    // this.start = this.service.firstVisit;
+    this.start = this.service.firstVisit;
     this.innerWidth = window.innerWidth;
     this.view = this.viewService.getView().subscribe(view => {
       if (view == "listview") {

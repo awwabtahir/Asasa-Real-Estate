@@ -57,7 +57,6 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     });
     this.locationService.locationsChange.subscribe(value => {
       this.locations = value;
-      console.log(this.locations, "searchHome");
     });
     this.locationService.locChange.subscribe(value => {
       this.selectedLocation = value._id;
