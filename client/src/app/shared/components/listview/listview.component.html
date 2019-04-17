@@ -1,5 +1,5 @@
 <div class="container">
-  <p class="message" *ngIf="!propertiesAvailable">No Property Found!</p>
+  <p class="message" *ngIf="!propertiesAvailable">No Result Found!</p>
   <div *ngIf="propertiesAvailable" class="row">
     <pagination-controls
       (pageChange)="p = $event"
