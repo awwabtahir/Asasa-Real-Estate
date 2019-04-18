@@ -12,8 +12,8 @@ import { ViewService } from "shared/services/view.service";
   styleUrls: ["./search.component.css"]
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  cities = [];
-  locations = [];
+  cities: any;
+  locations: any;
   selectedCity;
   selectedLocation;
   selectedType;
@@ -52,9 +52,11 @@ export class SearchComponent implements OnInit, OnDestroy {
       e.preventDefault();
     });
 
-    this.getCities();
-    this.getLocations();
-    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+    await this.getCities();
+    await this.getLocations();
+    await new Promise((resolve, reject) => {
+      setTimeout(resolve, 1500);
+    });
 
     this.ga = this.locationService.getGa();
 
@@ -66,44 +68,54 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.city = params["city"];
       this.location = params["location"];
-      let locations = this.locations;
-
-      if (this.city) {
-        let city = this.city;
-        let foundCity = this.cities.filter(function(c) {
-          return c.city == city;
-        });
-        if (foundCity[0]) {
-          this.selectedCity = foundCity[0]._id;
-          this.cityChange(foundCity[0]);
-        }
-      }
-
-      if (this.location) {
-        this.locations = locations;
-        let location = this.location;
-        let foundLoc = locations.filter(function(l) {
-          return l.location == location;
-        });
-        this.selectedLocation = foundLoc[0]._id;
-        this.locationChange(foundLoc[0]);
-      }
+      this.checkCity();
+      this.checkLocation();
     });
+  }
+
+  async checkCity() {
+    if (this.city) {
+      let city = this.city;
+
+      let foundCity = await this.cities.filter(function(c) {
+        return c.city == city;
+      });
+      if (foundCity[0]) {
+        this.selectedCity = foundCity[0]._id;
+        this.cityChange(foundCity[0]);
+      }
+    }
+  }
+  async checkLocation() {
+    let locations = await this.locations;
+
+    if (this.location) {
+      this.locations = locations;
+      let location = this.location;
+      let foundLoc = locations.filter(function(l) {
+        return l.location == location;
+      });
+      this.selectedLocation = foundLoc[0]._id;
+      this.locationChange(foundLoc[0]);
+    }
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  getCities() {
-    this.auth.getCities().subscribe(
-      cities => {
-        this.cities = cities;
-      },
-      err => {
-        console.error(err);
-      }
-    );
+  async getCities() {
+    await this.auth
+      .getCities()
+      .toPromise()
+      .then(
+        cities => {
+          this.cities = cities;
+        },
+        err => {
+          console.error(err);
+        }
+      );
   }
 
   cityChange(cityObj, prevData?) {
@@ -128,20 +140,23 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.ga("send", "pageview");
   }
 
-  getLocations(selectedCity?) {
-    this.auth.getLocations().subscribe(
-      locations => {
-        this.locations = locations;
+  async getLocations(selectedCity?) {
+    await this.auth
+      .getLocations()
+      .toPromise()
+      .then(
+        locations => {
+          this.locations = locations;
 
-        if (selectedCity)
-          this.locations = locations.filter(function(loc) {
-            return loc.cityId == selectedCity;
-          });
-      },
-      err => {
-        console.error(err);
-      }
-    );
+          if (selectedCity)
+            this.locations = locations.filter(function(loc) {
+              return loc.cityId == selectedCity;
+            });
+        },
+        err => {
+          console.error(err);
+        }
+      );
   }
 
   locationChange(locObj) {

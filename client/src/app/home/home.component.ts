@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, Inject } from "@angular/core";
 import { ViewService } from "shared/services/view.service";
 import { DOCUMENT } from "@angular/platform-browser";
 import { PropertyService } from "shared/services/property.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "home-page",
@@ -18,14 +19,24 @@ export class HomeComponent implements OnInit {
   mapSearchBar = false;
   start: boolean;
   num: number;
+  sub;
 
   constructor(
     private viewService: ViewService,
     private service: PropertyService,
+    private route: ActivatedRoute,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      if (params.city) {
+        this.service.firstVisit = false;
+        this.firstVisit = false;
+        this.mapSearchBar = true;
+        this.start = false;
+      }
+    });
     this.firstVisit = this.service.firstVisit;
     if (!this.firstVisit) {
       this.mapSearchBar = true;
