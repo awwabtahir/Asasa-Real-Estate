@@ -1,6 +1,21 @@
 .container {
   margin-top: 4rem;
 }
-.displayNone {
-  display: none !important;
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+  margin-left: -120px;
+  position: absolute;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 109%;
+    margin-left: -15px;
+  }
 }
