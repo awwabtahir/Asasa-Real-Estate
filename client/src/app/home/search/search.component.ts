@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private viewService: ViewService,
     private route: ActivatedRoute,
     private locationUrl: Location
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.locationService.cityChange.subscribe(value => {
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     //   $(".dropdown-toggle")[0].innerText = "Type: " + value;
     //   console.log($(".dropdown-toggle")[0].innerText);
     // });
-    $(".dropdown").on("hide.bs.dropdown", function(e) {
+    $(".dropdown").on("hide.bs.dropdown", function (e) {
       e.preventDefault();
     });
 
@@ -77,7 +77,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (this.city) {
       let city = this.city;
 
-      let foundCity = await this.cities.filter(function(c) {
+      let foundCity = await this.cities.filter(function (c) {
         return c.city == city;
       });
       if (foundCity[0]) {
@@ -92,7 +92,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (this.location) {
       this.locations = locations;
       let location = this.location;
-      let foundLoc = locations.filter(function(l) {
+      let foundLoc = locations.filter(function (l) {
         return l.location == location;
       });
       this.selectedLocation = foundLoc[0]._id;
@@ -123,7 +123,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (!cityObj) return;
     let cityId = cityObj._id;
     this.selectedCity = cityObj._id;
-    let cityData = this.cities.filter(function(city) {
+    let cityData = this.cities.filter(function (city) {
       return city._id == cityId;
     });
     this.mapService.cityChange(cityData[0]);
@@ -149,7 +149,7 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.locations = locations;
 
           if (selectedCity)
-            this.locations = locations.filter(function(loc) {
+            this.locations = locations.filter(function (loc) {
               return loc.cityId == selectedCity;
             });
         },
@@ -163,16 +163,22 @@ export class SearchComponent implements OnInit, OnDestroy {
     $(":focus").blur();
     if (!locObj) return;
     let locId = locObj._id;
+    let cityId = this.selectedCity;
     this.selectedLocation = locObj._id;
-    let locData = this.locations.filter(function(loc) {
+    let locData = this.locations.filter(function (loc) {
       return loc._id == locId;
     });
     this.mapService.locationChange(locData[0]);
     this.locationService.setLocObj(locData[0]);
 
-    if (this.city)
-      this.locationUrl.go("/" + this.city + "/" + locData[0].location);
-    else this.locationUrl.go("/" + locData[0].location);
+    if (!this.city) {
+      let cityData = this.cities.filter(function (city) {
+        return city._id == cityId;
+      });
+      this.city = cityData[0].city;
+    }
+
+    this.locationUrl.go("/" + this.city + "/" + locData[0].location);
 
     this.ga("set", "page", this.locationUrl.path());
     this.ga("send", "pageview");
