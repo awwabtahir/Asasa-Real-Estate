@@ -192,6 +192,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
             return loc.cityId == selectedCity;
           });
         this.locationService.locations = this.locations;
+        this.locationService.locationsChange.next(this.locations);
       },
       err => {
         console.error(err);

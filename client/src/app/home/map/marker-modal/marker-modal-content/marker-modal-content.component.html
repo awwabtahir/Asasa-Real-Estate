@@ -153,6 +153,22 @@
 
           </div>
 
+          <div *ngIf="ad.type != 'plot'" class="row mt-2 mb-2">
+            <div class="alert alert-info w-100 text-center">
+              <strong>Features</strong>
+            </div>
+
+            <ng-container *ngIf="ad.rooms">
+              <ng-container *ngFor="let entry of ad.rooms | keys">
+                <div *ngIf="entry.value" class="col-md-6">
+                  <b>{{entry.key | titlecase}}</b> &nbsp;
+                  <i class="fas fa-check bluetick"></i>
+                </div>
+              </ng-container>
+            </ng-container>
+
+          </div>
+
         </div>
         <email [id]="ad._id"></email>
         <br>

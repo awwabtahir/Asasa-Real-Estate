@@ -1,51 +1,51 @@
 <div class="mt-2 form-inline">
-
-  <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
-    [(ngModel)]="selectedCity" (change)="cityChange($event)">
+  <ng-select
+    #city
+    [items]="cities"
+    bindLabel="city"
+    bindValue="_id"
+    class="mr-2 ml-2"
+    placeholder="Select City"
+    [(ngModel)]="selectedCity"
+    (change)="cityChange($event)"
+  >
   </ng-select>
 
-  <ng-select *ngIf="selectedCity" [items]="locations" bindLabel="location" bindValue="_id" class="mr-2 ml-2" placeholder="Search Location"
-    [(ngModel)]="selectedLocation" (change)="locationChange($event)">
+  <ng-select
+    *ngIf="selectedCity"
+    [items]="locations"
+    bindLabel="location"
+    bindValue="_id"
+    class="mr-2 ml-2"
+    placeholder="Search Location"
+    [(ngModel)]="selectedLocation"
+    (change)="locationChange($event)"
+  >
   </ng-select>
-
-  <!-- <div class="form-group">
-    <div class="form-check form-check-inline">
-      <input class="form-check-input radio-custom" type="radio" name="propertyOptionHome"
-       id="propertyOption1" value="house" [(ngModel)]="selectedType"
-       (change)="typeChange($event)">
-      <label class="form-check-label radio-custom-label" for="propertyOption1">House</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input radio-custom" type="radio" name="propertyOptionHome" id="propertyOption2" value="plot"
-        [(ngModel)]="selectedType" (change)="typeChange($event)">
-      <label class="form-check-label radio-custom-label" for="propertyOption2">Plot</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input radio-custom" type="radio" name="propertyOptionHome" id="propertyOption3" value="commercial"
-        [(ngModel)]="selectedType" (change)="typeChange($event)">
-      <label class="form-check-label radio-custom-label" for="propertyOption3">Commercial</label>
-    </div>
-  </div> -->
 
   <div *ngIf="selectedCity" class="dropdown ml-2 mr-2 mt-1">
-    <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-      aria-haspopup="true" aria-expanded="false" (click)="hideDropDown()">
+    <button
+      class="btn btn-outline-secondary dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+      (click)="hideDropDown()"
+    >
       Select Property Type
     </button>
     <div class="dropdown-menu keepopen" aria-labelledby="dropdownMenuButton">
       <div class="tabbable-line">
         <ul class="nav nav-tabs">
           <li>
-            <a href="#home" data-toggle="tab" class="active">
-              Home </a>
+            <a href="#home" data-toggle="tab" class="active"> Home </a>
           </li>
           <li>
-            <a href="#plot" data-toggle="tab">
-              Plot </a>
+            <a href="#plot" data-toggle="tab"> Plot </a>
           </li>
           <li>
-            <a href="#commercial" data-toggle="tab">
-              Commercial </a>
+            <a href="#commercial" data-toggle="tab"> Commercial </a>
           </li>
         </ul>
         <div class="tab-content" (click)="typeChange($event)">
@@ -81,11 +81,19 @@
 
   <search-filter class="mt-1"></search-filter>
 
-  <button *ngIf="listView" (click)="listViewClicked()" class="btn btn-info btn-sm mt-1 mr-1 ml-2">
-    <i class="fas fa-th-list"></i> List View</button>
+  <!-- <button
+    *ngIf="listView"
+    (click)="listViewClicked()"
+    class="btn btn-info btn-sm mt-1 mr-1 ml-2"
+  >
+    <i class="fas fa-th-list"></i> List View
+  </button>
 
-  <button *ngIf="mapView" (click)="mapViewClicked()" class="btn btn-info btn-sm mt-1 mr-1 ml-2">
-        <i class="fas fa-th-list"></i> Map View</button>
-
-
+  <button
+    *ngIf="mapView"
+    (click)="mapViewClicked()"
+    class="btn btn-info btn-sm mt-1 mr-1 ml-2"
+  >
+    <i class="fas fa-th-list"></i> Map View
+  </button> -->
 </div>

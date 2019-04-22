@@ -17,6 +17,7 @@ export class PropertyService {
   healthcare = {};
   nearby_loc = {};
   other = {};
+  firstVisit:boolean=true;
 
   constructor(private auth: AuthenticationService,
               private router: Router) { }

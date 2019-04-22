@@ -1,5 +1,6 @@
 <div class="container">
   <search-home
+    *ngIf="firstVisit"
     (searched)="search($event)"
     id="search"
   ></search-home>
@@ -18,7 +19,7 @@
   ></map>
   <listview
     [ngStyle]="start && { display: 'none' }"
-    *ngIf="listView"
+    *ngIf="mapView"
     class="row mt-2"
   ></listview>
   <regions class="row"></regions>
