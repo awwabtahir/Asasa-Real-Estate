@@ -41,6 +41,8 @@ import { DashboardComponent } from "./admin/components/dashboard/dashboard.compo
 import { SearchHomeComponent } from "./home/search-home/search-home.component";
 import { HomeFeaturesComponent } from "./home/home-features/home-features.component";
 import { HowWorksComponent } from "./home/how-works/how-works.component";
+import { AboutUsComponent } from "./home/about_us/about_us.component";
+import { ContactUsComponent } from "./home/contact_us/contact_us.component";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -86,7 +88,9 @@ export function getAuthServiceConfigs() {
     PrivacyComponent,
     InfoWindowContentComponent,
     EmailComponent,
-    RegionsComponent
+    RegionsComponent,
+    AboutUsComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
