@@ -41,6 +41,7 @@ import { DashboardComponent } from "./admin/components/dashboard/dashboard.compo
 import { SearchHomeComponent } from "./home/search-home/search-home.component";
 import { HomeFeaturesComponent } from "./home/home-features/home-features.component";
 import { HowWorksComponent } from "./home/how-works/how-works.component";
+import { MobileSearchComponent } from "app/home/mobile-view-search/mobile-search.component";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -67,6 +68,7 @@ export function getAuthServiceConfigs() {
     HomeComponent,
     SearchComponent,
     SearchHomeComponent,
+    MobileSearchComponent,
     HomeFeaturesComponent,
     HowWorksComponent,
     MapComponent,

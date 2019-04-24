@@ -17,17 +17,17 @@ import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
 
 @Component({
-  selector: "search-home",
-  templateUrl: "./search-home.component.html",
-  styleUrls: ["./search-home.component.css"]
+  selector: "mobile-search",
+  templateUrl: "./mobile-search.component.html",
+  styleUrls: ["./mobile-search.component.css"]
 })
-export class SearchHomeComponent implements OnInit, OnDestroy {
+export class MobileSearchComponent implements OnInit, OnDestroy {
   @Output() searched = new EventEmitter<any>();
   cities = [];
   locations = [];
   isRent: boolean = false;
   isBuy: boolean = true;
-
+  firstVisit: boolean = true;
   selectedCity;
   selectedLocation;
   selectedType;
@@ -71,8 +71,8 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
       e.preventDefault();
     });
 
-    this.getCities();
-    this.getLocations();
+    await this.getCities();
+    await this.getLocations();
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
 
     this.ga = this.locationService.getGa();
@@ -85,8 +85,10 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.sub = this.route.params.subscribe(params => {
       this.city = params["city"];
       this.location = params["location"];
+      if (params["city"] || params["locations"]) {
+        this.firstVisit = false;
+      }
       let locations = this.locations;
-
       if (this.city) {
         let city = this.city;
         let foundCity = this.cities.filter(function(c) {
@@ -109,38 +111,10 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
       }
     });
   }
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    this.num = this.doc.documentElement.scrollTop;
-    // For Desktop
-    if (this.innerWidth > 600) {
-      if (this.num > 210) {
-        this.searchBarFixed = true;
-      } else if (this.num < 210) {
-        this.searchBarFixed = false;
-      }
-      if (this.num > 565) {
-        this.mapSearchBar = true;
-      } else if (this.num < 565) {
-        this.mapSearchBar = false;
-      }
-    }
-    //For Mobile
-    if (this.innerWidth < 600) {
-      if (this.num > 140) {
-        this.searchBarFixed = true;
-      } else if (this.num < 140) {
-        this.searchBarFixed = false;
-      }
-      if (this.num > 345) {
-        this.mapSearchBar = true;
-      } else if (this.num < 345) {
-        this.mapSearchBar = false;
-      }
-    }
-  }
+
   search() {
-    this.searched.emit("scroll");
+    this.searched.emit("mobile");
+    this.firstVisit = false;
     // if (this.innerWidth > 600) {
     //   this.doc.documentElement.scrollTo({ top: 650, behavior: "smooth" });
     // } else if (this.innerWidth < 600) {
@@ -152,15 +126,18 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  getCities() {
-    this.auth.getCities().subscribe(
-      cities => {
-        this.cities = cities;
-      },
-      err => {
-        console.error(err);
-      }
-    );
+  async getCities() {
+    await this.auth
+      .getCities()
+      .toPromise()
+      .then(
+        cities => {
+          this.cities = cities;
+        },
+        err => {
+          console.error(err);
+        }
+      );
   }
 
   cityChange(cityObj, prevData?) {
@@ -184,24 +161,24 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.ga("send", "pageview");
   }
 
-  getLocations(selectedCity?) {
-    this.auth.getLocations().subscribe(
-      locations => {
-        this.locations = locations;
+  async getLocations(selectedCity?) {
+    await this.auth
+      .getLocations()
+      .toPromise()
+      .then(
+        locations => {
+          this.locations = locations;
 
-        if (selectedCity)
-          this.locations = locations.filter(function(loc) {
-            return loc.cityId == selectedCity;
-          });
-        this.locationService.locations = this.locations;
-        this.locationService.locationsChange.next(this.locations);
-      },
-      err => {
-        console.error(err);
-      }
-    );
+          if (selectedCity)
+            this.locations = locations.filter(function(loc) {
+              return loc.cityId == selectedCity;
+            });
+        },
+        err => {
+          console.error(err);
+        }
+      );
   }
-
   locationChange(locObj) {
     $(":focus").blur();
     if (!locObj) return;

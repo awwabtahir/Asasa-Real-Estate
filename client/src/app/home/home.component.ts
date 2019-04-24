@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   innerWidth: number;
   view;
   firstVisit: boolean;
+  isMobile: boolean;
 
   mapView = true;
   listView = false;
@@ -43,6 +44,9 @@ export class HomeComponent implements OnInit {
     }
     this.start = this.service.firstVisit;
     this.innerWidth = window.innerWidth;
+    if (this.innerWidth < 600) {
+      this.isMobile = true;
+    }
     this.view = this.viewService.getView().subscribe(view => {
       if (view == "listview") {
         this.mapView = false;
@@ -53,45 +57,52 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    if (this.service.firstVisit) {
-      this.num = this.doc.documentElement.scrollTop;
-      if (this.innerWidth > 600) {
-        //previos was 640
-        if (this.num > 565) {
-          this.mapSearchBar = true;
-        } else if (this.num < 565) {
-          this.mapSearchBar = false;
-        }
-      }
-      if (this.innerWidth < 600) {
-        //previos was 420
-        if (this.num > 345) {
-          this.mapSearchBar = true;
-        } else if (this.num < 345) {
-          this.mapSearchBar = false;
-        }
-      }
-    }
-  }
+  // @HostListener("window:scroll", [])
+  // onWindowScroll() {
+  //   if (this.service.firstVisit) {
+  //     this.num = this.doc.documentElement.scrollTop;
+  //     if (this.innerWidth > 600) {
+  //       //previos was 640
+  //       if (this.num > 565) {
+  //         this.mapSearchBar = true;
+  //       } else if (this.num < 565) {
+  //         this.mapSearchBar = false;
+  //       }
+  //     }
+  //     if (this.innerWidth < 600) {
+  //       //previos was 420
+  //       if (this.num > 345) {
+  //         this.mapSearchBar = true;
+  //       } else if (this.num < 345) {
+  //         this.mapSearchBar = false;
+  //       }
+  //     }
+  //   }
+  // }
 
   search(scroll) {
-    setTimeout(() => {
+    console.log(scroll);
+    if (scroll == "mobile") {
       this.service.firstVisit = false;
       this.firstVisit = false;
-    }, 1000);
+      this.start = false;
+    } else {
+      setTimeout(() => {
+        this.service.firstVisit = false;
+        this.firstVisit = false;
+      }, 1000);
 
-    this.start = false;
-    setTimeout(() => {
-      let el = document.getElementById("mapSearch");
-      let pos = el.style.position;
-      let top = el.style.top;
-      el.style.position = "relative";
-      el.style.top = "-55px";
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      el.style.top = top;
-      el.style.position = pos;
-    }, 100);
+      this.start = false;
+      setTimeout(() => {
+        let el = document.getElementById("mapSearch");
+        let pos = el.style.position;
+        let top = el.style.top;
+        el.style.position = "relative";
+        el.style.top = "-55px";
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        el.style.top = top;
+        el.style.position = pos;
+      }, 100);
+    }
   }
 }
