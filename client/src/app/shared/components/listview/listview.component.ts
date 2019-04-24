@@ -90,7 +90,7 @@ export class ListviewComponent implements OnInit {
     this.list = result;
     if (this.list.length == 0) {
       this.propertiesAvailable = false;
-    }
+    } else this.propertiesAvailable = true;
   }
 
   filteredByCity() {
