@@ -633,13 +633,14 @@ body {
   z-index: 18;
 }
 .btn-search-2nd {
+  position: fixed;
   border-radius: 0;
   font-size: 16px;
   background-color: #367ea5;
   box-shadow: 0 0 10px #444;
   color: white;
   border: 1px solid #efefef;
-  position: absolute;
+  /* position: absolute; */
   top: 5.2rem;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);

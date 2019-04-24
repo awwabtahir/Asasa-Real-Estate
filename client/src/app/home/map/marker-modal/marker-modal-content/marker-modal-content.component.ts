@@ -97,7 +97,6 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
           return ad._id == id;
         });
         this.ad = ad[0];
-
         this.ngOnChanges();
       },
       err => {

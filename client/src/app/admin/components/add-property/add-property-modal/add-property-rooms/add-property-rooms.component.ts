@@ -1,17 +1,17 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { PropertyService } from 'shared/services/property.service';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { PropertyService } from "shared/services/property.service";
 
 @Component({
-  selector: 'add-property-rooms',
-  templateUrl: './add-property-rooms.component.html',
-  styleUrls: ['./add-property-rooms.component.css']
+  selector: "add-property-rooms",
+  templateUrl: "./add-property-rooms.component.html",
+  styleUrls: ["./add-property-rooms.component.css"]
 })
 export class AddPropertyRoomsComponent implements OnInit, OnDestroy {
-
-  @ViewChild('form') ngForm: NgForm;
+  @ViewChild("form") ngForm: NgForm;
   @Input() type: string;
+  @Input() edit: any;
   formChangesSubscription: Subscription;
 
   room = {
@@ -30,18 +30,24 @@ export class AddPropertyRoomsComponent implements OnInit, OnDestroy {
     lounge_room: false,
     laundary_room: false,
     other_rooms: ""
-  }
+  };
 
-  constructor(private propertyService: PropertyService) { }
+  constructor(private propertyService: PropertyService) {}
 
   ngOnInit() {
-    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(rooms => {
-      this.propertyService.addRooms(rooms);
-    });
+    if (this.edit.rooms) {
+      for (var key in this.edit.rooms) {
+        this.room[key] = this.edit.rooms[key];
+      }
+    }
+    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(
+      rooms => {
+        this.propertyService.addRooms(rooms);
+      }
+    );
   }
 
   ngOnDestroy() {
     this.formChangesSubscription.unsubscribe();
   }
-
 }
