@@ -61,3 +61,31 @@ ul li {
   margin-bottom: 2rem;
   font-weight: 700;
 }
+
+.icon-row {
+  margin: 50px;
+  margin-left: 100px;
+  margin-top: 70px;
+}
+
+.fab {
+  margin-left: 25px;
+}
+
+.badge-row {
+  margin-left: 115px;
+}
+
+@media (max-width: 768px) {
+  .fab {
+    margin-left: 14px;
+  }
+
+  .icon-row {
+    margin-left: 40px;
+  }
+
+  .badge-row {
+    margin-left: 30px;
+  }
+}
