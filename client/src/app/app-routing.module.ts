@@ -11,6 +11,7 @@ import { TermsComponent } from "./home/footer/terms/terms.component";
 import { PrivacyComponent } from "./home/footer/privacy/privacy.component";
 import { AboutUsComponent } from "./home/about_us/about_us.component";
 import { ContactUsComponent } from "./home/contact_us/contact_us.component";
+import { HelpAndSupportComponent } from "./home/help_and_support/help_and_support.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "aboutus", component: AboutUsComponent },
   { path: "contactus", component: ContactUsComponent },
+  { path: "help", component: HelpAndSupportComponent },
 
   {
     path: "register",
