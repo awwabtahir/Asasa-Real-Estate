@@ -1,0 +1,185 @@
+<div *ngIf="firstVisit" class="background">
+  <ul class="slideshow">
+    <li><span>Slide One</span></li>
+    <li><span>Slide Two</span></li>
+    <li><span>Slide Three</span></li>
+    <li><span>Slide Four</span></li>
+  </ul>
+
+  <div class="container demo">
+    <div class="text-center">
+      <button
+        type="button"
+        class="btn btn-search"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        <i class="fa fa-search" aria-hidden="true"></i>
+        Search Property
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!firstVisit" class="firstView">
+  <div class="container demo">
+    <div class="text-center">
+      <button
+        type="button"
+        class="btn btn-search-2nd"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        <i class="fa fa-search" aria-hidden="true"></i>
+        Search Property
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal left fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+
+        <div class="filterBtn">
+          <button
+            (click)="rent()"
+            class="btn typeBtn btn-lg"
+            [ngClass]="{ activeBtn: isRent }"
+          >
+            RENT
+          </button>
+          <button
+            (click)="buy()"
+            class="btn typeBtn btn-lg"
+            [ngClass]="{ activeBtn: isBuy }"
+          >
+            BUY
+          </button>
+          <div
+            [ngClass]="{
+              'arrow-down-rent': isRent,
+              'arrow-down-buy': isBuy
+            }"
+          ></div>
+        </div>
+        <hr />
+        <label>Select City:</label>
+        <ng-select
+          #city
+          [items]="cities"
+          bindLabel="city"
+          bindValue="_id"
+          class="mr-2 ml-2"
+          placeholder="Select City"
+          [(ngModel)]="selectedCity"
+          (change)="cityChange($event)"
+        >
+        </ng-select>
+        <label *ngIf="selectedCity">Select Location:</label>
+
+        <ng-select
+          *ngIf="selectedCity"
+          [items]="locations"
+          bindLabel="location"
+          bindValue="_id"
+          class="mr-2 ml-2 selectLocation"
+          placeholder="Search Location"
+          [(ngModel)]="selectedLocation"
+          (change)="locationChange($event)"
+          [disabled]="!selectedCity"
+        >
+        </ng-select>
+        <label *ngIf="selectedCity">Property Type:</label>
+        <div class="dropdown ml-2 mr-2 mt-1">
+          <button
+            *ngIf="selectedCity"
+            class="btn btn-outline-secondary dropdown-toggle1"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            (click)="hideDropDown()"
+          >
+            Select Property Type
+          </button>
+          <div
+            class="dropdown-menu keepopen"
+            aria-labelledby="dropdownMenuButton"
+          >
+            <div class="tabbable-line">
+              <ul class="nav nav-tabs">
+                <li>
+                  <a href="#home" data-toggle="tab" class="active">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#plot" data-toggle="tab"> Plot </a>
+                </li>
+                <li>
+                  <a href="#commercial" data-toggle="tab"> Commercial </a>
+                </li>
+              </ul>
+              <div class="tab-content" (click)="typeChange($event)">
+                <div class="tab-pane active" id="home">
+                  <a class="btn btn-outline-success btn-sm">House</a>
+                  <a class="btn btn-outline-success btn-sm">Flat</a>
+                  <a class="btn btn-outline-success btn-sm">Upper Portion</a>
+                  <a class="btn btn-outline-success btn-sm">Lower Portion</a>
+                  <a class="btn btn-outline-success btn-sm">Farm House</a>
+                  <a class="btn btn-outline-success btn-sm">Room</a>
+                  <a class="btn btn-outline-success btn-sm">Penthouse</a>
+                </div>
+                <div class="tab-pane" id="plot">
+                  <a class="btn btn-outline-success btn-sm">Residential Plot</a>
+                  <a class="btn btn-outline-success btn-sm">Commercial Plot</a>
+                  <a class="btn btn-outline-success btn-sm"
+                    >Agricultural Land</a
+                  >
+                  <a class="btn btn-outline-success btn-sm">Industrial Land</a>
+                  <a class="btn btn-outline-success btn-sm">Plot File</a>
+                  <a class="btn btn-outline-success btn-sm">Plot Form</a>
+                </div>
+                <div class="tab-pane" id="commercial">
+                  <a class="btn btn-outline-success btn-sm">Office</a>
+                  <a class="btn btn-outline-success btn-sm">Shop</a>
+                  <a class="btn btn-outline-success btn-sm">Warehouse</a>
+                  <a class="btn btn-outline-success btn-sm">Factory</a>
+                  <a class="btn btn-outline-success btn-sm">Building</a>
+                  <a class="btn btn-outline-success btn-sm">Other</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br />
+        <search-filter class="mt-1 mt-2 mr-2"></search-filter>
+        <button
+          type="button"
+          (click)="search()"
+          class="btn btn-dismiss"
+          data-dismiss="modal"
+          [disabled]="!selectedCity"
+        >
+          <i class="fa fa-search" aria-hidden="true"></i>
+
+          Search
+        </button>
+      </div>
+      <div class="modal-footer"></div>
+    </div>
+  </div>
+</div>

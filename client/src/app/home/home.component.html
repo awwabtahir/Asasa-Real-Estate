@@ -1,21 +1,25 @@
 <div class="container">
-  <search-home
-    *ngIf="firstVisit"
-    (searched)="search($event)"
-    id="search"
-  ></search-home>
-  <search
-    id="mapSearch"
-    [ngClass]="{ displayNone: start }"
-    [ngStyle]="!mapSearchBar && { visibility: 'hidden' }"
-    class="row"
-  ></search>
+  <span *ngIf="!isMobile">
+    <search-home
+      *ngIf="firstVisit"
+      (searched)="search($event)"
+      id="search"
+    ></search-home>
+    <search
+      id="mapSearch"
+      [ngClass]="{ displayNone: start }"
+      [ngStyle]="!mapSearchBar && { visibility: 'hidden' }"
+      class="row"
+    ></search
+  ></span>
+  <mobile-search (searched)="search($event)" *ngIf="isMobile"></mobile-search>
   <!-- ||
       (start && { display: 'none' }) -->
   <map
     [ngStyle]="start && { display: 'none' }"
     *ngIf="mapView"
     class="row"
+    id="map"
   ></map>
   <listview
     [ngStyle]="start && { display: 'none' }"
