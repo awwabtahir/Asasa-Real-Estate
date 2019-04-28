@@ -43,6 +43,7 @@ import { HomeFeaturesComponent } from "./home/home-features/home-features.compon
 import { HowWorksComponent } from "./home/how-works/how-works.component";
 import { AboutUsComponent } from "./home/about_us/about_us.component";
 import { ContactUsComponent } from "./home/contact_us/contact_us.component";
+import { HelpAndSupportComponent } from "./home/help_and_support/help_and_support.component";
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -90,7 +91,8 @@ export function getAuthServiceConfigs() {
     EmailComponent,
     RegionsComponent,
     AboutUsComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    HelpAndSupportComponent
   ],
   imports: [
     BrowserModule,
