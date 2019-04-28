@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./add-property-modal.component.css"]
 })
 export class AddPropertyModalComponent implements OnInit {
-  @Input() details: string;
+  @Input() details;
 
   constructor() {}
 
