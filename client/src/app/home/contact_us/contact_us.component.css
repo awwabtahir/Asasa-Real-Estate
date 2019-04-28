@@ -17,3 +17,47 @@
 .map-image {
   margin-top: 5px;
 }
+
+.postal {
+  margin-top: 5px !important;
+  margin-bottom: 5px !important;
+  text-align: center;
+  width: 640px;
+  margin: 0 auto;
+  background-color: #ececec;
+  border-top: 5px solid #25bda4;
+  border-radius: 4px;
+}
+
+.postal .heading {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.heading {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 35px;
+  text-align: center;
+  color: #414141;
+}
+
+.country-phone {
+  color: #25bda4;
+  font-size: 15px;
+  line-height: 30px;
+}
+
+.country-name {
+  text-align: center;
+  font-size: 18px;
+  line-height: 25px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .postal {
+    width: 100%;
+  }
+}
