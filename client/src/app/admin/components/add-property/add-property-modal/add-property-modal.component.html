@@ -1,10 +1,22 @@
-<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#featuresModal">
-  <i class="fas fa-plus-circle"></i> Add Features</button>
+<button
+  class="btn btn-primary btn-sm"
+  data-toggle="modal"
+  data-target="#featuresModal"
+>
+  <i class="fas fa-plus-circle"></i> Add Features
+</button>
 
 <!-- Modal -->
-<div class="modal fade" id="featuresModal" tabindex="-1" role="dialog" 
-    aria-labelledby="featuresModalLabel" aria-hidden="true" 
-    data-backdrop="static" data-keyboard="false">
+<div
+  class="modal fade"
+  id="featuresModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="featuresModalLabel"
+  aria-hidden="true"
+  data-backdrop="static"
+  data-keyboard="false"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -12,19 +24,26 @@
       </div>
       <div class="modal-body">
         <div class="container">
-
           <!-- Row 1 -->
           <div class="row">
             <div class="col">
-              <add-property-features *ngIf="type != 'plot'" [type]="type">
+              <add-property-features
+                *ngIf="details?.type != 'plot'"
+                [type]="details?.type"
+                [edit]="details"
+              >
               </add-property-features>
-              <add-property-plot-features *ngIf="type == 'plot'">
+              <add-property-plot-features *ngIf="details?.type == 'plot'">
               </add-property-plot-features>
             </div>
             <div class="col">
-              <add-property-rooms *ngIf="type != 'plot'" [type]="type">
+              <add-property-rooms
+                *ngIf="details?.type != 'plot'"
+                [type]="details?.type"
+                [edit]="details"
+              >
               </add-property-rooms>
-              <add-property-other *ngIf="type == 'plot'">
+              <add-property-other *ngIf="details?.type == 'plot'">
               </add-property-other>
             </div>
           </div>
@@ -32,11 +51,19 @@
           <!-- Row 2 -->
           <div class="row">
             <div class="col">
-              <add-property-biz-comm *ngIf="type != 'plot'" [type]="type">
+              <add-property-biz-comm
+                *ngIf="details?.type != 'plot'"
+                [type]="details?.type"
+                [edit]="details"
+              >
               </add-property-biz-comm>
             </div>
             <div class="col">
-              <add-property-healthcare *ngIf="type != 'plot'" [type]="type">
+              <add-property-healthcare
+                *ngIf="details?.type != 'plot'"
+                [type]="details?.type"
+                [edit]="details"
+              >
               </add-property-healthcare>
             </div>
           </div>
@@ -47,15 +74,20 @@
               <add-property-nearby-loc></add-property-nearby-loc>
             </div>
             <div class="col">
-              <add-property-other *ngIf="type != 'plot'" [type]="type">
+              <add-property-other
+                *ngIf="details?.type != 'plot'"
+                [type]="details?.type"
+                [edit]="details"
+              >
               </add-property-other>
             </div>
           </div>
-
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Continue
+        </button>
       </div>
     </div>
   </div>

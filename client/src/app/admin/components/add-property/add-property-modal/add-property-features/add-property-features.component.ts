@@ -1,17 +1,18 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { PropertyService } from 'shared/services/property.service';
+import { Component, OnInit, Input, ViewChild, OnDestroy } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { PropertyService } from "shared/services/property.service";
 
 @Component({
-  selector: 'add-property-features',
-  templateUrl: './add-property-features.component.html',
-  styleUrls: ['./add-property-features.component.css']
+  selector: "add-property-features",
+  templateUrl: "./add-property-features.component.html",
+  styleUrls: ["./add-property-features.component.css"]
 })
 export class AddPropertyFeaturesComponent implements OnInit, OnDestroy {
-  
-  @ViewChild('form') ngForm: NgForm;
+  @ViewChild("form") ngForm: NgForm;
   @Input() type: string;
+  @Input() edit: any;
+
   formChangesSubscription: Subscription;
 
   features = {
@@ -31,18 +32,24 @@ export class AddPropertyFeaturesComponent implements OnInit, OnDestroy {
     building_floor: "",
     elevators: "",
     service_elevators: false
-  }
+  };
 
-  constructor(private propertyService: PropertyService) { }
+  constructor(private propertyService: PropertyService) {}
 
   ngOnInit() {
-    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(features => {
-      this.propertyService.addFeatures(features);
-    });
+    if (this.edit.features) {
+      for (var key in this.edit.features) {
+        this.features[key] = this.edit.features[key];
+      }
+    }
+    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(
+      features => {
+        this.propertyService.addFeatures(features);
+      }
+    );
   }
 
   ngOnDestroy() {
     this.formChangesSubscription.unsubscribe();
   }
-
 }
