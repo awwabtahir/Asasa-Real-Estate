@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { PropertyService } from 'shared/services/property.service';
+import { Component, OnInit, OnDestroy, ViewChild, Input } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { PropertyService } from "shared/services/property.service";
 
 @Component({
-  selector: 'add-property-nearby-loc',
-  templateUrl: './add-property-nearby-loc.component.html',
-  styleUrls: ['./add-property-nearby-loc.component.css']
+  selector: "add-property-nearby-loc",
+  templateUrl: "./add-property-nearby-loc.component.html",
+  styleUrls: ["./add-property-nearby-loc.component.css"]
 })
 export class AddPropertyNearbyLocComponent implements OnInit, OnDestroy {
-
-  @ViewChild('form') ngForm: NgForm;
+  @ViewChild("form") ngForm: NgForm;
   formChangesSubscription: Subscription;
+  @Input() edit: any;
 
   nearby_loc = {
     nearby_schools: "",
@@ -21,18 +21,24 @@ export class AddPropertyNearbyLocComponent implements OnInit, OnDestroy {
     airport_distance: "",
     nearby_transport: "",
     nearby_places: ""
-  }
+  };
 
-  constructor(private propertyService: PropertyService) { }
+  constructor(private propertyService: PropertyService) {}
 
   ngOnInit() {
-    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(nearby_loc => {
-      this.propertyService.addNearByLoc(nearby_loc);
-    });
+    if (this.edit.nearby_loc) {
+      for (var key in this.edit.nearby_loc) {
+        this.nearby_loc[key] = this.edit.nearby_loc[key];
+      }
+    }
+    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(
+      nearby_loc => {
+        this.propertyService.addNearByLoc(nearby_loc);
+      }
+    );
   }
 
   ngOnDestroy() {
     this.formChangesSubscription.unsubscribe();
   }
-
 }

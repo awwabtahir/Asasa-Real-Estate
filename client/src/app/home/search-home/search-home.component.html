@@ -5,16 +5,14 @@
     <li><span>Slide Three</span></li>
     <li><span>Slide Four</span></li>
   </ul>
-  <!-- *ngIf="num < 1100" -->
 
   <div
-    class="mt-2 form-inline"
-    [ngClass]="{ searchBar: !searchBarFixed, fixedSearchBar: searchBarFixed }"
+    class="mt-2 form-inline searchBar"
     [ngStyle]="mapSearchBar && { display: 'none' }"
   >
-    <div class="filterBtn">
-      <!-- <div [ngClass]="{ 'arrow-up-rent': isRent, 'arrow-up-buy': isBuy }"></div> -->
+    <!-- [ngClass]="{ searchBar: !searchBarFixed, fixedSearchBar: searchBarFixed }" -->
 
+    <div class="filterBtn">
       <button
         (click)="rent()"
         class="btn typeBtn btn-lg"

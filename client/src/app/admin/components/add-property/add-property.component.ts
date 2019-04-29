@@ -48,59 +48,72 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "agent") this.agent = true;
 
-    this.getCities();
-    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+    await this.getCities();
 
     if (this.agent == true) {
       this.ad.userId = this.user.userId;
       this.selectedCity = this.user.cityId;
-      this.cityChange();
-      await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+      await this.cityChange();
+      // await new Promise((resolve, reject) => setTimeout(resolve, 1500));
       this.agentLocs = this.user.locationId;
       await this.filterLocations(this.agentLocs);
     }
-
-    this.sub = this.route.params.subscribe(params => {
-      this.id = +params["id"];
-
-      if (this.id && this.propertyService.getItemforUpdate()) {
-        this.item = this.propertyService.getItemforUpdate();
-
-        this.setPage(this.item);
-        if (this.item.imagesData !== undefined)
-          this.propertyService.addImagesData(this.item.imagesData);
-      } else {
-        this.item = this.ad;
-      }
-    });
   }
 
   ngOnDestroy() {
     if (this.sub) this.sub.unsubscribe();
   }
 
-  async getCities() {
-    await this.auth
-      .getCities()
-      .toPromise()
-      .then(
+  getCities() {
+    let promise = new Promise((resolve, reject) => {
+      this.auth.getCities().subscribe(
         cities => {
           this.cities = cities;
+          resolve("done");
         },
         err => {
-          console.error(err);
+          console.error("Error", err);
+          reject(new Error("…"));
         }
       );
+    }).then(() => {
+      this.sub = this.route.params.subscribe(params => {
+        this.id = +params["id"];
+
+        if (this.id && this.propertyService.getItemforUpdate()) {
+          this.item = this.propertyService.getItemforUpdate();
+
+          this.setPage(this.item);
+          if (this.item.imagesData !== undefined)
+            this.propertyService.addImagesData(this.item.imagesData);
+        } else {
+          this.item = this.ad;
+        }
+      });
+    });
   }
-  getLocations(selectedCity) {
-    this.auth.getLocations().subscribe(
+
+  async getLocations(selectedCity) {
+    await this.auth.getLocations().subscribe(
       locations => {
         this.locations = locations.filter(function(loc) {
           return loc.cityId == selectedCity;
         });
+        //Set Page to Edit
+        if (this.item) {
+          let location = this.locations.filter(location => {
+            return location.location == this.item.locationData.location;
+          });
+          if (location) {
+            this.selectedLoc = location[0]._id;
+            this.locationChange();
+            this.setitem(this.item);
+            this.edit = true;
+          }
+        }
       },
       err => {
-        console.error(err);
+        console.error("Error", err);
       }
     );
   }
@@ -176,30 +189,27 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       return city.city == item.locationData.city;
     });
     this.selectedCity = city[0]._id;
-    this.getLocations(this.selectedCity);
-    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
-    let location = this.locations.filter(function(location) {
-      return location.location == item.locationData.location;
-    });
-    this.selectedLoc = location[0]._id;
-    this.locationChange();
-    await this.setitem(item);
-    this.edit = true;
+    await this.getLocations(this.selectedCity);
   }
 
   private setitem(item) {
-    this.ad["_id"] = item._id;
-    this.ad.invId = item.invId;
-    this.ad.type = item.type;
-    this.ad.subtype = item.subtype;
-    this.ad.propNumber = item.propNumber;
-    this.ad.street = item.street;
-    this.ad.demand = item.demand;
-    this.ad.area = item.area;
-    this.ad.areaType = item.areaType;
-    this.ad.comment = item.comment;
-    this.ad.title = item.title;
-    this.ad.description = item.description;
-    this.ad.vidUrl = item.vidUrl;
+    let promise = new Promise((resolve, reject) => {
+      this.ad["_id"] = item._id;
+      this.ad.invId = item.invId;
+      this.ad.type = item.type;
+      this.ad.subtype = item.subtype;
+      this.ad.propNumber = item.propNumber;
+      this.ad.street = item.street;
+      this.ad.demand = item.demand;
+      this.ad.area = item.area;
+      this.ad.areaType = item.areaType;
+      this.ad.comment = item.comment;
+      this.ad.title = item.title;
+      this.ad.description = item.description;
+      this.ad.vidUrl = item.vidUrl;
+      resolve("done");
+
+      reject(new Error("…"));
+    });
   }
 }

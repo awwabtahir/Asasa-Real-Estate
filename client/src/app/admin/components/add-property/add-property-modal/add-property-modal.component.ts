@@ -10,7 +10,5 @@ export class AddPropertyModalComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log("add features modal", this.details);
-  }
+  ngOnInit() {}
 }

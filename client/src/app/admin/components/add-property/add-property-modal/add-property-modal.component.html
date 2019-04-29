@@ -33,7 +33,10 @@
                 [edit]="details"
               >
               </add-property-features>
-              <add-property-plot-features *ngIf="details?.type == 'plot'">
+              <add-property-plot-features
+                [edit]="details"
+                *ngIf="details?.type == 'plot'"
+              >
               </add-property-plot-features>
             </div>
             <div class="col">
@@ -43,7 +46,10 @@
                 [edit]="details"
               >
               </add-property-rooms>
-              <add-property-other *ngIf="details?.type == 'plot'">
+              <add-property-other
+                [edit]="details"
+                *ngIf="details?.type == 'plot'"
+              >
               </add-property-other>
             </div>
           </div>
@@ -71,7 +77,9 @@
           <!-- Row 3 -->
           <div class="row">
             <div class="col">
-              <add-property-nearby-loc></add-property-nearby-loc>
+              <add-property-nearby-loc
+                [edit]="details"
+              ></add-property-nearby-loc>
             </div>
             <div class="col">
               <add-property-other
