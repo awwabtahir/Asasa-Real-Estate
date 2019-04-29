@@ -197,6 +197,18 @@
                 <b>{{ ad.demand }}</b>
               </p>
             </div>
+
+            <div class="col mt-1 text-center">
+              <i
+                class="fas fa-thumbtack fa-2x"
+                style="color:#37bba3;"
+              ></i>
+              <p>Purpose</p>
+              <p>
+                <b>{{ ad.purpose | titlecase }}</b>
+              </p>
+            </div>
+
           </div>
 
           <div *ngIf="basic" class="row mb-1">
