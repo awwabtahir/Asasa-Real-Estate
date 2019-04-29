@@ -1,9 +1,12 @@
 <section class="banner">
   <h1 class="heading">CONTACT US</h1>
 </section>
-<div class="map-image">
-  <img src="assets/images/asasa-map.png" width="100%">
+<div class="agm-map">
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude" [label]="labelOptions" [iconUrl]="icon"></agm-marker>
+  </agm-map>
 </div>
+
 <section class="postal">
   <div class="heading mt40">Telephone</div>
   <div class="decription mt30 mb40 ">
