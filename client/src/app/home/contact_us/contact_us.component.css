@@ -19,7 +19,10 @@
 }
 
 .postal {
-  margin-top: 5px !important;
+  position: relative;
+
+  margin-top: -25px !important;
+
   margin-bottom: 5px !important;
   text-align: center;
   width: 640px;
@@ -54,6 +57,14 @@
   font-size: 18px;
   line-height: 25px;
   font-weight: bold;
+}
+
+agm-map {
+  height: 400px;
+}
+
+.agm-map {
+  margin-top: 5px;
 }
 
 @media (max-width: 768px) {
