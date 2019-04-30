@@ -5,16 +5,14 @@
     <li><span>Slide Three</span></li>
     <li><span>Slide Four</span></li>
   </ul>
-  <!-- *ngIf="num < 1100" -->
 
   <div
-    class="mt-2 form-inline"
-    [ngClass]="{ searchBar: !searchBarFixed, fixedSearchBar: searchBarFixed }"
+    class="mt-2 form-inline searchBar"
     [ngStyle]="mapSearchBar && { display: 'none' }"
   >
-    <div class="filterBtn">
-      <!-- <div [ngClass]="{ 'arrow-up-rent': isRent, 'arrow-up-buy': isBuy }"></div> -->
+    <!-- [ngClass]="{ searchBar: !searchBarFixed, fixedSearchBar: searchBarFixed }" -->
 
+    <div class="filterBtn">
       <button
         (click)="rent()"
         class="btn typeBtn btn-lg"
@@ -29,7 +27,9 @@
       >
         BUY
       </button>
-      <div  [ngClass]="{ 'arrow-down-rent': isRent, 'arrow-down-buy': isBuy }"></div>
+      <div
+        [ngClass]="{ 'arrow-down-rent': isRent, 'arrow-down-buy': isBuy }"
+      ></div>
     </div>
     <ng-select
       #city
@@ -75,7 +75,7 @@
     </div>
   </div> -->
 
-    <div class="dropdown ml-2 mr-2 mt-1">
+    <div class="dropdown ml-2 mr-2 ">
       <button
         *ngIf="selectedCity"
         class="btn btn-outline-secondary dropdown-toggle1"

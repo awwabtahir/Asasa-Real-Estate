@@ -7,8 +7,8 @@
     ></search-home>
     <search
       id="mapSearch"
+      *ngIf="!firstVisit"
       [ngClass]="{ displayNone: start }"
-      [ngStyle]="!mapSearchBar && { visibility: 'hidden' }"
       class="row"
     ></search
   ></span>
@@ -29,7 +29,6 @@
   <regions class="row"></regions>
   <home-features class="row"></home-features>
   <how-works class="row"></how-works>
-
 </div>
 <asasa-footer class="footer"></asasa-footer>
 <!-- <ul class="slideshow">

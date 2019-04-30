@@ -1,16 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PropertyService } from 'shared/services/property.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../../../authentication.service';
-import { LocationService } from 'shared/services/location.service';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { PropertyService } from "shared/services/property.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthenticationService } from "../../../authentication.service";
+import { LocationService } from "shared/services/location.service";
 
 @Component({
-  selector: 'add-property',
-  templateUrl: './add-property.component.html',
-  styleUrls: ['./add-property.component.css']
+  selector: "add-property",
+  templateUrl: "./add-property.component.html",
+  styleUrls: ["./add-property.component.css"]
 })
 export class AddPropertyComponent implements OnInit, OnDestroy {
-
   ad = {
     userId: "",
     invId: "",
@@ -43,59 +42,80 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private auth: AuthenticationService
-  ) { }
+  ) {}
 
   async ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "agent") this.agent = true;
 
-    this.getCities();
-    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+    await this.getCities();
 
     if (this.agent == true) {
       this.ad.userId = this.user.userId;
       this.selectedCity = this.user.cityId;
-      this.cityChange();
-      await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+      await this.cityChange();
+      // await new Promise((resolve, reject) => setTimeout(resolve, 1500));
       this.agentLocs = this.user.locationId;
-      this.filterLocations(this.agentLocs);
+      await this.filterLocations(this.agentLocs);
     }
-
-    this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id'];
-      if (this.id && this.propertyService.getItemforUpdate()) {
-        this.item = this.propertyService.getItemforUpdate();
-        this.setPage(this.item);
-        if (this.item.imagesData !== undefined)
-          this.propertyService.addImagesData(this.item.imagesData);
-      }
-    });
-
   }
 
   ngOnDestroy() {
-    if (this.sub)
-      this.sub.unsubscribe();
+    if (this.sub) this.sub.unsubscribe();
   }
 
   getCities() {
-    this.auth.getCities().subscribe(cities => {
-      this.cities = cities;
-    }, (err) => {
-      console.error(err);
+    let promise = new Promise((resolve, reject) => {
+      this.auth.getCities().subscribe(
+        cities => {
+          this.cities = cities;
+          resolve("done");
+        },
+        err => {
+          console.error("Error", err);
+          reject(new Error("…"));
+        }
+      );
+    }).then(() => {
+      this.sub = this.route.params.subscribe(params => {
+        this.id = +params["id"];
+
+        if (this.id && this.propertyService.getItemforUpdate()) {
+          this.item = this.propertyService.getItemforUpdate();
+
+          this.setPage(this.item);
+          if (this.item.imagesData !== undefined)
+            this.propertyService.addImagesData(this.item.imagesData);
+        } else {
+          this.item = this.ad;
+        }
+      });
     });
   }
 
-  getLocations(selectedCity) {
-    this.auth.getLocations().subscribe(locations => {
-
-      this.locations = locations.filter(function (loc) {
-        return loc.cityId == selectedCity;
-      });
-
-    }, (err) => {
-      console.error(err);
-    });
+  async getLocations(selectedCity) {
+    await this.auth.getLocations().subscribe(
+      locations => {
+        this.locations = locations.filter(function(loc) {
+          return loc.cityId == selectedCity;
+        });
+        //Set Page to Edit
+        if (this.item) {
+          let location = this.locations.filter(location => {
+            return location.location == this.item.locationData.location;
+          });
+          if (location) {
+            this.selectedLoc = location[0]._id;
+            this.locationChange();
+            this.setitem(this.item);
+            this.edit = true;
+          }
+        }
+      },
+      err => {
+        console.error("Error", err);
+      }
+    );
   }
 
   selectedCity;
@@ -103,7 +123,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   cityChange() {
     let selectedCity = this.selectedCity;
     this.getLocations(selectedCity);
-    this.city = this.cities.filter(function (city) {
+    this.city = this.cities.filter(function(city) {
       return city._id == selectedCity;
     });
     this.city = this.city[0];
@@ -114,7 +134,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   location: any;
   locationChange() {
     let selectedLoc = this.selectedLoc;
-    this.location = this.locations.filter(function (location) {
+    this.location = this.locations.filter(function(location) {
       return location._id == selectedLoc;
     });
     this.location = this.location[0];
@@ -136,7 +156,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   save(uploadMedia) {
     this.propertyService.save(this.ad);
     this.uploadMedia = uploadMedia;
-    if (!uploadMedia) this.router.navigateByUrl('/dashboard/activeProperties');
+    if (!uploadMedia) this.router.navigateByUrl("/dashboard/activeProperties");
   }
 
   image3dUrl;
@@ -149,7 +169,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         this.image3dUrl = this.item.imagesData.image3d.url;
       }
     }
-    if (!uploadMedia) this.router.navigateByUrl('/dashboard/activeProperties');
+    if (!uploadMedia) this.router.navigateByUrl("/dashboard/activeProperties");
   }
 
   uploadMedia = false;
@@ -165,35 +185,31 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   }
 
   private async setPage(item) {
-    let city = this.cities.filter(function (city) {
+    let city = this.cities.filter(function(city) {
       return city.city == item.locationData.city;
     });
     this.selectedCity = city[0]._id;
-    this.getLocations(this.selectedCity);
-    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
-    let location = this.locations.filter(function (location) {
-      return location.location == item.locationData.location;
-    });
-    this.selectedLoc = location[0]._id;
-    this.locationChange();
-    this.setitem(item);
-    this.edit = true;
+    await this.getLocations(this.selectedCity);
   }
 
   private setitem(item) {
-    this.ad["_id"] = item._id;
-    this.ad.invId = item.invId;
-    this.ad.type = item.type;
-    this.ad.subtype = item.subtype;
-    this.ad.propNumber = item.propNumber;
-    this.ad.street = item.street;
-    this.ad.demand = item.demand;
-    this.ad.area = item.area;
-    this.ad.areaType = item.areaType;
-    this.ad.comment = item.comment;
-    this.ad.title = item.title;
-    this.ad.description = item.description;
-    this.ad.vidUrl = item.vidUrl;
-  }
+    let promise = new Promise((resolve, reject) => {
+      this.ad["_id"] = item._id;
+      this.ad.invId = item.invId;
+      this.ad.type = item.type;
+      this.ad.subtype = item.subtype;
+      this.ad.propNumber = item.propNumber;
+      this.ad.street = item.street;
+      this.ad.demand = item.demand;
+      this.ad.area = item.area;
+      this.ad.areaType = item.areaType;
+      this.ad.comment = item.comment;
+      this.ad.title = item.title;
+      this.ad.description = item.description;
+      this.ad.vidUrl = item.vidUrl;
+      resolve("done");
 
+      reject(new Error("…"));
+    });
+  }
 }

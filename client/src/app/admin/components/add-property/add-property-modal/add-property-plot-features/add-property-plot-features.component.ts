@@ -1,16 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { PropertyService } from 'shared/services/property.service';
+import { Component, OnInit, OnDestroy, ViewChild, Input } from "@angular/core";
+import { NgForm } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { PropertyService } from "shared/services/property.service";
 
 @Component({
-  selector: 'add-property-plot-features',
-  templateUrl: './add-property-plot-features.component.html',
-  styleUrls: ['./add-property-plot-features.component.css']
+  selector: "add-property-plot-features",
+  templateUrl: "./add-property-plot-features.component.html",
+  styleUrls: ["./add-property-plot-features.component.css"]
 })
 export class AddPropertyPlotFeaturesComponent implements OnInit, OnDestroy {
-
-  @ViewChild('form') ngForm: NgForm;
+  @ViewChild("form") ngForm: NgForm;
+  @Input() edit: any;
   formChangesSubscription: Subscription;
 
   plot_features = {
@@ -26,18 +26,24 @@ export class AddPropertyPlotFeaturesComponent implements OnInit, OnDestroy {
     sui_gas: false,
     boundary_wall: false,
     plot_features: ""
-  }
+  };
 
-  constructor(private propertyService: PropertyService) { }
+  constructor(private propertyService: PropertyService) {}
 
   ngOnInit() {
-    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(plot_features => {
-      this.propertyService.addPlotFeatures(plot_features);
-    });
+    if (this.edit.plot_features) {
+      for (var key in this.edit.plot_features) {
+        this.plot_features[key] = this.edit.plot_features[key];
+      }
+    }
+    this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(
+      plot_features => {
+        this.propertyService.addPlotFeatures(plot_features);
+      }
+    );
   }
 
   ngOnDestroy() {
     this.formChangesSubscription.unsubscribe();
   }
-
 }
