@@ -4,6 +4,16 @@
   border: 1px solid #ededed;
 }
 
+.heading-contact {
+  font-size: 25px;
+  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 40px;
+  font-family: "Lato", sans-serif;
+  color: #414141;
+}
+
 .banner .heading {
   font-size: 33px;
   text-align: center;
@@ -21,7 +31,35 @@
 .postal {
   position: relative;
 
+  margin-top: 10px !important;
+
+  margin-bottom: 5px !important;
+  text-align: center;
+  width: 640px;
+  margin: 0 auto;
+  background-color: #ececec;
+  border-top: 5px solid #25bda4;
+  border-radius: 4px;
+}
+
+.email {
+  position: relative;
+
   margin-top: -25px !important;
+
+  margin-bottom: 5px !important;
+  text-align: center;
+  width: 640px;
+  margin: 0 auto;
+  background-color: #ececec;
+  border-top: 5px solid #25bda4;
+  border-radius: 4px;
+}
+
+.telephone {
+  position: relative;
+
+  margin-top: 10px !important;
 
   margin-bottom: 5px !important;
   text-align: center;
@@ -67,8 +105,52 @@ agm-map {
   margin-top: 5px;
 }
 
+.decription {
+  margin-top: 5px;
+  padding: 0px 30px 1px;
+}
+
+.lbl {
+  text-align: right !important;
+  /* margin-left: -133px; */
+  margin-right: 480px;
+  color: #6c757d;
+}
+
+.email_button {
+  width: 100% !important;
+  background-color: #25bda4;
+  border: #25bda4;
+  color: white;
+  height: 35px;
+  border-radius: 5px;
+}
+
+.message {
+  width: 100%;
+  height: 100px;
+  border-color: #cccccc;
+}
+
 @media (max-width: 768px) {
   .postal {
     width: 100%;
+  }
+
+  .email {
+    width: 100%;
+  }
+
+  .telephone {
+    width: 100%;
+  }
+
+  .banner {
+    width: 100%;
+  }
+
+
+  .agm-map {
+    width: 100%
   }
 }
