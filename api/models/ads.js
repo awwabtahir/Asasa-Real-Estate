@@ -10,6 +10,7 @@ var adSchema = new mongoose.Schema({
     areaType: String,
     biz_comm: Object,
     demand: String,
+    purpose: { type: String, default: 'buy' },
     comment: { type: String, default: '' },
     title: String,
     description: String,
