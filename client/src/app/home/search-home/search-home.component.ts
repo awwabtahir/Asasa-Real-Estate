@@ -153,14 +153,19 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   }
 
   getCities() {
-    this.auth.getCities().subscribe(
-      cities => {
-        this.cities = cities;
-      },
-      err => {
-        console.error(err);
-      }
-    );
+    if (this.locationService.allCities.length > 0) {
+      this.cities = this.locationService.allCities;
+    } else {
+      this.auth.getCities().subscribe(
+        cities => {
+          this.cities = cities;
+          this.locationService.allCities = cities;
+        },
+        err => {
+          console.error(err);
+        }
+      );
+    }
   }
 
   cityChange(cityObj, prevData?) {
@@ -175,6 +180,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.locationService.setCityObj(cityData[0]);
     if (!prevData) {
       this.locations = [];
+      this.selectedLocation = null;
       this.getLocations(cityId);
     }
     this.city = cityData[0].city;
@@ -185,21 +191,32 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   }
 
   getLocations(selectedCity?) {
-    this.auth.getLocations().subscribe(
-      locations => {
-        this.locations = locations;
+    if (this.locationService.allLocations.length > 0) {
+      this.locations = this.locationService.allLocations;
+      if (selectedCity)
+        this.locations = this.locationService.allLocations.filter(function(
+          loc
+        ) {
+          return loc.cityId == selectedCity;
+        });
+    } else {
+      this.auth.getLocations().subscribe(
+        locations => {
+          this.locations = locations;
+          this.locationService.allLocations = locations;
 
-        if (selectedCity)
-          this.locations = locations.filter(function(loc) {
-            return loc.cityId == selectedCity;
-          });
-        this.locationService.locations = this.locations;
-        this.locationService.locationsChange.next(this.locations);
-      },
-      err => {
-        console.error(err);
-      }
-    );
+          if (selectedCity)
+            this.locations = locations.filter(function(loc) {
+              return loc.cityId == selectedCity;
+            });
+          this.locationService.locations = this.locations;
+          this.locationService.locationsChange.next(this.locations);
+        },
+        err => {
+          console.error(err);
+        }
+      );
+    }
   }
 
   locationChange(locObj) {

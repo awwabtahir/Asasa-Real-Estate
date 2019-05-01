@@ -32,7 +32,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private viewService: ViewService,
     private route: ActivatedRoute,
     private locationUrl: Location
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.locationService.cityChange.subscribe(value => {
@@ -48,7 +48,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     //   $(".dropdown-toggle")[0].innerText = "Type: " + value;
     //   console.log($(".dropdown-toggle")[0].innerText);
     // });
-    $(".dropdown").on("hide.bs.dropdown", function (e) {
+    $(".dropdown").on("hide.bs.dropdown", function(e) {
       e.preventDefault();
     });
 
@@ -58,43 +58,46 @@ export class SearchComponent implements OnInit, OnDestroy {
       setTimeout(resolve, 1500);
     });
 
-    this.ga = this.locationService.getGa();
-
-    if (this.locationService.getCity())
-      this.cityChange(this.locationService.getCity(), true);
-    if (this.locationService.getLoc())
-      this.locationChange(this.locationService.getLoc());
-
     this.sub = this.route.params.subscribe(params => {
       this.city = params["city"];
       this.location = params["location"];
       this.checkCity();
       this.checkLocation();
     });
+
+    this.ga = this.locationService.getGa();
+
+    if (this.locationService.getCity()) {
+      await this.cityChange(this.locationService.getCity());
+    }
+    if (this.locationService.getLoc())
+      await this.locationChange(this.locationService.getLoc());
   }
 
   async checkCity() {
     if (this.city) {
       let city = this.city;
-
-      let foundCity = await this.cities.filter(function (c) {
+      let foundCity = await this.cities.filter(function(c) {
         return c.city == city;
       });
+
       if (foundCity[0]) {
         this.selectedCity = foundCity[0]._id;
         this.cityChange(foundCity[0]);
       }
     }
   }
+
   async checkLocation() {
     let locations = await this.locations;
 
     if (this.location) {
       this.locations = locations;
       let location = this.location;
-      let foundLoc = locations.filter(function (l) {
+      let foundLoc = locations.filter(function(l) {
         return l.location == location;
       });
+
       this.selectedLocation = foundLoc[0]._id;
       this.locationChange(foundLoc[0]);
     }
@@ -105,17 +108,21 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   async getCities() {
-    await this.auth
-      .getCities()
-      .toPromise()
-      .then(
-        cities => {
-          this.cities = cities;
-        },
-        err => {
-          console.error(err);
-        }
-      );
+    if (this.locationService.allCities.length > 0) {
+      this.cities = this.locationService.allCities;
+    } else {
+      await this.auth
+        .getCities()
+        .toPromise()
+        .then(
+          cities => {
+            this.cities = cities;
+          },
+          err => {
+            console.error(err);
+          }
+        );
+    }
   }
 
   cityChange(cityObj, prevData?) {
@@ -123,13 +130,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (!cityObj) return;
     let cityId = cityObj._id;
     this.selectedCity = cityObj._id;
-    let cityData = this.cities.filter(function (city) {
+    let cityData = this.cities.filter(function(city) {
       return city._id == cityId;
     });
     this.mapService.cityChange(cityData[0]);
     this.locationService.setCityObj(cityData[0]);
     if (!prevData) {
       this.locations = [];
+      this.selectedLocation = null;
       this.getLocations(cityId);
     }
     if (cityData) {
@@ -141,22 +149,32 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   async getLocations(selectedCity?) {
-    await this.auth
-      .getLocations()
-      .toPromise()
-      .then(
-        locations => {
-          this.locations = locations;
+    if (this.locationService.allLocations.length > 0) {
+      this.locations = this.locationService.allLocations;
+      if (selectedCity)
+        this.locations = this.locationService.allLocations.filter(function(
+          loc
+        ) {
+          return loc.cityId == selectedCity;
+        });
+    } else {
+      await this.auth
+        .getLocations()
+        .toPromise()
+        .then(
+          locations => {
+            this.locations = locations;
 
-          if (selectedCity)
-            this.locations = locations.filter(function (loc) {
-              return loc.cityId == selectedCity;
-            });
-        },
-        err => {
-          console.error(err);
-        }
-      );
+            if (selectedCity)
+              this.locations = locations.filter(function(loc) {
+                return loc.cityId == selectedCity;
+              });
+          },
+          err => {
+            console.error(err);
+          }
+        );
+    }
   }
 
   locationChange(locObj) {
@@ -165,14 +183,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     let locId = locObj._id;
     let cityId = this.selectedCity;
     this.selectedLocation = locObj._id;
-    let locData = this.locations.filter(function (loc) {
+    let locData = this.locations.filter(function(loc) {
       return loc._id == locId;
     });
     this.mapService.locationChange(locData[0]);
     this.locationService.setLocObj(locData[0]);
 
     if (!this.city) {
-      let cityData = this.cities.filter(function (city) {
+      let cityData = this.cities.filter(function(city) {
         return city._id == cityId;
       });
       this.city = cityData[0].city;

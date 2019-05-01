@@ -5,6 +5,8 @@ import { Subject } from "rxjs";
   providedIn: "root"
 })
 export class LocationService {
+  allCities = [];
+  allLocations = [];
   locations = [];
   latlng;
   type: any;
