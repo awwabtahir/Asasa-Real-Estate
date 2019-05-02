@@ -8,7 +8,7 @@
     <search
       id="mapSearch"
       *ngIf="!firstVisit"
-      [ngClass]="{ displayNone: start }"
+      [ngStyle]="start && { display: 'none' }"
       class="row"
     ></search
   ></span>

@@ -127,17 +127,21 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
   }
 
   async getCities() {
-    await this.auth
-      .getCities()
-      .toPromise()
-      .then(
-        cities => {
-          this.cities = cities;
-        },
-        err => {
-          console.error(err);
-        }
-      );
+    if (this.locationService.allCities.length > 0) {
+      this.cities = this.locationService.allCities;
+    } else {
+      await this.auth
+        .getCities()
+        .toPromise()
+        .then(
+          cities => {
+            this.cities = cities;
+          },
+          err => {
+            console.error(err);
+          }
+        );
+    }
   }
 
   cityChange(cityObj, prevData?) {
@@ -152,6 +156,7 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     this.locationService.setCityObj(cityData[0]);
     if (!prevData) {
       this.locations = [];
+      this.selectedLocation = null;
       this.getLocations(cityId);
     }
     this.city = cityData[0].city;
@@ -162,22 +167,32 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
   }
 
   async getLocations(selectedCity?) {
-    await this.auth
-      .getLocations()
-      .toPromise()
-      .then(
-        locations => {
-          this.locations = locations;
+    if (this.locationService.allLocations.length > 0) {
+      this.locations = this.locationService.allLocations;
+      if (selectedCity)
+        this.locations = this.locationService.allLocations.filter(function(
+          loc
+        ) {
+          return loc.cityId == selectedCity;
+        });
+    } else {
+      await this.auth
+        .getLocations()
+        .toPromise()
+        .then(
+          locations => {
+            this.locations = locations;
 
-          if (selectedCity)
-            this.locations = locations.filter(function(loc) {
-              return loc.cityId == selectedCity;
-            });
-        },
-        err => {
-          console.error(err);
-        }
-      );
+            if (selectedCity)
+              this.locations = locations.filter(function(loc) {
+                return loc.cityId == selectedCity;
+              });
+          },
+          err => {
+            console.error(err);
+          }
+        );
+    }
   }
   locationChange(locObj) {
     $(":focus").blur();

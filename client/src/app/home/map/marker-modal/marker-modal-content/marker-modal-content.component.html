@@ -194,7 +194,7 @@
               ></i>
               <p>Price (Rs)</p>
               <p>
-                <b>{{ ad.demand }}</b>
+                <b>{{ priceConverter(ad.demand) }}</b>
               </p>
             </div>
 
@@ -228,14 +228,14 @@
                     ad._id
                   }}
                 </tr>
-                <tr *ngFor="let entry of (basic | keys)">
+                <tr *ngFor="let entry of basic | keys">
                   <b>{{ entry.key | titlecase }}</b>
                   :
                   {{
                     entry.value | titlecase
                   }}
                 </tr>
-                <tr *ngFor="let entry of (location | keys)">
+                <tr *ngFor="let entry of location | keys">
                   <b>{{ entry.key | titlecase }}</b>
                   :
                   {{
@@ -260,30 +260,63 @@
             >
               <strong>Features</strong>
             </div>
-            <ng-container *ngFor="let entry of (plot_features | keys)">
+            <ng-container *ngFor="let entry of plot_features | keys">
               <div *ngIf="entry.value" class="col-md-6">
                 <b>{{ entry.key | titlecase }}</b> &nbsp;
-                <i class="fas fa-check bluetick"></i>
+                <span *ngIf="ad?.plot_features[entry.key]!=true">{{ (ad?.plot_features)[entry.key] }} </span><span *ngIf="ad?.plot_features[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
               </div>
             </ng-container>
 
-            <ng-container *ngIf="ad.other">
-              <ng-container *ngFor="let entry of (other | keys)">
-                <div *ngIf="entry.value" class="col-md-6">
-                  <b>{{ entry.key | titlecase }}</b> &nbsp;
-                  <i class="fas fa-check bluetick"></i>
-                </div>
+            <div *ngIf="ad.biz_comm" class="alert alert-info w-100 text-center">
+                <strong>Biz {{ad.biz_comm.length}}</strong>
+              </div>
+  
+              <ng-container *ngIf="ad.biz_comm">
+                <ng-container *ngFor="let entry of ad.biz_comm | keys">
+                  <div *ngIf="entry.value" class="col-md-6">
+                    <b>{{ entry.key | titlecase }} : </b>
+                    <span *ngIf="ad?.biz_comm[entry.key]!=true">{{ (ad?.biz_comm)[entry.key] }} </span><span *ngIf="ad?.biz_comm[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                    
+                  </div>
+                </ng-container>
               </ng-container>
-            </ng-container>
 
-            <ng-container *ngIf="ad.nearby_loc">
-              <ng-container *ngFor="let entry of (nearby_loc | keys)">
-                <div *ngIf="entry.value" class="col-md-6">
-                  <b>{{ entry.key | titlecase }}</b> :
-                  {{ entry.value | titlecase }}
+              <div *ngIf="ad.healthcare" class="alert alert-info w-100 text-center">
+                  <strong>Health Care</strong>
                 </div>
-              </ng-container>
-            </ng-container>
+    
+                <ng-container *ngIf="ad.healthcare">
+                  <ng-container *ngFor="let entry of ad.healthcare | keys">
+                    <div *ngIf="entry.value" class="col-md-6">
+                      <b>{{ entry.key | titlecase }} : </b>
+                      <span *ngIf="ad?.healthcare[entry.key]!=true">{{ (ad?.healthcare)[entry.key] }} </span><span *ngIf="ad?.healthcare[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <div *ngIf="ad.nearby_loc.value" class="alert alert-info w-100 text-center">
+                    <strong>Nearby Locations</strong>
+                  </div>
+      
+                  <ng-container *ngIf="ad.nearby_loc">
+                    <ng-container *ngFor="let entry of ad.nearby_loc | keys">
+                      <div *ngIf="entry.value" class="col-md-6">
+                        <b>{{ entry.key | titlecase }} : </b>
+                        {{ (ad?.nearby_loc)[entry.key] }}
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <div *ngIf="ad.other" class="alert alert-info w-100 text-center">
+                      <strong>Other {{ad.other[0]}}</strong>
+                    </div>
+        
+                    <ng-container *ngIf="ad.other">
+                      <ng-container *ngFor="let entry of ad.other | keys">
+                        <div *ngIf="entry.value" class="col-md-6">
+                          <b>{{ entry.key | titlecase }} : </b>
+                          <span *ngIf="ad?.other[entry.key]!=true">{{ (ad?.other)[entry.key] }} </span><span *ngIf="ad?.other[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                        </div>
+                      </ng-container>
+                    </ng-container>
           </div>
 
           <div *ngIf="ad.type != 'plot'" class="row mt-2 mb-2">
@@ -292,13 +325,63 @@
             </div>
 
             <ng-container *ngIf="ad.rooms">
-              <ng-container *ngFor="let entry of (ad.rooms | keys)">
+              <ng-container *ngFor="let entry of ad.rooms | keys">
                 <div *ngIf="entry.value" class="col-md-6">
-                  <b>{{ entry.key | titlecase }} :</b>
-                  {{ (ad?.rooms)[entry.key] }}
+                  <b>{{ entry.key | titlecase }} : </b>
+                  <span *ngIf="ad?.rooms[entry.key]!=true">{{ (ad?.rooms)[entry.key] }} </span><span *ngIf="ad?.rooms[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
                 </div>
               </ng-container>
             </ng-container>
+
+            <div *ngIf="ad.biz_comm" class="alert alert-info w-100 text-center">
+                <strong>Biz</strong>
+              </div>
+  
+              <ng-container *ngIf="ad.biz_comm">
+                <ng-container *ngFor="let entry of ad.biz_comm | keys">
+                  <div *ngIf="entry.value" class="col-md-6">
+                    <b>{{ entry.key | titlecase }} : </b>
+                    <span *ngIf="ad?.biz_comm[entry.key]!=true">{{ (ad?.biz_comm)[entry.key] }} </span><span *ngIf="ad?.biz_comm[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+              <div *ngIf="ad.healthcare" class="alert alert-info w-100 text-center">
+                  <strong>Health Care</strong>
+                </div>
+    
+                <ng-container *ngIf="ad.healthcare">
+                  <ng-container *ngFor="let entry of ad.healthcare | keys">
+                    <div *ngIf="entry.value" class="col-md-6">
+                      <b>{{ entry.key | titlecase }} : </b>
+                      <span *ngIf="ad?.healthcare[entry.key]!=true">{{ (ad?.healthcare)[entry.key] }} </span><span *ngIf="ad?.healthcare[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <div *ngIf="ad.nearby_loc" class="alert alert-info w-100 text-center">
+                    <strong>Nearby Locations</strong>
+                  </div>
+      
+                  <ng-container *ngIf="ad.nearby_loc">
+                    <ng-container *ngFor="let entry of ad.nearby_loc | keys">
+                      <div *ngIf="entry.value" class="col-md-6">
+                        <b>{{ entry.key | titlecase }} : </b>
+                        {{ (ad?.nearby_loc)[entry.key] }}
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <div *ngIf="ad.other" class="alert alert-info w-100 text-center">
+                      <strong>Other </strong>
+                    </div>
+        
+                    <ng-container *ngIf="ad.other">
+                      <ng-container *ngFor="let entry of ad.other | keys">
+                        <div *ngIf="entry.value" class="col-md-6">
+                          <b>{{ entry.key | titlecase }} : </b>
+                          <span *ngIf="ad?.other[entry.key]!=true">{{ (ad?.other)[entry.key] }}</span><span *ngIf="ad?.other[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                        </div>
+                      </ng-container>
+                    </ng-container>
           </div>
         </div>
         <email [id]="ad._id"></email>
