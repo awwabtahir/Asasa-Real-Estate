@@ -33,7 +33,8 @@ export class ContactUsComponent implements OnInit {
   phone = "";
   type = "";
   optin = true;
-
+  subject = "";
+  message = "";
   constructor(private auth: AuthenticationService) {}
 
   ngOnInit() {
@@ -48,5 +49,38 @@ export class ContactUsComponent implements OnInit {
         // 33.703570, 72.979746
       });
     }
+  }
+
+  send() {
+    if (this.email == "" || this.phone == "") return;
+
+    let message =
+      "<p>Name: " +
+      this.name +
+      "</p><p>Email: " +
+      this.email +
+      "</p><p>Phone: " +
+      this.phone +
+      "</p><p>Subject: " +
+      this.subject +
+      "</p><p>Message: " +
+      this.message;
+    //  +
+    // "</p><p>Message: " +
+    // $("#message").text() +
+    // "</p>";
+    let email = {
+      email: this.email,
+      message: message
+    };
+
+    this.auth.sendEmail(email).subscribe(
+      () => {
+        console.log("email processed");
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 }
