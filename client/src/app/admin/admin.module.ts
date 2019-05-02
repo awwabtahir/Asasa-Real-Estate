@@ -38,6 +38,7 @@ import {
   NbLayoutModule,
   NbMenuModule
 } from "@nebular/theme";
+import { FilterPipe } from "app/filter.pipe";
 
 @NgModule({
   imports: [
@@ -81,7 +82,8 @@ import {
     AgentsComponent,
     EditCityLocComponent,
     GDriveComponent,
-    FavouritesComponent
+    FavouritesComponent,
+    FilterPipe
   ],
   providers: [NbSidebarService]
 })

@@ -1,16 +1,15 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
-import { PropertyService } from 'shared/services/property.service';
-import { ad } from 'shared/models/ad';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../../../authentication.service';
+import { Component, OnInit, ElementRef } from "@angular/core";
+import { PropertyService } from "shared/services/property.service";
+import { ad } from "shared/models/ad";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "../../../authentication.service";
 
 @Component({
-  selector: 'app-active-properties',
-  templateUrl: './active-properties.component.html',
-  styleUrls: ['./active-properties.component.css']
+  selector: "app-active-properties",
+  templateUrl: "./active-properties.component.html",
+  styleUrls: ["./active-properties.component.css"]
 })
 export class ActivePropertiesComponent implements OnInit {
-
   data: any[];
   filteredData: any[];
   public sortBy = "id";
@@ -18,44 +17,76 @@ export class ActivePropertiesComponent implements OnInit {
   user;
   agent = false;
   agents;
-
-  constructor(private propertyService: PropertyService,
+  query = "";
+  options = [
+    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    {
+      value: "location",
+      name: "Filter By Location",
+      placeholder: "Location"
+    },
+    { value: "type", name: "Filter By Type", placeholder: "Type" },
+    {
+      value: "propNumber",
+      name: "Filter By Property Number",
+      placeholder: "Property Number"
+    }
+  ];
+  selectedOption = this.options[0].value;
+  placeholder = this.options[0].placeholder;
+  constructor(
+    private propertyService: PropertyService,
     private router: Router,
-    private auth: AuthenticationService) { }
+    private auth: AuthenticationService
+  ) {}
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "agent") this.agent = true;
     this.getAds();
     this.getAgents();
   }
 
+  optionChange(e) {
+    this.placeholder = e.placeholder;
+    this.refId = "";
+  }
+
   getAds() {
-    this.propertyService.getAds().subscribe(data => {
-      this.data = data;
-      if (this.agent) {
-        let userId = this.user.userId;
-        this.data = data.filter(function (d) {
-          return d.userId == userId;
+    this.propertyService.getAds().subscribe(
+      data => {
+        this.data = data;
+        this.data.forEach((obj, index) => {
+          this.data[index].location = obj.locationData.location;
         });
+        if (this.agent) {
+          let userId = this.user.userId;
+          this.data = data.filter(function(d) {
+            return d.userId == userId;
+          });
+        }
+        this.filteredData = this.data;
+      },
+      err => {
+        console.error(err);
       }
-      this.filteredData = this.data;
-    }, (err) => {
-      console.error(err);
-    });
+    );
   }
 
   getAgents() {
-    this.auth.getAgents().subscribe(agents => {
-      this.agents = agents;
-    }, (err) => {
-      console.error(err);
-    });
+    this.auth.getAgents().subscribe(
+      agents => {
+        this.agents = agents;
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   edit(item) {
     this.propertyService.setItemforUpdate(item);
-    this.router.navigate(['/dashboard/editProperty', item._id]);
+    this.router.navigate(["/dashboard/editProperty", item._id]);
   }
 
   itemfordelete;
@@ -76,25 +107,25 @@ export class ActivePropertiesComponent implements OnInit {
   }
 
   getName(userId) {
-    if(!userId) return "";
-    let agent = this.agents.filter(function (d) {
+    if (!userId) return "";
+    let agent = this.agents.filter(function(d) {
       return d._id == userId;
     });
-    if(agent[0] == undefined) return "";
+    if (agent[0] == undefined) return "";
     return agent[0].name;
   }
 
   refId;
   filterByRef() {
-    let id = this.refId;
-    let data = Object.assign([], this.data);
-    if (id == "") {
-      this.filteredData = data;
-      return;
-    }
-    this.filteredData = data.filter(function (d) {
-      return d._id == id;
-    });
+    // (keyup)=filterByRef //HTML
+    // let id = this.refId;
+    // let data = Object.assign([], this.data);
+    // if (id == "") {
+    //   this.filteredData = data;
+    //   return;
+    // }
+    // this.filteredData = data.filter(function(d) {
+    //   return d._id == id;
+    // });
   }
-
 }
