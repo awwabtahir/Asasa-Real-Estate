@@ -19,7 +19,7 @@ module.exports.send = async function (req, res) {
         secure: false,
         auth: {
             user: "realasasa@gmail.com",
-            pass: "warka123"
+            pass: "warka@@123"
         }
     });
 
