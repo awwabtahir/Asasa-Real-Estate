@@ -1,24 +1,27 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ad } from 'shared/models/ad';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from "@angular/core";
+import { ad } from "shared/models/ad";
 
 @Component({
-  selector: 'marker-modal',
-  templateUrl: './marker-modal.component.html',
-  styleUrls: ['./marker-modal.component.css']
+  selector: "marker-modal",
+  templateUrl: "./marker-modal.component.html",
+  styleUrls: ["./marker-modal.component.css"]
 })
 export class MarkerModalComponent implements OnInit {
-
   @Input() ad: ad;
-  
-  constructor() { }
+
+  constructor() {}
 
   ngOnInit() {
-    $('#markerModal').on('show.bs.modal', function (e) {
+    $("#markerModal").on("show.bs.modal", function(e) {
       if (window.innerWidth < 800) {
         return e.preventDefault();
       }
     });
   }
-
-
 }
