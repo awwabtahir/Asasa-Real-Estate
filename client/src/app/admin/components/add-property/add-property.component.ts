@@ -195,6 +195,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   private setitem(item) {
     let promise = new Promise((resolve, reject) => {
       this.ad["_id"] = item._id;
+      this.ad.userId = item.userId;
       this.ad.invId = item.invId;
       this.ad.type = item.type;
       this.ad.subtype = item.subtype;
