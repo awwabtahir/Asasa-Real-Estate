@@ -51,6 +51,15 @@ export class ActivePropertiesComponent implements OnInit {
     this.placeholder = e.placeholder;
     this.refId = "";
   }
+  agentChange(e) {
+    if (e) {
+      this.filteredData = this.data.filter(d => {
+        return d.userId == e._id;
+      });
+    } else {
+      this.filteredData = this.data;
+    }
+  }
 
   getAds() {
     this.propertyService.getAds().subscribe(

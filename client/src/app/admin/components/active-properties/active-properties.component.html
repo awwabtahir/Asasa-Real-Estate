@@ -24,6 +24,17 @@
         (change)="optionChange($event)"
       >
       </ng-select>
+
+      <ng-select
+        [items]="agents"
+        bindLabel="name"
+        bindValue="_id"
+        class="mr-2 ml-2"
+        placeholder="Agents"
+        [(ngModel)]="selectedAgent"
+        (change)="agentChange($event)"
+      >
+      </ng-select>
     </div>
     <table
       class="table table-hover"
