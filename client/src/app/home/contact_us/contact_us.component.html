@@ -82,7 +82,24 @@
       </div>
       <div class="clearfix"></div>
     </div>
+    <div class="offices-wrp">
+      <div class="offices-heading mt40">
+        <h3>Peshawar - Office</h3>
+      </div>
+      <div class="offices-addres left">
+        <p>
+          Tahkal, <br> Peshawar, Khyber Pakhtunkhwa,<br> Peshawar,<br> Pakistan.
+        </p>
 
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="agm-map2">
+      <agm-map [latitude]="latitude_ps" [longitude]="longitude_ps" [scrollwheel]="false" [zoom]="zoom">
+        <agm-marker [latitude]="latitude_ps" [longitude]="longitude_ps" [label]="labelOptions" [iconUrl]="icon">
+        </agm-marker>
+      </agm-map>
+    </div>
   </div>
 </section>
 <asasa-footer class="footer"></asasa-footer>

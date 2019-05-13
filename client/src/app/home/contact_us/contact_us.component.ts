@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { MapService } from "shared/services/map.service";
 import { AuthenticationService } from "app/authentication.service";
-
+import { Router, NavigationEnd } from "@angular/router";
 @Component({
   selector: "contactus",
   templateUrl: "./contact_us.component.html",
@@ -25,6 +25,8 @@ export class ContactUsComponent implements OnInit {
   title: string = "AGM project";
   latitude: number;
   longitude: number;
+  latitude_ps: number;
+  longitude_ps: number;
   zoom: number;
   @Input() id;
 
@@ -35,16 +37,25 @@ export class ContactUsComponent implements OnInit {
   optin = true;
   subject = "";
   message = "";
-  constructor(private auth: AuthenticationService) {}
+  constructor(private auth: AuthenticationService, private router: Router) {}
 
   ngOnInit() {
     this.setCurrentLocation();
+    this.router.events.subscribe(evt => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
   }
   setCurrentLocation() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(position => {
         this.latitude = 33.70357;
         this.longitude = 72.979746;
+        this.latitude_ps = 34.00524509786271;
+        this.longitude_ps = 71.5052890777588;
+
         this.zoom = 17;
         // 33.703570, 72.979746
       });
