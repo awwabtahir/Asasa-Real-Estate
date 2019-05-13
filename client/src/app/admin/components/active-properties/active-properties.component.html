@@ -2,12 +2,48 @@
 <div class="col-md-9">
   <div class="container-fluid">
     <div class="form-inline">
-      <button class="btn btn-primary mt-2 mb-2" routerLink="/dashboard/addProperty">Add New</button>
-      <input type="text" class="form-control ml-2" placeholder="Search Ref ID" [(ngModel)]="refId"
-        (keyup)="filterByRef()">
+      <button
+        class="btn btn-primary mt-2 mb-2"
+        routerLink="/dashboard/addProperty"
+      >
+        Add New
+      </button>
+      <input
+        type="text"
+        class="form-control ml-2"
+        placeholder="Search {{ placeholder }}"
+        [(ngModel)]="refId"
+      />
+      <ng-select
+        [items]="options"
+        bindLabel="name"
+        bindValue="value"
+        class="mr-2 ml-2"
+        placeholder="Filter By"
+        [(ngModel)]="selectedOption"
+        (change)="optionChange($event)"
+      >
+      </ng-select>
+
+      <ng-select
+        [items]="agents"
+        bindLabel="name"
+        bindValue="_id"
+        class="mr-2 ml-2"
+        placeholder="Agents"
+        [(ngModel)]="selectedAgent"
+        (change)="agentChange($event)"
+      >
+      </ng-select>
     </div>
-    <table class="table table-hover" [mfData]="filteredData" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder"
-      #mf="mfDataTable" [mfRowsOnPage]="50">
+    <table
+      class="table table-hover"
+      [mfData]="filteredData"
+      [(mfSortBy)]="sortBy"
+      [(mfSortOrder)]="sortOrder"
+      #mf="mfDataTable"
+      [mfRowsOnPage]="50"
+    >
       <thead>
         <tr>
           <th style="width: 5%">
@@ -43,29 +79,47 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of mf.data.slice().reverse()">
-          <td>{{item._id}}</td>
-          <td>{{item.invId}}</td>
-          <td>{{item.subtype}}</td>
-          <td>{{item.propNumber}}</td>
-          <td>{{item.area}} {{item.areaType | titlecase}}</td>
-          <td><span *ngIf="item.locationData.sector">{{item.locationData.sector}},</span>
-            {{item.locationData.location}},
-            {{item.locationData.city}}</td>
+        <tr
+          *ngFor="
+            let item of mf.data.slice().reverse()
+              | filterlist: selectedOption:refId
+          "
+        >
+          <td>{{ item._id }}</td>
+          <td>{{ item.invId }}</td>
+          <td>{{ item.subtype }}</td>
+          <td>{{ item.propNumber }}</td>
+          <td>{{ item.area }} {{ item.areaType | titlecase }}</td>
+          <td>
+            <span *ngIf="item.locationData.sector"
+              >{{ item.locationData.sector }},</span
+            >
+            {{ item.locationData.location }}, {{ item.locationData.city }}
+          </td>
           <td>Rs. {{ getDemand(item.demand) }}</td>
           <td>{{ item.comment }}</td>
           <td *ngIf="agents">{{ getName(item.userId) }}</td>
           <td>
-            <button class="btn btn-success btn-sm mr-1" (click)="edit(item)">Edit</button>
-            <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal"
-              (click)="confirmDelete(item)">Delete</button>
+            <button class="btn btn-success btn-sm mr-1" (click)="edit(item)">
+              Edit
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              (click)="confirmDelete(item)"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <td colspan="4">
-            <mfBootstrapPaginator [rowsOnPageSet]="[50,100,150]"></mfBootstrapPaginator>
+            <mfBootstrapPaginator
+              [rowsOnPageSet]="[50, 100, 150]"
+            ></mfBootstrapPaginator>
           </td>
         </tr>
       </tfoot>
@@ -73,13 +127,24 @@
   </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -87,8 +152,17 @@
         Are you sure you want to delete it?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-dismiss="modal"
+          (click)="delete()"
+        >
+          Delete
+        </button>
       </div>
     </div>
   </div>

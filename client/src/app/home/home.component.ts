@@ -81,17 +81,15 @@ export class HomeComponent implements OnInit {
   // }
 
   search(scroll) {
-    console.log(scroll);
     if (scroll == "mobile") {
       this.service.firstVisit = false;
       this.firstVisit = false;
       this.start = false;
-    } else {
+    } else if (scroll == "scroll") {
       setTimeout(() => {
         this.service.firstVisit = false;
-        this.firstVisit = false;
       }, 1000);
-
+      this.firstVisit = false;
       this.start = false;
       setTimeout(() => {
         let el = document.getElementById("mapSearch");
