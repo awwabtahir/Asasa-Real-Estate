@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
     } else if (scroll == "scroll") {
       setTimeout(() => {
         this.service.firstVisit = false;
-      }, 1000);
+      }, 100);
       this.firstVisit = false;
       this.start = false;
       setTimeout(() => {

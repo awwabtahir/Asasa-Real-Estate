@@ -41,6 +41,33 @@ export class ListviewComponent implements OnInit {
       this.city = val;
       this.filteredByCity();
     });
+    this.filterService.typeFilterChange.subscribe(r => {
+      if (r) {
+        if (this.filteredAds.length == 0) {
+          let ads = this.properties.filter(res => {
+            return res.purpose == "buy";
+          });
+          this.getList(ads);
+        } else if (this.filteredAds.length > 0) {
+          let ads = this.filteredAds.filter(res => {
+            return res.purpose == "buy";
+          });
+          this.getList(ads);
+        }
+      } else if (!r) {
+        if (this.filteredAds.length == 0) {
+          let ads = this.properties.filter(res => {
+            return res.purpose == "rent";
+          });
+          this.getList(ads);
+        } else if (this.filteredAds.length > 0) {
+          let ads = this.filteredAds.filter(res => {
+            return res.purpose == "rent";
+          });
+          this.getList(ads);
+        }
+      }
+    });
   }
 
   getAd(id) {
@@ -55,6 +82,15 @@ export class ListviewComponent implements OnInit {
     await this.propertyService.getAds().subscribe(
       properties => {
         this.properties = properties;
+        if (this.filterService.buy) {
+          this.properties = properties.filter(res => {
+            return res.purpose == "buy";
+          });
+        } else if (!this.filterService.buy) {
+          this.properties = properties.filter(res => {
+            return res.purpose == "rent";
+          });
+        }
 
         this.propertiesAvailable = true;
         if (!this.list) {

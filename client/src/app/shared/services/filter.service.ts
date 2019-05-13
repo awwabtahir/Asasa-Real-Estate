@@ -1,4 +1,5 @@
 import { Injectable, Output, EventEmitter } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -8,6 +9,8 @@ export class FilterService {
 
   ads;
   filteredAds;
+  buy:boolean=true;
+  typeFilterChange: Subject<any> = new Subject<any>();
 
   constructor() {}
 
@@ -118,5 +121,10 @@ export class FilterService {
       val = (val / 100000).toFixed(2) + " Lakh";
     } else if (val >= 1000) val = (val / 1000).toFixed(2) + " Thousand";
     return val;
+  }
+
+  buyOrRent(){
+    this.buy=!this.buy
+    this.typeFilterChange.next(this.buy);
   }
 }

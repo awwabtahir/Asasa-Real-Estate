@@ -5,6 +5,7 @@ import { ActivatedRoute } from "@angular/router";
 import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
+import { FilterService } from "shared/services/filter.service";
 
 @Component({
   selector: "search",
@@ -21,7 +22,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   city: string;
   location: string;
   private sub: any;
-
+  types = [
+    { value: "buy", type: "Buy" },
+    {
+      value: "rent",
+      type: "Rent"
+    }
+  ];
+  selectedPurpose = "buy";
   // Google Analytics
   ga;
 
@@ -31,10 +39,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     private locationService: LocationService,
     private viewService: ViewService,
     private route: ActivatedRoute,
-    private locationUrl: Location
+    private locationUrl: Location,
+    private filterService: FilterService
   ) {}
 
   async ngOnInit() {
+    if (this.filterService.buy) this.selectedPurpose = "buy";
+    else this.selectedPurpose = "rent";
     this.locationService.cityChange.subscribe(value => {
       this.selectedCity = value._id;
     });
@@ -54,9 +65,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     await this.getCities();
     await this.getLocations();
-    await new Promise((resolve, reject) => {
-      setTimeout(resolve, 1500);
-    });
 
     this.sub = this.route.params.subscribe(params => {
       this.city = params["city"];
@@ -103,6 +111,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  purposeChange() {
+    this.filterService.buyOrRent();
+  }
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
