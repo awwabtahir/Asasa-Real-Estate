@@ -15,6 +15,7 @@ import { ActivatedRoute } from "@angular/router";
 import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
+import { FilterService } from "shared/services/filter.service";
 
 @Component({
   selector: "mobile-search",
@@ -50,10 +51,12 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     private viewService: ViewService,
     private route: ActivatedRoute,
     private locationUrl: Location,
+    private filterService: FilterService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   async ngOnInit() {
+    this.isBuy = this.filterService.buy;
     this.locationService.cityChange.subscribe(value => {
       this.selectedCity = value._id;
     });
@@ -242,10 +245,12 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
   rent() {
     this.isBuy = false;
     this.isRent = true;
+    this.filterService.buyOrRent();
   }
 
   buy() {
     this.isBuy = true;
     this.isRent = false;
+    this.filterService.buyOrRent();
   }
 }
