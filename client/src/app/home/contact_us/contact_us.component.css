@@ -101,6 +101,10 @@ agm-map {
   height: 400px;
 }
 
+agm-map2 {
+  height: 250px;
+}
+
 .agm-map {
   margin-top: 5px;
 }
