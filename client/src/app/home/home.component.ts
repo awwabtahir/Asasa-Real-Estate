@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, Inject } from "@angular/core";
 import { ViewService } from "shared/services/view.service";
 import { DOCUMENT } from "@angular/platform-browser";
+import { Router, NavigationEnd } from "@angular/router";
 
 @Component({
   selector: "home-page",
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private viewService: ViewService,
+    private router: Router,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
@@ -31,6 +33,12 @@ export class HomeComponent implements OnInit {
         this.mapView = true;
         this.listView = false;
       }
+    });
+    this.router.events.subscribe(evt => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
     });
   }
   @HostListener("window:scroll", [])
