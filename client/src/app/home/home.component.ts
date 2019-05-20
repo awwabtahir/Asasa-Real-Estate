@@ -25,12 +25,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private viewService: ViewService,
-<<<<<<< HEAD
     private service: PropertyService,
     private route: ActivatedRoute,
-=======
     private router: Router,
->>>>>>> bf900a450705308ee5f765117ea1da5d2f91fce1
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
