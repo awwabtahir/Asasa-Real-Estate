@@ -53,6 +53,21 @@
     </div>
 
     <br />
+    <div class="purpose">
+      <ng-select
+        *ngIf="ad.type != 'plot'"
+        [items]="types"
+        bindLabel="type"
+        bindValue="value"
+        class="mr-2 ml-2"
+        placeholder="Purpose"
+        [(ngModel)]="selectedPurpose"
+        [clearable]="false"
+        name="selectedPurpose"
+        (change)="purposeChange($event)"  
+            >
+      </ng-select>
+    </div>
 
     <form #propForm="ngForm">
       <div class="form-row">
@@ -104,9 +119,11 @@
           </div>
         </div>
       </div>
+
       <div *ngIf="ad.type != '0'" class="form-row">
         <div class="form-group">
           <!-- Property Type Selection -->
+
           <select
             *ngIf="ad.type == 'house'"
             id="inputType"
