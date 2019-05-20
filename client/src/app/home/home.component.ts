@@ -3,6 +3,7 @@ import { ViewService } from "shared/services/view.service";
 import { DOCUMENT } from "@angular/platform-browser";
 import { PropertyService } from "shared/services/property.service";
 import { ActivatedRoute } from "@angular/router";
+import { Router, NavigationEnd } from "@angular/router";
 
 @Component({
   selector: "home-page",
@@ -24,8 +25,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private viewService: ViewService,
+<<<<<<< HEAD
     private service: PropertyService,
     private route: ActivatedRoute,
+=======
+    private router: Router,
+>>>>>>> bf900a450705308ee5f765117ea1da5d2f91fce1
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
@@ -55,6 +60,12 @@ export class HomeComponent implements OnInit {
         this.mapView = true;
         this.listView = false;
       }
+    });
+    this.router.events.subscribe(evt => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
     });
   }
   // @HostListener("window:scroll", [])
