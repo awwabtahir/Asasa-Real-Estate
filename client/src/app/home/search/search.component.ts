@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     private filterService: FilterService
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     if (this.filterService.buy) this.selectedPurpose = "buy";
     else this.selectedPurpose = "rent";
     this.locationService.cityChange.subscribe(value => {
@@ -63,23 +63,22 @@ export class SearchComponent implements OnInit, OnDestroy {
       e.preventDefault();
     });
 
-    await this.getCities();
-    await this.getLocations();
+    Promise.all([this.getCities(), this.getLocations()]).then(value => {
+      this.sub = this.route.params.subscribe(params => {
+        this.city = params["city"];
+        this.location = params["location"];
+        this.checkCity();
+        this.checkLocation();
+      });
 
-    this.sub = this.route.params.subscribe(params => {
-      this.city = params["city"];
-      this.location = params["location"];
-      this.checkCity();
-      this.checkLocation();
+      this.ga = this.locationService.getGa();
+
+      if (this.locationService.getCity()) {
+        this.cityChange(this.locationService.getCity());
+      }
+      if (this.locationService.getLoc())
+        this.locationChange(this.locationService.getLoc());
     });
-
-    this.ga = this.locationService.getGa();
-
-    if (this.locationService.getCity()) {
-      await this.cityChange(this.locationService.getCity());
-    }
-    if (this.locationService.getLoc())
-      await this.locationChange(this.locationService.getLoc());
   }
 
   async checkCity() {
@@ -194,11 +193,9 @@ export class SearchComponent implements OnInit, OnDestroy {
     let locId = locObj._id;
     let cityId = this.selectedCity;
     this.selectedLocation = locObj._id;
-    let locData = this.locations.filter(function(loc) {
+    let locData = this.locations.filter(loc => {
       return loc._id == locId;
     });
-    this.mapService.locationChange(locData[0]);
-    this.locationService.setLocObj(locData[0]);
 
     if (!this.city) {
       let cityData = this.cities.filter(function(city) {
@@ -206,11 +203,15 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
       this.city = cityData[0].city;
     }
+    if (locData.length > 0) {
+      this.mapService.locationChange(locData[0]);
+      this.locationService.setLocObj(locData[0]);
 
-    this.locationUrl.go("/" + this.city + "/" + locData[0].location);
+      this.locationUrl.go("/" + this.city + "/" + locData[0].location);
 
-    this.ga("set", "page", this.locationUrl.path());
-    this.ga("send", "pageview");
+      this.ga("set", "page", this.locationUrl.path());
+      this.ga("send", "pageview");
+    }
   }
 
   typeChange(type) {

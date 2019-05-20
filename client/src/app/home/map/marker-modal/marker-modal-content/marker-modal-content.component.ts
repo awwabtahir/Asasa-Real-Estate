@@ -116,35 +116,35 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     let locationObj;
     this.auth.getLocations().subscribe(
       locations => {
-        locationObj = locations.filter(function(loc) {
+        locationObj = locations.filter(loc => {
           return loc.location == location;
         });
+        locationObj = locationObj[0];
+
+        if (locationObj.overlayData.imgLoc) {
+          var bounds = {
+            lat0: locationObj.overlayData.lat0,
+            lng0: locationObj.overlayData.lng0,
+            lat1: locationObj.overlayData.lat1,
+            lng1: locationObj.overlayData.lng1
+          };
+          this.mapService.addOverLay(
+            map,
+            bounds,
+            locationObj.overlayData.imgLoc,
+            true
+          );
+        }
+
+        if (this.ad.imagesData == undefined) return;
+        if (this.ad.imagesData.image3d == undefined) return;
+        this.image3d = true;
       },
       err => {
         console.error(err);
       }
     );
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    locationObj = locationObj[0];
-
-    if (locationObj.overlayData.imgLoc) {
-      var bounds = {
-        lat0: locationObj.overlayData.lat0,
-        lng0: locationObj.overlayData.lng0,
-        lat1: locationObj.overlayData.lat1,
-        lng1: locationObj.overlayData.lng1
-      };
-      this.mapService.addOverLay(
-        map,
-        bounds,
-        locationObj.overlayData.imgLoc,
-        true
-      );
-    }
-
-    if (this.ad.imagesData == undefined) return;
-    if (this.ad.imagesData.image3d == undefined) return;
-    this.image3d = true;
+    // await new Promise((resolve, reject) => setTimeout(resolve, 3000));
   }
 
   url3D;
@@ -168,6 +168,10 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     //   });
     //   viewer.add(panorama);
     // }, 500);
+  }
+
+  backClicked() {
+    this.locationUrl.back();
   }
 
   private loadScripts() {
