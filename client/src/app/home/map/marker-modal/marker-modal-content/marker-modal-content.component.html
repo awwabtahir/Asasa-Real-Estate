@@ -2,7 +2,7 @@
   <div class="row" style="margin-top: 60px;">
     <a
       class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block"
-      routerLink="/"
+      (click)="backClicked()"
     >
       <i class="fas fa-arrow-left"></i> &nbsp; Go back</a
     >
@@ -33,7 +33,7 @@
     </nav>
 
     <div class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none ml-auto">
-      <a routerLink="/"><i class="far fa-times-circle fa-2x"></i></a>
+      <a (click)="backClicked()"><i class="far fa-times-circle fa-2x"></i></a>
     </div>
   </div>
 

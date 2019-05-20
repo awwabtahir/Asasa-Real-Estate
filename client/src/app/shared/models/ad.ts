@@ -15,6 +15,7 @@ export interface ad {
     locationData: object,
     nearby_loc: object,
     other: object,
+    features?: object,
     plot_features?: object,
     propNumber: string,
     rooms: object,

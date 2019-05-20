@@ -68,7 +68,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
           reject(new Error("…"));
         }
       );
-    }).then(() => {
+    }).then(async () => {
       this.sub = this.route.params.subscribe(params => {
         this.id = +params["id"];
 
@@ -85,7 +85,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         this.ad.userId = this.user.userId;
         this.selectedCity = this.user.cityId;
         this.cityChange();
-        // await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
         this.agentLocs = this.user.locationId;
         this.filterLocations(this.agentLocs);
       }
@@ -149,7 +149,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         }
       }
     }
-    this.locations = this.filtered;
+    this.locations = this.filtered;    
   }
 
   save(uploadMedia) {

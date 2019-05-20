@@ -15,6 +15,7 @@ import { ActivatedRoute } from "@angular/router";
 import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
+import { FilterService } from "shared/services/filter.service";
 
 @Component({
   selector: "mobile-search",
@@ -50,10 +51,18 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     private viewService: ViewService,
     private route: ActivatedRoute,
     private locationUrl: Location,
+    private filterService: FilterService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   async ngOnInit() {
+    if (this.filterService.buy) {
+      this.isBuy = true;
+      this.isRent = false;
+    } else {
+      this.isRent = true;
+      this.isBuy = false;
+    }
     this.locationService.cityChange.subscribe(value => {
       this.selectedCity = value._id;
     });
@@ -71,10 +80,6 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
       e.preventDefault();
     });
 
-    await this.getCities();
-    await this.getLocations();
-    await new Promise((resolve, reject) => setTimeout(resolve, 1500));
-
     this.ga = this.locationService.getGa();
 
     if (this.locationService.getCity())
@@ -82,33 +87,35 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     if (this.locationService.getLoc())
       this.locationChange(this.locationService.getLoc());
 
-    this.sub = this.route.params.subscribe(params => {
-      this.city = params["city"];
-      this.location = params["location"];
-      if (params["city"] || params["locations"]) {
-        this.firstVisit = false;
-      }
-      let locations = this.locations;
-      if (this.city) {
-        let city = this.city;
-        let foundCity = this.cities.filter(function(c) {
-          return c.city == city;
-        });
-        if (foundCity[0]) {
-          this.selectedCity = foundCity[0]._id;
-          this.cityChange(foundCity[0]);
+    Promise.all([this.getCities(), this.getLocations()]).then(val => {
+      this.sub = this.route.params.subscribe(params => {
+        this.city = params["city"];
+        this.location = params["location"];
+        if (params["city"] || params["locations"]) {
+          this.firstVisit = false;
         }
-      }
+        let locations = this.locations;
+        if (this.city) {
+          let city = this.city;
+          let foundCity = this.cities.filter(function(c) {
+            return c.city == city;
+          });
+          if (foundCity[0]) {
+            this.selectedCity = foundCity[0]._id;
+            this.cityChange(foundCity[0]);
+          }
+        }
 
-      if (this.location) {
-        this.locations = locations;
-        let location = this.location;
-        let foundLoc = locations.filter(function(l) {
-          return l.location == location;
-        });
-        this.selectedLocation = foundLoc[0]._id;
-        this.locationChange(foundLoc[0]);
-      }
+        if (this.location) {
+          this.locations = locations;
+          let location = this.location;
+          let foundLoc = locations.filter(function(l) {
+            return l.location == location;
+          });
+          this.selectedLocation = foundLoc[0]._id;
+          this.locationChange(foundLoc[0]);
+        }
+      });
     });
   }
 
@@ -194,23 +201,32 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
         );
     }
   }
+
   locationChange(locObj) {
     $(":focus").blur();
     if (!locObj) return;
     let locId = locObj._id;
+    let cityId = this.selectedCity;
     this.selectedLocation = locObj._id;
-    let locData = this.locations.filter(function(loc) {
+    let locData = this.locations.filter(loc => {
       return loc._id == locId;
     });
-    this.mapService.locationChange(locData[0]);
-    this.locationService.setLocObj(locData[0]);
 
-    if (this.city)
+    if (!this.city) {
+      let cityData = this.cities.filter(function(city) {
+        return city._id == cityId;
+      });
+      this.city = cityData[0].city;
+    }
+    if (locData.length > 0) {
+      this.mapService.locationChange(locData[0]);
+      this.locationService.setLocObj(locData[0]);
+
       this.locationUrl.go("/" + this.city + "/" + locData[0].location);
-    else this.locationUrl.go("/" + locData[0].location);
 
-    this.ga("set", "page", this.locationUrl.path());
-    this.ga("send", "pageview");
+      this.ga("set", "page", this.locationUrl.path());
+      this.ga("send", "pageview");
+    }
   }
 
   typeChange(type) {
@@ -242,10 +258,12 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
   rent() {
     this.isBuy = false;
     this.isRent = true;
+    this.filterService.buyOrRent();
   }
 
   buy() {
     this.isBuy = true;
     this.isRent = false;
+    this.filterService.buyOrRent();
   }
 }

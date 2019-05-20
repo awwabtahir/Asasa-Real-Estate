@@ -22,6 +22,18 @@
     (change)="locationChange($event)"
   >
   </ng-select>
+  <ng-select
+    *ngIf="selectedCity"
+    [items]="types"
+    bindLabel="type"
+    bindValue="value"
+    class="mr-2 ml-2"
+    placeholder="Purpose"
+    [(ngModel)]="selectedPurpose"
+    [clearable]="false"
+    (change)="purposeChange($event)"
+  >
+  </ng-select>
 
   <div *ngIf="selectedCity" class="dropdown ml-2 mr-2 ">
     <button

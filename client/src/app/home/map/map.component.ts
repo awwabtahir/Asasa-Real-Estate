@@ -1,15 +1,15 @@
 /// <reference types="@types/googlemaps" />
-import { Component, OnInit } from '@angular/core';
-import { MapService } from 'shared/services/map.service';
-import { ad } from 'shared/models/ad';
-import { city } from 'shared/models/city';
-import { location } from 'shared/models/location';
-import { PropertyModalService } from 'shared/services/property-modal.service';
+import { Component, OnInit } from "@angular/core";
+import { MapService } from "shared/services/map.service";
+import { ad } from "shared/models/ad";
+import { city } from "shared/models/city";
+import { location } from "shared/models/location";
+import { PropertyModalService } from "shared/services/property-modal.service";
 
 @Component({
-  selector: 'map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  selector: "map",
+  templateUrl: "./map.component.html",
+  styleUrls: ["./map.component.css"]
 })
 export class MapComponent implements OnInit {
   map: any;
@@ -25,17 +25,17 @@ export class MapComponent implements OnInit {
 
   gesture = "greedy";
 
-  constructor(private mapService: MapService) { }
+  constructor(private mapService: MapService) {}
 
-  ngOnInit() {
-    this.mapService.getCity().subscribe(city => {
+  async ngOnInit() {
+    await this.mapService.getCity().subscribe(city => {
       this.city = city;
       this.locName = "";
       this.cityName = this.city.city;
       this.lat = this.city.lat;
       this.lng = this.city.lng;
     });
-    this.mapService.getLocation().subscribe(location => {
+    await this.mapService.getLocation().subscribe(location => {
       this.location = location;
       this.locName = this.location.location;
       this.lat = this.location.lat;
@@ -46,7 +46,7 @@ export class MapComponent implements OnInit {
 
   mapReady(map) {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(position => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
       });
@@ -54,7 +54,9 @@ export class MapComponent implements OnInit {
     this.map = map;
     map.setZoom(14);
     map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('Settings'));
+    map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(
+      document.getElementById("Settings")
+    );
 
     // await new Promise((resolve, reject) => setTimeout(resolve, 1500));
     // $('.sebm-google-map-container .agm-map-container-inner div div.gm-style button[title="Toggle fullscreen view"]')
@@ -76,5 +78,4 @@ export class MapComponent implements OnInit {
   recieveModalAd(modalAd) {
     this.modalAd = modalAd;
   }
-
 }
