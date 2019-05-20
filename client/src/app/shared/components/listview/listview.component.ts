@@ -3,6 +3,7 @@ import { PropertyService } from "shared/services/property.service";
 import { LocationService } from "shared/services/location.service";
 import { FilterService } from "shared/services/filter.service";
 import { MapService } from "shared/services/map.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "listview",
@@ -26,20 +27,36 @@ export class ListviewComponent implements OnInit {
     private propertyService: PropertyService,
     private locationService: LocationService,
     private filterService: FilterService,
-    private mapService: MapService
+    private mapService: MapService,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
-    this.getAds();
-    this.filter();
+  async ngOnInit() {
+    await this.getAds();
+    await this.filter();
+  }
+
+  filterOpetations() {
+    this.route.params.subscribe(params => {
+      this.city = params["city"];
+
+      this.location = params["location"];
+
+      if (this.city) {
+        this.filteredByCity(this.city);
+        if (this.location) {
+          this.filteredByLocation(this.location);
+        }
+      }
+    });
 
     this.locationService.locChange.subscribe(val => {
       this.location = val;
-      this.filteredByLocation();
+      if (this.location) this.filteredByLocation(this.location.location);
     });
     this.locationService.cityChange.subscribe(val => {
       this.city = val;
-      this.filteredByCity();
+      if (this.city) this.filteredByCity(this.city.city);
     });
     this.filterService.typeFilterChange.subscribe(r => {
       if (r) {
@@ -82,6 +99,7 @@ export class ListviewComponent implements OnInit {
     await this.propertyService.getAds().subscribe(
       properties => {
         this.properties = properties;
+        this.filterOpetations();
         if (this.filterService.buy) {
           this.properties = properties.filter(res => {
             return res.purpose == "buy";
@@ -129,19 +147,17 @@ export class ListviewComponent implements OnInit {
     } else this.propertiesAvailable = true;
   }
 
-  filteredByCity() {
+  filteredByCity(city) {
     var byCityList = this.properties;
-    const result = byCityList.filter(
-      prop => prop.locationData.city == this.city.city
-    );
+    const result = byCityList.filter(prop => prop.locationData.city == city);
     this.filteredViaLocation = result;
     this.getList(result);
   }
 
-  filteredByLocation() {
+  filteredByLocation(location) {
     var byLocationList = this.properties;
     const result = byLocationList.filter(
-      prop => prop.locationData.location == this.location.location
+      prop => prop.locationData.location == location
     );
     this.filteredViaLocation = result;
     this.getList(result);
