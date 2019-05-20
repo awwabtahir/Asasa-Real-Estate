@@ -23,7 +23,8 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     comment: "",
     title: "",
     description: "",
-    vidUrl: ""
+    vidUrl: "",
+    purpose: ""
   };
   cities = [];
   locations = [];
@@ -36,6 +37,15 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   user;
   agent = false;
   agentLocs;
+
+  types = [
+    { value: "buy", type: "Buy" },
+    {
+      value: "rent",
+      type: "Rent"
+    }
+  ];
+  selectedPurpose = "buy";
 
   constructor(
     private propertyService: PropertyService,
@@ -183,6 +193,9 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     }
   }
 
+  purposeChange(e) {
+    this.ad.purpose = e.value;
+  }
   private async setPage(item) {
     let city = this.cities.filter(function(city) {
       return city.city == item.locationData.city;
@@ -207,6 +220,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       this.ad.title = item.title;
       this.ad.description = item.description;
       this.ad.vidUrl = item.vidUrl;
+      this.selectedPurpose = item.purpose;
       resolve("done");
 
       reject(new Error("…"));
