@@ -55,6 +55,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
+    console.log("conflict removed")
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "agent") this.agent = true;
     if (this.agent == true) {
@@ -84,7 +85,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
           reject(new Error("…"));
         }
       );
-    }).then(() => {
+    }).then(async () => {
       this.sub = this.route.params.subscribe(params => {
         this.id = +params["id"];
 
@@ -97,6 +98,17 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
           this.item = this.ad;
         }
       });
+<<<<<<< HEAD
+=======
+      if (this.agent == true) {
+        this.ad.userId = this.user.userId;
+        this.selectedCity = this.user.cityId;
+        this.cityChange();
+        await new Promise((resolve, reject) => setTimeout(resolve, 2000));
+        this.agentLocs = this.user.locationId;
+        this.filterLocations(this.agentLocs);
+      }
+>>>>>>> 0721a0191dc74ed57dc0fe4088b8e1fd7a52bb35
     });
   }
 
@@ -164,7 +176,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         }
       }
     }
-    this.locations = this.filtered;
+    this.locations = this.filtered;    
   }
 
   save(uploadMedia) {
