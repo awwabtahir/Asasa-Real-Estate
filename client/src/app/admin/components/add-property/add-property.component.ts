@@ -55,8 +55,15 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
+    console.log("conflict removed")
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "agent") this.agent = true;
+    if (this.agent == true) {
+      this.ad.userId = this.user.userId;
+      this.selectedCity = this.user.cityId;
+      this.getLocations(this.selectedCity);
+      // await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+    }
 
     await this.getCities();
   }
@@ -91,6 +98,8 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
           this.item = this.ad;
         }
       });
+<<<<<<< HEAD
+=======
       if (this.agent == true) {
         this.ad.userId = this.user.userId;
         this.selectedCity = this.user.cityId;
@@ -99,6 +108,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         this.agentLocs = this.user.locationId;
         this.filterLocations(this.agentLocs);
       }
+>>>>>>> 0721a0191dc74ed57dc0fe4088b8e1fd7a52bb35
     });
   }
 
@@ -119,6 +129,13 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
             this.setitem(this.item);
             this.edit = true;
           }
+        }
+        if (this.agent == true) {
+          this.agentLocs = this.user.locationId;
+          this.city = this.cities.filter(function(city) {
+            return city._id == selectedCity;
+          });
+          this.filterLocations(this.agentLocs);
         }
       },
       err => {
