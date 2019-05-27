@@ -60,29 +60,40 @@ export class ListviewComponent implements OnInit {
     });
     this.filterService.typeFilterChange.subscribe(r => {
       if (r) {
+        let ads;
         if (this.filteredAds.length == 0) {
-          let ads = this.properties.filter(res => {
+          ads = this.properties.filter(res => {
             return res.purpose == "buy";
           });
-          this.getList(ads);
         } else if (this.filteredAds.length > 0) {
-          let ads = this.filteredAds.filter(res => {
+          ads = this.filteredAds.filter(res => {
             return res.purpose == "buy";
           });
-          this.getList(ads);
         }
+        if (this.city)
+          ads = ads.filter(prop => prop.locationData.city == this.city);
+        if (this.location)
+          ads = ads.filter(prop => prop.locationData.location == location);
+
+        this.getList(ads);
       } else if (!r) {
+        let ads;
         if (this.filteredAds.length == 0) {
-          let ads = this.properties.filter(res => {
+          ads = this.properties.filter(res => {
             return res.purpose == "rent";
           });
-          this.getList(ads);
         } else if (this.filteredAds.length > 0) {
-          let ads = this.filteredAds.filter(res => {
+          ads = this.filteredAds.filter(res => {
             return res.purpose == "rent";
           });
-          this.getList(ads);
         }
+
+        if (this.city)
+          ads = ads.filter(prop => prop.locationData.city == this.city);
+        if (this.location)
+          ads = ads.filter(prop => prop.locationData.location == location);
+
+        this.getList(ads);
       }
     });
   }
@@ -96,23 +107,25 @@ export class ListviewComponent implements OnInit {
   }
 
   async getAds() {
+    let ads;
     await this.propertyService.getAds().subscribe(
       properties => {
         this.properties = properties;
+        ads = properties;
         this.filterOpetations();
         if (this.filterService.buy) {
-          this.properties = properties.filter(res => {
+          ads = properties.filter(res => {
             return res.purpose == "buy";
           });
         } else if (!this.filterService.buy) {
-          this.properties = properties.filter(res => {
+          ads = properties.filter(res => {
             return res.purpose == "rent";
           });
         }
 
         this.propertiesAvailable = true;
         if (!this.list) {
-          this.getList(this.properties);
+          this.getList(ads);
         }
       },
       err => {

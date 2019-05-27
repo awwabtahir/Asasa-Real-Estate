@@ -1,21 +1,28 @@
 <div class="map mt-2">
   <!-- this creates a google map on the page with the given lat/lng from -->
   <!-- the component as the initial center of the map: -->
-  <agm-map #map 
-    [latitude]="lat" [longitude]="lng" [gestureHandling]="gesture" [maxZoom]=18
-    [mapTypeControl]=true [panControl]=true [fullscreenControl]=true
-    (mapReady)="mapReady($event)">
-
+  <agm-map
+    #map
+    [latitude]="lat"
+    [longitude]="lng"
+    [gestureHandling]="gesture"
+    [maxZoom]="18"
+    [mapTypeControl]="true"
+    [panControl]="true"
+    [fullscreenControl]="true"
+    (mapReady)="mapReady($event)"
+  >
     <marker [map]="map" (adEvent)="recieveModalAd($event)"></marker>
-
   </agm-map>
 
   <ul id="Settings" class="d-none d-md-block list-inline ml-1">
-    <li><img src="assets/images/House.png" class="property-icon"> House</li>
-    <li><img src="assets/images/Plot.png" class="property-icon"> Plots</li>
-    <li><img src="assets/images/Commercial.png" class="property-icon"> Commercial</li>
+    <li><img src="assets/images/House.png" class="property-icon" /> House</li>
+    <li><img src="assets/images/Plot.png" class="property-icon" /> Plots</li>
+    <li>
+      <img src="assets/images/Commercial.png" class="property-icon" />
+      Commercial
+    </li>
   </ul>
 
   <marker-modal [ad]="modalAd"></marker-modal>
-
 </div>

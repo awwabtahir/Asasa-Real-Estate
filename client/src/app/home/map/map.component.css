@@ -1,37 +1,37 @@
 .map {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .list-inline {
-    overflow: hidden;
-    color: rgb(86, 86, 86);
-    font-family: Roboto, Arial, sans-serif;
-    user-select: none;
-    font-size: 15px;
-    background-color: rgb(255, 255, 255);
-    padding: 6px;
-    border-bottom-right-radius: 2px;
-    border-top-right-radius: 2px;
-    background-clip: padding-box;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-    min-width: 40px;
-    border-left: 0px;
-    border-radius: 10px;
+  overflow: hidden;
+  color: rgb(86, 86, 86);
+  font-family: Roboto, Arial, sans-serif;
+  user-select: none;
+  font-size: 15px;
+  background-color: rgb(255, 255, 255);
+  padding: 6px;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  background-clip: padding-box;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  min-width: 40px;
+  border-left: 0px;
+  border-radius: 10px;
 }
 
 .list-inline li {
-    display: block;   
-    font-weight: bold;
-    margin-right: 5px;
+  display: block;
+  font-weight: bold;
+  margin-right: 5px;
 }
 
 agm-map {
-    height: 450px;
-    display: block;
+  height: 450px;
+  display: block;
 }
 
 .property-icon {
-    height: 25px;
-    margin-bottom: 4px; 
+  height: 25px;
+  margin-bottom: 4px;
 }
