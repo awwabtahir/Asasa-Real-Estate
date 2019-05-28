@@ -6,6 +6,7 @@ import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
 import { FilterService } from "shared/services/filter.service";
+import { log } from "util";
 
 @Component({
   selector: "search",

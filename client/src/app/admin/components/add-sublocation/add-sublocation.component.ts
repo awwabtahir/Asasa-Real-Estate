@@ -80,7 +80,6 @@ export class AddSublocationComponent implements OnInit {
           });
 
         if ((this.access = "agent")) {
-          console.log("check");
           this.filterLocations();
         }
       },
@@ -97,25 +96,14 @@ export class AddSublocationComponent implements OnInit {
   }
 
   filterLocations() {
-    {
-      console.log(this.locations);
-      var loc = [];
-      for (var arr in this.locations) {
-        for (var filter in this.user.locationId) {
-          console.log(
-            this.locations[arr].location,
-            this.user.locationId[filter]
-          );
-          if (this.locations[arr].location == this.user.locationId[filter]) {
-            loc.push(this.locations[arr]);
-            console.log(loc);
-          }
+    var loc = [];
+    for (var arr in this.locations) {
+      for (var filter in this.user.locationId) {
+        if (this.locations[arr].location == this.user.locationId[filter]) {
+          loc.push(this.locations[arr]);
         }
       }
-      this.locations = loc;
-      setTimeout(() => {
-        console.log(this.locations);
-      }, 3000);
     }
+    this.locations = loc;
   }
 }

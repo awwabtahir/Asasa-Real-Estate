@@ -16,6 +16,7 @@ import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
 import { FilterService } from "shared/services/filter.service";
+import { PropertyService } from "shared/services/property.service";
 
 @Component({
   selector: "mobile-search",
@@ -52,10 +53,12 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private locationUrl: Location,
     private filterService: FilterService,
+    private propertyService: PropertyService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   async ngOnInit() {
+    this.firstVisit = this.propertyService.firstVisit;
     if (this.filterService.buy) {
       this.isBuy = true;
       this.isRent = false;
@@ -122,6 +125,7 @@ export class MobileSearchComponent implements OnInit, OnDestroy {
   search() {
     this.searched.emit("mobile");
     this.firstVisit = false;
+    this.propertyService.firstVisit = false;
     // if (this.innerWidth > 600) {
     //   this.doc.documentElement.scrollTo({ top: 650, behavior: "smooth" });
     // } else if (this.innerWidth < 600) {

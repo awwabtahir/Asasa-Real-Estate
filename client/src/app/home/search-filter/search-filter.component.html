@@ -116,6 +116,18 @@
             />
           </div>
         </form>
+
+        <h5 *ngIf="isHouse">Rooms</h5>
+        <select
+          *ngIf="isHouse"
+          class="form-control"
+          (change)="changingValue($event)"
+          [(ngModel)]="totalRooms"
+        >
+          <option *ngFor="let i of rooms" value="{{ i.value }}">{{
+            i.rooms
+          }}</option>
+        </select>
       </div>
       <div class="modal-footer">
         <button
