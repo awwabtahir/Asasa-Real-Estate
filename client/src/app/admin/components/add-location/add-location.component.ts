@@ -44,6 +44,7 @@ export class AddLocationComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.getCityLocs();
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id'];
       if (this.id) {
@@ -142,6 +143,19 @@ export class AddLocationComponent implements OnInit, OnDestroy {
     }, (err) => {
       console.error(err);
     });
+  }
+
+  getCityLocs() {
+    let data = {
+      _id : 1
+    };
+
+    this.auth.updateLocation(data).subscribe((locs) => {
+      console.log(locs);
+    }, (err) => {
+      console.error(err);
+    });
+
   }
 
   private getCityWithLoc(lat, lng) {

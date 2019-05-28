@@ -40,6 +40,7 @@ router.get('/get_cities', ctrlCity.getAll);
 // location operations
 router.post('/save_location', ctrlLocation.save);
 router.post('/update_location', ctrlLocation.update);
+router.post('/get_city_locations', ctrlLocation.getByCityId);
 router.get('/get_locations', ctrlLocation.getAll);
 
 // customer operations

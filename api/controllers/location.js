@@ -28,6 +28,21 @@ module.exports.getAll = function (req, res) {
     });
 };
 
+module.exports.getByCityId = function (req, res) {
+  var data = req.body;
+  if (!data) {
+    res.status(401).json({
+      "message": "No data found!"
+    });
+  } else {
+    Location
+      .find({ 'cityId': data._id })
+      .exec(function (err, locations) {
+        res.status(200).json(locations);
+      });
+  }
+};
+
 module.exports.update = function (req, res) {
   var data = req.body;
   if (!data) {
