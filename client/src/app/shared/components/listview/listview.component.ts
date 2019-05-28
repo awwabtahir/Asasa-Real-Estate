@@ -34,6 +34,18 @@ export class ListviewComponent implements OnInit {
   async ngOnInit() {
     await this.getAds();
     await this.filter();
+    let ads;
+    this.propertyService.roomChange.subscribe(r => {
+      if (this.filteredAds.length > 0) {
+        ads = this.filteredAds;
+      } else if (this.filteredAds.length == 0) {
+        ads = this.properties;
+      }
+      ads = ads.filter(res => {
+        return res.type != "plot" && parseInt(res.rooms.beds) >= r;
+      });
+      this.getList(ads);
+    });
   }
 
   filterOpetations() {

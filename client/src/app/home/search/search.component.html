@@ -48,10 +48,10 @@
       Select Property Type
     </button>
     <div class="dropdown-menu keepopen" aria-labelledby="dropdownMenuButton">
-      <div class="tabbable-line">
+      <div class="tabbable-line" (click)="typeChange($event)">
         <ul class="nav nav-tabs">
           <li>
-            <a href="#home" data-toggle="tab" class="active"> Home </a>
+            <a href="#home" data-toggle="tab"> Home </a>
           </li>
           <li>
             <a href="#plot" data-toggle="tab"> Plot </a>
@@ -60,7 +60,7 @@
             <a href="#commercial" data-toggle="tab"> Commercial </a>
           </li>
         </ul>
-        <div class="tab-content" (click)="typeChange($event)">
+        <div class="tab-content">
           <div class="tab-pane active" id="home">
             <a class="btn btn-outline-success btn-sm">House</a>
             <a class="btn btn-outline-success btn-sm">Flat</a>

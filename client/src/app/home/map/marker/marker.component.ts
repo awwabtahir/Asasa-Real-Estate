@@ -68,6 +68,12 @@ export class MarkerComponent implements OnInit {
         return ad.subtype.toLowerCase() == type.toLowerCase();
       });
     });
+    this.propertyService.roomChange.subscribe(r => {
+      this.filteredAds = this.ads;
+      this.filteredAds = this.filteredAds.filter(res => {
+        return res.type != "plot" && parseInt(res.rooms.beds) >= r;
+      });
+    });
     this.filterService.typeFilterChange.subscribe(r => {
       if (r) {
         if (this.filteredAds.length == 0) {
@@ -119,12 +125,11 @@ export class MarkerComponent implements OnInit {
       ads => {
         this.ads = ads;
         this.filteredAds = ads;
-        if(this.filterService.buy){
-           this.filteredAds = ads.filter(res => {
+        if (this.filterService.buy) {
+          this.filteredAds = ads.filter(res => {
             return res.purpose == "buy";
           });
-        }
-        else if (!this.filterService.buy){
+        } else if (!this.filterService.buy) {
           this.filteredAds = ads.filter(res => {
             return res.purpose == "rent";
           });

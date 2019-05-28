@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AuthenticationService } from "../../authentication.service";
 import { Router } from "@angular/router";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -18,6 +19,8 @@ export class PropertyService {
   nearby_loc = {};
   other = {};
   firstVisit: boolean = true;
+  roomCount: any;
+  roomChange: Subject<any> = new Subject<any>();
 
   constructor(private auth: AuthenticationService, private router: Router) {}
 
