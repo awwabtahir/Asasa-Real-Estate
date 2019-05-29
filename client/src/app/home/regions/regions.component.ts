@@ -17,8 +17,8 @@ export class RegionsComponent implements OnInit {
   constructor(private auth: AuthenticationService) {}
 
   async ngOnInit() {
-    this.getCities();
-    this.getLocations();
+    await this.getCities();
+    await this.getLocations();
 
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
     this.islamabadCount = this.getPropCounts("Islamabad");
@@ -40,14 +40,18 @@ export class RegionsComponent implements OnInit {
   }
 
   getCities() {
-    this.auth.getCities().subscribe(
-      cities => {
-        this.cities = cities;
-      },
-      err => {
-        console.error(err);
-      }
-    );
+    let promise = new Promise((resolve, reject) => {
+      this.auth.getCities().subscribe(
+        cities => {
+          this.cities = cities;
+          resolve("done");
+        },
+        err => {
+          console.error("Error", err);
+          reject(new Error("…"));
+        }
+      );
+    });
   }
 
   getLocations(selectedCity?) {

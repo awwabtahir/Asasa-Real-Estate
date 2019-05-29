@@ -4,38 +4,74 @@
   <ul class="nav sidebar-nav">
     <li routerLinkActive="active" data-toggle="tooltip" data-placement="right">
       <a routerLink="/dashboard/profile">
-        <i class="fas fa-user-alt"></i> Profile</a>
+        <i class="fas fa-user-alt"></i> Profile</a
+      >
     </li>
     <li routerLinkActive="active" data-toggle="tooltip" data-placement="right">
       <a routerLink="/dashboard/favourites">
-        <i class="fas fa-heart"></i> Favorites</a>
+        <i class="fas fa-heart"></i> Favorites</a
+      >
     </li>
-    <li routerLinkActive="active" data-toggle="tooltip" data-placement="right" *ngIf="!agent && !customer">
-      <a routerLink="/dashboard/agents">
-        <i class="fas fa-users"></i> Agents</a>
+    <li
+      routerLinkActive="active"
+      data-toggle="tooltip"
+      data-placement="right"
+      *ngIf="!agent && !customer"
+    >
+      <a routerLink="/dashboard/agents"> <i class="fas fa-users"></i> Agents</a>
     </li>
-    <li routerLinkActive="active" data-toggle="tooltip" data-placement="right" *ngIf="!customer">
+    <li
+      routerLinkActive="active"
+      data-toggle="tooltip"
+      data-placement="right"
+      *ngIf="!customer"
+    >
       <a routerLink="/dashboard/addProperty">
-        <i class="fas fa-home"></i> Add Property</a>
+        <i class="fas fa-home"></i> Add Property</a
+      >
     </li>
-    <li routerLinkActive="active" data-toggle="tooltip" data-placement="right" *ngIf="!customer">
+    <li
+      routerLinkActive="active"
+      data-toggle="tooltip"
+      data-placement="right"
+      *ngIf="!customer"
+    >
       <a routerLink="/dashboard/activeProperties">
-        <i class="fas fa-building"></i> Active Properties</a>
+        <i class="fas fa-building"></i> Active Properties</a
+      >
     </li>
 
-    <li routerLinkActive="active" data-toggle="tooltip" data-placement="right" *ngIf="!agent && !customer">
+    <li
+      routerLinkActive="active"
+      data-toggle="tooltip"
+      data-placement="right"
+      *ngIf="!agent && !customer"
+    >
       <a routerLink="/dashboard/editCityLoc">
-        <i class="fas fa-edit"></i> Edit City/Location</a>
+        <i class="fas fa-edit"></i> Edit City/Location</a
+      >
     </li>
-    <li routerLinkActive="active" data-toggle="tooltip" data-placement="right" *ngIf="!agent && !customer">
+    <li
+      routerLinkActive="active"
+      data-toggle="tooltip"
+      data-placement="right"
+      *ngIf="!customer"
+    >
       <a routerLink="/dashboard/addSubLocation">
-        <i class="fas fa-map-marked-alt"></i> Add Sub Locations</a>
+        <i class="fas fa-map-marked-alt"></i> Add Sub Locations</a
+      >
     </li>
 
-    <li routerLinkActive="active" data-toggle="tooltip" data-placement="right" *ngIf="!customer">
+    <!-- <li
+      routerLinkActive="active"
+      data-toggle="tooltip"
+      data-placement="right"
+      *ngIf="!customer"
+    >
       <a routerLink="/dashboard/storage">
-        <i class="fas fa-file-export"></i> File Sharing</a>
-    </li>
+        <i class="fas fa-file-export"></i> File Sharing</a
+      >
+    </li> -->
   </ul>
 </nav>
 

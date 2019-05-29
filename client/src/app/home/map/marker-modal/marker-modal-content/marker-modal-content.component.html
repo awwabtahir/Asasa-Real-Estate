@@ -1,24 +1,39 @@
 <div class="container">
   <div class="row" style="margin-top: 60px;">
-    <a class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block" routerLink="/">
-      <i class="fas fa-arrow-left"></i> &nbsp; Go
-      back</a>
+    <a
+      class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block"
+      (click)="backClicked()"
+    >
+      <i class="fas fa-arrow-left"></i> &nbsp; Go back</a
+    >
 
-    <fav-heart [id]="id" class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none"></fav-heart>
+    <fav-heart
+      [id]="id"
+      class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none"
+    ></fav-heart>
 
     <nav *ngIf="ad" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item"><a routerLink="/{{ ad.locationData.city }}">{{ ad.locationData.city }}</a></li>
-        <li class="breadcrumb-item"><a
-            routerLink="/{{ ad.locationData.city }}/{{ ad.locationData.location }}">{{ ad.locationData.location }}</a>
+        <li class="breadcrumb-item">
+          <a routerLink="/{{ ad.locationData.city }}">{{
+            ad.locationData.city
+          }}</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a
+            routerLink="/{{ ad.locationData.city }}/{{
+              ad.locationData.location
+            }}"
+            >{{ ad.locationData.location }}</a
+          >
         </li>
         <li class="breadcrumb-item">{{ ad._id }}</li>
       </ol>
     </nav>
 
     <div class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none ml-auto">
-      <a routerLink="/"><i class="far fa-times-circle fa-2x"></i></a>
+      <a (click)="backClicked()"><i class="far fa-times-circle fa-2x"></i></a>
     </div>
   </div>
 
@@ -26,42 +41,123 @@
     <div *ngIf="ad" class="col-md-8">
       <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
         <li *ngIf="ad.imagesData && ad.imagesData.images" class="nav-item col">
-          <a class="nav-link" id="photos-tab" data-toggle="tab" href="#photos" role="tab" aria-controls="photos"
-            aria-selected="false">Photos</a>
+          <a
+            class="nav-link"
+            id="photos-tab"
+            data-toggle="tab"
+            href="#photos"
+            role="tab"
+            aria-controls="photos"
+            aria-selected="false"
+            >Photos</a
+          >
         </li>
-        <li *ngIf="ad.imagesData && ad.imagesData.image3d && (ad.imagesData.image3d.value != '')" class="nav-item col">
-          <a class="nav-link" id="3dImg-tab" data-toggle="tab" href="#3dImg" role="tab" aria-controls="3dImg"
-            aria-selected="false" (click)="url3d()">360&deg;</a>
+        <li
+          *ngIf="
+            ad.imagesData &&
+            ad.imagesData.image3d &&
+            ad.imagesData.image3d.value != ''
+          "
+          class="nav-item col"
+        >
+          <a
+            class="nav-link"
+            id="3dImg-tab"
+            data-toggle="tab"
+            href="#3dImg"
+            role="tab"
+            aria-controls="3dImg"
+            aria-selected="false"
+            (click)="url3d()"
+            >360&deg;</a
+          >
         </li>
         <li *ngIf="ad.vidUrl" class="nav-item col">
-          <a class="nav-link" id="videos-tab" data-toggle="tab" href="#videos" role="tab" aria-controls="videos"
-            aria-selected="false">Videos</a>
+          <a
+            class="nav-link"
+            id="videos-tab"
+            data-toggle="tab"
+            href="#videos"
+            role="tab"
+            aria-controls="videos"
+            aria-selected="false"
+            >Videos</a
+          >
         </li>
         <li class="nav-item col">
-          <a class="nav-link active" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map"
-            aria-selected="true">Map</a>
+          <a
+            class="nav-link active"
+            id="map-tab"
+            data-toggle="tab"
+            href="#map"
+            role="tab"
+            aria-controls="map"
+            aria-selected="true"
+            >Map</a
+          >
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div *ngIf="ad.imagesData && ad.imagesData.images" class="tab-pane fade" id="photos" role="tabpanel"
-          aria-labelledby="photos-tab">
+        <div
+          *ngIf="ad.imagesData && ad.imagesData.images"
+          class="tab-pane fade"
+          id="photos"
+          role="tabpanel"
+          aria-labelledby="photos-tab"
+        >
           <photo-slider [images]="ad.imagesData.images"></photo-slider>
         </div>
-        <div *ngIf="ad.imagesData && ad.imagesData.image3d" class="tab-pane fade" id="3dImg" role="tabpanel"
-          aria-labelledby="3dImg-tab">
+        <div
+          *ngIf="ad.imagesData && ad.imagesData.image3d"
+          class="tab-pane fade"
+          id="3dImg"
+          role="tabpanel"
+          aria-labelledby="3dImg-tab"
+        >
           <!-- <div id="target"></div> -->
-          <iframe *ngIf="image3d" frameborder="0" scrolling="no" [src]="url3D" allowfullscreen></iframe>
+          <iframe
+            *ngIf="image3d"
+            frameborder="0"
+            scrolling="no"
+            [src]="url3D"
+            allowfullscreen
+          ></iframe>
         </div>
-        <div *ngIf="ad.vidUrl" class="tab-pane fade" id="videos" role="tabpanel" aria-labelledby="videos-tab">
-          <iframe [src]='safeUrl' frameborder="0" scrolling="no" allowfullscreen></iframe>
+        <div
+          *ngIf="ad.vidUrl"
+          class="tab-pane fade"
+          id="videos"
+          role="tabpanel"
+          aria-labelledby="videos-tab"
+        >
+          <iframe
+            [src]="safeUrl"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen
+          ></iframe>
         </div>
-        <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
-          <agm-map [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [mapTypeControl]=true
-            [panControl]=true [zoom]=17 [maxZoom]=19 [mapTypeId]="satellite" (mapReady)="mapReady($event)">
-
-            <agm-marker [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng">
+        <div
+          class="tab-pane fade show active"
+          id="map"
+          role="tabpanel"
+          aria-labelledby="map-tab"
+        >
+          <agm-map
+            [latitude]="ad.locationData.lat"
+            [longitude]="ad.locationData.lng"
+            [mapTypeControl]="true"
+            [panControl]="true"
+            [zoom]="17"
+            [maxZoom]="19"
+            [mapTypeId]="satellite"
+            (mapReady)="mapReady($event)"
+          >
+            <agm-marker
+              [latitude]="ad.locationData.lat"
+              [longitude]="ad.locationData.lng"
+            >
             </agm-marker>
-
           </agm-map>
         </div>
       </div>
@@ -76,23 +172,43 @@
         <!-- <social-login></social-login> -->
 
         <div class="container">
-
           <div class="row mb-2 mt-2">
             <div class="col mt-1 text-center">
               <i class="fab fa-houzz fa-2x" style="color:#37bba3;"></i>
               <p>Property Type</p>
-              <p><b>{{ ad.subtype }}</b></p>
+              <p>
+                <b>{{ ad.subtype }}</b>
+              </p>
             </div>
             <div class="col mt-1 text-center">
               <i class="fas fa-vector-square fa-2x" style="color:#37bba3;"></i>
               <p>Unit Area ({{ ad.areaType }})</p>
-              <p><b>{{ ad.area }}</b></p>
+              <p>
+                <b>{{ ad.area }}</b>
+              </p>
             </div>
             <div class="col mt-1 text-center">
-              <i class="fas fa-hand-holding-usd fa-2x" style="color:#37bba3;"></i>
+              <i
+                class="fas fa-hand-holding-usd fa-2x"
+                style="color:#37bba3;"
+              ></i>
               <p>Price (Rs)</p>
-              <p><b>{{ ad.demand }}</b></p>
+              <p>
+                <b>{{ priceConverter(ad.demand) }}</b>
+              </p>
             </div>
+
+            <div class="col mt-1 text-center">
+              <i
+                class="fas fa-thumbtack fa-2x"
+                style="color:#37bba3;"
+              ></i>
+              <p>Purpose</p>
+              <p>
+                <b>{{ ad.purpose | titlecase }}</b>
+              </p>
+            </div>
+
           </div>
 
           <div *ngIf="basic" class="row mb-1">
@@ -100,62 +216,176 @@
               <strong>Basics</strong>
             </div>
 
-            <table class="table table-striped" style="margin: 10px; margin-top: 0;">
+            <table
+              class="table table-striped"
+              style="margin: 10px; margin-top: 0;"
+            >
               <tbody>
                 <tr>
-                  <b>Property Ref Id</b> : {{ ad._id }}
+                  <b>Property Ref Id</b>
+                  :
+                  {{
+                    ad._id
+                  }}
                 </tr>
                 <tr *ngFor="let entry of basic | keys">
-                  <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
+                  <b>{{ entry.key | titlecase }}</b>
+                  :
+                  {{
+                    entry.value | titlecase
+                  }}
                 </tr>
                 <tr *ngFor="let entry of location | keys">
-                  <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
+                  <b>{{ entry.key | titlecase }}</b>
+                  :
+                  {{
+                    entry.value | titlecase
+                  }}
                 </tr>
               </tbody>
             </table>
-
           </div>
 
           <div *ngIf="ad.description" class="row mt-2">
             <div class="alert alert-info w-100 text-center">
               <strong>Description</strong>
             </div>
-            <div innerHTML="{{ad.description}}" class="ml-1"></div>
+            <div innerHTML="{{ ad.description }}" class="ml-1"></div>
           </div>
 
           <div *ngIf="ad.type == 'plot'" class="row mt-2">
-            <div *ngIf="plot_features.length > 0" class="alert alert-info w-100 text-center">
+            <div
+              *ngIf="plot_features.length > 0"
+              class="alert alert-info w-100 text-center"
+            >
               <strong>Features</strong>
             </div>
             <ng-container *ngFor="let entry of plot_features | keys">
               <div *ngIf="entry.value" class="col-md-6">
-                <b>{{entry.key | titlecase}}</b> &nbsp;
-                <i class="fas fa-check bluetick"></i>
+                <b>{{ entry.key | titlecase }}</b> &nbsp;
+                <span *ngIf="ad?.plot_features[entry.key]!=true">{{ (ad?.plot_features)[entry.key] }} </span><span *ngIf="ad?.plot_features[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
               </div>
             </ng-container>
 
-            <ng-container *ngIf="ad.other">
-              <ng-container *ngFor="let entry of other | keys">
-                <div *ngIf="entry.value" class="col-md-6">
-                  <b>{{entry.key | titlecase}}</b> &nbsp;
-                  <i class="fas fa-check bluetick"></i>
-                </div>
+            <div *ngIf="ad.biz_comm" class="alert alert-info w-100 text-center">
+                <strong>Biz {{ad.biz_comm.length}}</strong>
+              </div>
+  
+              <ng-container *ngIf="ad.biz_comm">
+                <ng-container *ngFor="let entry of ad.biz_comm | keys">
+                  <div *ngIf="entry.value" class="col-md-6">
+                    <b>{{ entry.key | titlecase }} : </b>
+                    <span *ngIf="ad?.biz_comm[entry.key]!=true">{{ (ad?.biz_comm)[entry.key] }} </span><span *ngIf="ad?.biz_comm[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                    
+                  </div>
+                </ng-container>
               </ng-container>
-            </ng-container>
 
-            <ng-container *ngIf="ad.nearby_loc">
-              <ng-container *ngFor="let entry of nearby_loc | keys">
-                <div *ngIf="entry.value" class="col-md-6">
-                  <b>{{entry.key | titlecase}}</b> : {{entry.value | titlecase}}
+              <div *ngIf="ad.healthcare" class="alert alert-info w-100 text-center">
+                  <strong>Health Care</strong>
                 </div>
-              </ng-container>
-            </ng-container>
-
+    
+                <ng-container *ngIf="ad.healthcare">
+                  <ng-container *ngFor="let entry of ad.healthcare | keys">
+                    <div *ngIf="entry.value" class="col-md-6">
+                      <b>{{ entry.key | titlecase }} : </b>
+                      <span *ngIf="ad?.healthcare[entry.key]!=true">{{ (ad?.healthcare)[entry.key] }} </span><span *ngIf="ad?.healthcare[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <div *ngIf="ad.nearby_loc.value" class="alert alert-info w-100 text-center">
+                    <strong>Nearby Locations</strong>
+                  </div>
+      
+                  <ng-container *ngIf="ad.nearby_loc">
+                    <ng-container *ngFor="let entry of ad.nearby_loc | keys">
+                      <div *ngIf="entry.value" class="col-md-6">
+                        <b>{{ entry.key | titlecase }} : </b>
+                        {{ (ad?.nearby_loc)[entry.key] }}
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <div *ngIf="ad.other" class="alert alert-info w-100 text-center">
+                      <strong>Other {{ad.other[0]}}</strong>
+                    </div>
+        
+                    <ng-container *ngIf="ad.other">
+                      <ng-container *ngFor="let entry of ad.other | keys">
+                        <div *ngIf="entry.value" class="col-md-6">
+                          <b>{{ entry.key | titlecase }} : </b>
+                          <span *ngIf="ad?.other[entry.key]!=true">{{ (ad?.other)[entry.key] }} </span><span *ngIf="ad?.other[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                        </div>
+                      </ng-container>
+                    </ng-container>
           </div>
 
+          <div *ngIf="ad.type != 'plot'" class="row mt-2 mb-2">
+            <div class="alert alert-info w-100 text-center">
+              <strong>Features</strong>
+            </div>
+
+            <ng-container *ngIf="ad.rooms">
+              <ng-container *ngFor="let entry of ad.rooms | keys">
+                <div *ngIf="entry.value" class="col-md-6">
+                  <b>{{ entry.key | titlecase }} : </b>
+                  <span *ngIf="ad?.rooms[entry.key]!=true">{{ (ad?.rooms)[entry.key] }} </span><span *ngIf="ad?.rooms[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                </div>
+              </ng-container>
+            </ng-container>
+
+            <div *ngIf="ad.biz_comm" class="alert alert-info w-100 text-center">
+                <strong>Biz</strong>
+              </div>
+  
+              <ng-container *ngIf="ad.biz_comm">
+                <ng-container *ngFor="let entry of ad.biz_comm | keys">
+                  <div *ngIf="entry.value" class="col-md-6">
+                    <b>{{ entry.key | titlecase }} : </b>
+                    <span *ngIf="ad?.biz_comm[entry.key]!=true">{{ (ad?.biz_comm)[entry.key] }} </span><span *ngIf="ad?.biz_comm[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+              <div *ngIf="ad.healthcare" class="alert alert-info w-100 text-center">
+                  <strong>Health Care</strong>
+                </div>
+    
+                <ng-container *ngIf="ad.healthcare">
+                  <ng-container *ngFor="let entry of ad.healthcare | keys">
+                    <div *ngIf="entry.value" class="col-md-6">
+                      <b>{{ entry.key | titlecase }} : </b>
+                      <span *ngIf="ad?.healthcare[entry.key]!=true">{{ (ad?.healthcare)[entry.key] }} </span><span *ngIf="ad?.healthcare[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <div *ngIf="ad.nearby_loc" class="alert alert-info w-100 text-center">
+                    <strong>Nearby Locations</strong>
+                  </div>
+      
+                  <ng-container *ngIf="ad.nearby_loc">
+                    <ng-container *ngFor="let entry of ad.nearby_loc | keys">
+                      <div *ngIf="entry.value" class="col-md-6">
+                        <b>{{ entry.key | titlecase }} : </b>
+                        {{ (ad?.nearby_loc)[entry.key] }}
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <div *ngIf="ad.other" class="alert alert-info w-100 text-center">
+                      <strong>Other </strong>
+                    </div>
+        
+                    <ng-container *ngIf="ad.other">
+                      <ng-container *ngFor="let entry of ad.other | keys">
+                        <div *ngIf="entry.value" class="col-md-6">
+                          <b>{{ entry.key | titlecase }} : </b>
+                          <span *ngIf="ad?.other[entry.key]!=true">{{ (ad?.other)[entry.key] }}</span><span *ngIf="ad?.other[entry.key]==true"><i class="fas fa-check bluetick"></i></span>
+                        </div>
+                      </ng-container>
+                    </ng-container>
+          </div>
         </div>
         <email [id]="ad._id"></email>
-        <br>
+        <br />
 
         <!-- <div class="container">
           <div class="row">
@@ -164,9 +394,7 @@
             </div>
           </div>
         </div> -->
-
       </div>
     </div>
   </div>
-
 </div>

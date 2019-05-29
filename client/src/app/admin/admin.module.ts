@@ -39,6 +39,7 @@ import {
   NbMenuModule
 } from "@nebular/theme";
 import { DataTablesModule } from "angular-datatables";
+import { FilterPipe } from "app/filter.pipe";
 
 @NgModule({
   imports: [
@@ -83,7 +84,8 @@ import { DataTablesModule } from "angular-datatables";
     AgentsComponent,
     EditCityLocComponent,
     GDriveComponent,
-    FavouritesComponent
+    FavouritesComponent,
+    FilterPipe
   ],
   providers: [NbSidebarService]
 })

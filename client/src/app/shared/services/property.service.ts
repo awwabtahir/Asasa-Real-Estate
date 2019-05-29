@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { AuthenticationService } from '../../authentication.service';
-import { Router } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { AuthenticationService } from "../../authentication.service";
+import { Router } from "@angular/router";
+import { Subject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class PropertyService {
   adId;
@@ -17,39 +18,49 @@ export class PropertyService {
   healthcare = {};
   nearby_loc = {};
   other = {};
+  firstVisit: boolean = true;
+  roomCount: any;
+  roomChange: Subject<any> = new Subject<any>();
 
-  constructor(private auth: AuthenticationService,
-              private router: Router) { }
+  constructor(private auth: AuthenticationService, private router: Router) {}
 
   save(ad) {
     this.modifyAd(ad);
     this.ad = ad;
-    this.auth.saveAd(ad).subscribe((ad) => {
-      this.adId = ad._id;
-    }, (err) => {
-      console.error(err);
-    });
+    this.auth.saveAd(ad).subscribe(
+      ad => {
+        this.adId = ad._id;
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   update(ad) {
     this.modifyAd(ad);
     this.ad = ad;
-    this.auth.updateAd(ad).subscribe((ad) => {
-      this.adId = ad._id;
-    }, (err) => {
-      console.error(err);
-    });
+    this.auth.updateAd(ad).subscribe(
+      ad => {
+        this.adId = ad._id;
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   updateMedia(ad) {
-    this.modifyAd(ad);    
+    this.modifyAd(ad);
     this.imagesData = {};
-    console.log(ad);
-    this.auth.updateAd(ad).subscribe(() => {
-      this.router.navigateByUrl('/dashboard/activeProperties');
-    }, (err) => {
-      console.error(err);
-    });
+    this.auth.updateAd(ad).subscribe(
+      () => {
+        this.router.navigateByUrl("/dashboard/activeProperties");
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
   getAdId() {
@@ -69,7 +80,7 @@ export class PropertyService {
   }
 
   delete(ad) {
-    this.auth.deleteAd(ad).subscribe((result) => {
+    this.auth.deleteAd(ad).subscribe(result => {
       console.log("success");
     });
   }
@@ -126,27 +137,33 @@ export class PropertyService {
   private modifyAd(ad) {
     ad["imagesData"] = this.imagesData;
     ad["locationData"] = this.locationData;
-    if (ad.type != 'plot') ad["features"] = this.features;
-    if (ad.type == 'plot') ad["plot_features"] = this.plot_features;
+    if (ad.type != "plot") {
+      ad["features"] = this.features;
+    }
+    if (ad.type == "plot") {
+      ad["plot_features"] = this.plot_features;
+    }
     ad["rooms"] = this.rooms;
     ad["biz_comm"] = this.biz_comm;
     ad["healthcare"] = this.healthcare;
     ad["nearby_loc"] = this.nearby_loc;
     ad["other"] = this.other;
-    console.log(this.adId);
-    if(this.adId) {
-      if(!ad["_id"]) ad["_id"] = this.adId;
+    if (this.adId) {
+      if (!ad["_id"]) ad["_id"] = this.adId;
       this.imagesData["adId"] = this.adId;
     }
   }
 
   localeString(x, sep?, grp?) {
-    var sx = ('' + x).split('.'), s = '', i, j;
-    sep || (sep = ','); // default seperator
+    var sx = ("" + x).split("."),
+      s = "",
+      i,
+      j;
+    sep || (sep = ","); // default seperator
     grp || grp === 0 || (grp = 2); // default grouping
     i = sx[0].length;
-    s = sep + sx[0].slice(i-3, i) + s;
-    i = i-3;
+    s = sep + sx[0].slice(i - 3, i) + s;
+    i = i - 3;
     while (i > grp) {
       j = i - grp;
       s = sep + sx[0].slice(j, i) + s;
@@ -154,7 +171,6 @@ export class PropertyService {
     }
     s = sx[0].slice(0, i) + s;
     sx[0] = s;
-    return sx.join('.');
+    return sx.join(".");
   }
-
 }

@@ -1,13 +1,16 @@
 <div class="container">
-
-  <search-home id="search"></search-home>
-  <search [ngStyle]="!mapSearchBar && { visibility: 'hidden' }" class="row"></search>
-  <map *ngIf="mapView" class="row"></map>
-  <listview *ngIf="listView" class="row mt-2"></listview>
+  <span *ngIf="!isMobile">
+    <search-home *ngIf="firstVisit" (searched)="search($event)" id="search"></search-home>
+    <search id="mapSearch" *ngIf="!firstVisit" [ngStyle]="start && { display: 'none' }" class="row"></search>
+  </span>
+  <mobile-search (searched)="search($event)" *ngIf="isMobile"></mobile-search>
+  <!-- ||
+      (start && { display: 'none' }) -->
+  <map [ngStyle]="start && { display: 'none' }" *ngIf="mapView" class="row" id="map"></map>
+  <listview [ngStyle]="start && { display: 'none' }" *ngIf="mapView" class="row mt-2"></listview>
   <regions class="row"></regions>
   <home-features class="row"></home-features>
   <how-works class="row"></how-works>
-
 </div>
 <asasa-footer class="footer"></asasa-footer>
 <!-- <ul class="slideshow">

@@ -62,8 +62,6 @@ export class AddLocationComponent implements OnInit, OnDestroy {
       this.getCities(this.cityId);
     }
 
-
-
   }
 
   ngOnDestroy() {

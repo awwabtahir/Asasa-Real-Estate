@@ -7,6 +7,7 @@ import { AuthenticationService } from "../../../../authentication.service";
 import { ActivatedRoute } from "@angular/router";
 import { PropertyService } from "shared/services/property.service";
 import { Location } from "@angular/common";
+import { FilterService } from "shared/services/filter.service";
 
 declare var PANOLENS: any;
 
@@ -36,7 +37,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     private auth: AuthenticationService,
     private route: ActivatedRoute,
     private locationUrl: Location,
-    private mapService: MapService
+    private mapService: MapService,
+    private filterService: FilterService
   ) {}
 
   ngOnInit() {
@@ -51,7 +53,6 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
 
     if (this.ad) {
       this.ngOnChanges();
-      console.log(this.ad);
     }
   }
 
@@ -97,6 +98,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
           return ad._id == id;
         });
         this.ad = ad[0];
+        // console.log(Array.isArray(this.ad.rooms), this.ad);
+
         this.ngOnChanges();
       },
       err => {
@@ -113,35 +116,35 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     let locationObj;
     this.auth.getLocations().subscribe(
       locations => {
-        locationObj = locations.filter(function(loc) {
+        locationObj = locations.filter(loc => {
           return loc.location == location;
         });
+        locationObj = locationObj[0];
+
+        if (locationObj.overlayData.imgLoc) {
+          var bounds = {
+            lat0: locationObj.overlayData.lat0,
+            lng0: locationObj.overlayData.lng0,
+            lat1: locationObj.overlayData.lat1,
+            lng1: locationObj.overlayData.lng1
+          };
+          this.mapService.addOverLay(
+            map,
+            bounds,
+            locationObj.overlayData.imgLoc,
+            true
+          );
+        }
+
+        if (this.ad.imagesData == undefined) return;
+        if (this.ad.imagesData.image3d == undefined) return;
+        this.image3d = true;
       },
       err => {
         console.error(err);
       }
     );
-    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    locationObj = locationObj[0];
-
-    if (locationObj.overlayData.imgLoc) {
-      var bounds = {
-        lat0: locationObj.overlayData.lat0,
-        lng0: locationObj.overlayData.lng0,
-        lat1: locationObj.overlayData.lat1,
-        lng1: locationObj.overlayData.lng1
-      };
-      this.mapService.addOverLay(
-        map,
-        bounds,
-        locationObj.overlayData.imgLoc,
-        true
-      );
-    }
-
-    if (this.ad.imagesData == undefined) return;
-    if (this.ad.imagesData.image3d == undefined) return;
-    this.image3d = true;
+    // await new Promise((resolve, reject) => setTimeout(resolve, 3000));
   }
 
   url3D;
@@ -165,6 +168,10 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     //   });
     //   viewer.add(panorama);
     // }, 500);
+  }
+
+  backClicked() {
+    this.locationUrl.back();
   }
 
   private loadScripts() {
@@ -192,4 +199,81 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
       return "error";
     }
   }
+
+  private priceConverter(value) {
+    return this.filterService.priceFilter(value);
+  }
+
+  a = [
+    "",
+    "one ",
+    "two ",
+    "three ",
+    "four ",
+    "five ",
+    "six ",
+    "seven ",
+    "eight ",
+    "nine ",
+    "ten ",
+    "eleven ",
+    "twelve ",
+    "thirteen ",
+    "fourteen ",
+    "fifteen ",
+    "sixteen ",
+    "seventeen ",
+    "eighteen ",
+    "nineteen "
+  ];
+  b = [
+    "",
+    "",
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety"
+  ];
+
+  public inWords(num) {
+    if ((num = num.toString()).length > 9) return "overflow";
+    let n: any = ("000000000" + num)
+      .substr(-9)
+      .match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+    if (!n) return;
+    var str = "";
+    str +=
+      n[1] != 0
+        ? (this.a[Number(n[1])] || this.b[n[1][0]] + " " + this.a[n[1][1]]) +
+          "crore "
+        : "";
+    str +=
+      n[2] != 0
+        ? (this.a[Number(n[2])] || this.b[n[2][0]] + " " + this.a[n[2][1]]) +
+          "lakh "
+        : "";
+    str +=
+      n[3] != 0
+        ? (this.a[Number(n[3])] || this.b[n[3][0]] + " " + this.a[n[3][1]]) +
+          "thousand "
+        : "";
+    str +=
+      n[4] != 0
+        ? (this.a[Number(n[4])] || this.b[n[4][0]] + " " + this.a[n[4][1]]) +
+          "hundred "
+        : "";
+    str +=
+      n[5] != 0
+        ? (str != "" ? "and " : "") +
+          (this.a[Number(n[5])] || this.b[n[5][0]] + " " + this.a[n[5][1]]) +
+          "only "
+        : "";
+    return str;
+  }
+
+  //  console.log(numDifferentiation(-50000000))
 }

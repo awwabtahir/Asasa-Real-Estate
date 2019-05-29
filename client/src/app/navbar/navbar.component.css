@@ -1,7 +1,7 @@
 .navbar-light {
   border-top: 1px solid #25bda4;
   border-bottom: 1px solid #25bda4;
-  height: 55px;
+  height: 60px;
   position: fixed;
   top: 0%;
   z-index: 20 !important;
@@ -27,7 +27,7 @@
 
 .logo {
   width: 180px;
-  height: 40px;
+  height: 52px;
 }
 
 /* .left-nav li {
@@ -88,7 +88,7 @@
 @media (max-width: 768px) {
   .navbar-collapse {
     position: absolute;
-    top: 45px;
+    top: 44px;
     left: 0;
     padding-left: 15px;
     padding-right: 15px;

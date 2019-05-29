@@ -1,15 +1,18 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Injectable, Output, EventEmitter } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class FilterService {
   @Output() filterFire: EventEmitter<any> = new EventEmitter();
 
   ads;
   filteredAds;
+  buy:boolean=true;
+  typeFilterChange: Subject<any> = new Subject<any>();
 
-  constructor() { }
+  constructor() {}
 
   apply(filterOpts) {
     this.filterFire.emit(filterOpts);
@@ -20,21 +23,20 @@ export class FilterService {
   }
 
   applyFilter(ads, filterOpts) {
-
     if (filterOpts.type !== "") {
-      ads = ads.filter(function (ad) {
+      ads = ads.filter(function(ad) {
         return ad.type == filterOpts.type;
       });
     }
 
     if (filterOpts.lowPrice !== 0) {
-      ads = ads.filter(function (ad) {
+      ads = ads.filter(function(ad) {
         return ad.demand >= filterOpts.lowPrice;
       });
     }
 
     if (filterOpts.highPrice !== 0) {
-      ads = ads.filter(function (ad) {
+      ads = ads.filter(function(ad) {
         return ad.demand <= filterOpts.highPrice;
       });
     }
@@ -53,8 +55,10 @@ export class FilterService {
     if (areaUnit == "sqft") {
       for (var i = 0; i < this.filteredAds.length; i++) {
         if (this.filteredAds[i].areaType == areaUnit) continue;
-        if (this.filteredAds[i].areaType == "marla") this.filteredAds[i].area = this.filteredAds[i].area * 272;
-        if (this.filteredAds[i].areaType == "kanal") this.filteredAds[i].area = this.filteredAds[i].area * 5445;
+        if (this.filteredAds[i].areaType == "marla")
+          this.filteredAds[i].area = this.filteredAds[i].area * 272;
+        if (this.filteredAds[i].areaType == "kanal")
+          this.filteredAds[i].area = this.filteredAds[i].area * 5445;
         this.filteredAds[i].areaType = "sqft";
       }
     }
@@ -62,8 +66,10 @@ export class FilterService {
     if (areaUnit == "marla") {
       for (var i = 0; i < this.filteredAds.length; i++) {
         if (this.filteredAds[i].areaType == areaUnit) continue;
-        if (this.filteredAds[i].areaType == "sqft") this.filteredAds[i].area = this.filteredAds[i].area / 272;
-        if (this.filteredAds[i].areaType == "kanal") this.filteredAds[i].area = this.filteredAds[i].area * 20;
+        if (this.filteredAds[i].areaType == "sqft")
+          this.filteredAds[i].area = this.filteredAds[i].area / 272;
+        if (this.filteredAds[i].areaType == "kanal")
+          this.filteredAds[i].area = this.filteredAds[i].area * 20;
         this.filteredAds[i].areaType = "marla";
       }
     }
@@ -71,8 +77,10 @@ export class FilterService {
     if (areaUnit == "kanal") {
       for (var i = 0; i < this.filteredAds.length; i++) {
         if (this.filteredAds[i].areaType == areaUnit) continue;
-        if (this.filteredAds[i].areaType == "sqft") this.filteredAds[i].area = this.filteredAds[i].area / 5445;
-        if (this.filteredAds[i].areaType == "marla") this.filteredAds[i].area = this.filteredAds[i].area / 20;
+        if (this.filteredAds[i].areaType == "sqft")
+          this.filteredAds[i].area = this.filteredAds[i].area / 5445;
+        if (this.filteredAds[i].areaType == "marla")
+          this.filteredAds[i].area = this.filteredAds[i].area / 20;
         this.filteredAds[i].areaType = "kanal";
       }
     }
@@ -80,13 +88,13 @@ export class FilterService {
 
   private applyAreaFilters(filteredAds, filterOpts) {
     if (filterOpts.lowArea !== 0) {
-      filteredAds = filteredAds.filter(function (ad) {
+      filteredAds = filteredAds.filter(function(ad) {
         return ad.area >= filterOpts.lowArea;
       });
     }
 
     if (filterOpts.highArea !== 0) {
-      filteredAds = filteredAds.filter(function (ad) {
+      filteredAds = filteredAds.filter(function(ad) {
         return ad.area <= filterOpts.highArea;
       });
     }
@@ -101,8 +109,22 @@ export class FilterService {
     }
 
     return filtered;
-
   }
 
+  priceFilter(value) {
+    var val: any = Math.abs(value);
+    if (val >= 1000000000) {
+      val = (val / 1000000000).toFixed(2) + " Arab";
+    } else if (val >= 10000000) {
+      val = (val / 10000000).toFixed(2) + " Crore";
+    } else if (val >= 100000) {
+      val = (val / 100000).toFixed(2) + " Lakh";
+    } else if (val >= 1000) val = (val / 1000).toFixed(2) + " Thousand";
+    return val;
+  }
 
+  buyOrRent(){
+    this.buy=!this.buy
+    this.typeFilterChange.next(this.buy);
+  }
 }

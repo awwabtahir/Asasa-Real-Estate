@@ -3,7 +3,9 @@ import {
   OnInit,
   OnDestroy,
   Inject,
-  HostListener
+  HostListener,
+  Output,
+  EventEmitter
 } from "@angular/core";
 import { DOCUMENT } from "@angular/platform-browser";
 
@@ -14,6 +16,7 @@ import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
 import { SlimLoadingBarService } from "ng2-slim-loading-bar";
+import { FilterService } from "shared/services/filter.service";
 
 @Component({
   selector: "search-home",
@@ -21,8 +24,11 @@ import { SlimLoadingBarService } from "ng2-slim-loading-bar";
   styleUrls: ["./search-home.component.css"]
 })
 export class SearchHomeComponent implements OnInit, OnDestroy {
+  @Output() searched = new EventEmitter<any>();
   cities = [];
   locations = [];
+  isRent: boolean = false;
+  isBuy: boolean = true;
 
   selectedCity;
   selectedLocation;
@@ -46,7 +52,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     private viewService: ViewService,
     private route: ActivatedRoute,
     private locationUrl: Location,
-
+    private filterService: FilterService,
     private slimScroll: SlimLoadingBarService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
@@ -54,6 +60,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     this.slimScroll.progress = 20;
     this.slimScroll.start();
+    this.isBuy = this.filterService.buy;
     this.locationService.cityChange.subscribe(value => {
       this.selectedCity = value._id;
     });
@@ -140,11 +147,12 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     }
   }
   search() {
-    if (this.innerWidth > 600) {
-      this.doc.documentElement.scrollTo({ top: 650, behavior: "smooth" });
-    } else if (this.innerWidth < 600) {
-      this.doc.documentElement.scrollTo({ top: 422, behavior: "smooth" });
-    }
+    this.searched.emit("scroll");
+    // if (this.innerWidth > 600) {
+    //   this.doc.documentElement.scrollTo({ top: 650, behavior: "smooth" });
+    // } else if (this.innerWidth < 600) {
+    //   this.doc.documentElement.scrollTo({ top: 422, behavior: "smooth" });
+    // }
     // this.doc.documentElement.scrollTop = 610;
   }
   ngOnDestroy() {
@@ -152,14 +160,19 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   }
 
   getCities() {
-    this.auth.getCities().subscribe(
-      cities => {
-        this.cities = cities;
-      },
-      err => {
-        console.error(err);
-      }
-    );
+    if (this.locationService.allCities.length > 0) {
+      this.cities = this.locationService.allCities;
+    } else {
+      this.auth.getCities().subscribe(
+        cities => {
+          this.cities = cities;
+          this.locationService.allCities = cities;
+        },
+        err => {
+          console.error(err);
+        }
+      );
+    }
   }
 
   cityChange(cityObj, prevData?) {
@@ -174,6 +187,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.locationService.setCityObj(cityData[0]);
     if (!prevData) {
       this.locations = [];
+      this.selectedLocation = null;
       this.getLocations(cityId);
     }
     this.city = cityData[0].city;
@@ -184,20 +198,32 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   }
 
   getLocations(selectedCity?) {
-    this.auth.getLocations().subscribe(
-      locations => {
-        this.locations = locations;
+    if (this.locationService.allLocations.length > 0) {
+      this.locations = this.locationService.allLocations;
+      if (selectedCity)
+        this.locations = this.locationService.allLocations.filter(function(
+          loc
+        ) {
+          return loc.cityId == selectedCity;
+        });
+    } else {
+      this.auth.getLocations().subscribe(
+        locations => {
+          this.locations = locations;
+          this.locationService.allLocations = locations;
 
-        if (selectedCity)
-          this.locations = locations.filter(function(loc) {
-            return loc.cityId == selectedCity;
-          });
-        this.locationService.locations = this.locations;
-      },
-      err => {
-        console.error(err);
-      }
-    );
+          if (selectedCity)
+            this.locations = locations.filter(function(loc) {
+              return loc.cityId == selectedCity;
+            });
+          this.locationService.locations = this.locations;
+          this.locationService.locationsChange.next(this.locations);
+        },
+        err => {
+          console.error(err);
+        }
+      );
+    }
   }
 
   locationChange(locObj) {
@@ -219,12 +245,12 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.ga("send", "pageview");
   }
 
-  // typeChange(type) {
-  //   if (type.target.innerText.length > 20) return;
-  //   $(".dropdown-toggle1")[0].innerText = "Type: " + type.target.innerText;
-  //   this.hideDropDown();
-  //   this.mapService.typeChange(type.target.innerText);
-  // }
+  typeChange(type) {
+    if (type.target.innerText.length > 20) return;
+    $(".dropdown-toggle1")[0].innerText = "Type: " + type.target.innerText;
+    this.hideDropDown();
+    this.mapService.typeChange(type.target.innerText);
+  }
 
   hideDropDown() {
     $(".dropdown-menu").toggle();
@@ -243,5 +269,17 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     this.mapView = false;
     this.listView = true;
     this.viewService.viewChange("mapview");
+  }
+
+  rent() {
+    this.isBuy = false;
+    this.isRent = true;
+    this.filterService.buyOrRent();
+  }
+
+  buy() {
+    this.isBuy = true;
+    this.isRent = false;
+    this.filterService.buyOrRent();
   }
 }

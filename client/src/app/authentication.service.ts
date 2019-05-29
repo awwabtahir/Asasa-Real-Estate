@@ -69,6 +69,7 @@ export class AuthenticationService {
       | "get_cities"
       | "save_location"
       | "get_locations"
+      | "get_city_locations"
       | "update_image"
       | "update_location"
       | "getAgents"
@@ -160,6 +161,10 @@ export class AuthenticationService {
 
   public updateLocation(location): Observable<any> {
     return this.request("post", "update_location", location);
+  }
+
+  public getCityLocations(location): Observable<any> {
+    return this.request("post", "get_city_locations", location);
   }
 
   public updateAd(ad): Observable<any> {

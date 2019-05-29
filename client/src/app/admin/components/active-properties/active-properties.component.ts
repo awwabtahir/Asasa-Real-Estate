@@ -21,7 +21,7 @@ export class ActivePropertiesComponent implements OnInit {
   user;
   agent = false;
   agents;
-
+  placeholder: any;
   constructor(
     private propertyService: PropertyService,
     private router: Router,
@@ -33,6 +33,20 @@ export class ActivePropertiesComponent implements OnInit {
     if (this.user.access == "agent") this.agent = true;
     this.getAds();
     this.getAgents();
+  }
+
+  optionChange(e) {
+    this.placeholder = e.placeholder;
+    this.refId = "";
+  }
+  agentChange(e) {
+    if (e) {
+      this.filteredData = this.data.filter(d => {
+        return d.userId == e._id;
+      });
+    } else {
+      this.filteredData = this.data;
+    }
   }
 
   getAds() {
