@@ -32,7 +32,8 @@
 
     <ul class="navbar-nav pull-right right-nav">
       <li *ngIf="!auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <div class="nav-link sign-in">
+        <div class="nav-link sign-in" style="    color: #ececec;
+        background: #25bda4;">
           <!-- Button trigger modal -->
           <div data-toggle="modal" data-target="#signinModel">
             <i class="fas fa-sign-in-alt"></i> Sign In/Register
@@ -68,7 +69,7 @@
         <input type="phone" class="form-control" name="phone" placeholder="Phone" required>
       </div>
       <div class="form-group">
-        <select name="city" class="form-control" (change)="cityId($event.target.value)">
+        <select name="city" class="form-control" (change)="getCityLocs($event.target.value)">
           <option value="">Select City</option>
           <option *ngFor="let listing of cities" [value]="listing._id">
             {{listing.city}}</option>
@@ -76,7 +77,7 @@
       </div>
 
       <div class="form-group">
-        <select name="city" class="form-control" (change)="cityId($event.target.value)">
+        <select name="city" class="form-control" (change)="getCityLocs($event.target.value)">
           <option value="">Location</option>
           <option *ngFor="let listing of locations" [value]="listing._id">
             {{listing.location}}</option>

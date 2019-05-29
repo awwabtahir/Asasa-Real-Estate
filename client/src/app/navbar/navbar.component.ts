@@ -48,20 +48,34 @@ export class NavbarComponent implements OnInit {
       }
     );
   }
-  cityId(_id) {
-    this.selectedLocation = _id;
-    this.getLocations();
+  getCityLocs(_id) {
+    console.log("uppper", _id);
+    let cityid = _id;
 
-    console.log("uppper say id i hai", this.selectedLocation);
-  }
-  getLocations() {
-    this.auth.getLocations().subscribe(
-      locations => {
-        this.locations = locations;
+    this.auth.getCityLocations(cityid).subscribe(
+      locs => {
+        console.log("uppper say id i hai", cityid);
+        console.log(locs);
       },
       err => {
         console.error(err);
       }
     );
   }
+  // cityId(_id) {
+  //   this.selectedLocation = _id;
+  //   this.getLocations();
+
+  //   console.log("uppper say id i hai", this.selectedLocation);
+  // }
+  // getLocations() {
+  //   this.auth.getLocations().subscribe(
+  //     locations => {
+  //       this.locations = locations;
+  //     },
+  //     err => {
+  //       console.error(err);
+  //     }
+  //   );
+  // }
 }

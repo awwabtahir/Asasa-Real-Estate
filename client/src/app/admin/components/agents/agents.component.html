@@ -4,14 +4,8 @@
     <button class="btn btn-primary mt-2 mb-2" routerLink="/register">
       Add New
     </button>
-    <table
-      class="table table-hover"
-      [mfData]="data"
-      [(mfSortBy)]="sortBy"
-      [(mfSortOrder)]="sortOrder"
-      #mf="mfDataTable"
-      [mfRowsOnPage]="50"
-    >
+    <table class="table table-hover" [mfData]="data" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder" #mf="mfDataTable"
+      [mfRowsOnPage]="50">
       <thead>
         <tr>
           <th style="width: 5%">
@@ -24,9 +18,7 @@
             <mfDefaultSorter by="email">Email</mfDefaultSorter>
           </th>
           <th style="width: 5%">
-            <mfDefaultSorter by="propertyCount"
-              >Number Of Properties</mfDefaultSorter
-            >
+            <mfDefaultSorter by="propertyCount">Number Of Properties</mfDefaultSorter>
           </th>
           <th style="width: 5%">
             <mfDefaultSorter by="phone">Phone</mfDefaultSorter>
@@ -53,29 +45,26 @@
             </ul>
           </td>
           <td>
-            <button
-              class="btn btn-success btn-sm mr-2"
-              routerLink="/editAgent/{{ item._id }}"
-            >
+
+            <a routerLink="/editAgent/{{ item._id }}" style="color: #5c5cff;
+            font-weight: 600;"><i class="far fa-edit fa-2x"></i></a>
+            <!-- <button class="btn btn-success btn-sm mr-2" routerLink="/editAgent/{{ item._id }}">
               Edit
-            </button>
-            <button
-              class="btn btn-danger btn-sm"
-              data-toggle="modal"
-              data-target="#exampleModal"
-              (click)="confirmDelete(item)"
-            >
+            </button> -->
+
+            <a data-toggle="modal" data-target="#exampleModal" (click)="confirmDelete(item)" style="color: #ff2929;
+              font-weight: 600;margin: 8px;"><i class="far fa-trash-alt fa-2x"></i></a>
+            <!-- <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal"
+              (click)="confirmDelete(item)">
               Delete
-            </button>
+            </button> -->
           </td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <td colspan="4">
-            <mfBootstrapPaginator
-              [rowsOnPageSet]="[50, 100, 150]"
-            ></mfBootstrapPaginator>
+            <mfBootstrapPaginator [rowsOnPageSet]="[50, 100, 150]"></mfBootstrapPaginator>
           </td>
         </tr>
       </tfoot>
@@ -83,26 +72,15 @@
   </div>
 
   <!-- Modal -->
-  <div
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
             Delete Confirmation
           </h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -113,12 +91,7 @@
           <button type="button" class="btn btn-secondary" data-dismiss="modal">
             Close
           </button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-dismiss="modal"
-            (click)="delete()"
-          >
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="delete()">
             Delete
           </button>
         </div>

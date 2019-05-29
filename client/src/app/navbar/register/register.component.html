@@ -1,30 +1,9 @@
-<style>
-  .row {
-    margin-top: 5%;
-  }
-
-  .email {
-    position: relative;
-
-    margin-top: 0px !important;
-
-    margin-bottom: 5px !important;
-    text-align: center;
-    width: 640px;
-    margin: 0 auto;
-    background-color: #ececec;
-    border-top: 5px solid #25bda4;
-    border-radius: 4px;
-  }
-
-</style>
-
 <div class="row">
   <section class="email">
 
     <div class="decription mt30 mb40 ">
 
-      <h5>Agent Information</h5>
+      <h5 class="header">Agent Information</h5>
       <form>
         <div class="form-group">
           <input type="name" class="form-control" name="name" placeholder="Full name" />
@@ -39,17 +18,18 @@
           <input type="password" class="form-control" name="password" placeholder="Password" required />
         </div>
       </form>
-      <h5>Assign Location</h5>
+      <h5 class="header">Assign Location</h5>
 
       <div class="form-group" style="    margin-top: 24px;">
-        <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
-          [(ngModel)]="credentials.cityId" (change)="cityChange($event)">
+        <ng-select style="    width: 300px;" #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2"
+          placeholder="Select City" [(ngModel)]="credentials.cityId" (change)="cityChange($event)">
         </ng-select>
       </div>
 
       <div class="form-group">
-        <ng-select [items]="locations" [multiple]="true" bindLabel="location" bindValue="location" class="mr-2 ml-2"
-          placeholder="Select Location" [(ngModel)]="credentials.locationId" (change)="locChange($event)">
+        <ng-select style="    width: 300px;" [items]="locations" [multiple]="true" bindLabel="location"
+          bindValue="location" class="mr-2 ml-2" placeholder="Select Location" [(ngModel)]="credentials.locationId"
+          (change)="locChange($event)">
         </ng-select>
       </div>
 
@@ -60,12 +40,10 @@
           </option>
         </select>
       </div>
-      <button *ngIf="!edit" (click)="register()" type="button" class="btn btn-primary" style="    background-color: #25bda4;
-        border: #25bda4;">
+      <button *ngIf="!edit" (click)="register()" type="button" class="btn btn-primary">
         Register!
       </button>
-      <button *ngIf="edit" (click)="update()" type="button" class="btn btn-primary" style="    background-color: #25bda4;
-        border: #25bda4;">
+      <button *ngIf="edit" (click)="update()" type="button" class="btn btn-primary">
         Update
       </button>
     </div>
