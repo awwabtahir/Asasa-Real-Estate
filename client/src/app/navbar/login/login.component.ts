@@ -14,7 +14,7 @@ export class LoginComponent {
     email: "",
     password: ""
   };
-
+  password = "";
   regForm = false;
   name = "";
   phone = "";
@@ -23,14 +23,19 @@ export class LoginComponent {
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   login() {
-    this.auth.login(this.credentials).subscribe(
-      data => {
-        this.saveData(data);
-      },
-      err => {
-        console.error(err);
-      }
-    );
+    if (this.credentials.password !== "") {
+      this.auth.login(this.credentials).subscribe(
+        data => {
+          this.saveData(data);
+          console.log("data ia g data", data);
+        },
+        err => {
+          console.error(err);
+        }
+      );
+    } else {
+      console.log("ghlt password");
+    }
   }
 
   invalid = false;

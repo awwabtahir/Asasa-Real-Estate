@@ -7,9 +7,11 @@
   z-index: 20 !important;
   width: 100%;
 }
+
 .navbar {
   padding: 0rem 1rem !important;
 }
+
 @media only screen and (max-width: 768px) {
   .navbar-collapse {
     z-index: 99;
@@ -77,6 +79,12 @@
   border-radius: 10px !important;
 }
 
+/* .modal-head {
+  min-height: 16.43px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+} */
+
 @media (max-width: 768px) {
   .navbar-collapse {
     position: absolute;
@@ -87,6 +95,7 @@
     padding-bottom: 15px;
     width: 100%;
   }
+
   .navbar-collapse.collapsing {
     height: auto;
     -webkit-transition: left 0.3s ease;
@@ -95,6 +104,7 @@
     transition: left 0.3s ease;
     left: -100%;
   }
+
   .navbar-collapse.show {
     left: 0;
     -webkit-transition: left 0.3s ease-in;
@@ -102,9 +112,11 @@
     -moz-transition: left 0.3s ease-in;
     transition: left 0.3s ease-in;
   }
+
   .call {
     margin-bottom: 10px;
   }
+
   .nav-link {
     border-bottom: 1px solid gainsboro;
   }

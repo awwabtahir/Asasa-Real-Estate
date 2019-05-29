@@ -1,69 +1,72 @@
 <style>
-  .col-md-9 {
+  .row {
     margin-top: 5%;
-    margin-left: 20%;
+  }
 
+  .email {
+    position: relative;
+
+    margin-top: 0px !important;
+
+    margin-bottom: 5px !important;
+    text-align: center;
+    width: 640px;
+    margin: 0 auto;
+    background-color: #ececec;
+    border-top: 5px solid #25bda4;
+    border-radius: 4px;
   }
 
 </style>
 
-<div class="col-md-9">
-  <div class="container">
+<div class="row">
+  <section class="email">
 
-    <div class="row mt-2">
-      <div class="col-md-3">
+    <div class="decription mt30 mb40 ">
+
+      <h5>Agent Information</h5>
+      <form>
         <div class="form-group">
-          <label for="name">Full name</label>
-          <input type="text" class="form-control" name="name" placeholder="Enter your name"
-            [(ngModel)]="credentials.name">
-        </div>
-        <div class="form-group">
-          <label for="phone">Phone #</label>
-          <input type="phone" class="form-control" name="phone" placeholder="Enter phone"
-            [(ngModel)]="credentials.phone">
+          <input type="name" class="form-control" name="name" placeholder="Full name" />
         </div>
         <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" name="email" placeholder="Enter email"
-            [(ngModel)]="credentials.email">
+          <input type="phone" class="form-control" name="phone" placeholder="Enter Phone" required />
         </div>
-        <div *ngIf="!edit" class="form-group">
-          <label for="password">Password</label>
-          <input type="text" class="form-control" name="password" placeholder="Password"
-            [(ngModel)]="credentials.password">
+        <div class="form-group">
+          <input type="email" class="form-control" name="email" placeholder="Email Address" required />
         </div>
+        <div class="form-group">
+          <input type="password" class="form-control" name="password" placeholder="Password" required />
+        </div>
+      </form>
+      <h5>Assign Location</h5>
+
+      <div class="form-group" style="    margin-top: 24px;">
+        <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
+          [(ngModel)]="credentials.cityId" (change)="cityChange($event)">
+        </ng-select>
       </div>
 
-      <div class="col-md-4 ml-1 mt-1" style="border:1px solid;">
-        <h4>Assign Location</h4>
+      <div class="form-group">
+        <ng-select [items]="locations" [multiple]="true" bindLabel="location" bindValue="location" class="mr-2 ml-2"
+          placeholder="Select Location" [(ngModel)]="credentials.locationId" (change)="locChange($event)">
+        </ng-select>
+      </div>
 
-        <div class="form-group">
-          <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
-            [(ngModel)]="credentials.cityId" (change)="cityChange($event)">
-          </ng-select>
-        </div>
-
-        <div class="form-group">
-          <ng-select [items]="locations" [multiple]="true" bindLabel="location" bindValue="location" class="mr-2 ml-2"
-            placeholder="Select Location" [(ngModel)]="credentials.locationId" (change)="locChange($event)">
-          </ng-select>
-        </div>
-
-        <!-- <div *ngIf="location" class="form-group">
+      <div *ngIf="location" class="form-group">
         <h6 style="color:red;">This is optional</h6>
         <select multiple class="form-control" name="subLocations" [(ngModel)]="credentials.subLocations">
-          <option *ngFor="let sloc of location.subLocations" value="{{ sloc.subLocation }}">{{ sloc.subLocation }}</option>
+          <option *ngFor="let sloc of location.subLocations" value="{{ sloc.subLocation }}">{{ sloc.subLocation }}
+          </option>
         </select>
-      </div> -->
-
       </div>
-
+      <button *ngIf="!edit" (click)="register()" type="button" class="btn btn-primary" style="    background-color: #25bda4;
+        border: #25bda4;">
+        Register!
+      </button>
+      <button *ngIf="edit" (click)="update()" type="button" class="btn btn-primary" style="    background-color: #25bda4;
+        border: #25bda4;">
+        Update
+      </button>
     </div>
-
-    <div class="row">
-      <button *ngIf="!edit" (click)="register()" class="btn btn-default">Register!</button>
-      <button *ngIf="edit" (click)="update()" class="btn btn-default mb-4">Update</button>
-    </div>
-
-  </div>
-</div>
+  </section>

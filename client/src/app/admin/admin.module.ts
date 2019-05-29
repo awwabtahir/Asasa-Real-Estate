@@ -38,6 +38,7 @@ import {
   NbLayoutModule,
   NbMenuModule
 } from "@nebular/theme";
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import {
     NgxEditorModule,
     FilePondModule,
     SharedModule,
+    DataTablesModule,
     AdminRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",

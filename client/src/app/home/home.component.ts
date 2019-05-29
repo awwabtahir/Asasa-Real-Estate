@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, Inject } from "@angular/core";
 import { ViewService } from "shared/services/view.service";
 import { DOCUMENT } from "@angular/platform-browser";
 import { Router, NavigationEnd } from "@angular/router";
+import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 
 @Component({
   selector: "home-page",
@@ -20,10 +21,13 @@ export class HomeComponent implements OnInit {
   constructor(
     private viewService: ViewService,
     private router: Router,
+    private slimScroll: SlimLoadingBarService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   ngOnInit() {
+    this.slimScroll.progress = 20;
+    this.slimScroll.start();
     this.innerWidth = window.innerWidth;
     this.view = this.viewService.getView().subscribe(view => {
       if (view == "listview") {

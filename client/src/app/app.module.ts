@@ -1,7 +1,7 @@
 import { AgmCoreModule } from "@agm/core";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { SharedModule } from "shared/shared.module";
@@ -44,7 +44,10 @@ import { HowWorksComponent } from "./home/how-works/how-works.component";
 import { AboutUsComponent } from "./home/about_us/about_us.component";
 import { ContactUsComponent } from "./home/contact_us/contact_us.component";
 import { HelpAndSupportComponent } from "./home/help_and_support/help_and_support.component";
-
+import { ModalModule } from "ngx-bootstrap";
+import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
+import { TextMaskModule } from "angular2-text-mask";
+import { DataTablesModule } from "angular-datatables";
 // Configs
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig([
@@ -95,6 +98,9 @@ export function getAuthServiceConfigs() {
     HelpAndSupportComponent
   ],
   imports: [
+    ModalModule.forRoot(),
+    ReactiveFormsModule,
+    SlimLoadingBarModule.forRoot(),
     BrowserModule,
     SharedModule,
     FormsModule,
@@ -105,7 +111,9 @@ export function getAuthServiceConfigs() {
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",
       libraries: ["places"]
-    })
+    }),
+    TextMaskModule,
+    DataTablesModule
   ],
   providers: [
     AuthenticationService,

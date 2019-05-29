@@ -13,6 +13,7 @@ import { ActivatedRoute } from "@angular/router";
 import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
+import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 
 @Component({
   selector: "search-home",
@@ -45,10 +46,14 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     private viewService: ViewService,
     private route: ActivatedRoute,
     private locationUrl: Location,
+
+    private slimScroll: SlimLoadingBarService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   async ngOnInit() {
+    this.slimScroll.progress = 20;
+    this.slimScroll.start();
     this.locationService.cityChange.subscribe(value => {
       this.selectedCity = value._id;
     });
