@@ -40,6 +40,7 @@
           <td>{{ item.phone }}</td>
           <td *ngIf="cities && locations">
             {{ getCity(item.cityId) }}
+
             <ul>
               <li *ngFor="let sloc of item.locationId">{{ sloc }}</li>
             </ul>
