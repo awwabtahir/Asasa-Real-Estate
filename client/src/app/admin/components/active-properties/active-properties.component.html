@@ -6,15 +6,15 @@
         Add New
       </button>
       <input type="text" class="form-control ml-2" placeholder="Search {{ placeholder }}" [(ngModel)]="refId" />
-      <ng-select [items]="options" bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By"
-        [(ngModel)]="selectedOption" (change)="optionChange($event)">
+      <ng-select bindLabel="name" bindValue="value" class="mr-2 ml-2" placeholder="Filter By"
+       (change)="optionChange($event)">
       </ng-select>
 
       <ng-select [items]="agents" bindLabel="name" bindValue="_id" class="mr-2 ml-2" placeholder="Agents"
         (change)="agentChange($event)">
       </ng-select>
     </div>
-    <table class="table table-hover" [mfData]="filteredData | filterlist: selectedOption:refId" [(mfSortBy)]="sortBy"
+    <table class="table table-hover" [mfData]="filteredData" [(mfSortBy)]="sortBy"
       [(mfSortOrder)]="sortOrder" #mf="mfDataTable" [mfRowsOnPage]="50">
       <thead>
         <tr>
