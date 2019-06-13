@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "customer") this.customer = true;
     this.getCities();
+    this.getCityLocs(3);
   }
   openDeleteModal(template: TemplateRef<any>, index, value) {
     this.modalRef = this.modalService.show(template, { class: "modal-lg" });
