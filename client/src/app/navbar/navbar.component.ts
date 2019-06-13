@@ -21,9 +21,10 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log("citeis agdsfdsfhksdjfhkdsjfhkdsjfhksdjfhkjsdfhkjdai hain");
+    this.getCities();
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "customer") this.customer = true;
-    this.getCities();
   }
   openDeleteModal(template: TemplateRef<any>, index, value) {
     this.modalRef = this.modalService.show(template, { class: "modal-lg" });
@@ -42,6 +43,7 @@ export class NavbarComponent implements OnInit {
     this.auth.getCities().subscribe(
       cities => {
         this.cities = cities;
+        console.log("citeis agai hain", this.cities);
       },
       err => {
         console.error(err);
