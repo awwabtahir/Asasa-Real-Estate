@@ -51,10 +51,13 @@ export class NavbarComponent implements OnInit {
   }
   getCityLocs(_id) {
     console.log("uppper", _id);
-    let cityid = _id;
+    let cityid = {
+      _id: _id
+    };
 
     this.auth.getCityLocations(cityid).subscribe(
       locs => {
+        this.locations = locs;
         console.log("uppper say id i hai", cityid);
         console.log(locs);
       },
