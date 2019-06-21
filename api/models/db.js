@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'mongodb+srv://iamasasa:6cvgSTuT4q7W0OIk@cluster0-ijdgl.mongodb.net/asasadbweb';
+var dbURI = 'mongodb+srv://iamasasa:OE3LY5warPj1A0UO@cluster0-ijdgl.mongodb.net/asasadbweb';
 // if (process.env.NODE_ENV === 'production') {
 //   dbURI = process.env.MONGOLAB_URI;
 // }
