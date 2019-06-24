@@ -2,14 +2,26 @@
   <a class="navbar-brand" routerLink="/">
     <img src="/assets/images/asasa_logo.png" class="logo" />
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent"
-    aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navContent"
+    aria-controls="navContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navContent">
     <ul class="navbar-nav mr-auto left-nav">
-      <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
+      <li
+        [routerLinkActive]="['active']"
+        data-toggle="collapse"
+        data-target="#navContent"
+        class="nav-item"
+      >
         <a class="nav-link" routerLink="/">Find Your Best Property</a>
       </li>
       <!-- <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
@@ -17,13 +29,28 @@
       </li> -->
       <li data-toggle="collapse" data-target="#navContent" class="nav-item">
         <!-- onclick="openForm(); return false;" -->
-        <!-- <a class="nav-link" routerLink="/" (click)="openDeleteModal(confirmation,i,data)">Add Property FREE</a> -->
-        <a class="nav-link" routerLink="/">Add Property FREE</a>
+        <a
+          class="nav-link"
+          routerLink="/"
+          (click)="openDeleteModal(confirmation)"
+          >Add Property FREE</a
+        >
+        <!-- <a class="nav-link" routerLink="/">Add Property FREE</a> -->
       </li>
-      <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
+      <li
+        [routerLinkActive]="['active']"
+        data-toggle="collapse"
+        data-target="#navContent"
+        class="nav-item"
+      >
         <a class="nav-link" href="#">Discover New Projects</a>
       </li>
-      <li [routerLinkActive]="['active']" data-toggle="collapse" data-target="#navContent" class="nav-item">
+      <li
+        [routerLinkActive]="['active']"
+        data-toggle="collapse"
+        data-target="#navContent"
+        class="nav-item"
+      >
         <a class="nav-link" href="#">House Architecture</a>
       </li>
       <!-- <li class="nav-item">
@@ -32,20 +59,42 @@
     </ul>
 
     <ul class="navbar-nav pull-right right-nav">
-      <li *ngIf="!auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <div class="nav-link sign-in" style="    color: #ececec;
-        background: #25bda4;">
+      <li
+        *ngIf="!auth.isLoggedIn()"
+        data-toggle="collapse"
+        data-target="#navContent"
+        class="nav-item"
+      >
+        <div
+          class="nav-link sign-in"
+          style="    color: #ececec;
+        background: #25bda4;"
+        >
           <!-- Button trigger modal -->
           <div data-toggle="modal" data-target="#signinModel">
             <i class="fas fa-sign-in-alt"></i> Sign In/Register
           </div>
         </div>
       </li>
-      <li *ngIf="auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <a class="nav-link" routerLink="/dashboard/profile"><i class="fas fa-toolbox fa-2x"></i> Dashboard</a>
+      <li
+        *ngIf="auth.isLoggedIn()"
+        data-toggle="collapse"
+        data-target="#navContent"
+        class="nav-item"
+      >
+        <a class="nav-link" routerLink="/dashboard/profile"
+          ><i class="fas fa-toolbox fa-2x"></i> Dashboard</a
+        >
       </li>
-      <li *ngIf="auth.isLoggedIn()" data-toggle="collapse" data-target="#navContent" class="nav-item">
-        <a class="nav-link logout" (click)="auth.logout()"><i class="fas fa-sign-out-alt fa-2x"></i> Logout</a>
+      <li
+        *ngIf="auth.isLoggedIn()"
+        data-toggle="collapse"
+        data-target="#navContent"
+        class="nav-item"
+      >
+        <a class="nav-link logout" (click)="auth.logout()"
+          ><i class="fas fa-sign-out-alt fa-2x"></i> Logout</a
+        >
       </li>
     </ul>
   </div>
@@ -54,38 +103,68 @@
 <signin></signin>
 <ng-template #confirmation>
   <div class="modal-header _600" style="display: block !important">
-    <button (click)="closeModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+    >
       <span aria-hidden="true">×</span>
     </button>
-    {{'Add Property'}}</div>
+    {{ "Add Property" }}
+  </div>
   <div class="modal-body">
-    <form>
+    <form (ngSubmit)="add_property()" #f="ngForm" [formGroup]="AddProperty">
       <div class="form-group">
-        <input type="name" class="form-control" name="name" placeholder="Name">
+        <input
+          type="name"
+          class="form-control"
+          formControlName="name"
+          placeholder="Name"
+        />
       </div>
       <div class="form-group">
-        <input type="email" class="form-control" name="email" placeholder="Email" required>
+        <input
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="Email"
+          required
+        />
       </div>
       <div class="form-group">
-        <input type="phone" class="form-control" name="phone" placeholder="Phone" required>
+        <input
+          type="phone"
+          class="form-control"
+          formControlName="phone"
+          placeholder="Phone"
+          required
+        />
       </div>
       <div class="form-group">
-        <select name="city" class="form-control" (change)="getCityLocs($event.target.value)">
+        <select
+          formControlName="city"
+          class="form-control"
+          (ngModelChange)="getCityLocs($event)"
+        >
           <option value="">Select City</option>
-          <option *ngFor="let listing of cities" [value]="listing._id">
-            {{listing.city}}</option>
+          <option *ngFor="let listing of cities" [ngValue]="listing">
+            {{ listing.city }}</option
+          >
         </select>
       </div>
 
       <div class="form-group">
-        <select name="city" class="form-control" (change)="getCityLocs($event.target.value)">
+        <select formControlName="location" class="form-control">
           <option value="">Location</option>
-          <option *ngFor="let listing of locations" [value]="listing._id">
-            {{listing.location}}</option>
+          <option *ngFor="let listing of locations" [ngValue]="listing">
+            {{ listing.location }}</option
+          >
         </select>
       </div>
       <div class="form-group">
-        <select name="city" class="form-control">
+        <select formControlName="property_type" class="form-control">
           <option value="">Property Type</option>
           <option value="c_b">Commercial Building</option>
           <option value="c_p">Commercial Plot</option>
@@ -95,17 +174,44 @@
         </select>
       </div>
       <div class="form-group">
-        <input type="area" class="form-control" name="area" placeholder="Area" required>
+        <input
+          type="area"
+          class="form-control"
+          formControlName="area"
+          placeholder="Area"
+          required
+        />
       </div>
       <div class="form-group">
-        <input type="demand" [textMask]="{ mask: numberMask }" class="form-control" name="demand" placeholder="Demand"
-          required>
+        <input
+          type="demand"
+          [textMask]="{ mask: numberMask }"
+          class="form-control"
+          formControlName="demand"
+          placeholder="Demand"
+          required
+        />
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" (click)="closeModal()" class="btn btn-line" data-dismiss="modal">Cancel</button>
-    <button type="button" id="addfeatures" class="btn btn-primary" style="    background-color: #25bda4;
-    border: #25bda4;">Add Property</button>
+    <button
+      type="button"
+      (click)="closeModal()"
+      class="btn btn-line"
+      data-dismiss="modal"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      (click)="add_property()"
+      id="addfeatures"
+      class="btn btn-primary"
+      style="    background-color: #25bda4;
+    border: #25bda4;"
+    >
+      Add Property
+    </button>
   </div>
 </ng-template>

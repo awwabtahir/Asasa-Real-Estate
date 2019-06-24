@@ -9,7 +9,7 @@
   <div *ngIf="propertiesAvailable" class="row">
     <ng-container
       *ngFor="
-        let l of (list | paginate: { itemsPerPage: 6, currentPage: p });
+        let l of list | paginate: { itemsPerPage: 6, currentPage: p };
         let i = index
       "
     >
