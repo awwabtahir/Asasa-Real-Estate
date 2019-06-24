@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
       this.customer = true;
     }
   }
-  openDeleteModal(template: TemplateRef<any>, index, value) {
+  openDeleteModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: "modal-lg" });
   }
   closeModal(): void {
