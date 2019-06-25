@@ -77,7 +77,9 @@ export class AuthenticationService {
       | "save_customer"
       | "send_email"
       | "update_fav"
-      | "update_user",
+      | "update_user"
+      | "save_customerProperty"
+      | "get_customerProperty",
     template?:
       | TokenPayload
       | ad
@@ -197,6 +199,14 @@ export class AuthenticationService {
 
   public getCustomers(): Observable<any> {
     return this.request("get", "get_customers");
+  }
+
+  public saveCustomerProperty(customerAd): Observable<any> {
+    return this.request("post", "save_customerProperty", customerAd);
+  }
+
+  public getCustomersProperties(): Observable<any> {
+    return this.request("get", "get_customerProperty");
   }
 
   public sendEmail(email): Observable<any> {
