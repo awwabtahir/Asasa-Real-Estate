@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     this.formInitializer();
     // tslint:disable-next-line: quotemark
-    console.log("citeis agdsfdsfhksdjfhkdsjfhkdsjfhksdjfhkjsdfhkjdai hain");
     this.getCities();
     this.user = JSON.parse(localStorage.getItem("user"));
     // tslint:disable-next-line: triple-equals
@@ -41,7 +40,7 @@ export class NavbarComponent implements OnInit {
       this.customer = true;
     }
   }
-  openDeleteModal(template: TemplateRef<any>, index, value) {
+  openDeleteModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, { class: "modal-lg" });
   }
   closeModal(): void {

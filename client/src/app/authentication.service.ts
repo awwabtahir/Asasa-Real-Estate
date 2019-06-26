@@ -96,9 +96,9 @@ export class AuthenticationService {
       if (prod)
         base = this.http.post(`https://asasa.com/api/${type}`, template);
     } else {
-      base = this.http.get(`https://www.asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`https://asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
       if(prod)
-        base = this.http.get(`https://www.asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+        base = this.http.get(`https://asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
     }
 
     const request = base.pipe(

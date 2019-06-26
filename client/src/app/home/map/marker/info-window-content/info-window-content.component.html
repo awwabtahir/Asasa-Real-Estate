@@ -13,10 +13,16 @@
   </p>
   <p class="mb-1">{{ ad.area }} {{ ad.areaType | titlecase }}</p>
   <p class="mb-1">
-    <span *ngIf="ad.locationData.sector">{{ad.locationData.sector}}, </span>
-    {{ ad.locationData.location }}</p>
+    <span *ngIf="ad.locationData.sector">{{ ad.locationData.sector }}, </span>
+    {{ ad.locationData.location }}
+  </p>
   <p class="mb-1">{{ ad.locationData.city }}</p>
   <p class="mb-1 d-sm-block d-md-none">
-    <a class="btn btn-outline-danger" routerLink="/property-details/{{ad._id}}" (click)="onPropClick(ad)">More Info</a>
+    <a class="btn btn-outline-danger" (click)="onPropClick(markerclick, ad)"
+      >More Info</a
+    >
   </p>
 </div>
+<ng-template #markerclick>
+  <marker-modal-content [ad]="ad"></marker-modal-content>
+</ng-template>

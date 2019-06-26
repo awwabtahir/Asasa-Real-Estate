@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="row" style="margin-top: 60px;">
+
+  <!-- <div class="row" style="margin-top: 60px;">
     <a
       class="btn btn-primary btn-sm mt-1 ml-4 mr-1 mb-1 d-none d-sm-none d-md-block"
       (click)="backClicked()"
@@ -35,8 +35,19 @@
     <div class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none ml-auto">
       <a (click)="backClicked()"><i class="far fa-times-circle fa-2x"></i></a>
     </div>
+  </div> -->
+  <div class="modal-header _600" style="display: block !important">
+    <button
+      (click)="closeModal()"
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">×</span>
+    </button>
+    {{ "Property Detail" }}
   </div>
-
   <div class="row no-gutters">
     <div *ngIf="ad" class="col-md-8">
       <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
@@ -150,7 +161,7 @@
             [panControl]="true"
             [zoom]="17"
             [maxZoom]="19"
-            [mapTypeId]="satellite"
+           
             (mapReady)="mapReady($event)"
           >
             <agm-marker
@@ -397,4 +408,16 @@
       </div>
     </div>
   </div>
-</div>
+   <div class="modal-footer">
+    <button
+      type="button"
+      (click)="closeModal()"
+      class="btn btn-primary"
+      data-dismiss="modal"
+      
+    >
+      Cancel
+    </button>
+   
+  </div>
+

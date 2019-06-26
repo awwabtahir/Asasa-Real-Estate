@@ -8,6 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 import { PropertyService } from "shared/services/property.service";
 import { Location } from "@angular/common";
 import { FilterService } from "shared/services/filter.service";
+import { BsModalRef } from "ngx-bootstrap";
 
 declare var PANOLENS: any;
 
@@ -17,18 +18,6 @@ declare var PANOLENS: any;
   styleUrls: ["./marker-modal-content.component.css"]
 })
 export class MarkerModalContentComponent implements OnInit, OnDestroy {
-  @Input() ad;
-  basic: any;
-  location: any;
-  plot_features: any;
-  other: any;
-  nearby_loc: any;
-  safeUrl: any;
-  image3d = false;
-
-  id: number;
-  private sub: any;
-
   constructor(
     private modalService: PropertyModalService,
     private propertyService: PropertyService,
@@ -40,6 +29,58 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     private mapService: MapService,
     private filterService: FilterService
   ) {}
+  @Input() ad;
+  basic: any;
+  location: any;
+  plot_features: any;
+  other: any;
+  nearby_loc: any;
+  safeUrl: any;
+  image3d = false;
+  modalRef: BsModalRef;
+  id: number;
+  private sub: any;
+
+  map: any;
+
+  url3D;
+
+  panorama;
+
+  a = [
+    "",
+    "one ",
+    "two ",
+    "three ",
+    "four ",
+    "five ",
+    "six ",
+    "seven ",
+    "eight ",
+    "nine ",
+    "ten ",
+    "eleven ",
+    "twelve ",
+    "thirteen ",
+    "fourteen ",
+    "fifteen ",
+    "sixteen ",
+    "seventeen ",
+    "eighteen ",
+    "nineteen "
+  ];
+  b = [
+    "",
+    "",
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety"
+  ];
 
   ngOnInit() {
     if (!this.ad) this.ad = this.propertyModalService.getAd();
@@ -90,7 +131,9 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.sub) this.sub.unsubscribe();
   }
-
+  closeModal(): void {
+    this.modalRef.hide();
+  }
   getAd(id) {
     this.propertyService.getAds().subscribe(
       ads => {
@@ -107,8 +150,6 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
       }
     );
   }
-
-  map: any;
   async mapReady(map) {
     // this.loadScripts();
     this.map = map;
@@ -146,16 +187,12 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     );
     // await new Promise((resolve, reject) => setTimeout(resolve, 3000));
   }
-
-  url3D;
   url3d() {
     this.image3d = true;
     this.url3D = this._sanitizer.bypassSecurityTrustResourceUrl(
       this.ad.imagesData.image3d.value
     );
   }
-
-  panorama;
   reload3D() {
     // if(this.panorama) return;
     // let container = document.querySelector('#target');
@@ -203,41 +240,6 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   private priceConverter(value) {
     return this.filterService.priceFilter(value);
   }
-
-  a = [
-    "",
-    "one ",
-    "two ",
-    "three ",
-    "four ",
-    "five ",
-    "six ",
-    "seven ",
-    "eight ",
-    "nine ",
-    "ten ",
-    "eleven ",
-    "twelve ",
-    "thirteen ",
-    "fourteen ",
-    "fifteen ",
-    "sixteen ",
-    "seventeen ",
-    "eighteen ",
-    "nineteen "
-  ];
-  b = [
-    "",
-    "",
-    "twenty",
-    "thirty",
-    "forty",
-    "fifty",
-    "sixty",
-    "seventy",
-    "eighty",
-    "ninety"
-  ];
 
   public inWords(num) {
     if ((num = num.toString()).length > 9) return "overflow";

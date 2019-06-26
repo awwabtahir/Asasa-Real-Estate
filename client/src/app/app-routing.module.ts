@@ -33,14 +33,14 @@ const routes: Routes = [
     component: RegisterComponent,
     canActivate: [AuthGuardService]
   },
-  { path: "property-details/:id", component: MarkerModalContentComponent },
+  // { path: "property-details/:id", component: MarkerModalContentComponent },
   {
     path: "dashboard",
     loadChildren: "../app/admin/admin.module#AdminModule"
   },
   { path: ":city", component: HomeComponent },
-  { path: ":city/:location", component: HomeComponent },
-  { path: ":city/:location/:type/:id", component: MarkerModalContentComponent }
+  { path: ":city/:location", component: HomeComponent }
+  // { path: ":city/:location/:type/:id", component: MarkerModalContentComponent }
 ];
 
 @NgModule({
