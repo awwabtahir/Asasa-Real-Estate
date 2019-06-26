@@ -25,7 +25,8 @@ var adSchema = new mongoose.Schema({
     rooms: Object,
     street: String,
     type: String,
-    subtype: String
+    subtype: String,
+    created:  {type: Date, default: Date.now}
 });
 
 adSchema.plugin(autoIncrement.plugin, 'Ad');
