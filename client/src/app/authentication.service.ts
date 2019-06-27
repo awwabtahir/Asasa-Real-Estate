@@ -91,21 +91,29 @@ export class AuthenticationService {
       | fav
   ): Observable<any> {
     let base;
-    let prod = false;
+    const prod = false;
 
     if (method === "post") {
       base = this.http.post(`https://asasa.com/api/${type}`, template);
-      if (prod)
+      if (prod) {
         base = this.http.post(`https://asasa.com/api/${type}`, template);
+      }
     } else {
-      base = this.http.get(`https://asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
-      if(prod)
-        base = this.http.get(`https://asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`https://asasa.com/api/${type}`, {
+        headers: { Authorization: `Bearer ${this.getToken()}` }
+      });
+      if (prod) {
+        base = this.http.get(`https://asasa.com/api/${type}`, {
+          headers: { Authorization: `Bearer ${this.getToken()}` }
+        });
+      }
     }
 
     const request = base.pipe(
       map((data: TokenResponse) => {
-        if (!data) return;
+        if (!data) {
+          return;
+        }
         if (data.token) {
           localStorage.setItem("customer-data", JSON.stringify(data.data));
           this.saveToken(data.token);

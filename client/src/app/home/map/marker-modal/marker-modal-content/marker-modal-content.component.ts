@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+  EventEmitter,
+  Output
+} from "@angular/core";
 import { ad } from "shared/models/ad";
 import { MapService } from "shared/services/map.service";
 import { DomSanitizer } from "@angular/platform-browser";
@@ -30,6 +37,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     private filterService: FilterService
   ) {}
   @Input() ad;
+  @Output() output = new EventEmitter<any>();
+
   basic: any;
   location: any;
   plot_features: any;
@@ -132,7 +141,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     if (this.sub) this.sub.unsubscribe();
   }
   closeModal(): void {
-    this.modalRef.hide();
+    this.output.emit(null);
+    // this.modalRef.hide();
   }
   getAd(id) {
     this.propertyService.getAds().subscribe(

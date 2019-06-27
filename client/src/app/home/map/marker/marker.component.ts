@@ -24,7 +24,7 @@ import { BsModalService, BsModalRef, ModalDirective } from "ngx-bootstrap";
 export class MarkerComponent implements OnInit {
   @Input() map: any;
   @Output() adEvent = new EventEmitter<object>();
- 
+  @Output() modalClose: EventEmitter<any> = new EventEmitter();
   // marker icon
   modalRef: BsModalRef;
   houseIcon = {
@@ -108,6 +108,14 @@ export class MarkerComponent implements OnInit {
         }
       }
     });
+  }
+  modalClosed() {
+    // this.modalClose.emit(null);
+    // this.modalClose.emit(this.modalRef.hide());
+  }
+
+  closeModal() {
+    this.modalRef.hide();
   }
 
   onMouseOver(infoWindow, map) {

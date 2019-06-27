@@ -115,13 +115,18 @@
     {{ "Add Property" }}
   </div>
   <div class="modal-body">
-    <form (ngSubmit)="add_property()" #f="ngForm" [formGroup]="AddProperty">
+    <form (ngSubmit)="add_property()" [formGroup]="AddProperty">
       <div class="form-group">
         <input
-          type="name"
+          type="text"
           class="form-control"
           formControlName="name"
           placeholder="Name"
+          name="name"
+          id="name"
+          [ngClass]="{
+            error: AddProperty.controls['name'].invalid
+          }"
         />
       </div>
       <div class="form-group">
@@ -129,8 +134,10 @@
           type="email"
           class="form-control"
           formControlName="email"
-          placeholder="Email"
-          required
+          placeholder="xxxxxx@xxxx.com"
+          [ngClass]="{
+            error: AddProperty.controls['email'].invalid
+          }"
         />
       </div>
       <div class="form-group">
@@ -139,7 +146,9 @@
           class="form-control"
           formControlName="phone"
           placeholder="Phone"
-          required
+          [ngClass]="{
+            error: AddProperty.controls['phone'].invalid
+          }"
         />
       </div>
       <div class="form-group">
@@ -147,6 +156,9 @@
           formControlName="city"
           class="form-control"
           (ngModelChange)="getCityLocs($event)"
+          [ngClass]="{
+            error: AddProperty.controls['city'].invalid
+          }"
         >
           <option value="">Select City</option>
           <option *ngFor="let listing of cities" [ngValue]="listing">
@@ -156,7 +168,9 @@
       </div>
 
       <div class="form-group">
-        <select formControlName="location" class="form-control">
+        <select formControlName="location" class="form-control" [ngClass]="{
+          error: AddProperty.controls['location'].invalid
+        }">
           <option value="">Location</option>
           <option *ngFor="let listing of locations" [ngValue]="listing">
             {{ listing.location }}</option
@@ -179,7 +193,9 @@
           class="form-control"
           formControlName="area"
           placeholder="Area"
-          required
+          [ngClass]="{
+            error: AddProperty.controls['area'].invalid
+          }"
         />
       </div>
       <div class="form-group">
@@ -189,7 +205,9 @@
           class="form-control"
           formControlName="demand"
           placeholder="Demand"
-          required
+          [ngClass]="{
+            error: AddProperty.controls['demand'].invalid
+          }"
         />
       </div>
     </form>

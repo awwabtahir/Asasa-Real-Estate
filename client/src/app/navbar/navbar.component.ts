@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 })
 export class NavbarComponent implements OnInit {
   user;
+  result: any;
   customer = false;
   modalRef: BsModalRef;
   cities = [];
@@ -80,15 +81,30 @@ export class NavbarComponent implements OnInit {
       name: ["", [Validators.required]],
       phone: "",
       email: ["", [Validators.required, Validators.email]],
-      city: "",
-      location: "",
+      city: ["", [Validators.required]],
+      location: ["", [Validators.required]],
       property_type: "",
-      area: "",
-      demand: ""
+      area: ["", [Validators.required]],
+      demand: ["", [Validators.required]]
     });
   }
   add_property() {
-    console.log("ye hai property form ka data", this.AddProperty.value);
+    if (this.AddProperty.valid) {
+      console.log("ye hai property form ka data", this.AddProperty.value);
+      this.auth.saveCustomerProperty(this.AddProperty.value).subscribe(
+        data => {
+          // this.result.unshift(data.data);
+          this.AddProperty.reset();
+          this.modalRef.hide();
+          //   this.rerender();
+          //     this.isLoading = false;
+        },
+        err => {
+          console.log(err);
+          //     this.isLoading = false;
+        }
+      );
+    }
   }
 }
 // cityId(_id) {
