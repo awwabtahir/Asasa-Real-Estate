@@ -24,5 +24,8 @@
   </p>
 </div>
 <ng-template #markerclick>
-  <marker-modal-content [ad]="ad"></marker-modal-content>
+  <marker-modal-content
+    (output)="closeModal()"
+    [ad]="ad"
+  ></marker-modal-content>
 </ng-template>
