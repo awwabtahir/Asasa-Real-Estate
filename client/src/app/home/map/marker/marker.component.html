@@ -12,7 +12,10 @@
       <info-window-content [ad]="ad"></info-window-content>
     </agm-info-window>
     <ng-template #markerclick>
-      <marker-modal-content (output)="closeModal()" [ad]="ad"></marker-modal-content>
+      <marker-modal-content
+        (output)="closeModal()"
+        [ad]="ad"
+      ></marker-modal-content>
     </ng-template>
   </agm-marker>
 
@@ -29,7 +32,10 @@
       <info-window-content [ad]="ad"></info-window-content>
     </agm-info-window>
     <ng-template #markerclick>
-      <marker-modal-content [ad]="ad"></marker-modal-content>
+      <marker-modal-content
+        (output)="closeModal()"
+        [ad]="ad"
+      ></marker-modal-content>
     </ng-template>
   </agm-marker>
 
@@ -46,7 +52,10 @@
       <info-window-content [ad]="ad"></info-window-content>
     </agm-info-window>
     <ng-template #markerclick>
-      <marker-modal-content [ad]="ad"></marker-modal-content>
+      <marker-modal-content
+        (output)="closeModal()"
+        [ad]="ad"
+      ></marker-modal-content>
     </ng-template>
   </agm-marker>
 </ng-container>
