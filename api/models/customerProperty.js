@@ -8,6 +8,7 @@ var customerPropertySchema = new mongoose.Schema({
     name: { type: String },
     phone: { required: true, type: String },
     area: { type: String },
+    demand: { type: String },
     property_type: { type: String },
     city: Object,
     location: Object,
