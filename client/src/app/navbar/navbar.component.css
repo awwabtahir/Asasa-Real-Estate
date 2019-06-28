@@ -12,16 +12,7 @@
   padding: 0rem 1rem !important;
 }
 .error {
-  /* border-color: #a94442 !important; */
-  border: 1px solid#a94442 !important;
-}
-@media only screen and (max-width: 768px) {
-  .navbar-collapse {
-    z-index: 99;
-    background: white;
-    padding: 10px;
-    margin: 10px 10px 0px 0px;
-  }
+  border-color: #a94442 !important;
 }
 
 .bg-light {
@@ -122,5 +113,13 @@
 
   .nav-link {
     border-bottom: 1px solid gainsboro;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .navbar-collapse {
+    z-index: 99;
+    background: white;
+    padding: 10px;
+    margin: 10px 10px 0px 0px;
   }
 }
