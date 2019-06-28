@@ -13,7 +13,8 @@
 }
 .error {
   /* border-color: #a94442 !important; */
-  border: 1px solid#a94442 !important;
+  border: 1px !important;
+  border-color: solid#a94442 !important;
 }
 @media only screen and (max-width: 768px) {
   .navbar-collapse {
