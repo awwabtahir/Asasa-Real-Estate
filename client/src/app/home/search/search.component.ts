@@ -47,7 +47,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log("search");
     if (this.filterService.buy) this.selectedPurpose = "buy";
     else this.selectedPurpose = "rent";
     this.locationService.cityChange.subscribe(value => {

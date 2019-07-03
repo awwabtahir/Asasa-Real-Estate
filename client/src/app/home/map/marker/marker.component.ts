@@ -64,8 +64,7 @@ export class MarkerComponent implements OnInit {
     private mapService: MapService,
     private router: Router,
     private filterService: FilterService,
-    private adsService: AdsService
-    private filterService: FilterService,
+    private adsService: AdsService,
     private modalService: BsModalService
   ) {}
 

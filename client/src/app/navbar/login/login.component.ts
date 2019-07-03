@@ -27,14 +27,14 @@ export class LoginComponent {
       this.auth.login(this.credentials).subscribe(
         data => {
           this.saveData(data);
-          console.log("data ia g data", data);
+          console.log(data);
         },
         err => {
           console.error(err);
         }
       );
     } else {
-      console.log("ghlt password");
+      console.error("Error processed");
     }
   }
 

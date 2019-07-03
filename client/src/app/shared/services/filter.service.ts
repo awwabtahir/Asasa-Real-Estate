@@ -23,7 +23,6 @@ export class FilterService {
   }
 
   applyFilter(ads, filterOpts) {
-    console.log("applied", ads, filterOpts);
     if (filterOpts.type !== "") {
       ads = ads.filter(function(ad) {
         return ad.type == filterOpts.type;
