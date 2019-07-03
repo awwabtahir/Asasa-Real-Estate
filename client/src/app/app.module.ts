@@ -1,7 +1,7 @@
 import { AgmCoreModule } from "@agm/core";
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgSelectModule } from "@ng-select/ng-select";
 import { SharedModule } from "shared/shared.module";
@@ -104,6 +104,7 @@ export function getAuthServiceConfigs() {
     NgSelectModule,
     SocialLoginModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",
       libraries: ["places"]

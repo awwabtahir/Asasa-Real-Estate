@@ -7,6 +7,7 @@ import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
 import { FilterService } from "shared/services/filter.service";
 import { log } from "util";
+import { AdsService } from "shared/services/ads.service";
 
 @Component({
   selector: "search",
@@ -41,10 +42,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     private viewService: ViewService,
     private route: ActivatedRoute,
     private locationUrl: Location,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private adsService: AdsService
   ) {}
 
   ngOnInit() {
+    console.log("search");
     if (this.filterService.buy) this.selectedPurpose = "buy";
     else this.selectedPurpose = "rent";
     this.locationService.cityChange.subscribe(value => {
@@ -90,6 +93,8 @@ export class SearchComponent implements OnInit, OnDestroy {
       });
 
       if (foundCity[0]) {
+        this.adsService.cityObject = foundCity[0];
+        // this.locationService.cityChange.next(foundCity[0]);
         this.selectedCity = foundCity[0]._id;
         this.cityChange(foundCity[0]);
       }
@@ -137,6 +142,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   cityChange(cityObj, prevData?) {
+    if (!cityObj) {
+      this.adsService.locationObject = cityObj;
+      this.adsService.cityObject = cityObj;
+      this.adsService.checkAllFilters(this.adsService.totalAds);
+    }
     $(":focus").blur();
     if (!cityObj) return;
     let cityId = cityObj._id;
@@ -189,6 +199,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   locationChange(locObj) {
+    if (!locObj) {
+      this.adsService.locationObject = locObj;
+      this.adsService.checkAllFilters(this.adsService.totalAds);
+    }
     $(":focus").blur();
     if (!locObj) return;
     let locId = locObj._id;
@@ -197,6 +211,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     let locData = this.locations.filter(loc => {
       return loc._id == locId;
     });
+    this.adsService.locationObject = locData[0];
+    // this.locationService.locChange.next(locData[0]);
 
     if (!this.city) {
       let cityData = this.cities.filter(function(city) {

@@ -16,6 +16,7 @@ import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
 import { FilterService } from "shared/services/filter.service";
+import { AdsService } from "shared/services/ads.service";
 
 @Component({
   selector: "search-home",
@@ -52,6 +53,7 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private locationUrl: Location,
     private filterService: FilterService,
+    private adsService: AdsService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
@@ -172,6 +174,11 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   }
 
   cityChange(cityObj, prevData?) {
+    if (!cityObj) {
+      this.adsService.locationObject = cityObj;
+      this.adsService.cityObject = cityObj;
+      this.adsService.checkAllFilters(this.adsService.totalAds);
+    }
     $(":focus").blur();
     if (!cityObj) return;
     let cityId = cityObj._id;
@@ -223,6 +230,10 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
   }
 
   locationChange(locObj) {
+    if (!locObj) {
+      this.adsService.locationObject = locObj;
+      this.adsService.checkAllFilters(this.adsService.totalAds);
+    }
     $(":focus").blur();
     if (!locObj) return;
     let locId = locObj._id;

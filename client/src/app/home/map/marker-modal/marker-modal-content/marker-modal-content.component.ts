@@ -5,9 +5,9 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { PropertyModalService } from "shared/services/property-modal.service";
 import { AuthenticationService } from "../../../../authentication.service";
 import { ActivatedRoute } from "@angular/router";
-import { PropertyService } from "shared/services/property.service";
 import { Location } from "@angular/common";
 import { FilterService } from "shared/services/filter.service";
+import { AdsService } from "shared/services/ads.service";
 
 declare var PANOLENS: any;
 
@@ -31,7 +31,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
 
   constructor(
     private modalService: PropertyModalService,
-    private propertyService: PropertyService,
+    private adsService: AdsService,
     private propertyModalService: PropertyModalService,
     private _sanitizer: DomSanitizer,
     private auth: AuthenticationService,
@@ -92,20 +92,17 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   }
 
   getAd(id) {
-    this.propertyService.getAds().subscribe(
-      ads => {
-        let ad = ads.filter(function(ad) {
-          return ad._id == id;
-        });
-        this.ad = ad[0];
-        // console.log(Array.isArray(this.ad.rooms), this.ad);
+    if (this.adsService.totalAds) {
+      let ads = this.adsService.totalAds;
 
-        this.ngOnChanges();
-      },
-      err => {
-        console.error(err);
-      }
-    );
+      let ad = ads.filter(function(ad) {
+        return ad._id == id;
+      });
+      this.ad = ad[0];
+      // console.log(Array.isArray(this.ad.rooms), this.ad);
+
+      this.ngOnChanges();
+    }
   }
 
   map: any;

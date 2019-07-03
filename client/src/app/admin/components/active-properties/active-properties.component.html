@@ -85,11 +85,13 @@
           <td>{{ item.propNumber }}</td>
           <td>{{ item.area }} {{ item.areaType | titlecase }}</td>
           <td>
-            <span *ngIf="item.locationData.sector"
-              >{{ item.locationData.sector }},</span
-            >
-            {{ item.locationData.location }}, {{ item.locationData.city }}
+            {{ item.locationData.city }}
           </td>
+          <!-- 
+          <span *ngIf="item.locationData.sector"
+          >{{ item.locationData.sector }},</span
+        >
+        {{ item.locationData.location }}, -->
           <td>Rs. {{ getDemand(item.demand) }}</td>
           <td>{{ item.comment }}</td>
           <td *ngIf="agents">{{ getName(item.userId) }}</td>
