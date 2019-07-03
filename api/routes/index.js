@@ -12,6 +12,7 @@ var ctrlAd = require('../controllers/ad');
 var ctrlCity = require('../controllers/city');
 var ctrlLocation = require('../controllers/location');
 var ctrlCustomer = require('../controllers/customer');
+var ctrlCustomerProperty = require('../controllers/customerProperty');
 var ctrlEmail = require('../controllers/email');
 
 // profile
@@ -37,9 +38,14 @@ router.post('/update_image', ctrlAd.updateImage);
 router.post('/save_city', ctrlCity.save);
 router.get('/get_cities', ctrlCity.getAll);
 
+// customerProperty operations
+router.post('/save_customerProperty', ctrlCustomerProperty.save);
+router.get('/get_customerProperty', ctrlCustomerProperty.getAll);
+
 // location operations
 router.post('/save_location', ctrlLocation.save);
 router.post('/update_location', ctrlLocation.update);
+router.post('/get_city_locations', ctrlLocation.getByCityId);
 router.get('/get_locations', ctrlLocation.getAll);
 
 // customer operations

@@ -38,6 +38,7 @@ import {
   NbLayoutModule,
   NbMenuModule
 } from "@nebular/theme";
+import { DataTablesModule } from "angular-datatables";
 import { FilterPipe } from "app/filter.pipe";
 
 @NgModule({
@@ -54,6 +55,7 @@ import { FilterPipe } from "app/filter.pipe";
     NgxEditorModule,
     FilePondModule,
     SharedModule,
+    DataTablesModule,
     AdminRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",

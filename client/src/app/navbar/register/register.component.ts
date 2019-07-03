@@ -4,7 +4,8 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { TokenPayload } from "shared/models/token";
 
 @Component({
-  templateUrl: "./register.component.html"
+  templateUrl: "./register.component.html",
+  styleUrls: ["./register.component.css"]
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   credentials = {

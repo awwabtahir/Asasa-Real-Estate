@@ -1,0 +1,29 @@
+.header {
+  text-align: -webkit-left;
+  margin-left: 5px;
+}
+
+.row {
+  margin-top: 5%;
+}
+
+.email {
+  position: relative;
+
+  margin-top: 0px !important;
+
+  margin-bottom: 5px !important;
+  text-align: center;
+  width: 640px;
+  margin: 0 auto;
+  background-color: #ececec;
+  border-top: 5px solid #25bda4;
+  border-radius: 4px;
+}
+
+.btn {
+  margin-left: 85%;
+  margin-bottom: 10px;
+  background-color: #25bda4;
+  border: #25bda4;
+}

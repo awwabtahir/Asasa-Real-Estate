@@ -1,59 +1,30 @@
 <div class="background">
   <ul class="slideshow">
-    <li><span>Slide One</span></li>
-    <li><span>Slide Two</span></li>
-    <li><span>Slide Three</span></li>
-    <li><span>Slide Four</span></li>
+    <li><span style="top: 15px !important;">Slide One</span></li>
+    <li><span style="top: 15px !important;">Slide Two</span></li>
+    <li><span style="top: 15px !important;">Slide Three</span></li>
+    <li><span style="top: 15px !important;">Slide Four</span></li>
   </ul>
 
-  <div
-    class="mt-2 form-inline searchBar"
-    [ngStyle]="mapSearchBar && { display: 'none' }"
-  >
+  <div class="mt-2 form-inline searchBar" [ngStyle]="mapSearchBar && { display: 'none' }">
     <!-- [ngClass]="{ searchBar: !searchBarFixed, fixedSearchBar: searchBarFixed }" -->
 
     <div class="filterBtn">
-      <button
-        (click)="rent()"
-        class="btn typeBtn btn-lg"
-        [ngClass]="{ activeBtn: isRent }"
-      >
+      <button (click)="rent()" class="btn typeBtn btn-lg" [ngClass]="{ activeBtn: isRent }">
         RENT
       </button>
-      <button
-        (click)="buy()"
-        class="btn typeBtn btn-lg"
-        [ngClass]="{ activeBtn: isBuy }"
-      >
+      <button (click)="buy()" class="btn typeBtn btn-lg" [ngClass]="{ activeBtn: isBuy }">
         BUY
       </button>
-      <div
-        [ngClass]="{ 'arrow-down-rent': isRent, 'arrow-down-buy': isBuy }"
-      ></div>
+      <div [ngClass]="{ 'arrow-down-rent': isRent, 'arrow-down-buy': isBuy }"></div>
     </div>
-    <ng-select
-      #city
-      [items]="cities"
-      bindLabel="city"
-      bindValue="_id"
-      class="mr-2 ml-2"
-      placeholder="Select City"
-      [(ngModel)]="selectedCity"
-      (change)="cityChange($event)"
-    >
+    <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
+      [(ngModel)]="selectedCity" (change)="cityChange($event)">
     </ng-select>
 
-    <ng-select
-      *ngIf="selectedCity"
-      [items]="locations"
-      bindLabel="location"
-      bindValue="_id"
-      class="mr-2 ml-2 selectLocation"
-      placeholder="Search Location"
-      [(ngModel)]="selectedLocation"
-      (change)="locationChange($event)"
-      [disabled]="!selectedCity"
-    >
+    <ng-select *ngIf="selectedCity" [items]="locations" bindLabel="location" bindValue="_id"
+      class="mr-2 ml-2 selectLocation" placeholder="Search Location" [(ngModel)]="selectedLocation"
+      (change)="locationChange($event)" [disabled]="!selectedCity">
     </ng-select>
 
     <!-- <div class="form-group">
@@ -76,16 +47,9 @@
   </div> -->
 
     <div class="dropdown ml-2 mr-2 ">
-      <button
-        *ngIf="selectedCity"
-        class="btn btn-outline-secondary dropdown-toggle1"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        (click)="hideDropDown()"
-      >
+      <button *ngIf="selectedCity" class="btn btn-outline-secondary dropdown-toggle1" type="button"
+        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        (click)="hideDropDown()">
         Select Property Type
       </button>
       <div class="dropdown-menu keepopen" aria-labelledby="dropdownMenuButton">
@@ -149,11 +113,7 @@
     >
       <i class="fas fa-th-list"></i> Map View
     </button> -->
-    <button
-      [disabled]="!selectedCity"
-      (click)="search()"
-      class="btn btn-info btn-sm mt-1 mr-1 ml-2 btnSearch"
-    >
+    <button [disabled]="!selectedCity" (click)="search()" class="btn btn-info btn-sm mt-1 mr-1 ml-2 btnSearch">
       <i class="fa fa-search"></i> Search
     </button>
   </div>

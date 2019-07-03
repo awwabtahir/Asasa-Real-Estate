@@ -1,69 +1,50 @@
-<style>
-  .col-md-9 {
-    margin-top: 5%;
-    margin-left: 20%;
+<div class="row">
+  <section class="email">
 
-  }
+    <div class="decription mt30 mb40 ">
 
-</style>
-
-<div class="col-md-9">
-  <div class="container">
-
-    <div class="row mt-2">
-      <div class="col-md-3">
+      <h5 class="header">Agent Information</h5>
+      <form>
         <div class="form-group">
-          <label for="name">Full name</label>
-          <input type="text" class="form-control" name="name" placeholder="Enter your name"
-            [(ngModel)]="credentials.name">
+          <input type="name" class="form-control" name="name" placeholder="Full name" />
         </div>
         <div class="form-group">
-          <label for="phone">Phone #</label>
-          <input type="phone" class="form-control" name="phone" placeholder="Enter phone"
-            [(ngModel)]="credentials.phone">
+          <input type="phone" class="form-control" name="phone" placeholder="Enter Phone" required />
         </div>
         <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" name="email" placeholder="Enter email"
-            [(ngModel)]="credentials.email">
+          <input type="email" class="form-control" name="email" placeholder="Email Address" required />
         </div>
-        <div *ngIf="!edit" class="form-group">
-          <label for="password">Password</label>
-          <input type="text" class="form-control" name="password" placeholder="Password"
-            [(ngModel)]="credentials.password">
+        <div class="form-group">
+          <input type="password" class="form-control" name="password" placeholder="Password" required />
         </div>
+      </form>
+      <h5 class="header">Assign Location</h5>
+
+      <div class="form-group" style="    margin-top: 24px;">
+        <ng-select style="    width: 300px;" #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2"
+          placeholder="Select City" [(ngModel)]="credentials.cityId" (change)="cityChange($event)">
+        </ng-select>
       </div>
 
-      <div class="col-md-4 ml-1 mt-1" style="border:1px solid;">
-        <h4>Assign Location</h4>
+      <div class="form-group">
+        <ng-select style="    width: 300px;" [items]="locations" [multiple]="true" bindLabel="location"
+          bindValue="location" class="mr-2 ml-2" placeholder="Select Location" [(ngModel)]="credentials.locationId"
+          (change)="locChange($event)">
+        </ng-select>
+      </div>
 
-        <div class="form-group">
-          <ng-select #city [items]="cities" bindLabel="city" bindValue="_id" class="mr-2 ml-2" placeholder="Select City"
-            [(ngModel)]="credentials.cityId" (change)="cityChange($event)">
-          </ng-select>
-        </div>
-
-        <div class="form-group">
-          <ng-select [items]="locations" [multiple]="true" bindLabel="location" bindValue="location" class="mr-2 ml-2"
-            placeholder="Select Location" [(ngModel)]="credentials.locationId" (change)="locChange($event)">
-          </ng-select>
-        </div>
-
-        <!-- <div *ngIf="location" class="form-group">
+      <div *ngIf="location" class="form-group">
         <h6 style="color:red;">This is optional</h6>
         <select multiple class="form-control" name="subLocations" [(ngModel)]="credentials.subLocations">
-          <option *ngFor="let sloc of location.subLocations" value="{{ sloc.subLocation }}">{{ sloc.subLocation }}</option>
+          <option *ngFor="let sloc of location.subLocations" value="{{ sloc.subLocation }}">{{ sloc.subLocation }}
+          </option>
         </select>
-      </div> -->
-
       </div>
-
+      <button *ngIf="!edit" (click)="register()" type="button" class="btn btn-primary">
+        Register!
+      </button>
+      <button *ngIf="edit" (click)="update()" type="button" class="btn btn-primary">
+        Update
+      </button>
     </div>
-
-    <div class="row">
-      <button *ngIf="!edit" (click)="register()" class="btn btn-default">Register!</button>
-      <button *ngIf="edit" (click)="update()" class="btn btn-default mb-4">Update</button>
-    </div>
-
-  </div>
-</div>
+  </section>

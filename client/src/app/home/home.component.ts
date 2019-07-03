@@ -4,6 +4,7 @@ import { DOCUMENT } from "@angular/platform-browser";
 import { PropertyService } from "shared/services/property.service";
 import { ActivatedRoute } from "@angular/router";
 import { Router, NavigationEnd } from "@angular/router";
+import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 
 @Component({
   selector: "home-page",
@@ -28,10 +29,13 @@ export class HomeComponent implements OnInit {
     private service: PropertyService,
     private route: ActivatedRoute,
     private router: Router,
+    private slimScroll: SlimLoadingBarService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   ngOnInit() {
+    this.slimScroll.progress = 20;
+    this.slimScroll.start();
     this.sub = this.route.params.subscribe(params => {
       if (params.city) {
         this.service.firstVisit = false;

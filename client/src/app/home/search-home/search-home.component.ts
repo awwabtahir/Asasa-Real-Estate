@@ -15,6 +15,7 @@ import { ActivatedRoute } from "@angular/router";
 import { LocationService } from "shared/services/location.service";
 import { Location } from "@angular/common";
 import { ViewService } from "shared/services/view.service";
+import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 import { FilterService } from "shared/services/filter.service";
 import { AdsService } from "shared/services/ads.service";
 
@@ -54,10 +55,13 @@ export class SearchHomeComponent implements OnInit, OnDestroy {
     private locationUrl: Location,
     private filterService: FilterService,
     private adsService: AdsService,
+    private slimScroll: SlimLoadingBarService,
     @Inject(DOCUMENT) private doc: Document
   ) {}
 
   async ngOnInit() {
+    this.slimScroll.progress = 20;
+    this.slimScroll.start();
     this.isBuy = this.filterService.buy;
     this.locationService.cityChange.subscribe(value => {
       this.selectedCity = value._id;

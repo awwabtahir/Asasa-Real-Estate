@@ -69,6 +69,7 @@ export class AuthenticationService {
       | "get_cities"
       | "save_location"
       | "get_locations"
+      | "get_city_locations"
       | "update_image"
       | "update_location"
       | "getAgents"
@@ -76,7 +77,9 @@ export class AuthenticationService {
       | "save_customer"
       | "send_email"
       | "update_fav"
-      | "update_user",
+      | "update_user"
+      | "save_customerProperty"
+      | "get_customerProperty",
     template?:
       | TokenPayload
       | ad
@@ -88,21 +91,29 @@ export class AuthenticationService {
       | fav
   ): Observable<any> {
     let base;
-    let prod = false;
+    const prod = false;
 
     if (method === "post") {
       base = this.http.post(`https://asasa.com/api/${type}`, template);
-      if (prod)
+      if (prod) {
         base = this.http.post(`https://asasa.com/api/${type}`, template);
+      }
     } else {
-      base = this.http.get(`https://www.asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
-      if(prod)
-        base = this.http.get(`https://www.asasa.com/api/${type}`, { headers: { Authorization: `Bearer ${this.getToken()}` }});
+      base = this.http.get(`https://asasa.com/api/${type}`, {
+        headers: { Authorization: `Bearer ${this.getToken()}` }
+      });
+      if (prod) {
+        base = this.http.get(`https://asasa.com/api/${type}`, {
+          headers: { Authorization: `Bearer ${this.getToken()}` }
+        });
+      }
     }
 
     const request = base.pipe(
       map((data: TokenResponse) => {
-        if (!data) return;
+        if (!data) {
+          return;
+        }
         if (data.token) {
           localStorage.setItem("customer-data", JSON.stringify(data.data));
           this.saveToken(data.token);
@@ -162,6 +173,10 @@ export class AuthenticationService {
     return this.request("post", "update_location", location);
   }
 
+  public getCityLocations(location): Observable<any> {
+    return this.request("post", "get_city_locations", location);
+  }
+
   public updateAd(ad): Observable<any> {
     return this.request("post", "update_ad", ad);
   }
@@ -192,6 +207,14 @@ export class AuthenticationService {
 
   public getCustomers(): Observable<any> {
     return this.request("get", "get_customers");
+  }
+
+  public saveCustomerProperty(customerAd): Observable<any> {
+    return this.request("post", "save_customerProperty", customerAd);
+  }
+
+  public getCustomersProperties(): Observable<any> {
+    return this.request("get", "get_customerProperty");
   }
 
   public sendEmail(email): Observable<any> {

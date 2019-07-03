@@ -1,8 +1,10 @@
-import { Component, OnInit, ElementRef } from "@angular/core";
+import { Component, OnInit, ElementRef, ViewChild } from "@angular/core";
 import { PropertyService } from "shared/services/property.service";
 import { ad } from "shared/models/ad";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../../authentication.service";
+import { DataTableDirective } from "angular-datatables";
+import { DataTable } from "angular-6-datatable";
 
 @Component({
   selector: "app-active-properties",
@@ -10,6 +12,8 @@ import { AuthenticationService } from "../../../authentication.service";
   styleUrls: ["./active-properties.component.css"]
 })
 export class ActivePropertiesComponent implements OnInit {
+  @ViewChild(DataTableDirective) dtElement: DataTableDirective;
+  dtOptions2: DataTables.Settings = {};
   data: any[];
   filteredData: any[];
   public sortBy = "id";
@@ -17,23 +21,7 @@ export class ActivePropertiesComponent implements OnInit {
   user;
   agent = false;
   agents;
-  query = "";
-  options = [
-    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
-    {
-      value: "location",
-      name: "Filter By Location",
-      placeholder: "Location"
-    },
-    { value: "type", name: "Filter By Type", placeholder: "Type" },
-    {
-      value: "propNumber",
-      name: "Filter By Property Number",
-      placeholder: "Property Number"
-    }
-  ];
-  selectedOption = this.options[0].value;
-  placeholder = this.options[0].placeholder;
+  placeholder: any;
   constructor(
     private propertyService: PropertyService,
     private router: Router,
@@ -126,15 +114,25 @@ export class ActivePropertiesComponent implements OnInit {
 
   refId;
   filterByRef() {
-    // (keyup)=filterByRef //HTML
-    // let id = this.refId;
-    // let data = Object.assign([], this.data);
-    // if (id == "") {
-    //   this.filteredData = data;
-    //   return;
-    // }
-    // this.filteredData = data.filter(function(d) {
-    //   return d._id == id;
-    // });
+    let id = this.refId;
+    let data = Object.assign([], this.data);
+    if (id == "") {
+      this.filteredData = data;
+      return;
+    }
+    this.filteredData = data.filter(function(d) {
+      return d._id == id;
+    });
+  }
+  initilizeGrid() {
+    this.dtOptions2 = {
+      paging: true,
+      lengthChange: false,
+      searching: true,
+      pageLength: 10,
+      columnDefs: [{ targets: 3, orderable: false }],
+      pagingType: "simple_numbers",
+      order: [[0, "desc"]]
+    };
   }
 }

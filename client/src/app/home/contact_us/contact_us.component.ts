@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from "@angular/core";
 import { MapService } from "shared/services/map.service";
 import { AuthenticationService } from "app/authentication.service";
 import { Router, NavigationEnd } from "@angular/router";
+import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 @Component({
   selector: "contactus",
   templateUrl: "./contact_us.component.html",
@@ -37,7 +38,11 @@ export class ContactUsComponent implements OnInit {
   optin = true;
   subject = "";
   message = "";
-  constructor(private auth: AuthenticationService, private router: Router) {}
+  constructor(
+    private auth: AuthenticationService,
+    private router: Router,
+    private slimScroll: SlimLoadingBarService
+  ) {}
 
   ngOnInit() {
     this.setCurrentLocation();

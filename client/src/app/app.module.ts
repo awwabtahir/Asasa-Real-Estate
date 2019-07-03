@@ -45,7 +45,10 @@ import { MobileSearchComponent } from "app/home/mobile-view-search/mobile-search
 import { AboutUsComponent } from "./home/about_us/about_us.component";
 import { ContactUsComponent } from "./home/contact_us/contact_us.component";
 import { HelpAndSupportComponent } from "./home/help_and_support/help_and_support.component";
-
+import { ModalModule } from "ngx-bootstrap";
+import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
+import { TextMaskModule } from "angular2-text-mask";
+import { DataTablesModule } from "angular-datatables";
 // Configs
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig([
@@ -94,9 +97,13 @@ export function getAuthServiceConfigs() {
     RegionsComponent,
     AboutUsComponent,
     ContactUsComponent,
-    HelpAndSupportComponent
+    HelpAndSupportComponent,
+    MobileSearchComponent
   ],
   imports: [
+    ModalModule.forRoot(),
+    ReactiveFormsModule,
+    SlimLoadingBarModule.forRoot(),
     BrowserModule,
     SharedModule,
     FormsModule,
@@ -108,7 +115,9 @@ export function getAuthServiceConfigs() {
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",
       libraries: ["places"]
-    })
+    }),
+    TextMaskModule,
+    DataTablesModule
   ],
   providers: [
     AuthenticationService,

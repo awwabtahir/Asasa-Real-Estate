@@ -1,12 +1,21 @@
 /// <reference types="@types/googlemaps" />
 declare var $: any;
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  TemplateRef,
+  ViewChild
+} from "@angular/core";
 import { PropertyService } from "shared/services/property.service";
 import { PropertyModalService } from "shared/services/property-modal.service";
 import { Router } from "@angular/router";
 import { FilterService } from "shared/services/filter.service";
 import { MapService } from "shared/services/map.service";
 import { AdsService } from "shared/services/ads.service";
+import { BsModalService, BsModalRef, ModalDirective } from "ngx-bootstrap";
 
 @Component({
   selector: "marker",
@@ -16,8 +25,9 @@ import { AdsService } from "shared/services/ads.service";
 export class MarkerComponent implements OnInit {
   @Input() map: any;
   @Output() adEvent = new EventEmitter<object>();
-
+  @Output() modalClose: EventEmitter<any> = new EventEmitter();
   // marker icon
+  modalRef: BsModalRef;
   houseIcon = {
     url: "assets/images/House.png",
     scaledSize: {
@@ -55,6 +65,8 @@ export class MarkerComponent implements OnInit {
     private router: Router,
     private filterService: FilterService,
     private adsService: AdsService
+    private filterService: FilterService,
+    private modalService: BsModalService
   ) {}
 
   ngOnInit() {
@@ -100,6 +112,14 @@ export class MarkerComponent implements OnInit {
       }
     });
   }
+  modalClosed() {
+    // this.modalClose.emit(null);
+    // this.modalClose.emit(this.modalRef.hide());
+  }
+
+  closeModal() {
+    this.modalRef.hide();
+  }
 
   onMouseOver(infoWindow, map) {
     if (map.lastOpen && map.lastOpen.isOpen) {
@@ -116,10 +136,13 @@ export class MarkerComponent implements OnInit {
     }
   }
 
-  onMarkerClick(selectedMarkerData) {
-    if (window.innerWidth < 800) return;
+  onMarkerClick(template: TemplateRef<any>, selectedMarkerData: any) {
+    if (window.innerWidth < 800) {
+      return;
+    }
     this.propertyModalService.setAd(selectedMarkerData);
-    this.router.navigate(["/property-details", selectedMarkerData._id]);
+    // this.router.navigate(["/property-details", selectedMarkerData._id]);
+    this.modalRef = this.modalService.show(template, { class: "modal-xl" });
   }
 
   getAds() {

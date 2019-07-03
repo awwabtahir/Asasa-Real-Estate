@@ -1,29 +1,61 @@
-<ng-container *ngFor="let ad of filteredAds; let i=index">
-
-  <agm-marker *ngIf="ad.type == 'house'" [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="houseIcon"
-    (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()" (markerClick)="onMarkerClick(ad)">
-
+<ng-container *ngFor="let ad of filteredAds; let i = index">
+  <agm-marker
+    *ngIf="ad.type == 'house'"
+    [latitude]="ad.locationData.lat"
+    [longitude]="ad.locationData.lng"
+    [iconUrl]="houseIcon"
+    (mouseOver)="onMouseOver(infoWindow, map)"
+    (mouseOut)="onMouseOut()"
+    (markerClick)="onMarkerClick(markerclick, ad)"
+  >
     <agm-info-window #infoWindow>
       <info-window-content [ad]="ad"></info-window-content>
     </agm-info-window>
-
+    <ng-template #markerclick>
+      <marker-modal-content
+        (output)="closeModal()"
+        [ad]="ad"
+      ></marker-modal-content>
+    </ng-template>
   </agm-marker>
 
-  <agm-marker *ngIf="ad.type == 'plot'" [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng" [iconUrl]="plotIcon"
-    (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()" (markerClick)="onMarkerClick(ad)">
-
-    <agm-info-window #infoWindow>
+  <agm-marker
+    *ngIf="ad.type == 'plot'"
+    [latitude]="ad.locationData.lat"
+    [longitude]="ad.locationData.lng"
+    [iconUrl]="plotIcon"
+    (mouseOver)="onMouseOver(infoWindow, map)"
+    (mouseOut)="onMouseOut()"
+    (markerClick)="onMarkerClick(markerclick, ad)"
+  >
+    <agm-info-window>
       <info-window-content [ad]="ad"></info-window-content>
     </agm-info-window>
-
+    <ng-template #markerclick>
+      <marker-modal-content
+        (output)="closeModal()"
+        [ad]="ad"
+      ></marker-modal-content>
+    </ng-template>
   </agm-marker>
 
-  <agm-marker *ngIf="ad.type == 'commercial'" [latitude]="ad.locationData.lat" [longitude]="ad.locationData.lng"
-    [iconUrl]="commercialIcon" (mouseOver)="onMouseOver(infoWindow,map)" (mouseOut)="onMouseOut()" (markerClick)="onMarkerClick(ad)">
-
+  <agm-marker
+    *ngIf="ad.type == 'commercial'"
+    [latitude]="ad.locationData.lat"
+    [longitude]="ad.locationData.lng"
+    [iconUrl]="commercialIcon"
+    (mouseOver)="onMouseOver(infoWindow, map)"
+    (mouseOut)="onMouseOut()"
+    (markerClick)="onMarkerClick(markerclick, ad)"
+  >
     <agm-info-window #infoWindow>
       <info-window-content [ad]="ad"></info-window-content>
     </agm-info-window>
-
+    <ng-template #markerclick>
+      <marker-modal-content
+        (output)="closeModal()"
+        [ad]="ad"
+      ></marker-modal-content>
+    </ng-template>
   </agm-marker>
 </ng-container>

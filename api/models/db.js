@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = 'mongodb+srv://iamasasa:warka123@cluster0-ijdgl.mongodb.net';
+var dbURI = 'mongodb+srv://iamasasa:OE3LY5warPj1A0UO@cluster0-ijdgl.mongodb.net/asasadbweb';
 // if (process.env.NODE_ENV === 'production') {
 //   dbURI = process.env.MONGOLAB_URI;
 // }
 
-mongoose.connect(dbURI, {dbName: 'asasadbweb'});
+mongoose.connect(dbURI, { useNewUrlParser: true });
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
@@ -51,3 +51,4 @@ require('./ads');
 require('./city');
 require('./location');
 require('./customer');
+require('./customerProperty');
