@@ -40,6 +40,7 @@ import {
 } from "@nebular/theme";
 import { DataTablesModule } from "angular-datatables";
 import { FilterPipe } from "app/filter.pipe";
+import { PropertyRequestComponent } from "./components/property-request/property-request.component";
 
 @NgModule({
   imports: [
@@ -85,7 +86,8 @@ import { FilterPipe } from "app/filter.pipe";
     EditCityLocComponent,
     GDriveComponent,
     FavouritesComponent,
-    FilterPipe
+    FilterPipe,
+    PropertyRequestComponent
   ],
   providers: [NbSidebarService]
 })
