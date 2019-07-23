@@ -2,13 +2,11 @@
 @import "~@ng-select/ng-select/themes/default.theme.css";
 /* You can add global styles to this file, and also import other style files */
 
-
-
 .irs-from,
 .irs-to,
 .irs-single,
 .irs-bar {
-  background: #25BDA4;
+  background: #25bda4;
 }
 
 .gm-svpc {
@@ -24,7 +22,7 @@
 }
 
 .ng-dropdown-panel {
-  width: 120% !important;
+  width: 100% !important;
 }
 
 .slim-loading-bar {
@@ -53,7 +51,6 @@
   opacity: 1 !important;
   right: 7px !important;
 }
-
 
 @media (max-width: 768px) {
   .modal-backdrop {

@@ -370,7 +370,7 @@ body {
 /*Not Mobile*/
 @media (min-width: 600px) {
   .background {
-    height: 40rem;
+    height: 100vh;
   }
   .slideshow li span {
     width: 100%;

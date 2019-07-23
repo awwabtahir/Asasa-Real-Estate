@@ -352,8 +352,9 @@ a:hover {
   background: #dcdcdc;
 }
 
-.selectLocation {
-  width: 15rem;
+.selectWidth {
+  width: 60vw;
+  margin: 1rem 0;
 }
 .searchBar {
   position: absolute;
@@ -675,12 +676,18 @@ body {
 }
 
 .btn-dismiss {
-  position: absolute;
-  bottom: 30px;
   border: 1px solid gray;
   background: #25bda4;
   color: white;
+  margin-left: 3vw;
 }
 .btn-search:focus {
   outline: 0;
+}
+
+.alignCenter {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
 }

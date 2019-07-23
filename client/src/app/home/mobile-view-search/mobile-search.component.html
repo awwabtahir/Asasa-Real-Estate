@@ -75,109 +75,115 @@
           ></div>
         </div>
         <hr />
-        <label>Select City:</label>
-        <ng-select
-          #city
-          [items]="cities"
-          bindLabel="city"
-          bindValue="_id"
-          class="mr-2 ml-2"
-          placeholder="Select City"
-          [(ngModel)]="selectedCity"
-          (change)="cityChange($event)"
-        >
-        </ng-select>
-        <label *ngIf="selectedCity">Select Location:</label>
+        <div class="alignCenter">
+          <ng-select
+            #city
+            [items]="cities"
+            bindLabel="city"
+            bindValue="_id"
+            class="mr-2 ml-2 selectWidth"
+            placeholder="Select City"
+            [(ngModel)]="selecte > dCity"
+            (change)="cityChange($event)"
+          >
+          </ng-select>
 
-        <ng-select
-          *ngIf="selectedCity"
-          [items]="locations"
-          bindLabel="location"
-          bindValue="_id"
-          class="mr-2 ml-2 selectLocation"
-          placeholder="Search Location"
-          [(ngModel)]="selectedLocation"
-          (change)="locationChange($event)"
-          [disabled]="!selectedCity"
-        >
-        </ng-select>
-        <label *ngIf="selectedCity">Property Type:</label>
-        <div class="dropdown ml-2 mr-2 mt-1">
-          <button
+          <ng-select
             *ngIf="selectedCity"
-            class="btn btn-outline-secondary dropdown-toggle1"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            (click)="hideDropDown()"
+            [items]="locations"
+            bindLabel="location"
+            bindValue="_id"
+            class="mr-2 ml-2 selectWidth"
+            placeholder="Search Location"
+            [(ngModel)]="selectedLocation"
+            (change)="locationChange($event)"
+            [disabled]="!selectedCity"
           >
-            Select Property Type
-          </button>
-          <div
-            class="dropdown-menu keepopen"
-            aria-labelledby="dropdownMenuButton"
-          >
-            <div class="tabbable-line">
-              <ul class="nav nav-tabs">
-                <li>
-                  <a href="#home" data-toggle="tab" class="active">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="#plot" data-toggle="tab"> Plot </a>
-                </li>
-                <li>
-                  <a href="#commercial" data-toggle="tab"> Commercial </a>
-                </li>
-              </ul>
-              <div class="tab-content" (click)="typeChange($event)">
-                <div class="tab-pane active" id="home">
-                  <a class="btn btn-outline-success btn-sm">House</a>
-                  <a class="btn btn-outline-success btn-sm">Flat</a>
-                  <a class="btn btn-outline-success btn-sm">Upper Portion</a>
-                  <a class="btn btn-outline-success btn-sm">Lower Portion</a>
-                  <a class="btn btn-outline-success btn-sm">Farm House</a>
-                  <a class="btn btn-outline-success btn-sm">Room</a>
-                  <a class="btn btn-outline-success btn-sm">Penthouse</a>
-                </div>
-                <div class="tab-pane" id="plot">
-                  <a class="btn btn-outline-success btn-sm">Residential Plot</a>
-                  <a class="btn btn-outline-success btn-sm">Commercial Plot</a>
-                  <a class="btn btn-outline-success btn-sm"
-                    >Agricultural Land</a
-                  >
-                  <a class="btn btn-outline-success btn-sm">Industrial Land</a>
-                  <a class="btn btn-outline-success btn-sm">Plot File</a>
-                  <a class="btn btn-outline-success btn-sm">Plot Form</a>
-                </div>
-                <div class="tab-pane" id="commercial">
-                  <a class="btn btn-outline-success btn-sm">Office</a>
-                  <a class="btn btn-outline-success btn-sm">Shop</a>
-                  <a class="btn btn-outline-success btn-sm">Warehouse</a>
-                  <a class="btn btn-outline-success btn-sm">Factory</a>
-                  <a class="btn btn-outline-success btn-sm">Building</a>
-                  <a class="btn btn-outline-success btn-sm">Other</a>
+          </ng-select>
+
+          <div class="dropdown ml-2 mr-2 mt-1 ">
+            <button
+              *ngIf="selectedCity"
+              class="btn btn-outline-secondary dropdown-toggle1 selectWidth"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              (click)="hideDropDown()"
+            >
+              Select Property Type
+            </button>
+            <div
+              class="dropdown-menu keepopen"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <div class="tabbable-line">
+                <ul class="nav nav-tabs">
+                  <li>
+                    <a href="#home" data-toggle="tab" class="active">
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#plot" data-toggle="tab"> Plot </a>
+                  </li>
+                  <li>
+                    <a href="#commercial" data-toggle="tab"> Commercial </a>
+                  </li>
+                </ul>
+                <div class="tab-content" (click)="typeChange($event)">
+                  <div class="tab-pane active" id="home">
+                    <a class="btn btn-outline-success btn-sm">House</a>
+                    <a class="btn btn-outline-success btn-sm">Flat</a>
+                    <a class="btn btn-outline-success btn-sm">Upper Portion</a>
+                    <a class="btn btn-outline-success btn-sm">Lower Portion</a>
+                    <a class="btn btn-outline-success btn-sm">Farm House</a>
+                    <a class="btn btn-outline-success btn-sm">Room</a>
+                    <a class="btn btn-outline-success btn-sm">Penthouse</a>
+                  </div>
+                  <div class="tab-pane" id="plot">
+                    <a class="btn btn-outline-success btn-sm"
+                      >Residential Plot</a
+                    >
+                    <a class="btn btn-outline-success btn-sm"
+                      >Commercial Plot</a
+                    >
+                    <a class="btn btn-outline-success btn-sm"
+                      >Agricultural Land</a
+                    >
+                    <a class="btn btn-outline-success btn-sm"
+                      >Industrial Land</a
+                    >
+                    <a class="btn btn-outline-success btn-sm">Plot File</a>
+                    <a class="btn btn-outline-success btn-sm">Plot Form</a>
+                  </div>
+                  <div class="tab-pane" id="commercial">
+                    <a class="btn btn-outline-success btn-sm">Office</a>
+                    <a class="btn btn-outline-success btn-sm">Shop</a>
+                    <a class="btn btn-outline-success btn-sm">Warehouse</a>
+                    <a class="btn btn-outline-success btn-sm">Factory</a>
+                    <a class="btn btn-outline-success btn-sm">Building</a>
+                    <a class="btn btn-outline-success btn-sm">Other</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <br />
-        <search-filter class="mt-1 mt-2 mr-2"></search-filter>
-        <button
-          type="button"
-          (click)="search()"
-          class="btn btn-dismiss"
-          data-dismiss="modal"
-          [disabled]="!selectedCity"
-        >
-          <i class="fa fa-search" aria-hidden="true"></i>
+          <br />
+          <search-filter class="mt-1 mt-2 mr-2"></search-filter>
+          <button
+            type="button"
+            (click)="search()"
+            class="btn btn-dismiss"
+            data-dismiss="modal"
+            [disabled]="!selectedCity"
+          >
+            <i class="fa fa-search" aria-hidden="true"></i>
 
-          Search
-        </button>
+            Search
+          </button>
+        </div>
       </div>
       <div class="modal-footer"></div>
     </div>
