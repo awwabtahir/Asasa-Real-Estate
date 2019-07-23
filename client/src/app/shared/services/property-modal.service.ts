@@ -1,17 +1,22 @@
-import { Injectable } from '@angular/core';
-import { PropertyService } from 'shared/services/property.service';
+import { Injectable } from "@angular/core";
+import { PropertyService } from "shared/services/property.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class PropertyModalService {
-
-  constructor(private propertyService: PropertyService) { }
+  constructor(private propertyService: PropertyService) {}
 
   updateBasic(ad, basic) {
-    basic = (({ type, subtype, propNumber, demand, area, areaType }) =>
-      ({ type, subtype, propNumber, demand, area, areaType }))(ad);
-    let newKeys = { subtype: "Type", propNumber: basic.type + " #" };
+    basic = (({ type, subtype, demand, area, areaType }) => ({
+      type,
+      subtype,
+
+      demand,
+      area,
+      areaType
+    }))(ad);
+    let newKeys = { subtype: "Type" };
     basic = this.renameKeys(basic, newKeys);
     basic.area = basic.area + " " + basic.areaType;
     basic.demand = "Rs. " + this.propertyService.localeString(basic.demand);
@@ -21,8 +26,7 @@ export class PropertyModalService {
   }
 
   updateLocation(locData, location) {
-    location = (({ location, city }) =>
-      ({ location, city }))(locData);
+    location = (({ location, city }) => ({ location, city }))(locData);
 
     return location;
   }
@@ -43,5 +47,4 @@ export class PropertyModalService {
   getAd() {
     return this.ad;
   }
-
 }

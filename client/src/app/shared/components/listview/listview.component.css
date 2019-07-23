@@ -1,3 +1,10 @@
+.div_listview {
+  letter-spacing: 1px;
+  color: #2b2a2a;
+  text-align: left;
+  margin-left: 5px;
+  font-weight: 620;
+}
 p {
   font-size: 13.9px;
   color: #707070;
@@ -55,7 +62,11 @@ fav-heart {
 }
 
 .feature-title {
-  padding-top: 20px;
+  margin-top: -82px;
+  z-index: 100;
+  background: rgba(193, 193, 193, 0.8);
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .feature-title p {
@@ -88,8 +99,8 @@ fav-heart {
   background: #fff;
   text-align: center;
   padding: 13px;
-  background: #30caa0;
-  color: #fff;
+  background: rgba(193, 193, 193, 0.8);
+  color: black;
 }
 
 call > button {

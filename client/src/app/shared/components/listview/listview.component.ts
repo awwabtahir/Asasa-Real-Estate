@@ -47,6 +47,9 @@ export class ListviewComponent implements OnInit {
       this.getList(ads);
     });
   }
+  private priceConverter(value) {
+    return this.filterService.priceFilter(value);
+  }
 
   filterOpetations() {
     this.route.params.subscribe(params => {

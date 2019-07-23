@@ -11,7 +11,7 @@ import { MapService } from "shared/services/map.service";
 import { DomSanitizer } from "@angular/platform-browser";
 import { PropertyModalService } from "shared/services/property-modal.service";
 import { AuthenticationService } from "../../../../authentication.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { PropertyService } from "shared/services/property.service";
 import { Location } from "@angular/common";
 import { FilterService } from "shared/services/filter.service";
@@ -34,7 +34,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private locationUrl: Location,
     private mapService: MapService,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private router: Router
   ) {}
   @Input() ad;
   @Output() output = new EventEmitter<any>();
@@ -92,7 +93,9 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit() {
-    if (!this.ad) this.ad = this.propertyModalService.getAd();
+    if (!this.ad) {
+      this.ad = this.propertyModalService.getAd();
+    }
 
     if (!this.ad) {
       this.sub = this.route.params.subscribe(params => {
@@ -107,18 +110,21 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges() {
-    if (!this.ad) return;
+    if (!this.ad) {
+      return;
+    }
 
-    this.locationUrl.replaceState(
-      "/" +
-        this.ad.locationData.city +
-        "/" +
-        this.ad.locationData.location +
-        "/" +
-        this.ad.type +
-        "/" +
-        this.ad._id
-    );
+    // this.locationUrl
+    //   .replaceState
+    //   "/" +
+    //     this.ad.locationData.city +
+    //     "/" +
+    //     this.ad.locationData.location +
+    //     "/" +
+    //     this.ad.type +
+    //     "/" +
+    //     this.ad._id
+    //   ();
 
     this.basic = this.modalService.updateBasic(this.ad, this.basic);
     this.location = this.modalService.updateLocation(
@@ -128,7 +134,9 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     this.plot_features = this.ad.plot_features;
     this.other = this.ad.other;
     this.nearby_loc = this.ad.nearby_loc;
-    if (this.map) this.mapReady(this.map);
+    if (this.map) {
+      this.mapReady(this.map);
+    }
 
     if (this.ad.vidUrl != "") {
       this.safeUrl = this._sanitizer.bypassSecurityTrustResourceUrl(
@@ -138,16 +146,20 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.sub) this.sub.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
   closeModal(): void {
+    this.router.navigate([""]);
     this.output.emit(null);
+
     // this.modalRef.hide();
   }
   getAd(id) {
     this.propertyService.getAds().subscribe(
       ads => {
-        let ad = ads.filter(function(ad) {
+        const ad = ads.filter(function(ad) {
           return ad._id == id;
         });
         this.ad = ad[0];
@@ -163,7 +175,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   async mapReady(map) {
     // this.loadScripts();
     this.map = map;
-    let location = this.location.location;
+    const location = this.location.location;
     let locationObj;
     this.auth.getLocations().subscribe(
       locations => {
@@ -173,7 +185,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
         locationObj = locationObj[0];
 
         if (locationObj.overlayData.imgLoc) {
-          var bounds = {
+          let bounds = {
             lat0: locationObj.overlayData.lat0,
             lng0: locationObj.overlayData.lng0,
             lat1: locationObj.overlayData.lat1,
@@ -187,8 +199,12 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
           );
         }
 
-        if (this.ad.imagesData == undefined) return;
-        if (this.ad.imagesData.image3d == undefined) return;
+        if (this.ad.imagesData == undefined) {
+          return;
+        }
+        if (this.ad.imagesData.image3d == undefined) {
+          return;
+        }
         this.image3d = true;
       },
       err => {
@@ -237,8 +253,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   }
 
   private getId(url) {
-    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = url.match(regExp);
+    let regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    let match = url.match(regExp);
 
     if (match && match[2].length == 11) {
       return match[2];
@@ -252,12 +268,16 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   }
 
   public inWords(num) {
-    if ((num = num.toString()).length > 9) return "overflow";
-    let n: any = ("000000000" + num)
+    if ((num = num.toString()).length > 9) {
+      return "overflow";
+    }
+    const n: any = ("000000000" + num)
       .substr(-9)
       .match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
-    if (!n) return;
-    var str = "";
+    if (!n) {
+      return;
+    }
+    let str = "";
     str +=
       n[1] != 0
         ? (this.a[Number(n[1])] || this.b[n[1][0]] + " " + this.a[n[1][1]]) +
