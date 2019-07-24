@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 
 import { AdsService } from "shared/services/ads.service";
+import { FilterService } from "shared/services/filter.service";
 
 @Component({
   selector: "listview",
@@ -12,13 +13,19 @@ export class ListviewComponent implements OnInit {
   propertiesAvailable = false;
   properties;
 
-  constructor(private adsService: AdsService) {}
+  constructor(
+    private adsService: AdsService,
+    private filterService: FilterService
+  ) {}
 
   async ngOnInit() {
     this.adsService.filteredAdsChange.subscribe(res => {
       this.properties = res;
       this.getList(res);
     });
+  }
+  private priceConverter(value) {
+    return this.filterService.priceFilter(value);
   }
 
   getAd(id) {
