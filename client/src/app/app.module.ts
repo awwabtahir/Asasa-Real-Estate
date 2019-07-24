@@ -121,6 +121,7 @@ export function getAuthServiceConfigs() {
     NgSelectModule,
     SocialLoginModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",
       libraries: ["places"]

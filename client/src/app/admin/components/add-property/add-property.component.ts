@@ -24,7 +24,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     title: "",
     description: "",
     vidUrl: "",
-    purpose: ""
+    purpose: "buy"
   };
   cities = [];
   locations = [];
@@ -55,7 +55,6 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
-    console.log("conflict removed");
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "agent") this.agent = true;
     if (this.agent == true) {
