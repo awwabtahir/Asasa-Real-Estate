@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, TemplateRef } from "@angular/core";
 
 import { AdsService } from "shared/services/ads.service";
+import { FilterService } from "shared/services/filter.service";
+import { BsModalRef, BsModalService } from "ngx-bootstrap";
 
 @Component({
   selector: "listview",
@@ -11,8 +13,12 @@ export class ListviewComponent implements OnInit {
   @Input() list;
   propertiesAvailable = false;
   properties;
-
-  constructor(private adsService: AdsService) {}
+  modalRef: BsModalRef;
+  constructor(
+    private adsService: AdsService,
+    private filterService: FilterService,
+    private modalService: BsModalService
+  ) {}
 
   async ngOnInit() {
     this.adsService.filteredAdsChange.subscribe(res => {
@@ -20,7 +26,13 @@ export class ListviewComponent implements OnInit {
       this.getList(res);
     });
   }
-
+  private priceConverter(value) {
+    return this.filterService.priceFilter(value);
+  }
+  openAdModal(template: TemplateRef<any>, selectedMarkerData: any) {
+    console.log("main click ho rha hu hehehehhehee ");
+    this.modalRef = this.modalService.show(template, { class: "modal-xl" });
+  }
   getAd(id) {
     let ad = this.properties.filter(function(p) {
       return p._id == id;

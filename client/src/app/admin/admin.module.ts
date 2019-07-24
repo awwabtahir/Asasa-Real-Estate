@@ -40,7 +40,18 @@ import {
 } from "@nebular/theme";
 import { DataTablesModule } from "angular-datatables";
 import { FilterPipe } from "app/filter.pipe";
+import { PropertyRequestComponent } from "./components/property-request/property-request.component";
+// Import angular-fusioncharts
+import { FusionChartsModule } from "angular-fusioncharts";
 
+// Import FusionCharts library and chart modules
+import * as FusionCharts from "fusioncharts";
+import * as Charts from "fusioncharts/fusioncharts.charts";
+
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
+// Pass the fusioncharts library and chart modules
+FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 @NgModule({
   imports: [
     NbMenuModule.forRoot(),
@@ -60,7 +71,8 @@ import { FilterPipe } from "app/filter.pipe";
     AgmCoreModule.forRoot({
       apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",
       libraries: ["places"]
-    })
+    }),
+    FusionChartsModule
   ],
   declarations: [
     ProfileComponent,
@@ -85,7 +97,8 @@ import { FilterPipe } from "app/filter.pipe";
     EditCityLocComponent,
     GDriveComponent,
     FavouritesComponent,
-    FilterPipe
+    FilterPipe,
+    PropertyRequestComponent
   ],
   providers: [NbSidebarService]
 })

@@ -49,7 +49,17 @@ import { ModalModule } from "ngx-bootstrap";
 import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
 import { TextMaskModule } from "angular2-text-mask";
 import { DataTablesModule } from "angular-datatables";
-// Configs
+// Import angular-fusioncharts
+import { FusionChartsModule } from "angular-fusioncharts";
+
+// Import FusionCharts library and chart modules
+import * as FusionCharts from "fusioncharts";
+import * as Charts from "fusioncharts/fusioncharts.charts";
+
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
+// Pass the fusioncharts library and chart modules
+FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig([
     {
@@ -117,7 +127,8 @@ export function getAuthServiceConfigs() {
       libraries: ["places"]
     }),
     TextMaskModule,
-    DataTablesModule
+    DataTablesModule,
+    FusionChartsModule
   ],
   providers: [
     AuthenticationService,

@@ -28,7 +28,7 @@
     (mouseOut)="onMouseOut()"
     (markerClick)="onMarkerClick(markerclick, ad)"
   >
-    <agm-info-window>
+    <agm-info-window #infoWindow>
       <info-window-content [ad]="ad"></info-window-content>
     </agm-info-window>
     <ng-template #markerclick>
