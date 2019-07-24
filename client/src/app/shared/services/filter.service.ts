@@ -9,7 +9,7 @@ export class FilterService {
 
   ads;
   filteredAds;
-  buy:boolean=true;
+  buy: boolean = true;
   typeFilterChange: Subject<any> = new Subject<any>();
 
   constructor() {}
@@ -46,7 +46,7 @@ export class FilterService {
       this.convertArea(ads, filterOpts.areaUnit);
       ads = this.applyAreaFilters(this.filteredAds, filterOpts);
     }
-
+    console.log("done with filter", ads);
     return ads;
   }
 
@@ -123,8 +123,8 @@ export class FilterService {
     return val;
   }
 
-  buyOrRent(){
-    this.buy=!this.buy
+  buyOrRent() {
+    this.buy = !this.buy;
     this.typeFilterChange.next(this.buy);
   }
 }

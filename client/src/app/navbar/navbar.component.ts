@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
     this.auth.getCities().subscribe(
       cities => {
         this.cities = cities;
-        console.log("citeis agai hain", this.cities);
+        // console.log("citeis agai hain", this.cities);
       },
       err => {
         console.error(err);
@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
     );
   }
   getCityLocs(listing) {
-    console.log("uppper", listing);
+    // console.log("uppper", listing);
     const cityid = {
       _id: listing._id
     };
@@ -68,8 +68,8 @@ export class NavbarComponent implements OnInit {
     this.auth.getCityLocations(cityid).subscribe(
       locs => {
         this.locations = locs;
-        console.log("uppper say id i hai", cityid);
-        console.log(locs);
+        // console.log("uppper say id i hai", cityid);
+        // console.log(locs);
       },
       err => {
         console.error(err);
@@ -90,7 +90,7 @@ export class NavbarComponent implements OnInit {
   }
   add_property() {
     if (this.AddProperty.valid) {
-      console.log("ye hai property form ka data", this.AddProperty.value);
+      // console.log("ye hai property form ka data", this.AddProperty.value);
       this.auth.saveCustomerProperty(this.AddProperty.value).subscribe(
         data => {
           // this.result.unshift(data.data);

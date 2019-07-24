@@ -14,6 +14,7 @@ import { PropertyModalService } from "shared/services/property-modal.service";
 import { Router } from "@angular/router";
 import { FilterService } from "shared/services/filter.service";
 import { MapService } from "shared/services/map.service";
+import { AdsService } from "shared/services/ads.service";
 import { BsModalService, BsModalRef, ModalDirective } from "ngx-bootstrap";
 
 @Component({
@@ -63,6 +64,7 @@ export class MarkerComponent implements OnInit {
     private mapService: MapService,
     private router: Router,
     private filterService: FilterService,
+    private adsService: AdsService,
     private modalService: BsModalService
   ) {}
 
@@ -79,7 +81,7 @@ export class MarkerComponent implements OnInit {
         return ad.subtype.toLowerCase() == type.toLowerCase();
       });
     });
-    this.propertyService.roomChange.subscribe(r => {
+    this.adsService.roomChange.subscribe(r => {
       this.filteredAds = this.ads;
       this.filteredAds = this.filteredAds.filter(res => {
         return res.type != "plot" && parseInt(res.rooms.beds) >= r;
@@ -146,6 +148,8 @@ export class MarkerComponent implements OnInit {
     this.propertyService.getAds().subscribe(
       ads => {
         this.ads = ads;
+        this.adsService.totalAds = ads;
+        this.adsService.Init();
         this.filteredAds = ads;
         if (this.filterService.buy) {
           this.filteredAds = ads.filter(res => {

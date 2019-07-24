@@ -53,6 +53,9 @@ export class ActivePropertiesComponent implements OnInit {
     this.propertyService.getAds().subscribe(
       data => {
         this.data = data;
+        this.data.forEach((obj, index) => {
+          this.data[index].location = obj.locationData.location;
+        });
         if (this.agent) {
           let userId = this.user.userId;
           this.data = data.filter(function(d) {

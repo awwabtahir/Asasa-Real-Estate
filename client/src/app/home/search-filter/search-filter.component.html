@@ -54,16 +54,18 @@
 
         <!-- Price Filter -->
         <h5>Price</h5>
-        <form class="form-inline">
+        <form class="form-inline" [formGroup]="filterPriceForm">
           <div class="input-group mb-2 mr-sm-2">
             <div class="input-group-prepend">
               <div class="input-group-text">Rs.</div>
             </div>
             <input
-              type="text"
+              type="number"
+              (keyup)="checkRange(filterPriceForm)"
               class="form-control"
               name="lowPrice"
-              [(ngModel)]="filterOpts.lowPrice"
+              formControlName="lowPrice"
+              [ngClass]="{ 'is-invalid': lowPrice }"
             />
           </div>
 
@@ -76,10 +78,12 @@
               <div class="input-group-text">Rs.</div>
             </div>
             <input
-              type="text"
+              type="number"
+              (keyup)="checkRange(filterPriceForm)"
               class="form-control"
               name="highPrice"
-              [(ngModel)]="filterOpts.highPrice"
+              formControlName="highPrice"
+              [ngClass]="{ 'is-invalid': highPrice }"
             />
           </div>
         </form>
@@ -87,19 +91,20 @@
         <!-- Area Filter -->
         <h5>Area</h5>
         <select class="form-control mb-2" [(ngModel)]="filterOpts.areaUnit">
-          <option value="">Select Area Unit</option>
           <option value="sqft">Sq. Feet</option>
           <option value="marla">Marla</option>
           <option value="kanal">Kanal</option>
         </select>
 
-        <form class="form-inline">
+        <form class="form-inline" [formGroup]="filterAreaForm">
           <div class="input-group mb-2 mr-sm-2">
             <input
-              type="text"
+              type="number"
               class="form-control"
               name="lowArea"
-              [(ngModel)]="filterOpts.lowArea"
+              formControlName="lowArea"
+              [ngClass]="{ 'is-invalid': lowArea }"
+              (keyup)="checkAreaRange(filterAreaForm)"
             />
           </div>
 
@@ -109,10 +114,12 @@
 
           <div class="input-group mb-2 mr-sm-2">
             <input
-              type="text"
+              type="number"
               class="form-control"
               name="highArea"
-              [(ngModel)]="filterOpts.highArea"
+              formControlName="highArea"
+              [ngClass]="{ 'is-invalid': highArea }"
+              (keyup)="checkAreaRange(filterAreaForm)"
             />
           </div>
         </form>
@@ -143,6 +150,7 @@
           class="btn btn-primary"
           data-dismiss="modal"
           (click)="filter()"
+          [disabled]="highPrice || lowPrice || lowArea || highArea"
         >
           Apply Filter
         </button>
