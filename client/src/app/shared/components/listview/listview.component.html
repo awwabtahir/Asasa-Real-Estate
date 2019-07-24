@@ -13,7 +13,7 @@
         let i = index
       "
     >
-      <div class="col-sm-4">
+      <div class="col-sm-4" (click)="openAdModal(adclick)">
         <ng-container *ngTemplateOutlet="adTemplate; context: getAd(l)">
         </ng-container>
       </div>
@@ -62,4 +62,8 @@
       <div class="room-price">Rs. {{ priceConverter(ad.demand) }}</div>
     </div>
   </div>
+</ng-template>
+<ng-template #adclick>
+  <div>asdasdgjasgdjagshdjasdgad</div>
+  <!-- <marker-modal-content></marker-modal-content> -->
 </ng-template>

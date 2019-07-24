@@ -15,9 +15,10 @@ import { CallComponent } from "./components/call/call.component";
 import { RouterModule } from "@angular/router";
 import { ViewService } from "./services/view.service";
 import { AdsService } from "shared/services/ads.service";
+import { ModalModule } from "ngx-bootstrap";
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgxPaginationModule],
+  imports: [CommonModule, RouterModule, NgxPaginationModule, ModalModule],
   declarations: [ListviewComponent, FavHeartComponent, CallComponent],
   providers: [
     AuthGuardService,
