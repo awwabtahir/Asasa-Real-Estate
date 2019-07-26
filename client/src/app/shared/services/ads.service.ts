@@ -49,7 +49,7 @@ export class AdsService {
     });
 
     this.filteredAdsChange.subscribe(r => {
-      console.log("Filtered Ads from service", r);
+      // console.log("Filtered Ads from service", r);
     });
 
     this.roomChange.subscribe(r => {
@@ -126,7 +126,7 @@ export class AdsService {
 
   filterPrice(filterOpt) {
     this.filterOpt = filterOpt;
-    console.log(this.filterOpt, "filterOpt");
+    // console.log(this.filterOpt, "filterOpt");
     if (filterOpt.highPrice && filterOpt.lowPrice) {
       let ads = this.totalAds.filter(ad => {
         return (

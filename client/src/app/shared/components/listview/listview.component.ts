@@ -30,7 +30,7 @@ export class ListviewComponent implements OnInit {
     return this.filterService.priceFilter(value);
   }
   openAdModal(template: TemplateRef<any>, selectedMarkerData: any) {
-    console.log("main click ho rha hu hehehehhehee ");
+    // console.log("main click ho rha hu hehehehhehee ");
     this.modalRef = this.modalService.show(template, { class: "modal-xl" });
   }
   getAd(id) {

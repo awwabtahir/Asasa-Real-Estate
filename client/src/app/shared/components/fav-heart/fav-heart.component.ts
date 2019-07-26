@@ -87,7 +87,7 @@ export class FavHeartComponent implements OnInit, OnDestroy {
     fav['userId'] = data.userId;
     fav['favourites'] = data.favourites;
     this.auth.updateFav(data).subscribe(() => {
-      console.log("Added");
+      // console.log("Added");
     }, (err) => {
       console.error(err);
     });

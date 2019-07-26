@@ -49,6 +49,7 @@ import { ModalModule } from "ngx-bootstrap";
 import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
 import { TextMaskModule } from "angular2-text-mask";
 import { DataTablesModule } from "angular-datatables";
+import { MatVideoModule } from "mat-video";
 // Import angular-fusioncharts
 import { FusionChartsModule } from "angular-fusioncharts";
 
@@ -111,6 +112,7 @@ export function getAuthServiceConfigs() {
     MobileSearchComponent
   ],
   imports: [
+    MatVideoModule,
     ModalModule.forRoot(),
     ReactiveFormsModule,
     SlimLoadingBarModule.forRoot(),

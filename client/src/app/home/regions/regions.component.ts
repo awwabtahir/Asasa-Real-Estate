@@ -86,7 +86,7 @@ export class RegionsComponent implements OnInit {
         locations: loc.length,
         city: this.cities[item].city
       };
-      console.log(this.locationJSON);
+      // console.log(this.locationJSON);
     }
   }
   getCities() {

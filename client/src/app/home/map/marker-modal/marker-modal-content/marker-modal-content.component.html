@@ -50,7 +50,7 @@
     {{ "Property Detail" }}
   </div> -->
   <div class="row no-gutters">
-    <div *ngIf="ad" class="col-md-8">
+    <div *ngIf="ad" class="col-md-12">
       <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
         <li *ngIf="ad.imagesData && ad.imagesData.images" class="nav-item col">
           <a
@@ -96,6 +96,8 @@
             >Videos</a
           >
         </li>
+        
+        
         <li class="nav-item col">
           <a
             class="nav-link active"
@@ -107,6 +109,17 @@
             aria-selected="true"
             >Map</a
           >
+        </li>
+        <li  style="background: black">
+          <fav-heart class="d-none d-md-block" style=" padding: 10px;
+         
+          color: white;"></fav-heart>
+         
+           </li>
+           <span style="width: 1px;"></span>
+        <li style="    background: black;
+        width: 40px;">
+          <img  (click)="closeModal()" src="/assets/images/close.png" width="18" height="18" style="    margin-top: 17px;    margin-left: 10px;"/>
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
@@ -175,53 +188,15 @@
       </div>
     </div>
 
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <div class="modal-header">
-        <h5 class="d-none d-md-block modal-title">Add to Favourite</h5>
-        <fav-heart class="d-none d-md-block"></fav-heart>
+       
       </div>
       <div *ngIf="ad" class="modal-content scroll" id="style-2">
-        <!-- <social-login></social-login> -->
+      
 
         <div class="container">
-          <!-- <div class="row mb-2 mt-2">
-            <div class="col mt-1 text-center">
-              <i class="fab fa-houzz fa-2x" style="color:#37bba3;"></i>
-              <p>Property Type </p>
-              <p>
-                <b>{{ ad.subtype }}</b>
-              </p>
-            </div>
-            <div class="col mt-1 text-center">
-              <i class="fas fa-vector-square fa-2x" style="color:#37bba3;"></i>
-              <p>Unit Area ({{ ad.areaType }})</p>
-              <p>
-                <b>{{ ad.area }}</b>
-              </p>
-            </div>
-            <div class="col mt-1 text-center">
-              <i
-                class="fas fa-hand-holding-usd fa-2x"
-                style="color:#37bba3;"
-              ></i>
-              <p>Price (Rs)</p>
-              <p>
-                <b>{{ priceConverter(ad.demand) }}</b>
-              </p>
-            </div>
-
-            <div class="col mt-1 text-center">
-              <i
-                class="fas fa-thumbtack fa-2x"
-                style="color:#37bba3;"
-              ></i>
-              <p>Purpose</p>
-              <p>
-                <b>{{ ad.purpose | titlecase }}</b>
-              </p>
-            </div>
-
-          </div> -->
+       
 
           <div *ngIf="basic" class="row mb-1">
             <div class="alert alert-info w-100 text-center">
@@ -399,15 +374,9 @@
         <email [id]="ad._id"></email>
         <br />
 
-        <!-- <div class="container">
-          <div class="row">
-            <div *ngFor="let entry of ad | keys" class="col-md-6">
-              <b>{{entry.key}}</b> : {{entry.value}}
-            </div>
-          </div>
-        </div> -->
+       
       </div>
-    </div>
+    </div> -->
   </div>
    <div class="modal-footer">
     <button

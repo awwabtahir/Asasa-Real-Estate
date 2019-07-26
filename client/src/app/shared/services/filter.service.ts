@@ -46,7 +46,7 @@ export class FilterService {
       this.convertArea(ads, filterOpts.areaUnit);
       ads = this.applyAreaFilters(this.filteredAds, filterOpts);
     }
-    console.log("done with filter", ads);
+    // console.log("done with filter", ads);
     return ads;
   }
 

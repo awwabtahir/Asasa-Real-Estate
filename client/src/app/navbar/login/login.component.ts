@@ -27,7 +27,7 @@ export class LoginComponent {
       this.auth.login(this.credentials).subscribe(
         data => {
           this.saveData(data);
-          console.log(data);
+          // console.log(data);
         },
         err => {
           console.error(err);
