@@ -15,7 +15,7 @@ export class ImageService {
   addImage(image) {
     this.auth.updateImage(image).subscribe((ad) => {
       this.propertyService.addImagesData(ad.imagesData);
-      console.log("Successfully Uploaded");
+      // console.log("Successfully Uploaded");
     }, (err) => {
       console.error(err);
     });
@@ -24,7 +24,7 @@ export class ImageService {
   removeImage(image) {
     this.auth.updateImage(image).subscribe((ad) => {
       this.propertyService.addImagesData(ad.imagesData);
-      console.log("Successfully Deleted");
+      // console.log("Successfully Deleted");
     }, (err) => {
       console.error(err);
     });
