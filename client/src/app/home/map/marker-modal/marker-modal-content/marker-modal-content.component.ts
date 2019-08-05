@@ -37,9 +37,11 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     private filterService: FilterService,
     private router: Router
   ) {}
-  @Input() ad;
+  @Input() ad: any;
   @Output() output = new EventEmitter<any>();
-
+  myAllAdData = [];
+  rsDemand = [];
+  locProperty = [];
   basic: any;
   location: any;
   plot_features: any;
@@ -50,7 +52,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   modalRef: BsModalRef;
   id: number;
   private sub: any;
-
+  myData: any;
   map: any;
 
   url3D;
@@ -105,7 +107,12 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     }
 
     if (this.ad) {
+      console.log("this.ad this.ad", this.ad);
+      this.myData = this.ad;
       this.ngOnChanges();
+      this.myAllAdData.push(this.ad);
+      this.rsDemand.push(this.basic);
+      this.locProperty.push(this.location);
     }
   }
 
@@ -127,13 +134,19 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     //   ();
 
     this.basic = this.modalService.updateBasic(this.ad, this.basic);
+    console.log("this.basic", this.basic);
+
     this.location = this.modalService.updateLocation(
       this.ad.locationData,
       this.location
     );
+    console.log("this.location", this.location);
     this.plot_features = this.ad.plot_features;
+    console.log("this.plot_features", this.plot_features);
     this.other = this.ad.other;
+    console.log("this.other", this.other);
     this.nearby_loc = this.ad.nearby_loc;
+    console.log("this.nearby_loc", this.nearby_loc);
     if (this.map) {
       this.mapReady(this.map);
     }
@@ -159,13 +172,13 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   getAd(id) {
     if (this.adsService.totalAds) {
       let ads = this.adsService.totalAds;
-
+      console.log("let ads", ads);
       let ad = ads.filter(function(ad) {
         return ad._id == id;
       });
       this.ad = ad[0];
       // console.log(Array.isArray(this.ad.rooms), this.ad);
-
+      console.log("let ad", this.ad);
       this.ngOnChanges();
     }
   }

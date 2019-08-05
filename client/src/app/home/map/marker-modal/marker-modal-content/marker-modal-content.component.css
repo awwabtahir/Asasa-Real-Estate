@@ -1,3 +1,59 @@
+.row-header{
+  width: 100%;
+    margin-left: 0px;
+
+    height: 25px !important;
+    margin-bottom: 2px;
+    background: #37bba3;
+    border-radius: 4px;
+}
+.icon-header{
+  text-align: right;
+    }
+.fav{
+  display: contents;
+}
+.header-row{
+  height: 25px;
+  text-align: end
+}
+.col-md-4{
+  max-width: 32%;
+  text-align: center;
+}
+.whatsapp{
+  background: transparent;
+  border: none;
+  width: 125px;
+}
+.upper {
+  background: #37bba3;
+  color: white;
+  width: 100%;
+  margin-left: 0px;
+  border-bottom: 2px solid;
+}
+.lower {
+  height: 25px;
+  background: #37bba3;
+  color: white;
+  width: 100%;
+  margin-left: 0px;
+}
+.modal-footer-content1 {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+.modal-footer-content2 {
+  margin-left: 20px;
+  font-weight: 500;
+}
+.modal-footer-content3 {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
 p {
   margin-bottom: 0;
 }
@@ -8,7 +64,7 @@ p {
   border: 1px solid #e9ecef;
 }
 agm-map {
-  height: 500px;
+  height: 400px;
 }
 iframe {
   width: 100%;
@@ -96,9 +152,36 @@ iframe {
   padding-left: 0;
   padding-top: 10px;
 }
+.fav_heat {
+  width: 40px;
+}
+.d-md-block {
+  padding: 9px;
+}
 
 @media (max-width: 768px) {
   .fav_heat {
     display: block !important;
+    padding: 9px;
+  }
+  .d-md-block {
+    padding: 0px;
+  }
+  .uan {
+    max-width: 70%;
+  }
+  .email {
+    max-width: 30%;
+  }
+  .whatsapp{
+    background: transparent;
+    border: none;
+    width: 110px;
+  }
+  .text-header{
+width: 70% !important
+  }
+  .icon-header{
+width:30% !important;
   }
 }
