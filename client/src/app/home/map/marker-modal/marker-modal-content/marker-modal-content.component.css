@@ -1,3 +1,30 @@
+.upper {
+  background: #37bba3;
+  color: white;
+  width: 100%;
+  margin-left: 0px;
+  border-bottom: 2px solid;
+}
+.lower {
+  background: #37bba3;
+  color: white;
+  width: 100%;
+  margin-left: 0px;
+}
+.modal-footer-content1 {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+.modal-footer-content2 {
+  margin-left: 20px;
+  font-weight: 500;
+}
+.modal-footer-content3 {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
 p {
   margin-bottom: 0;
 }
@@ -8,7 +35,7 @@ p {
   border: 1px solid #e9ecef;
 }
 agm-map {
-  height: 500px;
+  height: 400px;
 }
 iframe {
   width: 100%;
@@ -96,9 +123,25 @@ iframe {
   padding-left: 0;
   padding-top: 10px;
 }
+.fav_heat {
+  width: 40px;
+}
+.d-md-block {
+  padding: 9px;
+}
 
 @media (max-width: 768px) {
   .fav_heat {
     display: block !important;
+    padding: 9px;
+  }
+  .d-md-block {
+    padding: 0px;
+  }
+  .uan {
+    max-width: 70%;
+  }
+  .email {
+    max-width: 25%;
   }
 }
