@@ -1,3 +1,31 @@
+.row-header{
+  width: 100%;
+    margin-left: 0px;
+
+    height: 25px !important;
+    margin-bottom: 2px;
+    background: #37bba3;
+    border-radius: 4px;
+}
+.icon-header{
+  text-align: right;
+    }
+.fav{
+  display: contents;
+}
+.header-row{
+  height: 25px;
+  text-align: end
+}
+.col-md-4{
+  max-width: 32%;
+  text-align: center;
+}
+.whatsapp{
+  background: transparent;
+  border: none;
+  width: 125px;
+}
 .upper {
   background: #37bba3;
   color: white;
@@ -6,6 +34,7 @@
   border-bottom: 2px solid;
 }
 .lower {
+  height: 25px;
   background: #37bba3;
   color: white;
   width: 100%;
@@ -142,6 +171,17 @@ iframe {
     max-width: 70%;
   }
   .email {
-    max-width: 25%;
+    max-width: 30%;
+  }
+  .whatsapp{
+    background: transparent;
+    border: none;
+    width: 110px;
+  }
+  .text-header{
+width: 70% !important
+  }
+  .icon-header{
+width:30% !important;
   }
 }

@@ -34,20 +34,32 @@
     <div class="mt-1 ml-4 mr-4 mb-1 d-sm-block d-md-none ml-auto">
       <a (click)="backClicked()"><i class="far fa-times-circle fa-2x"></i></a>
     </div>
-  </div> -->
-<!-- <div class="modal-header _600" style="display: block !important">
-    <button
-      (click)="closeModal()"
-      type="button"
-      class="close"
-      data-dismiss="modal"
-      aria-label="Close"
+  /</div> -->
+<div class="row row-header" >
+  <div class="col-md-9 text-header" *ngFor="let data of myAllAdData">PROPERTY ID:&nbsp;{{ data._id }} </div>
+  <div class="col-md-3 icon-header">
+      <fav-heart
+      class=" "
+      style="
+      color: white;
+    position: absolute;
+    margin-left: -25px;
+    margin-top: -5px;"
+    ></fav-heart>
 
-    >
-      <span aria-hidden="true">×</span>
-    </button>
-    {{ "Property Detail" }}
-  </div> -->
+    <img
+    (click)="closeModal()"
+    src="/assets/images/close.png"
+    width="18"
+    height="18"
+    style="    margin-top: -5px;
+    margin-left: 5px;
+    margin-right: -5px;"
+  /></div>
+</div>
+<!-- <span style="width: 1px;"></span> -->
+
+
 <div class="row no-gutters">
   <div *ngIf="ad" class="col-md-12">
     <ul class="nav nav-tabs no-gutters" id="myTab" role="tablist">
@@ -108,7 +120,7 @@
           >Map</a
         >
       </li>
-      <li class="fav_heat">
+      <!-- <li class="fav_heat">
         <fav-heart
           class=" d-md-block"
           style="
@@ -128,9 +140,10 @@
           height="18"
           style="    margin-top: 17px;    margin-left: 10px;"
         />
-      </li>
+      </li> -->
     </ul>
-    <div class="tab-content" id="myTabContent">
+    <div class="tab-content" id="myTabContent" style="    overflow-y: scroll;
+    height: 455px;">
       <div
         *ngIf="ad.imagesData && ad.imagesData.images"
         class="tab-pane fade"
@@ -191,6 +204,153 @@
           >
           </agm-marker>
         </agm-map>
+      </div>
+
+      <div class="row upper">
+        <div class="col-md-3">
+          <div *ngFor="let data of rsDemand">
+            <div class="row1">
+              <P class="modal-footer-content1">{{ data.demand }}</P>
+            </div>
+          </div>
+          <div *ngFor="let data of locProperty">
+            <div class="row2">
+              <P class="modal-footer-content2"
+                >{{ data.location }}&nbsp;{{ data.city }}</P
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <!-- <div *ngFor="let data of rsDemand">
+            <div class="">
+              <P class="">{{ data.demand }}</P>
+            </div>
+          </div>
+          <div *ngFor="let data of locProperty">
+            <div class="">
+              <P class="">{{ data.location }}&nbsp;{{ data.city }}</P>
+            </div>
+          </div> -->
+        </div>
+      </div>
+
+
+      <!-- <div class="row lower">
+        <div class="col-md-9 uan" style="max-width: 74%">
+          <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
+        </div>
+        <span
+          style="    background: white;
+
+        width: 2px;"
+        ></span>
+        <div class="col-md-3 email">
+          <button
+            type="button"
+            style="    background: transparent;
+          border: none;"
+          >
+            EMAIL &nbsp;<i class="far fa-envelope"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row lower">
+        <div class="col-md-9 uan" style="max-width: 74%">
+          <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
+        </div>
+        <span
+          style="    background: white;
+
+        width: 2px;"
+        ></span>
+        <div class="col-md-3 email">
+          <button
+            type="button"
+            style="    background: transparent;
+          border: none;"
+          >
+            EMAIL &nbsp;<i class="far fa-envelope"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row lower">
+        <div class="col-md-9 uan" style="max-width: 74%">
+          <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
+        </div>
+        <span
+          style="    background: white;
+
+        width: 2px;"
+        ></span>
+        <div class="col-md-3 email">
+          <button
+            type="button"
+            style="    background: transparent;
+          border: none;"
+          >
+            EMAIL &nbsp;<i class="far fa-envelope"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row lower">
+        <div class="col-md-9 uan" style="max-width: 74%">
+          <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
+        </div>
+        <span
+          style="    background: white;
+
+        width: 2px;"
+        ></span>
+        <div class="col-md-3 email">
+          <button
+            type="button"
+            style="    background: transparent;
+          border: none;"
+          >
+            EMAIL &nbsp;<i class="far fa-envelope"></i>
+          </button>
+        </div>
+      </div> -->
+
+    </div>
+    <div class="row lower">
+      <div class="col-md-4 email">
+        <button
+          type="button"
+          style="    background: transparent;
+        border: none;"
+        >
+          Email &nbsp;<i class="far fa-envelope"></i>
+        </button>
+      </div>
+      <span
+      style="    background: white;
+
+    width: 5px;"
+    ></span>
+      <div class="col-md-4 email">
+        <button
+          type="button"
+          style="    background: transparent;
+        border: none;"
+        >
+          Call &nbsp;<i class="fas fa-phone"></i>
+        </button>
+      </div>
+      <span
+        style="    background: white;
+
+      width: 5px;"
+      ></span>
+      <div class="col-md-4 email">
+        <button
+        class="whatsapp"
+          type="button"
+
+        >
+          Whatsapp &nbsp;<i class="fab fa-whatsapp"></i>
+        </button>
       </div>
     </div>
   </div>
@@ -384,129 +544,6 @@
 
       </div>
     </div> -->
+
 </div>
 
-<div class="row upper">
-  <div col-md-3>
-    <div *ngFor="let data of rsDemand">
-      <div class="row1">
-        <P class="modal-footer-content1">{{ data.demand }}</P>
-      </div>
-    </div>
-    <div *ngFor="let data of locProperty">
-      <div class="row2">
-        <P class="modal-footer-content2"
-          >{{ data.location }}&nbsp;{{ data.city }}</P
-        >
-      </div>
-    </div>
-  </div>
-  <div class="col-md-9">
-    <!-- <div *ngFor="let data of rsDemand">
-      <div class="">
-        <P class="">{{ data.demand }}</P>
-      </div>
-    </div>
-    <div *ngFor="let data of locProperty">
-      <div class="">
-        <P class="">{{ data.location }}&nbsp;{{ data.city }}</P>
-      </div>
-    </div> -->
-  </div>
-</div>
-
-<div class="row lower">
-  <div class="col-md-9 uan" style="max-width: 74%">
-    <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
-  </div>
-  <span
-    style="    background: white;
-
-  width: 2px;"
-  ></span>
-  <div class="col-md-3 email">
-    <button
-      type="button"
-      style="    background: transparent;
-    border: none;"
-    >
-      EMAIL &nbsp;<i class="far fa-envelope"></i>
-    </button>
-  </div>
-</div>
-<div class="row lower">
-  <div class="col-md-9 uan" style="max-width: 74%">
-    <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
-  </div>
-  <span
-    style="    background: white;
-
-  width: 2px;"
-  ></span>
-  <div class="col-md-3 email">
-    <button
-      type="button"
-      style="    background: transparent;
-    border: none;"
-    >
-      EMAIL &nbsp;<i class="far fa-envelope"></i>
-    </button>
-  </div>
-</div>
-<div class="row lower">
-  <div class="col-md-9 uan" style="max-width: 74%">
-    <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
-  </div>
-  <span
-    style="    background: white;
-
-  width: 2px;"
-  ></span>
-  <div class="col-md-3 email">
-    <button
-      type="button"
-      style="    background: transparent;
-    border: none;"
-    >
-      EMAIL &nbsp;<i class="far fa-envelope"></i>
-    </button>
-  </div>
-</div>
-<div class="row lower">
-  <div class="col-md-9 uan" style="max-width: 74%">
-    <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
-  </div>
-  <span
-    style="    background: white;
-
-  width: 2px;"
-  ></span>
-  <div class="col-md-3 email">
-    <button
-      type="button"
-      style="    background: transparent;
-    border: none;"
-    >
-      EMAIL &nbsp;<i class="far fa-envelope"></i>
-    </button>
-  </div>
-</div>
-<div class="row lower">
-  <div class="col-md-9 uan" style="max-width: 74%">
-    <P class="modal-footer-content3">UAN: +92-51-111-127-272</P>
-  </div>
-  <span
-    style="    background: white;
-
-  width: 2px;"
-  ></span>
-  <div class="col-md-3 email">
-    <button
-      type="button"
-      style="    background: transparent;
-    border: none;"
-    >
-      EMAIL &nbsp;<i class="far fa-envelope"></i>
-    </button>
-  </div>
-</div>
