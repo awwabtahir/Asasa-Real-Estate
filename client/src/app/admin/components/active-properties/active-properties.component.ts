@@ -4,7 +4,6 @@ import { ad } from "shared/models/ad";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../../../authentication.service";
 import { DataTableDirective } from "angular-datatables";
-import { DataTable } from "angular-6-datatable";
 
 @Component({
   selector: "app-active-properties",
@@ -21,7 +20,23 @@ export class ActivePropertiesComponent implements OnInit {
   user;
   agent = false;
   agents;
-  placeholder: any;
+
+  options = [
+    { value: "_id", name: "Filter By Ref ID", placeholder: "Ref Id" },
+    {
+      value: "location",
+      name: "Filter By Location",
+      placeholder: "Location"
+    },
+    { value: "type", name: "Filter By Type", placeholder: "Type" },
+    {
+      value: "propNumber",
+      name: "Filter By Property Number",
+      placeholder: "Property Number"
+    }
+  ];
+  selectedOption = this.options[0].value;
+  placeholder = this.options[0].placeholder;
   constructor(
     private propertyService: PropertyService,
     private router: Router,

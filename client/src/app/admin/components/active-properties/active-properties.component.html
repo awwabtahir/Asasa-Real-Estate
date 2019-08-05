@@ -15,11 +15,14 @@
         [(ngModel)]="refId"
       />
       <ng-select
+        [items]="options"
         bindLabel="name"
         bindValue="value"
         class="mr-2 ml-2"
         placeholder="Filter By"
+        [(ngModel)]="selectedOption"
         (change)="optionChange($event)"
+        [clearable]="false"
       >
       </ng-select>
 
@@ -35,7 +38,7 @@
     </div>
     <table
       class="table table-hover"
-      [mfData]="filteredData | filterlist: refId"
+      [mfData]="filteredData | filterlist: selectedOption:refId"
       [(mfSortBy)]="sortBy"
       [(mfSortOrder)]="sortOrder"
       #mf="mfDataTable"

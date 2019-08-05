@@ -24,7 +24,8 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     title: "",
     description: "",
     vidUrl: "",
-    purpose: "buy"
+    purpose: "buy",
+    locationData: {}
   };
   cities = [];
   locations = [];
@@ -55,16 +56,15 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   ) {}
 
   async ngOnInit() {
+    await this.getCities();
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "agent") this.agent = true;
     if (this.agent == true) {
       this.ad.userId = this.user.userId;
       this.selectedCity = this.user.cityId;
-      this.getLocations(this.selectedCity);
+      await this.getLocations(this.selectedCity);
       // await new Promise((resolve, reject) => setTimeout(resolve, 1500));
     }
-
-    await this.getCities();
   }
 
   ngOnDestroy() {
@@ -76,6 +76,10 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       this.auth.getCities().subscribe(
         cities => {
           this.cities = cities;
+
+          this.city = this.cities.filter(city => {
+            return city._id == this.user.cityId;
+          });
 
           resolve("done");
         },
@@ -106,8 +110,9 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         this.locations = locations.filter(function(loc) {
           return loc.cityId == selectedCity;
         });
+
         //Set Page to Edit
-        if (this.item) {
+        if (this.item && this.propertyService.getItemforUpdate()) {
           let location = this.locations.filter(location => {
             return location.location == this.item.locationData.location;
           });
@@ -120,7 +125,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
         }
         if (this.agent == true) {
           this.agentLocs = this.user.locationId;
-          this.city = this.cities.filter(function(city) {
+          this.city = this.cities.filter(city => {
             return city._id == selectedCity;
           });
           this.filterLocations(this.agentLocs);
@@ -169,6 +174,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
 
   save(uploadMedia) {
     this.propertyService.save(this.ad);
+
     this.uploadMedia = uploadMedia;
     if (!uploadMedia) this.router.navigateByUrl("/dashboard/activeProperties");
   }
