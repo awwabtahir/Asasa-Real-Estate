@@ -4,7 +4,8 @@ import {
   Input,
   OnDestroy,
   EventEmitter,
-  Output
+  Output,
+  TemplateRef
 } from "@angular/core";
 import { ad } from "shared/models/ad";
 import { MapService } from "shared/services/map.service";
@@ -15,7 +16,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Location } from "@angular/common";
 import { FilterService } from "shared/services/filter.service";
 import { AdsService } from "shared/services/ads.service";
-import { BsModalRef } from "ngx-bootstrap";
+import { BsModalRef, BsModalService } from "ngx-bootstrap";
 
 declare var PANOLENS: any;
 
@@ -35,7 +36,8 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     private locationUrl: Location,
     private mapService: MapService,
     private filterService: FilterService,
-    private router: Router
+    private router: Router,
+    private modalServiceOne: BsModalService
   ) {}
   @Input() ad: any;
   @Output() output = new EventEmitter<any>();
@@ -168,6 +170,15 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     this.output.emit(null);
 
     // this.modalRef.hide();
+  }
+  emailModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalServiceOne.show(template, { class: "modal-sm" });
+  }
+  callModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalServiceOne.show(template, { class: "modal-sm" });
+  }
+  whatsappModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalServiceOne.show(template, { class: "modal-sm" });
   }
   getAd(id) {
     if (this.adsService.totalAds) {

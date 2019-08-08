@@ -317,6 +317,7 @@
     <div class="row lower">
       <div class="col-md-4 email">
         <button
+        (click)="emailModal(emailFormModal)"
           type="button"
           style="    background: transparent;
         border: none;"
@@ -331,6 +332,7 @@
     ></span>
       <div class="col-md-4 email">
         <button
+        (click)="callModal(callFormModal)"
           type="button"
           style="    background: transparent;
         border: none;"
@@ -347,7 +349,7 @@
         <button
         class="whatsapp"
           type="button"
-
+          (click)="whatsappModal(whatsappFormModal)"
         >
           Whatsapp &nbsp;<i class="fab fa-whatsapp"></i>
         </button>
@@ -547,3 +549,32 @@
 
 </div>
 
+<ng-template #emailFormModal>
+ <email></email>
+</ng-template>
+<ng-template #callFormModal >
+
+  <div class="container"><div class="row"> <img src="/assets/images/telephone-icon.png" width="46px" height="46px" style="    margin-left: 3px;
+    margin-top: 5px;" /><div style="    padding: 20px;
+    font-size: 17px;
+    font-weight: 600;">UAN: +92-51-111-127-272</div></div>
+<div style="width: 100%;
+height: 1px;
+background: #37bba3;"></div>
+  <div  *ngFor="let data of myAllAdData">Please mention Property ID:<span style="    font-weight: 600;">{{data._id}}</span> when calling us.</div>
+</div>
+
+ </ng-template>
+ <ng-template #whatsappFormModal >
+    <div class="container"><div class="row">
+        <i class="fab fa-whatsapp fa-3x"  style="    margin-left: 20px;
+        margin-top: 5px;"></i> <div style="    padding: 20px;
+      font-size: 17px;
+      font-weight: 600;">+92-311-2233656</div></div>
+<div style="width: 100%;
+height: 1px;
+background: #37bba3;"></div>
+    <div  *ngFor="let data of myAllAdData" style="    margin-left: 20px;">Please mention Property ID: <span style="    font-weight: 600;">{{data._id}}</span> when calling us.</div>
+  </div>
+
+   </ng-template>
