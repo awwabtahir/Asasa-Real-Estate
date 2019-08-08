@@ -19,7 +19,6 @@ export class PropertyService {
   other = {};
   firstVisit: boolean = true;
 
-
   constructor(private auth: AuthenticationService, private router: Router) {}
 
   save(ad) {

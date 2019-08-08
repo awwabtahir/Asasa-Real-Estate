@@ -182,6 +182,8 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
   image3dUrl;
   async update(uploadMedia) {
     await new Promise((resolve, reject) => setTimeout(resolve, 1500));
+
+    this.ad.locationData = this.locationData;
     this.propertyService.update(this.ad);
     this.uploadMedia = uploadMedia;
     if (this.item.imagesData !== undefined) {
@@ -214,7 +216,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
     this.selectedCity = city[0]._id;
     await this.getLocations(this.selectedCity);
   }
-
+  locationData: any;
   private setitem(item) {
     let promise = new Promise((resolve, reject) => {
       this.ad["_id"] = item._id;
@@ -232,6 +234,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       this.ad.description = item.description;
       this.ad.vidUrl = item.vidUrl;
       this.selectedPurpose = item.purpose;
+      this.locationData = item.locationData;
       resolve("done");
 
       reject(new Error("…"));

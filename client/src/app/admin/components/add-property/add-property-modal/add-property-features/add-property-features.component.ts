@@ -44,6 +44,7 @@ export class AddPropertyFeaturesComponent implements OnInit, OnDestroy {
     }
     this.formChangesSubscription = this.ngForm.form.valueChanges.subscribe(
       features => {
+        console.log(features);
         this.propertyService.addFeatures(features);
       }
     );

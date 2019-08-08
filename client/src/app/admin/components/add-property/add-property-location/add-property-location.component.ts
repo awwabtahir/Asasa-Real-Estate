@@ -63,32 +63,6 @@ export class AddPropertyLocationComponent
   ) {}
 
   ngOnInit() {
-    //create search FormControl
-    // this.searchControl = new FormControl();
-
-    //set location data
-
-    // //load Places Autocomplete
-    // this.mapsAPILoader.load().then(() => {
-    //   let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {});
-    //   autocomplete.setComponentRestrictions({ 'country': ['pk'] });
-    //   autocomplete.addListener("place_changed", () => {
-    //     this.ngZone.run(() => {
-    //       //get the place result
-    //       let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-    //       //verify result
-    //       if (place.geometry === undefined || place.geometry === null) return;
-
-    //       //set latitude, longitude and zoom
-    //       this.latitude = this.mlatitude = place.geometry.location.lat();
-    //       this.longitude = this.mlongitude = place.geometry.location.lng();
-    //       this.getCityWithLoc(this.latitude, this.longitude);
-    //       this.setLocationData();
-    //     });
-    //   });
-    // });
-
     this.user = JSON.parse(localStorage.getItem("user"));
     if (this.user.access == "agent") this.agent = true;
 
@@ -108,33 +82,33 @@ export class AddPropertyLocationComponent
       if (this.user.subLocations.length !== 0)
         this.locationData.subLocations = subLocations;
     }
-
+    //set google map
+    if (!this.locationData || this.edit) {
+      this.latitude = this.mlatitude = this.locationData.lat;
+      this.longitude = this.mlongitude = this.locationData.lng;
+      this.location = this.locationData.location;
+      this.city = this.cityData.city;
+    }
     this.sub = this.route.params.subscribe(params => {
       this.id = +params["id"];
       if (this.id && this.propertyService.getItemforUpdate()) {
         let item = this.propertyService.getItemforUpdate();
+
         this.latitude = this.mlatitude = item.locationData.lat;
         this.longitude = this.mlongitude = item.locationData.lng;
         this.sector = item.locationData.sector;
         this.location = item.locationData.location;
         this.city = item.locationData.city;
+
+        this.setLocationData(false);
       }
     });
-
-    //set google map
-    if (!this.locationData || this.edit) return;
-    this.latitude = this.mlatitude = this.locationData.lat;
-    this.longitude = this.mlongitude = this.locationData.lng;
-    this.location = this.locationData.location;
-    this.city = this.cityData[0].city;
-
-    this.setLocationData();
   }
 
   ngOnChanges() {
     if (this.locationData) {
       this.location = this.locationData.location;
-      this.setLocationData(false);
+      this.setLocationData();
     }
 
     if (this.edit) {
@@ -169,7 +143,7 @@ export class AddPropertyLocationComponent
     this.mlatitude = event.coords.lat;
     this.mlongitude = event.coords.lng;
     this.getCityWithLoc(this.mlatitude, this.mlongitude);
-    this.setLocationData();
+    this.setLocationData(false);
   }
 
   map: any;
@@ -201,15 +175,23 @@ export class AddPropertyLocationComponent
 
   private async setLocationData(wait = true) {
     // wait 3 seconds
-
-    if (wait) await new Promise((resolve, reject) => setTimeout(resolve, 3000));
-    this.propertyService.addLocation({
-      lat: this.mlatitude,
-      lng: this.mlongitude,
-      sector: this.sector,
-      location: this.location,
-      city: this.city
-    });
+    if (wait) {
+      this.propertyService.addLocation({
+        lat: this.locationData.lat,
+        lng: this.locationData.lng,
+        sector: this.sector,
+        location: this.locationData.location,
+        city: this.cityData.city
+      });
+    } else {
+      this.propertyService.addLocation({
+        lat: this.mlatitude,
+        lng: this.mlongitude,
+        sector: this.sector,
+        location: this.location,
+        city: this.city
+      });
+    }
   }
 
   private getCityWithLoc(lat, lng) {
