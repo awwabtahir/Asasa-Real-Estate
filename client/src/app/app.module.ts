@@ -94,17 +94,17 @@ export function getAuthServiceConfigs() {
     NavbarComponent,
     MarkerComponent,
     MarkerModalComponent,
-    PhotoSliderComponent,
+
     KeysPipe,
     SafeResourceUrlPipe,
-    MarkerModalContentComponent,
+
     SearchFilterComponent,
     LinksComponent,
     SocialLoginComponent,
     TermsComponent,
     PrivacyComponent,
     InfoWindowContentComponent,
-    EmailComponent,
+
     RegionsComponent,
     AboutUsComponent,
     ContactUsComponent,

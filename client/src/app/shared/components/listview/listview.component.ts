@@ -14,6 +14,7 @@ export class ListviewComponent implements OnInit {
   propertiesAvailable = false;
   properties;
   modalRef: BsModalRef;
+  ad:any;
   constructor(
     private adsService: AdsService,
     private filterService: FilterService,
@@ -29,8 +30,9 @@ export class ListviewComponent implements OnInit {
   private priceConverter(value) {
     return this.filterService.priceFilter(value);
   }
-  openAdModal(template: TemplateRef<any>, selectedMarkerData: any) {
-    // console.log("main click ho rha hu hehehehhehee ");
+  openAdModal(template: TemplateRef<any>, ad) {
+  this.ad=ad.ad;
+  console.log("my ad data", this.ad)
     this.modalRef = this.modalService.show(template, { class: "modal-xl" });
   }
   getAd(id) {
