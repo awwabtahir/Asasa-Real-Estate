@@ -13,7 +13,7 @@
         let i = index
       "
     >
-      <div class="col-sm-4" (click)="openAdModal(adclick)">
+      <div class="col-sm-4" (click)="openAdModal(adclick,getAd(l))">
         <ng-container *ngTemplateOutlet="adTemplate; context: getAd(l)">
         </ng-container>
       </div>
@@ -39,7 +39,7 @@
     </div>
     <div class="feature-text">
       <div class="text-center feature-title">
-        <!-- <h5>{{ ad.subtype }}</h5> -->
+
         <div class="row_listview">
           <div class="div_listview">
             <i class="fa fa-map-marker"></i> {{ ad.locationData.location }}
@@ -52,18 +52,19 @@
           {{ ad.areaType | titlecase }}&nbsp;( {{ ad.type | titlecase }})
         </div>
 
-        <!-- <a
-          class="btn btn-outline-success btn-sm"
-          routerLink="/property-details/{{ ad._id }}"
-          >Click Here For More Details</a
-        > -->
+
       </div>
 
       <div class="room-price">Rs. {{ priceConverter(ad.demand) }}</div>
     </div>
   </div>
-</ng-template>
-<ng-template #adclick>
 
-  <!-- <marker-modal-content></marker-modal-content> -->
+</ng-template>
+
+<ng-template  #adclick>
+
+    <marker-modal-content
+
+    [ad]="ad"
+  ></marker-modal-content>
 </ng-template>

@@ -16,10 +16,18 @@ import { RouterModule } from "@angular/router";
 import { ViewService } from "./services/view.service";
 import { AdsService } from "shared/services/ads.service";
 import { ModalModule } from "ngx-bootstrap";
+import { MarkerModalContentComponent } from "app/home/map/marker-modal/marker-modal-content/marker-modal-content.component";
+import { PhotoSliderComponent } from "app/home/map/marker-modal/photo-slider/photo-slider.component";
+import { AgmCoreModule } from "@agm/core";
+import { EmailComponent } from "app/home/email/email.component";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 @NgModule({
-  imports: [CommonModule, RouterModule, NgxPaginationModule, ModalModule],
-  declarations: [ListviewComponent, FavHeartComponent, CallComponent],
+  imports: [ReactiveFormsModule, FormsModule,CommonModule, RouterModule, NgxPaginationModule, ModalModule, AgmCoreModule.forRoot({
+    apiKey: "AIzaSyCHA1nWRxqPxa86h3_FdsLdkEf-vJVkoU4",
+    libraries: ["places"]
+  }),],
+  declarations: [EmailComponent, PhotoSliderComponent, MarkerModalContentComponent, ListviewComponent, FavHeartComponent, CallComponent],
   providers: [
     AuthGuardService,
     PropertyService,
@@ -31,6 +39,6 @@ import { ModalModule } from "ngx-bootstrap";
     ViewService,
     AdsService
   ],
-  exports: [ListviewComponent, FavHeartComponent, CallComponent]
+  exports: [EmailComponent, PhotoSliderComponent, MarkerModalContentComponent, ListviewComponent, FavHeartComponent, CallComponent]
 })
 export class SharedModule {}

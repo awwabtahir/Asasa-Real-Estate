@@ -56,7 +56,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   private sub: any;
   myData: any;
   map: any;
-
+  disabled:boolean=true;
   url3D;
 
   panorama;
@@ -109,11 +109,14 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
     }
 
     if (this.ad) {
-      console.log("this.ad this.ad", this.ad);
+
       this.myData = this.ad;
       this.ngOnChanges();
       this.myAllAdData.push(this.ad);
+      console.log("this.ad this.ad", this.ad);
+      console.log("this.ad this.ad", this.myAllAdData);
       this.rsDemand.push(this.basic);
+      // console.log("this.ad this.ad", this.ad);
       this.locProperty.push(this.location);
     }
   }
@@ -159,7 +162,12 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
       );
     }
   }
+  moreDetailScroll(el: HTMLElement){
+    setTimeout(() => {
+      el.scrollIntoView({behavior: 'smooth'});
+    }, 250);
 
+  }
   ngOnDestroy() {
     if (this.sub) {
       this.sub.unsubscribe();
