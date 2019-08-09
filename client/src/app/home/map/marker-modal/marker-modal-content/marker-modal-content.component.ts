@@ -56,7 +56,7 @@ export class MarkerModalContentComponent implements OnInit, OnDestroy {
   private sub: any;
   myData: any;
   map: any;
-
+  disabled:boolean=true;
   url3D;
 
   panorama;

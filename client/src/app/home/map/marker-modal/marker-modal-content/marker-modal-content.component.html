@@ -246,12 +246,170 @@
           </div>
         </div>
       </div>
-      <div class="row middle">
-          <div id="moreDetail" class="collapse" #target>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </div>
+
+          <div  id="moreDetail" class="collapse" #target>
+              <div class="row middle-1" style="   justify-content: center;" >
+            <span *ngFor="let data of myAllAdData">
+             <span *ngIf="data?.type=='house'">
+                <span class="font-span2" *ngIf="data?.type=='house'">
+                   Kitchens {{data?.rooms.kitchens}}
+                </span>
+                <span  >|</span>
+                <span class="font-span2" *ngIf="data?.type=='house'">
+                    Servant Quarters {{data?.rooms.servant_quarters}}
+                 </span>
+                 <span  >|</span>
+                <span class="font-span2" *ngIf="data?.type=='house'">
+                    Store Rooms {{data?.rooms.store_rooms}}
+                 </span>
+                 <span >|</span>
+                 <span class="font-span2" *ngIf="data?.type=='house'">
+                    Other Rooms {{data?.rooms.other_rooms}}
+                 </span>
+             </span>
+             <span *ngIf="data?.type=='commercial'">
+                <span class="font-span2" *ngIf="data?.type=='commercial'">
+                    Servant Quarters {{data?.rooms.servant_quarters}}
+                </span>
+                <span  >|</span>
+                <span class="font-span2" *ngIf="data?.type=='commercial'">
+                    Other Rooms {{data?.rooms.other_rooms}}
+                 </span>
+
+
+             </span>
+
+            </span>
+              </div>
+            <div class="row middle-2" style="    justify-content: center;">
+                <span style="    text-align: center;
+                background: white;
+                color: #37bba3;
+                border-radius: 15px;
+                width: 180px;
+                margin-top: 5px;
+                margin-bottom: 5px;">Special Features</span>
+                </div>
+                <div class="row middle-3" *ngFor="let data of myAllAdData" style="    justify-content: center;">
+                    <span *ngIf="data?.type=='plot'">
+                        <span class="font-span2" *ngIf="data?.plot_features.balloted==true">
+                            Balloted <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.balloted==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.boundary_wall==true">
+                            Boundary Wall <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.boundary_wall==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.corner==true">
+                            Corner <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.corner==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.disputed==true">
+                            Disputed <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.disputed==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.electricity==true">
+                            Electricity <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.electricity==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.file==true">
+                            File <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.file==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.park_facing==true">
+                            Park Facing <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.park_facing==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.possession==true">
+                            Possession <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.possession==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.sewerage==true">
+                            Sewerage <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.sewerage==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.sui_gas==true">
+                            Sui Gas <i class="far fa-check-square"></i>
+                        </span>
+                        <span *ngIf="data?.plot_features.sui_gas==true" >|</span>
+                        <span class="font-span2" *ngIf="data?.plot_features.water_supply==true">
+                            Water Supply <i class="far fa-check-square"></i>
+                        </span>
+                        <!-- <span *ngIf="data?.plot_features.water_supply==true" >|</span> -->
+                      </span>
+                      <span *ngIf="data?.type=='house'">
+                          <span class="font-span2" *ngIf="data?.rooms.dining_room==true">
+                              Dining Room <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.dining_room==true" >|</span>
+                          <span class="font-span2" *ngIf="data?.rooms.drawing_room==true">
+                              Drawing Room <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.drawing_room==true" >|</span>
+                          <span class="font-span2" *ngIf="data?.rooms.gym==true">
+                              Gym <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.gym==true" >|</span>
+                          <span class="font-span2" *ngIf="data?.rooms.laundry_room==true">
+                              Laundry Room <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.laundry_room==true" >|</span>
+                          <span class="font-span2" *ngIf="data?.rooms.lounge_room==true">
+                              Lounge Room <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.lounge_room==true" >|</span>
+                          <span class="font-span2" *ngIf="data?.rooms.powder_room==true">
+                              Powder Room <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.powder_room==true" >|</span>
+                          <span class="font-span2" *ngIf="data?.rooms.prayer_room==true">
+                              Prayer Room <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.prayer_room==true" >|</span>
+                          <span class="font-span2" *ngIf="data?.rooms.steam_room==true">
+                              Steam Room <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.steam_room==true" >|</span>
+                          <span class="font-span2" *ngIf="data?.rooms.studing_room==true">
+                              Studying Room <i class="far fa-check-square"></i>
+                          </span>
+                          <span *ngIf="data?.rooms.studing_room==true" >|</span>
+
+
+                        </span>
+                        <span *ngIf="data?.type=='commercial'">
+                            <span class="font-span2" *ngIf="data?.biz_comm.atm==true">
+                                ATM <i class="far fa-check-square"></i>
+                            </span>
+                            <span *ngIf="data?.biz_comm.atm==true" >|</span>
+                            <span class="font-span2" *ngIf="data?.biz_comm.business_center==true">
+                                Business Center <i class="far fa-check-square"></i>
+                            </span>
+                            <span *ngIf="data?.biz_comm.business_center==true" >|</span>
+                            <span class="font-span2" *ngIf="data?.biz_comm.cable_tv==true">
+                                Cable Tv <i class="far fa-check-square"></i>
+                            </span>
+                            <span *ngIf="data?.biz_comm.cable_tv==true" >|</span>
+                            <span class="font-span2" *ngIf="data?.biz_comm.intercom==true">
+                                Intercom <i class="far fa-check-square"></i>
+                            </span>
+                            <span *ngIf="data?.biz_comm.intercom==true" >|</span>
+                            <span class="font-span2" *ngIf="data?.biz_comm.internet==true">
+                                Internet <i class="far fa-check-square"></i>
+                            </span>
+                            <span *ngIf="data?.biz_comm.internet==true" >|</span>
+                            <span class="font-span2" *ngIf="data?.healthcare.lawn==true">
+                                Lawn <i class="far fa-check-square"></i>
+                            </span>
+                            <span *ngIf="data?.healthcare.lawn==true" >|</span>
+                            <span class="font-span2" *ngIf="data?.other.maintainance_staff==true">
+                                Maintainance Staff <i class="far fa-check-square"></i>
+                            </span>
+                            <span *ngIf="data?.other.maintainance_staff==true" >|</span>
+
+                          </span>
+                    </div>
+
       </div>
 
     </div>

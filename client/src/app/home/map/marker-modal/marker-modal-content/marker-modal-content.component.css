@@ -41,6 +41,12 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+.font-span2{
+  font-size: 18px;
+    font-weight: 400;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .row-header{
   width: 100%;
     margin-left: 0px;
@@ -76,7 +82,21 @@
   margin-left: 0px;
 
 }
-.middle{
+.middle-1{
+  background: #37bba3;
+  color: white;
+  width: 100%;
+  margin-left: 0px;
+  border-bottom: 2px solid;
+}
+.middle-2{
+  background: #37bba3;
+  color: white;
+  width: 100%;
+  margin-left: 0px;
+
+}
+.middle-3{
   background: #37bba3;
   color: white;
   width: 100%;
