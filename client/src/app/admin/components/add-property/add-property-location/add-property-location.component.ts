@@ -67,7 +67,7 @@ export class AddPropertyLocationComponent
     if (this.user.access == "agent") this.agent = true;
 
     if (this.agent == true) {
-      this.city = this.cityData[0].city;
+      this.city = this.cityData.city;
 
       let subLocations = [];
       for (var i = 0; i < this.user.subLocations.length; i++) {
@@ -175,6 +175,7 @@ export class AddPropertyLocationComponent
 
   private async setLocationData(wait = true) {
     // wait 3 seconds
+
     if (wait) {
       this.propertyService.addLocation({
         lat: this.locationData.lat,

@@ -81,6 +81,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
             return city._id == this.user.cityId;
           });
 
+          this.city = this.city[0];
           resolve("done");
         },
         err => {
@@ -128,6 +129,8 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
           this.city = this.cities.filter(city => {
             return city._id == selectedCity;
           });
+
+          this.city = this.city[0];
           this.filterLocations(this.agentLocs);
         }
       },
