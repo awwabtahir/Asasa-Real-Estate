@@ -82,6 +82,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
           });
 
           this.city = this.city[0];
+
           resolve("done");
         },
         err => {
@@ -131,6 +132,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
           });
 
           this.city = this.city[0];
+
           this.filterLocations(this.agentLocs);
         }
       },
@@ -149,6 +151,7 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       return city._id == selectedCity;
     });
     this.city = this.city[0];
+
     this.selectedLoc = null;
   }
 
@@ -238,6 +241,11 @@ export class AddPropertyComponent implements OnInit, OnDestroy {
       this.ad.vidUrl = item.vidUrl;
       this.selectedPurpose = item.purpose;
       this.locationData = item.locationData;
+      this.ad.locationData = item.locationData;
+
+      this.city = this.cities.filter(city => {
+        return city.city == this.ad.locationData["city"];
+      });
       resolve("done");
 
       reject(new Error("…"));
