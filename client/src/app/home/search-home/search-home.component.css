@@ -1,3 +1,4 @@
+ 
 .box {
   background-color: black;
   text-align: center;
@@ -512,8 +513,8 @@ body {
     opacity: 0;
   }
 }
-.slideshow li:nth-child(1) span {
-  /* background-image: url("/assets/images/background.jpg"); */
+/* .slideshow li:nth-child(1) span {
+ 
 
   background-image: linear-gradient(
       0deg,
@@ -521,10 +522,10 @@ body {
       rgba(0, 0, 0, 0.5)
     ),
     url("/assets/images/background.jpg");
-}
-
+} */
+/* 
 .slideshow li:nth-child(2) span {
-  /* background-image: url("/assets/images/isb.jpg"); */
+  
   background-image: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.5),
@@ -537,7 +538,7 @@ body {
 }
 
 .slideshow li:nth-child(3) span {
-  /* background-image: url("/assets/images/khi.jpg"); */
+  
   background-image: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.5),
@@ -550,7 +551,7 @@ body {
 }
 
 .slideshow li:nth-child(4) span {
-  /* background-image: url("/assets/images/pshwr.jpg"); */
+  
   background-image: linear-gradient(
       0deg,
       rgba(0, 0, 0, 0.5),
@@ -560,7 +561,7 @@ body {
   -webkit-animation-delay: 18s;
   -moz-animation-delay: 18s;
   animation-delay: 18s;
-}
+} */
 
 .btn-outline-success {
   border-color: darkgray;
