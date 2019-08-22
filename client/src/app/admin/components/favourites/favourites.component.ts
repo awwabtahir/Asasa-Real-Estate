@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-favourites',
-  templateUrl: './favourites.component.html',
-  styleUrls: ['./favourites.component.css']
+  selector: "app-favourites",
+  templateUrl: "./favourites.component.html",
+  styleUrls: ["./favourites.component.css"]
 })
 export class FavouritesComponent implements OnInit {
-
   favs;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    let customer = JSON.parse(localStorage.getItem('customer-data'));
+    let customer = JSON.parse(localStorage.getItem("customer-data"));
     this.favs = customer.favourites;
+    console.log("lalalalallalallalalalalalala", this.favs);
   }
-
 }

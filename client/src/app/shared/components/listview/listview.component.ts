@@ -14,7 +14,7 @@ export class ListviewComponent implements OnInit {
   propertiesAvailable = false;
   properties;
   modalRef: BsModalRef;
-  ad:any;
+  ad: any;
   constructor(
     private adsService: AdsService,
     private filterService: FilterService,
@@ -22,17 +22,20 @@ export class ListviewComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+   
     this.adsService.filteredAdsChange.subscribe(res => {
       this.properties = res;
+     
       this.getList(res);
     });
+  
   }
   private priceConverter(value) {
     return this.filterService.priceFilter(value);
   }
   openAdModal(template: TemplateRef<any>, ad) {
-  this.ad=ad.ad;
-  console.log("my ad data", this.ad)
+    this.ad = ad.ad;
+    console.log("my ad data", this.ad);
     this.modalRef = this.modalService.show(template, { class: "modal-xl" });
   }
   getAd(id) {

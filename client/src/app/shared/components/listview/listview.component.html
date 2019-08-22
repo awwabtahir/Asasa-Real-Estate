@@ -7,33 +7,26 @@
     ></pagination-controls> -->
   </div>
   <div *ngIf="propertiesAvailable" class="row">
-    <ng-container
-      *ngFor="
+    <ng-container *ngFor="
         let l of list | paginate: { itemsPerPage: 6, currentPage: p };
         let i = index
-      "
-    >
+      ">
       <div class="col-sm-4" (click)="openAdModal(adclick,getAd(l))">
+
         <ng-container *ngTemplateOutlet="adTemplate; context: getAd(l)">
         </ng-container>
       </div>
     </ng-container>
   </div>
   <div *ngIf="propertiesAvailable" class="row">
-    <pagination-controls
-      (pageChange)="p = $event"
-      responsive="true"
-    ></pagination-controls>
+    <pagination-controls (pageChange)="p = $event" responsive="true"></pagination-controls>
   </div>
 </div>
 
 <ng-template #adTemplate let-ad="ad">
   <div class="feature-item">
-    <div
-      class="feature-pic set-bg"
-      data-setbg="img/feature/1.jpg"
-      style="background-image: url(https://grantcardonetv.com/wp-content/uploads/gctv-recommend-real-estate.jpg);"
-    >
+    <div class="feature-pic set-bg" data-setbg="img/feature/1.jpg"
+      style="background-image: url(https://grantcardonetv.com/wp-content/uploads/gctv-recommend-real-estate.jpg);">
       <div class="sale-notic">FOR SALE</div>
       <fav-heart [adId]="ad._id"></fav-heart>
     </div>
@@ -61,10 +54,7 @@
 
 </ng-template>
 
-<ng-template  #adclick>
+<ng-template #adclick>
 
-    <marker-modal-content
-
-    [ad]="ad"
-  ></marker-modal-content>
+  <marker-modal-content [ad]="ad"></marker-modal-content>
 </ng-template>

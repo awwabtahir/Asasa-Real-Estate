@@ -38,10 +38,13 @@
 <div class="row row-header">
   <div class="col-md-9 text-header" *ngFor="let data of myAllAdData">PROPERTY ID:&nbsp;{{ data._id }} </div>
   <div class="col-md-3 icon-header">
-    <fav-heart class=" " style="color: black;
-    position: absolute;
-    margin-left: -25px;
-    margin-top: -5px;"></fav-heart>
+
+    <fav-heart *ngIf="ad" class=" " [adId]="ad?._id" style="color: black;
+      position: absolute;
+      margin-left: -25px;
+      margin-top: -5px;"></fav-heart>
+
+
 
     <img (click)="closeModal()" src="/assets/images/close.png" width="18" height="18" style="margin-top: -5px;
     margin-left: 5px;
@@ -348,25 +351,30 @@
       <div class="col-md-4 email">
         <button (click)="emailModal(emailFormModal)" type="button" style="    background: transparent;
         border: none;">
-          Email &nbsp;<i class="far fa-envelope"></i>
+          <i class="far fa-envelope"></i>
+          &nbsp;
+          <span class="mobile-number">Email</span>
         </button>
       </div>
       <span style="    background: white;
 
     width: 5px;"></span>
       <div class="col-md-4 email">
-        <a href="https://wa.me/+923026326656"  type="button" style="    background: transparent;
-        border: none;">
-          Call &nbsp;<i class="fas fa-phone"></i>
-      </a>
+        <a style="color: whitesmoke;" href="tel:+923112233656">
+          <i class="fas fa-phone"></i> &nbsp;
+          <span class="mobile-number">(+92)-311-2233656</span>
+
+        </a>
       </div>
       <span style="    background: white;
 
       width: 5px;"></span>
       <div class="col-md-4 email">
-        <button class="whatsapp" type="button" (click)="whatsappModal(whatsappFormModal)">
-          Whatsapp &nbsp;<i class="fab fa-whatsapp"></i>
-        </button>
+        <a style="color: whitesmoke;" href="https://wa.me/+923112233656">
+          <i class="fab fa-whatsapp"></i>
+          &nbsp;
+          <span class="mobile-number">Whatsapp</span>
+        </a>
       </div>
     </div>
   </div>

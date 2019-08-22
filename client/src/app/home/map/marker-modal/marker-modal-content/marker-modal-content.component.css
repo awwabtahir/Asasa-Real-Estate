@@ -1,3 +1,8 @@
+.mobile-number {
+
+  color: whitesmoke;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -256,6 +261,11 @@ iframe {
 }
 
 @media (max-width: 768px) {
+  .mobile-number {
+    display: none;
+
+  }
+
   .fav_heat {
     display: block !important;
     padding: 9px;
