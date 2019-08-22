@@ -106,7 +106,7 @@
       <div class="tab-pane active" id="start" *ngIf="ad.imagesData && ad.imagesData.images">
         <photo-slider [images]="ad.imagesData.images"></photo-slider>
       </div>
-      <div class="tab-pane" id="form" *ngIf="ad.imagesData && ad.imagesData.image3d"><iframe *ngIf="image3d"
+      <div class="tab-pane holds-the-iframe" id="form" *ngIf="ad.imagesData && ad.imagesData.image3d"><iframe  *ngIf="image3d"
           frameborder="0" scrolling="no" [src]="url3D" allowfullscreen></iframe></div>
       <div class="tab-pane" id="status" *ngIf="ad.vidUrl"> <iframe [src]="safeUrl" frameborder="0" scrolling="no"
           allowfullscreen></iframe></div>
@@ -355,10 +355,10 @@
 
     width: 5px;"></span>
       <div class="col-md-4 email">
-        <button (click)="callModal(callFormModal)" type="button" style="    background: transparent;
+        <a href="https://wa.me/+923026326656"  type="button" style="    background: transparent;
         border: none;">
           Call &nbsp;<i class="fas fa-phone"></i>
-        </button>
+      </a>
       </div>
       <span style="    background: white;
 
