@@ -146,6 +146,7 @@ export class PropertyService {
     ad["nearby_loc"] = this.nearby_loc;
     ad["other"] = this.other;
     if (this.adId) {
+      console.log(ad["_id"]);
       if (!ad["_id"]) ad["_id"] = this.adId;
       this.imagesData["adId"] = this.adId;
     }
